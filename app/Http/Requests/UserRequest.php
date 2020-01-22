@@ -99,7 +99,7 @@ class UserRequest extends Request
 				// 'dumbpwd',
 				'confirmed'
 			],
-			'term'         => ['accepted'],
+			// 'term'         => ['accepted'],
 		];
 		
 		// Email

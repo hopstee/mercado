@@ -105,7 +105,7 @@
 						@endif
 						
 {{--						<div class="row mt-5">--}}
-								<form id="signupForm" class="form-horizontal" method="POST" action="{{ url()->current() }}">
+								<form id="signupForm" class="form-horizontal" method="POST" action="{{ url()->current() }}" autocomplete="off">
 
 									{!! csrf_field() !!}
 
@@ -172,6 +172,7 @@
 																	   class="form-control input-md{{ $phoneError }}"
 																	   type="tel"
 																	   value="{{ phoneFormat(old('phone'), old('country', config('country.code'))) }}"
+																	   autocomplete="new-password"
 																>
 
 																<!-- <div class="input-group-append tooltipHere" data-placement="top"
@@ -241,13 +242,10 @@
 													<label class="col-md-2 col-form-label" for="password">{{ t('Password') }} <sup>*</sup></label>
 													<div class="col-md-9">
 														<input id="password" name="password" type="password" class="form-control{{ $passwordError }}"
-															   placeholder="{{ t('Four characters') }}">
+															   placeholder="{{ t('Four characters') }}" autocomplete="new-password">
 														<br>
 														<input id="password_confirmation" name="password_confirmation" type="password" class="form-control{{ $passwordError }}"
-															   placeholder="{{ t('Password Confirmation') }}">
-														<small id="" class="form-text text-muted">
-															{{ t('At least :num characters', ['num' => 4]) }}
-														</small>
+															   placeholder="{{ t('Password Confirmation') }}" autocomplete="new-password">
 													</div>
 
 												</div>
@@ -271,7 +269,6 @@
 																</label>
 															</div>
 															<!-- <input class="form-check-input" type="checkbox" onclick="showPass()">
-
 															<label class="form-check-label" for="term">
 																{!! t('Show Password') !!}
 															</label> -->
@@ -280,43 +277,12 @@
 													</div>
 												</div>
 
-
 												@include('layouts.inc.tools.recaptcha', ['colLeft' => 'col-md-2', 'colRight' => 'col-md-9'])
 
-												<!-- term -->
-												<?php $termError = (isset($errors) and $errors->has('term')) ? ' is-invalid' : ''; ?>
-												<div class="form-group row required">
-{{--													<label class="col-md-2 col-form-label"></label>--}}
-													<div class="col-md-2"></div>
-													<div class="col-md-12">
-														<div class="form-check flex-align">
-															<div class="cntr">
-																<label for="term" class="label-cbx">
-																<input name="term" id="term" type="checkbox" class="invisible {{ $termError }}" value="1" {{ (old('term')=='1') ? 'checked="checked"' : '' }}>
-																<div class="checkbox">
-																	<svg width="14px" height="14px" viewBox="0 0 14 14">
-																	<path d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
-																	<polyline points="4 8 6 10 11 5"></polyline>
-																	</svg>
-																</div>
-																{!! t('I have read and agree to the') !!} <a href="{{ lurl('page/terms-of-use')}}">{{ t('Terms of Use') }}</a>, <a href="{{ lurl('page/privacy-policy')}}">{{ t('Privacy Policy') }}</a> {{ t('And')}} <a href="{{ lurl('page/posting-rules')}}">{{ t('Posting Rules') }}</a>
-																<!-- {!! t('I have read and agree to the <a :attributes>Terms of Use</a>', ['attributes' => getUrlPageByType('terms-of-use')]) !!} -->
-																</label>
-															</div>
-
-															<!-- <input name="term" id="term"
-																   class="form-check-input{{ $termError }}"
-																   value="1"
-																   type="checkbox" {{ (old('term')=='1') ? 'checked="checked"' : '' }}
-															>
-
-															<label class="form-check-label" for="term">
-																{!! t('I have read and agree to the <a :attributes>Terms & Conditions</a>', ['attributes' => getUrlPageByType('terms')]) !!}
-															</label> -->
-														</div>
-														<!-- <div style="clear:both"></div> -->
-													</div>
-												</div>
+												<!-- term 2-->
+												<label style="font-weight: normal">
+													{!! t('I have read and agree to the') !!} <a href="{{ lurl('page/terms-of-use')}}">{{ t('Terms of Use') }}</a>, <a href="{{ lurl('page/privacy-policy')}}">{{ t('Privacy Policy') }}</a> {{ t('And')}} <a href="{{ lurl('page/posting-rules')}}">{{ t('Posting Rules') }}</a>
+												</label>
 
 												<!-- Button  -->
 												<div class="form-group row">

@@ -23,7 +23,7 @@ if (!isset($cacheExpiration)) {
 
             <div class="relative content featured-list-row clearfix cart">
                 <div class="large-12 columns">
-                    <div class="no-margin featured-list-slider owl-carousel owl-theme">
+                    <div class="no-margin featured-list-slider owl-carousel owl-theme" id="similarAds">
                         <?php
 							foreach($featured->posts as $key => $post):
 								if (empty($countries) or !$countries->has($post->country_code)) continue;

@@ -284,7 +284,7 @@ if (isset(auth()->user()->id)) {
                                 </span>
                             </div>
                         </div>
-                        <div class="posts-image">
+                        <!-- <div class="posts-image"> -->
                         <?php $titleSlug = \Illuminate\Support\Str::slug($post->title); ?>
                         <!-- @if (!in_array($post->category->type, ['not-salable']))
                             <h1 class="pricetag">
@@ -297,41 +297,61 @@ if (isset(auth()->user()->id)) {
 @endif -->
 
                             @if (count($post->pictures) > 0)
-                                <ul class="bxslider">
+                                <!-- <ul class="bxslider"> -->
+                                    <div class="owl-carousel" id="sync1">
                                     @foreach($post->pictures as $key => $image)
-                                        <li><img src="{{ imgUrl($image->filename, 'big') }}"
-                                                 alt="{{ $titleSlug . '-big-' . $key }}"></li>
+                                        <!-- <li> -->
+                                            <div class="item" id="pic">
+                                                <img src="{{ imgUrl($image->filename, 'big') }}"
+                                                     alt="{{ $titleSlug . '-big-' . $key }}">
+                                            </div>
+                                                 <!-- </li> -->
                                     @endforeach
-                                </ul>
-                                <div class="product-view-thumb-wrapper">
-                                    <ul id="bx-pager" class="product-view-thumb">
+                                    </div>
+                                    <!-- </ul> -->
+{{--                                <div class="product-view-thumb-wrapper">--}}
+                                    <div class="owl-carousel" id="sync2">
+                                <!-- <ul id="bx-pager" class="product-view-thumb"> -->
                                         @foreach($post->pictures as $key => $image)
-                                            <li>
-                                                <a class="thumb-item-link" data-slide-index="{{ $key }}" href="">
+                                            <div class="item" id="pic">
+                                        <!-- <li> -->
+                                                <!-- <a class="thumb-item-link"  href=""> -->
                                                     <img src="{{ imgUrl($image->filename, 'small') }}"
-                                                         alt="{{ $titleSlug . '-small-' . $key }}">
-                                                </a>
-                                            </li>
+                                                         alt="{{ $titleSlug . '-small-' . $key }}" data-slide-index="{{ $key }}">
+                                                <!-- </a> -->
+                                            </div>
+                                                <!-- </li> -->
                                         @endforeach
-                                    </ul>
-                                </div>
+                                    </div>
+                                    <!-- </ul> -->
+{{--                                </div>--}}
                             @else
-                                <ul class="bxslider">
-                                    <li><img src="{{ imgUrl(config('larapen.core.picture.default'), 'big') }}"
-                                             alt="img"></li>
-                                </ul>
-                                <div class="product-view-thumb-wrapper">
-                                    <ul id="bx-pager" class="product-view-thumb">
-                                        <li>
-                                            <a class="thumb-item-link" data-slide-index="0" href="">
-                                                <img src="{{ imgUrl(config('larapen.core.picture.default'), 'small') }}"
-                                                     alt="img">
-                                            </a>
-                                        </li>
-                                    </ul>
+                                <!-- <ul class="bxslider"> -->
+                                <div class="owl-carousel" id="sync1">
+                                <!-- <li> -->
+                                    <div class="item" id="noPic">
+                                        <img src="{{ imgUrl(config('larapen.core.picture.default'), 'big') }}"
+                                             alt="img">
+                                    </div>
+                                    <!-- </li> -->
                                 </div>
+                                <!-- </ul> -->
+                                <!-- <div class="product-view-thumb-wrapper"> -->
+                                    <!-- <ul id="bx-pager" class="product-view-thumb"> -->
+                                    <div class="owl-carousel" id="sync2">
+                                    <!-- <li> -->
+                                        <div class="item" id="noPic">
+                                            <!-- <a class="thumb-item-link" data-slide-index="0" href=""> -->
+                                                <img src="{{ imgUrl(config('larapen.core.picture.default'), 'small') }}"
+                                                     alt="img" data-slide-index="0">
+                                            <!-- </a> -->
+                                        </div>
+                                            <!-- </li> -->
+                                    </div>
+                                            <!-- </ul> -->
+                                <!-- </div> -->
                             @endif
-                        </div>
+                        <!-- </div> -->
                         <!--posts-image-->
 
 
@@ -474,7 +494,7 @@ if (isset(auth()->user()->id)) {
                                                 <div class="col-xl-12 pl-1 pr-1 cart location">
                                                     <span class="title-3">
                                                         <span>
-                                                             {{ t('Location') }}: 
+                                                             {{ t('Location') }}:
                                                         </span>
                                                         <span class="detail-line-value">
                                                                 {{ $post->city->name }}
@@ -795,7 +815,8 @@ if (isset(auth()->user()->id)) {
 
     <!-- bxSlider Javascript file -->
     <script src="{{ url('assets/plugins/bxslider/jquery.bxslider.min.js') }}"></script>
-
+    <!-- <script src="{{ url('assets/plugins/bxslider/jquery.min.js') }}"></script> -->
+    <script src="{{ url('assets/plugins/owlcarousel/owl.carousel.min.js') }}"></script>
     <script>
         var scrollAdded = false;
 
@@ -814,6 +835,7 @@ if (isset(auth()->user()->id)) {
 
         var resp, loop = true;
         if (carouselItems > 5) {
+            
             resp = {
                 200: {
                     items: 2,
@@ -888,42 +910,122 @@ if (isset(auth()->user()->id)) {
             }
             loop = false;
         }
-        $('.owl-carousel').owlCarousel({
+        $('#similarAds').owlCarousel({
+            
             items: carouselItems,
             loop: loop,
             dots: false,
             autoplay: true,
+            nav:false,
             autoplayTimeout: 3000,
-            // autoWidth: true,
             responsive: resp,
+            pagination:false
         });
 
+        var sync1 = $("#sync1");
+        var sync2 = $("#sync2");
+
+        sync1.owlCarousel({
+            items:1,
+            dots: false,
+            loop:true,
+            autoHeight:true,
+            slideSpeed : 1000,
+            nav: true,
+            // afterAction : syncPosition,
+            responsiveRefreshRate : 200,
+            navText: [
+                '<svg width="100%" height="100%" viewBox="0 0 11 20"><path style="fill:none;stroke-width: 1px;stroke: #000;" d="M9.554,1.001l-8.607,8.607l8.607,8.606"/></svg>',
+                '<svg width="100%" height="100%" viewBox="0 0 11 20" version="1.1"><path style="fill:none;stroke-width: 1px;stroke: #000;" d="M1.054,18.214l8.606,-8.606l-8.606,-8.607"/></svg>'
+            ],
+        }).on('changed.owl.carousel', syncPosition);
+        sync2.owlCarousel({
+            items:15,
+            autoWidth:true,
+            dots: false,
+            smartSpeed: 200,
+            slideSpeed : 500,
+            responsiveRefreshRate : 100
+        });
+
+        function syncPosition(el) {
+            //if you set loop to false, you have to restore this next line
+            //var current = el.item.index;
+
+            //if you disable loop you have to comment this block
+            var count = el.item.count-1;
+            if(count==1){//не корректно работало с 2 картинками
+                var current = Math.round(el.item.index - (el.item.count/2) - .6);
+            }
+            else{
+                var current = Math.round(el.item.index - (el.item.count/2) - .5);
+            }
+            if(current < 0) {
+                current = count;
+            }
+            if(current > count) {
+                current = 0;
+            }
+
+            //end block
+
+            // sync2.find('.owl-item').first().removeClass("current");
+            sync2
+                .find(".owl-item")
+                .removeClass("current")
+                .eq(current)
+                .addClass("current");
+            var onscreen = sync2.find('.owl-item.active').length - 1;
+            var start = sync2.find('.owl-item.active').first().index();
+            var end = sync2.find('.owl-item.active').last().index();
+            // console.log(start+":"+end+"::"+el.item.index+"::"+(el.item.index - (el.item.count/2) - .5)+";"+count);
+            if (current > end) {
+                sync2.data('owl.carousel').to(current, 100, true);
+            }
+            if (current < start) {
+                sync2.data('owl.carousel').to(current - onscreen, 100, true);
+            }
+        }
+
+
+        sync2.on("click", ".owl-item", function(e){
+            e.preventDefault();
+            var number = $(this).index();
+            sync1.data('owl.carousel').to(number, 100, true);
+        });
+
+        // $(document).ready(function() {
+            
+
+        // });
+
         $(document).ready(function () {
+            sync2.find('.owl-item').first().addClass("current");
 
-            /* bxSlider - Main Images */
-            $('.bxslider').bxSlider({
-                speed: 300,
-                mode: 'fade',
-                pagerCustom: '#bx-pager',
-                adaptiveHeight: true,
-                preloadImages: 'all',
-                onSlideAfter: function ($slideElement, oldIndex, newIndex) {
-                    @if (!userBrowser('Chrome'))
-                    $('#bx-pager li:not(.bx-clone)').eq(newIndex).find('a.thumb-item-link').addClass('active');
-                    @endif
-                }
-            });
+            // /* bxSlider - Main Images */
+            // $('.bxslider').bxSlider({
+            //     speed: 300,
+            //     mode: 'fade',
+            //     pagerCustom: '#bx-pager',
+            //     adaptiveHeight: true,
+            //     preloadImages: 'all',
+            //     onSlideAfter: function ($slideElement, oldIndex, newIndex) {
+            //         @if (!userBrowser('Chrome'))
+            //         $('#bx-pager li:not(.bx-clone)').eq(newIndex).find('a.thumb-item-link').addClass('active');
+            //         @endif
+            //     }
+            // });
 
-            /* bxSlider - Thumbnails */
-            @if (userBrowser('Chrome'))
-            $('#bx-pager').addClass('m-3');
-            $('#bx-pager .thumb-item-link').unwrap();
-                    @else
-            var thumbSlider = $('.product-view-thumb').bxSlider(bxSliderSettings());
-            $(window).on('resize', function () {
-                thumbSlider.reloadSlider(bxSliderSettings());
-            });
-            @endif
+            // /* bxSlider - Thumbnails */
+            // @if (userBrowser('Chrome'))
+            // $('#bx-pager').addClass('m-3');
+            // $('#bx-pager .thumb-item-link').unwrap();
+            //         @else
+            // var thumbSlider = $('.product-view-thumb').bxSlider(bxSliderSettings());
+            // $(window).on('resize', function () {
+            //     thumbSlider.reloadSlider(bxSliderSettings());
+            // });
+            // @endif
 
             @if (config('settings.single.show_post_on_googlemap'))
             /* Google Maps */
@@ -1004,41 +1106,41 @@ if (isset(auth()->user()->id)) {
 
         });
 
-        /* bxSlider - Initiates Responsive Carousel */
-        function bxSliderSettings() {
-            var smSettings = {
-                slideWidth: 65,
-                minSlides: 1,
-                maxSlides: 4,
-                slideMargin: 5,
-                adaptiveHeight: true,
-                pager: false
-            };
-            var mdSettings = {
-                slideWidth: 100,
-                minSlides: 1,
-                maxSlides: 4,
-                slideMargin: 5,
-                adaptiveHeight: true,
-                pager: false
-            };
-            var lgSettings = {
-                slideWidth: 100,
-                minSlides: 3,
-                maxSlides: 6,
-                pager: false,
-                slideMargin: 10,
-                adaptiveHeight: true
-            };
+        // /* bxSlider - Initiates Responsive Carousel */
+        // function bxSliderSettings() {
+        //     var smSettings = {
+        //         slideWidth: 65,
+        //         minSlides: 1,
+        //         maxSlides: 4,
+        //         slideMargin: 5,
+        //         adaptiveHeight: true,
+        //         pager: false
+        //     };
+        //     var mdSettings = {
+        //         slideWidth: 100,
+        //         minSlides: 1,
+        //         maxSlides: 4,
+        //         slideMargin: 5,
+        //         adaptiveHeight: true,
+        //         pager: false
+        //     };
+        //     var lgSettings = {
+        //         slideWidth: 100,
+        //         minSlides: 3,
+        //         maxSlides: 6,
+        //         pager: false,
+        //         slideMargin: 10,
+        //         adaptiveHeight: true
+        //     };
 
-            if ($(window).width() <= 640) {
-                return smSettings;
-            } else if ($(window).width() > 640 && $(window).width() < 768) {
-                return mdSettings;
-            } else {
-                return lgSettings;
-            }
-        }
+        //     if ($(window).width() <= 640) {
+        //         return smSettings;
+        //     } else if ($(window).width() > 640 && $(window).width() < 768) {
+        //         return mdSettings;
+        //     } else {
+        //         return lgSettings;
+        //     }
+        // }
 
     </script>
 @endsection

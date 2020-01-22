@@ -530,7 +530,8 @@ if (!function_exists("createFieldNodeTree")) {
                            placeholder="{{ $field->name }}"
                            class="form-control input-md{{ $errorClass }}"
                            value="{{ $defaultValue }}"
-                           onkeydown = "if (event.keyCode == 69 || event.keyCode == 189||event.keyCode == 109) return false">
+                           onkeydown = "return checkOnlyDigits(this,event)"
+                    >
                     <small id=""
                            class="form-text text-muted">{!! $field->help !!}</small>
                 </div>
@@ -573,6 +574,11 @@ if (!function_exists("createFieldNodeTree")) {
                             $(smallTag).html('Too many characters');
                         } else {
                             $(smallTag).html(text_remaining + "{{ t('characters left') }}");
+                        }
+                    }
+                    function checkOnlyDigits(element,event) {
+                        if (event.keyCode == 69 || event.keyCode == 189||event.keyCode == 109) {
+                            return false;
                         }
                     }
                 </script>

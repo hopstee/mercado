@@ -1055,6 +1055,7 @@ ul.navbar-mobile > a{
   }
   .label-cbx input:checked + .checkbox {
     border-color: #0288d1;
+    background-color: #0288d1;
   }
   .label-cbx input:checked + .checkbox svg path {
     fill: #0288d1;
@@ -1067,6 +1068,7 @@ ul.navbar-mobile > a{
   }
   .label-cbx .checkbox {
     position: relative;
+    overflow: hidden;
     top: 1px;
     float: left;
     margin-right: 8px;
@@ -1080,9 +1082,12 @@ ul.navbar-mobile > a{
     top: -1.5px;
     left: -1.5px;
   }
+  .label-cbx input:checked + .checkbox  svg path {
+    stroke: #0288d1;
+  }
   .label-cbx .checkbox svg path {
     fill: none;
-    stroke: #0288d1;
+    stroke: #C8CCD4;
     stroke-width: 2;
     stroke-linecap: round;
     stroke-linejoin: round;

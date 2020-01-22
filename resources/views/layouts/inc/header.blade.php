@@ -129,7 +129,7 @@ if (getSegment(1) != trans('routes.countries')) {
 {{--						</li>--}}
 						<li class="nav-item dropdown no-arrow">
 {{--                            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">--}}
-							<a href="{{ url('/') }}/account" class="nav-link receive-info" style="display: flex; align-items: center">
+							<a href="{{ lurl('/' . trans('routes.personal-data'))}}" class="nav-link receive-info" style="display: flex; align-items: center">
 								<!-- <i class="unib-user fa"></i> -->
 								<span>{{ auth()->user()->name }}</span>
 {{--								@if(isset($noReadConversations) && $noReadConversations > 0)--}}

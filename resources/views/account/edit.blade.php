@@ -28,7 +28,7 @@
 				</div>
 				<div class="modal-footer modal-footer-dif modal-footer-user">
 					<div class="modal-chose">
-						<form role="form" method="POST" action="{{ lurl('account/' . auth()->user()->id . '/photo/delete') }}" enctype="multipart/form-data">
+						<form role="form" method="POST" action="{{ lurl(trans('routes.personal-data') . '/' . auth()->user()->id . '/' . trans('routes.photo-delete') ) }}" enctype="multipart/form-data">
 							<button type="submit" class="btn btn-dif btn-grey">{{ t('Delete') }}</button>
 						</form>
 					</div>
@@ -87,7 +87,7 @@
 
 								<div class="card card-default card-dif">
 									<div class="panel-collapse collapse {{ (old('panel')=='' or old('panel')=='photoPanel') ? 'show' : '' }}" id="photoPanel">
-										<form name="details" class="form-horizontal" role="form" method="POST" action="{{ lurl('account/' . $user->id . '/photo') }}">
+										<form name="details" class="form-horizontal" role="form" method="POST" action="{{ lurl(trans('routes.personal-data').'/'.$user->id.'/'.trans('routes.photo')) }}">
 											<?php $photoError = (isset($errors) and $errors->has('photo')) ? ' is-invalid' : ''; ?>
 											<div class="photo-field photo-field-dif">
 												<div class="file-loading">
@@ -110,7 +110,7 @@
 									<div>
 										<!-- Number of messages -->
 										<p>
-											<a href="{{ lurl('account/conversations') }}">
+											<a href="{{ lurl(trans('routes.personal-data').'/'.trans('routes.conversations')) }}">
 												{{ t('Conversations') }}
 											</a>
 											{{ isset($countConversations) ? \App\Helpers\Number::short($countConversations) : 0 }}
@@ -128,7 +128,7 @@
 									<div>
 										<!-- Number of visitors -->
 										<p>
-											<a href="{{ lurl('account/my-posts') }}">
+											<a href="{{ lurl(trans('routes.personal-data').'/'.trans('routes.my-ads')) }}">
 												{{ t('Views') }}
 											</a>
 											<?php $totalPostsVisits = (isset($countPostsVisits) and $countPostsVisits->total_visits) ? $countPostsVisits->total_visits : 0 ?>
@@ -147,7 +147,7 @@
 									<div>
 										<!-- Number of ads -->
 										<p>
-											<a href="{{ lurl('account/my-posts') }}">
+											<a href="{{ lurl(trans('routes.personal-data').'/'.trans('routes.my-ads')) }}">
 												{{ t('Ads') }}
 											</a>
 											{{ \App\Helpers\Number::short($countPosts) }}
@@ -165,7 +165,7 @@
 									<div>
 										<!-- Number of favorites -->
 										<p>
-											<a href="{{ lurl('account/favourite') }}">
+											<a href="{{ lurl(trans('routes.personal-data').'/'.trans('routes.favourite-ads'))  }}">
 												{{ t('Favorite') }}
 											</a>
 											{{ \App\Helpers\Number::short($countFavoritePosts) }}
@@ -265,7 +265,7 @@
 									</h3>
 								</div>
 								<div class="panel-collapse {{ (old('panel')=='settingsPanel') ? 'show' : '' }} inner-ads-box" id="settingsPanel">
-									<form name="settings" class="form-horizontal" role="form" method="POST" action="{{ lurl('account/settings') }}">
+									<form name="settings" class="form-horizontal" role="form" method="POST" action="{{ lurl(trans('routes.personal-data') . '/' . trans('routes.settings')) }}">
 										{!! csrf_field() !!}
 										<input name="_method" type="hidden" value="PUT">
 										<input name="panel" type="hidden" value="settingsPanel">
@@ -299,7 +299,7 @@
 										<div class="form-group flex-block">
 											<div class="col-12">
 													<input id="email" name="email" type="email" autocomplete="off"
-														class="form-control{{ $emailError }}" placeholder="{{ t('Your Email') }}" 
+														class="form-control{{ $emailError }}" placeholder="{{ t('') }}" 
 														value="{{ old('email', $user->email) }}">
 											</div>
 										</div>
@@ -485,7 +485,7 @@
 					{{--								</div>--}}
 					{{--								<div class="panel-collapse collapse {{ (old('panel')=='' or old('panel')=='photoPanel') ? 'show' : '' }}" id="photoPanel">--}}
 					{{--									<div class="card-body">--}}
-					{{--										<form name="details" class="form-horizontal" role="form" method="POST" action="{{ lurl('account/' . $user->id . '/photo') }}">--}}
+					{{--										<form name="details" class="form-horizontal" role="form" method="POST" action="{{ lurl(trans('routes.personal-data') . '/' . $user->id . '/photo') }}">--}}
 					{{--											<div class="row">--}}
 					{{--												<div class="col-xl-12 text-center">--}}
 					{{--													--}}
@@ -881,7 +881,7 @@
 							showCaption: false,
 							showPreview: true,
 							allowedFileExtensions: {!! getUploadFileTypes('image', true) !!},
-							uploadUrl: '{{ lurl('account/' . $user->id . '/photo') }}',
+							uploadUrl: '{{ lurl(trans('routes.personal-data') . '/' . $user->id . '/'.trans('routes.photo')) }}',
 							uploadAsync: false,
 							showBrowse: false,
 							showCancel: true,
@@ -918,7 +918,7 @@
 											@if (isset($user->photo) and !empty($user->photo))
 									caption: '{{ last(explode('/', $user->photo)) }}',
 									size: {{ $fileSize }},
-									url: '{{ lurl('account/' . $user->id . '/photo/delete') }}',
+									url: '{{ lurl(trans('routes.personal-data') .'/' . $user->id . '/photo/delete') }}',
 									key: {{ (int)$user->id }}
 									@endif
 								}

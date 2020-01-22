@@ -180,10 +180,11 @@ return [
     'Dec' => 'Dec',
     'On site since ' => 'On site since ',
 
+
     'The phone has already been taken.' => 'The phone has already been taken.',
     'Archive' => 'Archive',
     'Spam' => 'Spam',
-    'Your account is closed. You can restore it within 1 year then it will be removed.' => 'Your account is closed. You can restore it within 1 year then it will be removed.',
+    'Your account has been deleted.' => 'Your account has been deleted.',
     'Re-register successfully.'=>'Re-register successfully.',
     'To favorites.' => 'To favorites',
     'Ads information' => 'Ads information',
@@ -237,8 +238,11 @@ return [
 
     '1.  Enter your phone number' => '1.  Enter your phone number',
     '2.  Click “Send” button' => '2.  Click “Send” button',
-    '3.  We will send your new password on your email address' => '3.  We will send your new password on your email address',
-    'Please note – password recovery option is available only for users that previously indicated email address in Mercado.gratice account settings' => 'Please note – password recovery option is available only for users that previously indicated email address in Mercado.gratice account settings',
+
+    'Data updated successfully.' =>'Data updated successfully.',
+    '! Add e-mail for password recovery.'=>'! Add e-mail for password recovery.',
+    '3.  We will send your new password on your email address' => '3.  We will send your new password on your e-mail',
+    'Please note – password recovery option is available only for users that previously indicated email address in Mercado.gratice account settings' => 'Please note: password recovery option is available only for users that previously indicated email in Mercado.gratice account settings',
     'Change' => 'Change',
     'Previous Log In' => 'Previous Log In',
     'Personal Data' => 'Personal Data',
@@ -353,7 +357,7 @@ return [
     'Log in' => 'Login',
     'Log in to :app_name' => 'Log in to :app_name',
     'The Email Address or Password don\'t match.' => 'The Email Address or Password don\'t match.',
-    'You have been logged out.' => 'You have been logged out',
+    'You have been logged out from your account.' => 'You have been logged out from your account.',
     
     'Sign Up on :app_name !' => 'Sign Up on :app_name !',
     'Your account has been created.' => 'Your account has been created.',

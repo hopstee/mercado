@@ -351,35 +351,35 @@ Route::group([
             $router->pattern('id', '[0-9]+');
 
             // Users
-            Route::get('account', 'EditController@index');
+            Route::get(trans('routes.personal-data'), 'EditController@index');
             Route::group(['middleware' => 'impersonate.protect'], function () {
-                Route::put('account', 'EditController@updateDetails');
-                Route::put('account/settings', 'EditController@updateSettings');
-                Route::put('account/preferences', 'EditController@updatePreferences');
-                Route::post('account/{id}/photo', 'EditController@updatePhoto');
-                Route::post('account/{id}/photo/delete', 'EditController@deletePhoto');
+                Route::put(trans('routes.personal-data') , 'EditController@updateDetails');
+                Route::put(trans('routes.personal-data') .'/' .trans('routes.settings') , 'EditController@updateSettings');
+                Route::put(trans('routes.personal-data').'/preferences', 'EditController@updatePreferences');
+                Route::post(trans('routes.personal-data') . '/' . '{id}/' . trans('routes.photo'), 'EditController@updatePhoto');
+                Route::post(trans('routes.personal-data') . '/' . '{id}/' . trans('routes.photo-delete'), 'EditController@deletePhoto');
             });
-            Route::get('account/close', 'CloseController@index');
+            Route::get(trans('routes.personal-data') .'/' . trans('routes.delete-account'), 'CloseController@index');
             Route::group(['middleware' => 'impersonate.protect'], function () {
-                Route::post('account/close', 'CloseController@submit');
+                Route::post(trans('routes.personal-data') . '/' . trans('routes.delete-account'), 'CloseController@submit');
             });
 
             // Posts
             Route::get('account/saved-search', 'PostsController@getSavedSearch');
-            $router->pattern('pagePath', '(my-posts|archived|favourite|pending-approval|saved-search)+');
-            Route::get('account/{pagePath}', 'PostsController@getPage');
-            Route::get('account/my-posts/{id}/offline', 'PostsController@getMyPosts');
+            $router->pattern('pagePath', '('.trans('routes.my-ads').'|'.trans('routes.archived-ads').'|'.trans('routes.favourite-ads').'|'.trans('routes.rejected-ads').'|saved-search)+');
+            Route::get(trans('routes.personal-data') .'/{pagePath}', 'PostsController@getPage');
+            Route::get(trans('routes.personal-data').'/'.trans('routes.my-ads'). '/'.'{id}'  . '/offline', 'PostsController@getMyPosts');
             Route::get('account/archived/{id}/repost', 'PostsController@getArchivedPosts');
-            Route::get('account/{pagePath}/{id}/delete', 'PostsController@destroy');
-            Route::post('account/{pagePath}/delete', 'PostsController@destroy');
+            Route::get(trans('routes.personal-data') . '/{pagePath}/{id}/' . trans('routes.delete'), 'PostsController@destroy');
+            Route::post(trans('routes.personal-data').'/{pagePath}' . '/' . trans('routes.delete') , 'PostsController@destroy');
 
             // Conversations
-            Route::get('account/conversations', 'ConversationsController@index');
-            Route::get('account/conversations/{id}/delete', 'ConversationsController@destroy');
-            Route::post('account/conversations/delete', 'ConversationsController@destroy');
-            Route::post('account/conversations/{id}/reply', 'ConversationsController@reply');
+            Route::get(trans('routes.personal-data').'/'.trans('routes.conversations'),'ConversationsController@index');
+            Route::get(trans('routes.personal-data').'/'. trans('routes.conversations').'/{id}'.'/'. trans('routes.delete'),'ConversationsController@destroy');
+            Route::post(trans('routes.personal-data').'/'.trans('routes.conversations')."/".trans('routes.delete'), 'ConversationsController@destroy');
+            Route::post(trans('routes.personal-data').'/'.trans('routes.conversations').'/{id}'.'/'.trans('routes.reply'), 'ConversationsController@reply');
             $router->pattern('msgId', '[0-9]+');
-            Route::get('account/conversations/{id}/messages', 'ConversationsController@messages');
+            Route::get(trans('routes.personal-data').'/'.trans('routes.conversations').'/{id}'.'/'.trans('routes.messages'), 'ConversationsController@messages');
             Route::get('account/conversations/{id}/messages/{msgId}/delete', 'ConversationsController@destroyMessages');
             Route::post('account/conversations/{id}/messages/delete', 'ConversationsController@destroyMessages');
 

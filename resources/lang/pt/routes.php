@@ -1,9 +1,8 @@
-<?php 
+<?php
 
 return [
     'countries' => 'countries',
     'login' => 'login',
-    'logout' => 'logout',
     'register' => 'register',
     'post' => '{slug}/{id}',
     'v-post' => ':slug/:id',
@@ -13,9 +12,9 @@ return [
     'contact' => 'contact',
     'sitemap' => 'sitemap',
     'v-sitemap' => 'sitemap',
-    'search' => 'search',
-    't-search' => 'search',
-    'v-search' => 'search',
+    'search' => 'buscar',
+    't-search' => 'buscar',
+    'v-search' => 'buscar',
     'job-search' => 'category/jobs-pt',
     'search-subCat' => 'category/{catSlug}/{subCatSlug}',
     't-search-subCat' => 'category',
@@ -35,4 +34,20 @@ return [
     'search-tag' => 'tag/{tag}',
     't-search-tag' => 'tag',
     'v-search-tag' => 'tag/:tag',
+
+    'personal-data' => 'dados-pessoais',
+    'my-ads' => 'meus-anúncios',
+    'favourite-ads' => 'anúncios-favoritos',
+    'rejected-ads' => 'anúncios-reprovados',
+    'archived-ads' => 'anúncios-arquivados',
+    'conversations' => 'conversas',
+    'logout' => 'sair',
+    'settings' => 'configurações',
+    'delete-account' => 'apagar-conta',
+    'photo' => 'imagem',
+    'photo-delete' => 'imagem-remover',
+    'delete'=>'remover',
+    'reply'=>'resposta',
+    'messages'=>'mensagem',
+
 ];

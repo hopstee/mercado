@@ -52,7 +52,7 @@ class RegisterController extends FrontController
 	 *
 	 * @var string
 	 */
-	protected $redirectTo = '/account';
+	protected $redirectTo = "'/' . trans('routes.personal-data')";
 	
 	/**
 	 * @var array
@@ -85,7 +85,7 @@ class RegisterController extends FrontController
 	 */
 	public function commonQueries()
 	{
-		$this->redirectTo = config('app.locale') . '/account';
+		$this->redirectTo = config('app.locale') . '/' . trans('routes.personal-data');
 	}
 	
 	/**
@@ -160,7 +160,7 @@ class RegisterController extends FrontController
 				if (Auth::loginUsingId($user->id)) {
 					$message = t("Re-register successfully.");
 					flash($message)->success();
-					return redirect()->intended(config('app.locale') . '/account');
+					return redirect()->intended(config('app.locale') . '/' . trans('routes.personal-data'));
 				}
 			}
 		}
@@ -326,7 +326,7 @@ class RegisterController extends FrontController
 
 				// Redirect to the user area If Email or Phone verification is not required
 			if (Auth::loginUsingId($user->id)) {
-				return redirect()->intended(config('app.locale') . '/account');
+				return redirect()->intended(config('app.locale') . '/' .trans('routes.personal-data'));
 			}
 		}
 		return redirect( $nextUrl);

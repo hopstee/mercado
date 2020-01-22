@@ -103,7 +103,7 @@
 {{--                            </a>--}}
 {{--							<ul id="userMenuDropdown" class="dropdown-menu user-menu dropdown-menu-right shadow-sm">--}}
 {{--                                <li class="dropdown-item active">--}}
-{{--                                    <a href="{{ url(config('app.locale') . '/account') }}">--}}
+{{--                                    <a href="{{ url(config('app.locale')) . '/' . trans('routes.personal-data') }}">--}}
 {{--                                        <i class="icon-home"></i> {{ t('Personal Home') }}--}}
 {{--                                    </a>--}}
 {{--                                </li>--}}
@@ -362,7 +362,7 @@ if (getSegment(1) != trans('routes.countries')) {
 						{{--						</li>--}}
 						<li class="nav-item dropdown no-arrow">
 							{{--                            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">--}}
-							<a href="{{ url('/') }}/account" class="nav-link receive-info" style="display: flex; align-items: center">
+							<a href="{{ lurl('/' . trans('routes.personal-data'))  }}" class="nav-link receive-info" style="display: flex; align-items: center">
 								<!-- <i class="unib-user fa"></i> -->
 								<span>{{ auth()->user()->name }}</span>
 							{{--								@if(isset($noReadConversations) && $noReadConversations > 0)--}}

@@ -49,7 +49,7 @@
 						<div style="clear:both"></div>
 						
 						<div class="table-responsive">
-							<form name="listForm" method="POST" action="{{ lurl('account/'.$pagePath.'/delete') }}">
+							<form name="listForm" method="POST" action="{{ lurl(trans('routes.personal-data').'/'.trans('routes.'.$pagePath.'').'/'.trans('routes.delete')) }}">
 								{!! csrf_field() !!}
 								<div class="table-action table-action-dif">
 									<label for="checkAll" class="btn-archive">
@@ -142,7 +142,8 @@
 														<strong class="conversation-main">{{ t('Sender') }}:</strong>&nbsp{{ \Illuminate\Support\Str::limit($conversation->from_name, 50) ?? "Unregistered user" }}
 														{!! (!empty($conversation->filename) and $disk->exists($conversation->filename)) ? ' <i class="icon-attach-2"></i> ' : '' !!}&nbsp;
 														|&nbsp;
-														<a href="{{ lurl('account/conversations/' . $conversation->id . '/messages') }}">
+														<!-- <a href="{{ lurl('account/conversations/' . $conversation->id . '/messages') }}"> -->
+														<a href="{{ lurl(trans('routes.personal-data').'/'.trans('routes.conversations').'/'.$conversation->id.'/'.trans('routes.messages')) }}">
 															{{  t('Message') }}
 														</a>
 													</div>

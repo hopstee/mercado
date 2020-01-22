@@ -123,7 +123,7 @@ class EditController extends AccountBaseController
 		
 		// Message Notification & Redirection
 		flash(t("Your details account has updated successfully."))->success();
-		$nextUrl = config('app.locale') . '/account';
+		$nextUrl = config('app.locale') . '/' . trans('routes.personal-data');
 		
 		// Send Email Verification message
 		if ($emailVerificationRequired) {
@@ -194,7 +194,7 @@ class EditController extends AccountBaseController
 			
 			if (!empty($user->photo)) {
 				// Get Deletion Url
-				$initialPreviewConfigUrl = lurl('account/' . $user->id . '/photo/delete');
+				$initialPreviewConfigUrl = lurl(trans('routes.personal-data') .'/' . $user->id . '/' .trans('routes.photo-delete'));
 				
 				// Build Bootstrap-Input plugin's parameters
 				$data['initialPreview'][] = imgUrl($user->photo);
@@ -288,7 +288,7 @@ class EditController extends AccountBaseController
 		
 		flash(t("Your settings account has updated successfully."))->success();
 		
-		return redirect(config('app.locale') . '/account');
+		return redirect(config('app.locale') . '/' . trans('routes.personal-data'));
 	}
 	
 	/**

@@ -9,7 +9,7 @@
 				
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="unir-close"></i></span></button>
 			</div>
-			<form role="form" method="POST" action="{{ lurl('account/conversations/' . $conversation->id . '/reply') }}">
+			<form role="form" method="POST" action="{{ lurl(trans('routes.personal-data').'/'.trans('routes.conversations').'/'. $conversation->id.'/'.trans('routes.reply')) }}">
 				{!! csrf_field() !!}
 				<div class="modal-body enable-long-words modal-body-dif">
 					@if (isset($errors) and $errors->any())

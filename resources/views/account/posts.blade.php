@@ -54,7 +54,7 @@
 						@endif
 
 						<div class="table-responsive">
-							<form name="listForm" method="POST" action="{{ lurl('account/'.$pagePath.'/delete') }}">
+							<form name="listForm" method="POST" action="{{ lurl(trans('routes.personal-data') .'/'.$pagePath.'/'.trans('routes.delete')) }}">
 								{!! csrf_field() !!}
 								<div class="table-action table-action-dif">
 									<label for="checkAll" class="btn-archive">
@@ -296,7 +296,7 @@
 		{{--												@endif--}}
 		{{--												@if (in_array($pagePath, ['my-posts']) and isVerifiedPost($post) and $post->archived==0)--}}
 		{{--													<p>--}}
-		{{--														<a class="btn btn-warning btn-sm confirm-action" href="{{ lurl('account/'.$pagePath.'/'.$post->id.'/offline') }}">--}}
+		{{--														<a class="btn btn-warning btn-sm confirm-action" href="{{ lurl(trans('routes.personal-data').'/'.$pagePath.'/'.$post->id.'/offline') }}">--}}
 		{{--															 <i class="icon-eye-off"></i> {{ t('Offline') }}--}}
 		{{--															<i class="icon-eye-off"></i> {{ t('Archive') }}--}}
 		{{--														</a>--}}
@@ -304,13 +304,13 @@
 		{{--												@endif--}}
 		{{--												@if (in_array($pagePath, ['archived']) and $post->user_id==$user->id and $post->archived==1)--}}
 		{{--													<p>--}}
-		{{--                                                        <a class="btn btn-info btn-sm confirm-action" href="{{ lurl('account/'.$pagePath.'/'.$post->id.'/repost') }}">--}}
+		{{--                                                        <a class="btn btn-info btn-sm confirm-action" href="{{ lurl(trans('routes.personal-data').'/'.$pagePath.'/'.$post->id.'/repost') }}">--}}
 		{{--                                                            <i class="fa fa-recycle"></i> {{ t('Repost') }}--}}
 		{{--                                                        </a>--}}
 		{{--                                                    </p>--}}
 		{{--												@endif--}}
 		{{--												<p>--}}
-		{{--                                                    <a class="btn btn-danger btn-sm delete-action" href="{{ lurl('account/'.$pagePath.'/'.$post->id.'/delete') }}">--}}
+		{{--                                                    <a class="btn btn-danger btn-sm delete-action" href="{{ lurl(trans('routes.personal-data').'/'.$pagePath.'/'.$post->id.'/'.trans('routes.delete')) }}">--}}
 		{{--                                                        <i class="fa fa-trash"></i> {{ t('Delete') }}--}}
 		{{--                                                    </a>--}}
 		{{--                                                </p>--}}

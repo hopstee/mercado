@@ -36,7 +36,7 @@ if (isset($title)) {
             background-color: rgba(0,0,0,0.4);
         }
         .user-modal-content {
-            padding: 0;
+            padding: 0 0 20px 0 !important;
             border-radius: .3rem;
         }
         .user-modal-content {
@@ -183,7 +183,7 @@ if (isset($title)) {
                                 <div class="form-group required">
                                     <div class="form-check">
                                         <label for="reason-0"  class="radio">
-                                            <input type="radio" name='reason' id='reason-0' value="0" class="hidden">
+                                            <input type="radio" name='reason' checked id='reason-0' value="0" class="hidden">
                                             <span class="label"></span>
                                             {{ t('The ad does not correspond Posting Rules') }}
                                         </label>
@@ -199,7 +199,7 @@ if (isset($title)) {
 
                                 <!-- Submit -->
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-green btn-block btn-dif "> {{ t('Reject') }} </button>
+                                    <button type="submit" class="btn btn-danger btn-block btn-dif "> {{ t('Reject') }} </button>
                                 </div>
                             </form>
                         </div>
@@ -593,6 +593,19 @@ if (isset($title)) {
 
             if( modal_reason === true){
                 console.log("close");
+                 $(".reject-info-modal").attr("style", "display:none;");
+                modal_reason = false;
+            }
+        });
+
+        $('.reject-info-modal').click( function(){
+
+            if(!$(event.target).is('.modal-header.modal-header-dif')
+                && !$(event.target).closest('.modal-header.modal-header-dif').length
+                && !$(event.target).is('.modal-body.modal-body-dif.modal-body-user')
+                && ! $(event.target).closest('.modal-body.modal-body-dif.modal-body-user').length)
+            {
+                console.log("close screen");
                  $(".reject-info-modal").attr("style", "display:none;");
                 modal_reason = false;
             }

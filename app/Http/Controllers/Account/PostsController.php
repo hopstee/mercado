@@ -408,7 +408,7 @@ class PostsController extends AccountBaseController
 			if ($pagePath == trans("routes.my-ads")) {
 				flash(t("No ads selected for archiving."))->error();
 			}
-			elseif($pagePath == trans("routesfavourite-ads")){
+			elseif($pagePath == trans("routes.favourite-ads")){
 				flash(t("No ads selected for removing from favorites."))->error();
 			}
 			elseif($pagePath == trans("routes.archived-ads")){

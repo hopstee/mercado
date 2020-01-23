@@ -59,7 +59,7 @@ class CloseController extends AccountBaseController
             auth()->logout();
              
             // $message = t("Your account has been deleted. We regret you. <a href=\":url\">Re-register</a> if that is a mistake.", [
-            $message = t("Your account is closed. You can restore it within 1 year then it will be removed.");
+            $message = t("Your account has been deleted.");
             flash($message)->success();
         }
         

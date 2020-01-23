@@ -166,7 +166,7 @@
 										<!-- Number of favorites -->
 										<p>
 											<a href="{{ lurl(trans('routes.personal-data').'/'.trans('routes.favourite-ads'))  }}">
-												{{ t('Favorite') }}
+												{{ t('Favorites') }}
 											</a>
 											{{ \App\Helpers\Number::short($countFavoritePosts) }}
 										</p>
@@ -299,7 +299,7 @@
 										<div class="form-group flex-block">
 											<div class="col-12">
 													<input id="email" name="email" type="email" autocomplete="off"
-														class="form-control{{ $emailError }}" placeholder="{{ t('') }}" 
+														class="form-control{{ $emailError }}" placeholder="{{ t('Your E-mail') }}" 
 														value="{{ old('email', $user->email) }}">
 											</div>
 										</div>

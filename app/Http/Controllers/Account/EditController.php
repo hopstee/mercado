@@ -122,7 +122,7 @@ class EditController extends AccountBaseController
 		$user->save();
 		
 		// Message Notification & Redirection
-		flash(t("Your details account has updated successfully."))->success();
+		flash(t("Data updated successfully."))->success();
 		$nextUrl = config('app.locale') . '/' . trans('routes.personal-data');
 		
 		// Send Email Verification message

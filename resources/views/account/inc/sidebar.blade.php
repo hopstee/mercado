@@ -3,7 +3,7 @@
         <div class="modal-content modal-content-dif">
 
             <div class="modal-header modal-header-dif">
-                <h2 class="modal-title"> {{ t('Close account') }} </h2>
+                <h2 class="modal-title"> {{ t('Delete Account') }} </h2>
 
                 <button type="button" class="close" data-dismiss="modal">
                     <span aria-hidden="true"><i class="unir-close"></i></span>
@@ -21,7 +21,7 @@
                     <div class="modal-body modal-body-dif">
                         <div class="form-group row">
                             <div class="col-md-12">
-                                <p>{{ t('You are sure you want to close your account?') }}</p>
+                                <p>{{ t('You are sure you want to delete your account?') }}</p>
                                 <div class="form-check form-check-inline pt-2">
                                     <!-- <label class="form-check-label">
                                         <input class="form-check-input"
@@ -276,8 +276,7 @@
 
             <div class="collapse-box no-border">
                 <h5 class="collapse-title no-border">
-                    {{ t('
-                        ') }}&nbsp;
+                    {{ t('Terminate Account') }}&nbsp;
                     <a href="#TerminateAccount" data-toggle="collapse" class="pull-right collapsed" aria-expanded="false"><i class="fa fa-angle-down"></i></a>
                 </h5>
                 <div class="panel-collapse collapse" id="TerminateAccount">

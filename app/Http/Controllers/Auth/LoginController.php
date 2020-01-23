@@ -190,7 +190,7 @@ class LoginController extends FrontController
 			session(['country_code' => $countryCode]);
 		}
 		
-		$message = t('You have been logged out.');
+		$message = t('You have been logged out from your account.');
 		flash($message)->success();
 		
 		return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/');

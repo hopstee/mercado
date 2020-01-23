@@ -37,7 +37,7 @@
 				<div class="col-md-9 page-content">
 					<div class="inner-box inner-box-dif">
 						<h2 class="title-2 title-2-dif"> {{ t('Close account') }} </h2>
-						<p>{{ t('You are sure you want to close your account?') }}</p>
+						<p>{{ t('You are sure you want to delete your account?') }}</p>
 
 						@if ($user->can(\App\Models\Permission::getStaffPermissions()))
 							<div class="alert alert-danger" role="alert">

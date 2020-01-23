@@ -44,7 +44,7 @@
 						if (isset($conversation) && !empty($conversation) > 0):
 						
 							// Conversation URLs
-							$consUrl = lurl('account/conversations');
+							$consUrl = lurl(trans('routes.personal-data').'/' . trans('routes.conversations'));
 							$conDelAllUrl = lurl('account/conversations/' . $conversation->id . '/messages/delete');
 						?>
 						<div class="table-responsive">

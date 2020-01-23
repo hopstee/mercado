@@ -399,6 +399,15 @@ class Post extends BaseModel implements Feedable
 			return $builder;
 		}
 	}
+
+	public function scopeNotDeleted($builder)
+	{
+		if (config('settings.single.posts_review_activation')) {
+			return $builder->whereNull('deleted_at');
+		} else {
+			return $builder;
+		}
+	}
 	
 	public function scopeWithCountryFix($builder)
 	{

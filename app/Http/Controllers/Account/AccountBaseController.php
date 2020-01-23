@@ -64,7 +64,8 @@ abstract class AccountBaseController extends FrontController
         $this->myPosts = Post::currentCountry()
             ->where('user_id', auth()->user()->id)
             ->verified()
-			->unarchived()
+            ->unarchived()
+            ->notdeleted()
 			->reviewed()
             ->with(['pictures', 'city', 'latestPayment' => function ($builder) { $builder->with(['package']); }])
             ->orderByDesc('id');
@@ -74,6 +75,7 @@ abstract class AccountBaseController extends FrontController
         $this->archivedPosts = Post::currentCountry()
             ->where('user_id', auth()->user()->id)
             ->archived()
+            ->notdeleted()
             ->with(['pictures', 'city', 'latestPayment' => function ($builder) { $builder->with(['package']); }])
             ->orderByDesc('id');
         view()->share('countArchivedPosts', $this->archivedPosts->count());
@@ -87,14 +89,16 @@ abstract class AccountBaseController extends FrontController
             ->orderByDesc('id');
         view()->share('countFavouritePosts', $this->favouritePosts->count());
 
-        // Pending Approval Posts
+        // Rejected Posts
         $this->pendingPosts = Post::withoutGlobalScopes([VerifiedScope::class, ReviewedScope::class])
             ->currentCountry()
             ->where('user_id', auth()->user()->id)
-            ->unverified()
+            ->unreviewed()
+            ->notdeleted()
+            ->unarchived()
             ->with(['pictures', 'city', 'latestPayment' => function ($builder) { $builder->with(['package']); }])
             ->orderByDesc('id');
-        view()->share('countPendingPosts', $this->pendingPosts->count());
+        view()->share('countRejectedPosts', $this->pendingPosts->count());
 
         // Save Search
         $savedSearch = SavedSearch::currentCountry()

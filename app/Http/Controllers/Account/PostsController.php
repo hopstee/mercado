@@ -316,7 +316,7 @@ class PostsController extends AccountBaseController
 				$ids[] = $id;
 			}
 		}
-		
+
 		// Delete
 		$nb = 0;
 		if ($pagePath == trans('routes.favourite-ads')) {
@@ -326,42 +326,42 @@ class PostsController extends AccountBaseController
 			}
 		} elseif ($pagePath == 'saved-search') {
                     $nb = SavedSearch::destroy($ids);
-                } elseif ($pagePath == trans('routes.archived-ads')) {
-                    foreach ($ids as $item) {
-                        $post = Post::withoutGlobalScopes([VerifiedScope::class, ReviewedScope::class])
-                            ->where('user_id', auth()->user()->id)
-                            ->where('id', $item)
-                            ->first();
-                        if (!empty($post)) {
-                            $tmpPost = ArrayHelper::toObject($post->toArray());
+		} elseif ($pagePath == trans('routes.archived-ads')) {				
+			foreach ($ids as $item) {
+				$post = Post::withoutGlobalScopes([VerifiedScope::class, ReviewedScope::class])
+					->where('user_id', auth()->user()->id)
+					->where('id', $item)
+					->first();
+				if (!empty($post)) {
+					$tmpPost = ArrayHelper::toObject($post->toArray());
 
-                            // E.K.
-                            // set date and time and make post unvisible if it was deleted from archive
+					// E.K.
+					// set date and time and make post unvisible if it was deleted from archive
 
-                            $post->reviewed = 0;
-                            $post->deleted_at = date('Y-m-d H:i:s');
+					$post->reviewed = 0;
+					$post->deleted_at = date('Y-m-d H:i:s');
 
-                            try{
-                                $post->save();
-                                $nb = 2;
-                            }
-                            catch(\Exception $e){
-                                flash($e->getMessage())->error();
-                                $nb = 0;
-                            }
+					try{
+						$post->save();
+						$nb = 2;
+					}
+					catch(\Exception $e){
+						flash($e->getMessage())->error();
+						$nb = 0;
+					}
 
-                            // Send an Email confirmation
-                            if (!empty($tmpPost->email)) {
-                                if (config('settings.mail.confirmation') == 1) {
-                                    try {
-                                        Notification::route('mail', $tmpPost->email)->notify(new PostDeleted($tmpPost));
-                                    } catch (\Exception $e) {
-                                        flash($e->getMessage())->error();
-                                    }
-                                }
-                            }
-                        }
-                    }
+					// Send an Email confirmation
+					if (!empty($tmpPost->email)) {
+						if (config('settings.mail.confirmation') == 1) {
+							try {
+								Notification::route('mail', $tmpPost->email)->notify(new PostDeleted($tmpPost));
+							} catch (\Exception $e) {
+								flash($e->getMessage())->error();
+							}
+						}
+					}
+				}
+			}
 		} else {
 			foreach ($ids as $item) {
 				$post = Post::withoutGlobalScopes([VerifiedScope::class, ReviewedScope::class])

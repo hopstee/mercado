@@ -226,10 +226,11 @@ class PhotoController extends FrontController
             }
         }
 
-        if($post->reviewed == 1){
-            $post->reviewed = 0;
+        // if($post->reviewed == 1){
+            $post->archived = 0;
+            $post->reviewed = 1;
             $post->save();
-        }
+        // }
 
         // Get pictures limit
         $countExistingPictures = Picture::where('post_id', $post->id)->count();

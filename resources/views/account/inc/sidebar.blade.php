@@ -131,7 +131,7 @@
                                 {{--							<i class="icon-hourglass"></i> {{ t('Pending approval') }}&nbsp;--}}
                                 <i class="unir-clock sidebar-icon"></i> {{ t('Rejected ads') }}
                                 <span class="badge badge-pill badge-dif">
-							{{ isset($countPendingPosts) ? \App\Helpers\Number::short($countPendingPosts) : 0 }}
+							{{ isset($countRejectedPosts) ? \App\Helpers\Number::short($countRejectedPosts) : 0 }}
 						</span>
                             </a>
                         </li>

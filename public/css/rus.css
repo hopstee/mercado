@@ -1793,7 +1793,6 @@ input::placeholder {
 }
 
 /* for sitemap */
-
 .no-transition {
     transition: none !important;
 }
@@ -1829,7 +1828,7 @@ h3.cat-title{
 }
 
 div.cat-collapse{
-    margin-left: 10px;
+    margin-left: 15px;
 }
 
 .list-cats{

@@ -61,22 +61,6 @@
 														<?php
 															$randomId = '-' . substr(uniqid(rand(), true), 5, 5);
 														?>
-														<!-- mobile -->
-														<div class="list-cats">
-															<select name="cats" class="form-control selecter" onchange="top.location=this.value;">
-															<!-- сделано для перехода в саму категорию -->
-																<option disabled selected>{{ $iCat->name }} </option>
-																<option value="{{ \App\Helpers\UrlGen::category($iCat) }}" > {{ $iCat->name }} </option>
-																@if (isset($subCats) and $subCats->has($iCat->tid))
-																	@foreach ($subCats->get($iCat->tid) as $iSubCat)
-																		<option value="{{ \App\Helpers\UrlGen::category($iSubCat, 1) }}" > 																	
-																			{{ $iSubCat->name }}
-																		</option>
-																	@endforeach
-																@endif
-															</select>
-														</div>
-														<!-- pc -->
 														<div class="cat-list">
 															<h3 class="cat-title rounded cat-title-dif" >
 																<a href="{{ \App\Helpers\UrlGen::category($iCat) }}" style="display:inline-flex;align-items:center;margin-top:5px;margin-bottom:5px;color: #212121">
@@ -170,8 +154,6 @@
 		var maxSubCats = 15;
 		if ($(window).width() <= 500) {
 			$(".notrans-collapse *").attr("style", "display:block;");
-			$(".list-cats").attr("style", "display:block;");
-			$(".cat-list").attr("style","display:none;");
 		}
 	</script>
 	

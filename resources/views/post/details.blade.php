@@ -63,28 +63,25 @@ if (isset(auth()->user()->id)) {
 
                     <nav aria-label="breadcrumb" role="navigation" class="pull-left">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ lurl('/') }}">{{ t('Home')}} &#8194;<i
+                            <li class="breadcrumb-item"><a href="{{ lurl('/') }}">{{ t('Home')}}&#32;<i
                                             class="unir-rarrow2"> </i> </a></li>
                             <?php
 
                             $attr = ['city' => $post->city->name];?>
                             <li class="breadcrumb-item"><a
-                                        href="{{ \App\Helpers\UrlGen::city( $post->city) }}">{{ $post->city->name }}
-                                    &#8194;<i class="unir-rarrow2"></i></a></li>
+                                        href="{{ \App\Helpers\UrlGen::city( $post->city) }}">
+                                        {{ $post->city->name }}
+                                        &#32;<i class="unir-rarrow2"></i></a></li>
                             @if (!empty($post->category->parent))
                                 <li class="breadcrumb-item">
                                     <a href="{{ \App\Helpers\UrlGen::category($post->category->parent) }}">
                                         {{ $post->category->parent->name }}
-                                        &#8194;<i class="unir-rarrow2"></i>
-                                    </a>
-                                </li>
+                                        &#32;<i class="unir-rarrow2"></i></a></li>
                                 @if ($post->category->parent->id != $post->category->id)
                                     <li class="breadcrumb-item">
                                         <a href="{{ \App\Helpers\UrlGen::category($post->category, 1) }}">
                                             {{ $post->category->name }}
-                                            &#8194;<i class="unir-rarrow2"></i>
-                                        </a>
-                                    </li>
+                                            &#32;<i class="unir-rarrow2"></i></a></li>
                                 @endif
                             @else
                                 <li class="breadcrumb-item">

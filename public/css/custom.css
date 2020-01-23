@@ -663,6 +663,9 @@ a.sell-your-item span i{
 .breadcrumb-item+.breadcrumb-item::before{
     content: unset;
 }
+.breadcrumb-item+.breadcrumb-item{
+    padding-left: .4rem;
+}
 .breadcrumb{
     margin-bottom: 40px;
 }

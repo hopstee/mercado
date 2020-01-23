@@ -58,19 +58,32 @@
 									<div class="list-categories-children styled">
 										<div class="row">
 											@foreach ($cats as $key => $col)
-<!--												--><?php //var_dump($col); ?>
 												<div class="col-md-4 col-sm-4 {{ (count($cats) == $key+1) ? 'last-column' : '' }}">
 													@foreach ($col as $iCat)
 														
 														<?php
 															$randomId = '-' . substr(uniqid(rand(), true), 5, 5);
 														?>
-														
+														<!-- mobile -->
+														<div class="list-cats">
+															<select name="cats" class="form-control selecter" onchange="top.location=this.value;">
+															<!-- сделано для перехода в саму категорию -->
+																<option disabled selected>{{ $iCat->name }} </option>
+																<option value="{{ \App\Helpers\UrlGen::category($iCat) }}" > {{ $iCat->name }} </option>
+																@if (isset($subCats) and $subCats->has($iCat->tid))
+																	@foreach ($subCats->get($iCat->tid) as $iSubCat)
+																		<option value="{{ \App\Helpers\UrlGen::category($iSubCat, 1) }}" > 																	
+																			{{ $iSubCat->name }}
+																		</option>
+																	@endforeach
+																@endif
+															</select>
+														</div>
+														<!-- pc -->
 														<div class="cat-list">
 															<h3 class="cat-title rounded cat-title-dif" >
 																<a href="{{ \App\Helpers\UrlGen::category($iCat) }}" style="display:inline-flex;align-items:center;margin-top:5px;margin-bottom:5px;color: #212121">
-																	{{--																	<i class="{{ $iCat->icon_class ?? 'icon-ok' }}"></i>--}}
-{{--																	<i><img style="height: 30px; display:inline-block; padding-right: 5px" src="storage/{{ $iCat->picture }}"></i>--}}
+																	{{--	i class="{{ $iCat->icon_class ?? 'icon-ok' }}"></i>--}}
 																	<i><img style="height: 30px; display:inline-block; padding-right: 15px" src="{{ url('storage').'/'.$iCat->picture }}"></i>
 																	<p style="display:inline-block;">{{ $iCat->name }}</p>
 																	<span class="count"></span>
@@ -158,5 +171,10 @@
 	@parent
 	<script>
 		var maxSubCats = 15;
+		if ($(window).width() <= 500) {
+			$(".list-cats").attr("style", "display:block;");
+			$(".cat-list").attr("style","display:none;");
+		}
 	</script>
+	
 @endsection

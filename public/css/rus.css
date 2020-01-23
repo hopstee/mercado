@@ -1792,3 +1792,17 @@ input::placeholder {
 #sync2 .owl-item.current .item{
     background: #0c83e7;
 }
+
+/* for sitemap */
+.list-cats{
+    display: none;
+    margin:5px 0px 5px 0px; 
+}
+.cat-list{
+    display: block;
+}
+@media(max-width:500px){
+    .content-box{
+        margin-bottom: 0px;
+    }
+}

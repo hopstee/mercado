@@ -78,15 +78,15 @@
 
 						<div class="col-md-6 col-xs-12 col-xxs-12 cab-cel cab-cel-tl main-cel">
 							<div class="cab-cel-main">
-								<div class="head-message">
-									<h1 class="page-sub-header2 clearfix no-padding">{{ t('Hello') }} {{ $user->name }} </h1>
-									<span class="page-sub-header-sub">
+								<div class="head-message cabinet">
+									<h1 class="page-sub-header2 clearfix no-padding">{{ $user->name }} </h1>
+									<!-- <span class="page-sub-header-sub">
                                         {{ t('Previous Log In') }}: {{ $user->last_login_at->formatLocalized(config('settings.app.default_datetime_format')) }}
-                                    </span>
+                                    </span> -->
 								</div>
 
 								<div class="card card-default card-dif">
-									<div class="panel-collapse collapse {{ (old('panel')=='' or old('panel')=='photoPanel') ? 'show' : '' }}" id="photoPanel">
+									<div class="panel-collapse panel-collapse-dif collapse {{ (old('panel')=='' or old('panel')=='photoPanel') ? 'show' : '' }}" id="photoPanel">
 										<form name="details" class="form-horizontal" role="form" method="POST" action="{{ lurl(trans('routes.personal-data').'/'.$user->id.'/'.trans('routes.photo')) }}">
 											<?php $photoError = (isset($errors) and $errors->has('photo')) ? ' is-invalid' : ''; ?>
 											<div class="photo-field photo-field-dif">
@@ -95,6 +95,13 @@
 												</div>
 											</div>
 										</form>
+									</div>
+									<div class="user-info">
+										<span class="page-sub-header-sub">
+											{{ t('Previous Log In') }}: </br> {{ $user->last_login_at->formatLocalized(config('settings.app.default_datetime_format')) }}
+										</span>
+										</br>
+										<span class="on-site-date"></span>
 									</div>
 								</div>
 							</div>
@@ -221,7 +228,7 @@
 										<label class="col-4 col-form-label required">{{ t('Name') }} <sup>*</sup></label>
 										<div class="form-group flex-block required">
 											<div class="col-12">
-												<input name="name" type="text" class="form-control{{ $nameError }}" placeholder="" value="{{ old('name', $user->name) }}">
+												<input name="name" type="text" class="form-control name-form{{ $nameError }}" placeholder="" value="{{ old('name', $user->name) }}">
 											</div>
 										</div>
 
@@ -859,8 +866,15 @@
 					break;
 				}
 
-				$ans =  t('On site since ') .  $month . " " .  $joined[0];
+				$ans =  t('On site since ') . $month . " " .  $joined[0];
 			?>
+
+			<script>
+				$(document).ready(function() {
+					$('.on-site-date').text('{{ $ans }}');
+					// $('.file-default-preview img').attr('src', '/images/userCard.png');
+				})
+			</script>
 
 			<script>
 				var photoInfo = '<h6 class="text-muted pb-0">{{ t('Click to select') }}</h6>';
@@ -894,7 +908,8 @@
 							maxFileCount: 1,
 							validateInitialCount: true,
 							uploadClass: 'btn btn-primary',
-							defaultPreviewContent: '<img src="{{ !empty($gravatar) ? $gravatar : url('images/user.png') }}" alt="{{ t('Your Photo or Avatar') }}">' + photoInfo,
+							// defaultPreviewContent: '<img src="{{ !empty($gravatar) ? $gravatar : url('images/user.png') }}" alt="{{ t('Your Photo or Avatar') }}">' + photoInfo,
+							defaultPreviewContent: '<img src="{{ url('images/userCard.png') }}" alt="{{ t('Your Photo or Avatar') }}">' + photoInfo,
 							/* Retrieve current images */
 							/* Setup initial preview with data keys */
 							initialPreview: [
@@ -927,7 +942,7 @@
 							showClose: false,
 							fileActionSettings: {
 								// removeIcon: '<i class="far fa-trash-alt"></i>',
-								removeIcon: '<a class="change-text">{{t("Change")}}</a>',
+								removeIcon: '<a class="change-text"><i class="far fa-trash-alt"></i></a>',
 								// removeClass: 'btn btn-sm btn-danger',
 								removeTitle: '{{ t('Remove file') }}'
 							},

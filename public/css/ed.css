@@ -356,7 +356,7 @@ div.text-center-dif {
 }
 
 .head-message {
-    padding: 20px 0 20px 20px;
+    padding: 20px;
 }
 
 .head-message > h1 {
@@ -367,6 +367,20 @@ div.text-center-dif {
 .card.card-dif {
     padding: 0 20px 0 20px;
     background: #f7f9f9;
+    display: flex;
+    flex-direction: row;
+}
+
+.user-info {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 15px 0 15px 15px;
+}
+
+.page-sub-header2 {
+    font-size: 20px;
 }
 
 .cab-cel-inner {
@@ -608,70 +622,96 @@ table.table.table-dif {
     color: #ffffff !important;
 }
 
+.cabinet h1 {
+    text-overflow: ellipsis;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 0 !important;
+}
+
 .search-row-wrapper .select2-container--default .select2-selection--single {
     padding: 6px 8px 6px 8px !important;
+}
+
+.panel-collapse-dif {
+    width: 50%;
+}
+
+.file-drop-zone:hover {
+    border: 1px dashed #0096e8 !important;
+}
+
+.file-preview-thumbnails,
+.file-default-preview {
+    height: 100%;
+    width: 100%;
+}
+
+.file-default-preview img {
+    width: 70%;
+    padding: 21.5px 0 21.5px;
+}
+
+.page-content h6 {
+    padding: 0;
+    font-size: 13px;
 }
 
 .photo-field.photo-field-dif,
 .photo-field-dif>.file-input,
 .photo-field-dif>.file-input>.file-preview>.file-drop-zone>.file-preview-thumbnails>.file-preview-frame {
     width: 100% !important;
-    height: 185px !important;
+    height: 205px !important;
     display: flex !important;
     position: unset;
 }
 
-.photo-field-dif>.file-input>.file-preview,
+.photo-field-dif>.file-input>.file-preview {
+    width: 100%;
+}
+
 .photo-field-dif>.file-input>.file-preview>.file-drop-zone {
     margin: 0;
     padding: 0;
 }
 
 .photo-field-dif>.file-input>.file-preview>.file-drop-zone>.file-preview-thumbnails>.file-preview-frame>.kv-file-content {
-    height: 120px !important;
-    margin: 0 10px 0 0;
+    height: 70% !important;
+    width: 100%;
+    padding: 15px;
 }
 
 .photo-field-dif>.file-input>.file-preview>.file-drop-zone>.file-preview-thumbnails>.file-preview-frame {
-    /*display: flex;*/
-}
-
-.photo-field-dif>.file-input>.file-preview>.file-drop-zone>.file-preview-thumbnails>.file-default-preview>img {
-    width: 130px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .photo-field-dif>.file-input>.file-preview>.file-drop-zone>.file-preview-thumbnails>.file-preview-frame>.file-thumbnail-footer {
-    width: 100% !important;
-    height: 40px;
-    /*display: flex;*/
-    padding: 0 !important;
-}
-
-.photo-field-dif>.file-input>.file-preview>.file-drop-zone>.file-preview-thumbnails>.file-preview-frame>.file-thumbnail-footer>.file-actions>.file-footer-buttons {
-    width: 100% !important;
-}
-
-.photo-field-dif>.file-input>.file-preview>.file-drop-zone {
-    border: none;
+    height: 30%;
+    padding: 0 15px !important;
+    display: flex;
+    align-items: flex-start;
 }
 
 .photo-field-dif>.file-input>.file-preview>.file-drop-zone>.file-preview-thumbnails>.file-preview-frame>.file-thumbnail-footer>.file-actions>.file-footer-buttons>.kv-file-remove {
-    /*width: 100px !important;*/
-    width: 110px;
+    width: 41px;
     height: 41px!important;
-    margin: 10px 0 0 0 !important;
-    background: #47bd99 !important;
+    background: #d9534f;
+    color: #fff;
     border: none;
-    color: #ffffff;
-    border-radius: 3px !important;
 }
 
 .photo-field-dif>.file-input>.file-preview>.file-drop-zone>.file-preview-thumbnails>.file-preview-frame>.file-thumbnail-footer>.file-actions>.file-footer-buttons>.kv-file-remove:hover {
-    background: #36a986 !important;
+    background: #ce3e39;
 }
 
-.photo-field-dif>.file-input>.file-preview>.file-drop-zone>.file-preview-thumbnails>.file-preview-frame>.file-thumbnail-footer>.file-drag-handle,
 .photo-field-dif>.file-input>.file-preview>.file-drop-zone>.file-preview-thumbnails>.file-preview-frame>.file-thumbnail-footer>.file-actions>.file-footer-buttons>.kv-file-zoom {
+    display: none;
+}
+
+.photo-field-dif>.file-input>.file-preview>.file-drop-zone>.file-preview-thumbnails>.file-preview-frame>.file-thumbnail-footer>.file-drag-handle {
     display: none;
 }
 
@@ -682,7 +722,7 @@ table.table.table-dif {
 
 .user-name,
 .user-onSite {
-    text-align: left;
+    display: none;
 }
 
 .change-text {
@@ -1154,7 +1194,7 @@ ul.nav-wizard>li:before {
     .photo-field.photo-field-dif,
     .photo-field-dif>.file-input,
     .photo-field-dif>.file-input>.file-preview>.file-drop-zone>.file-preview-thumbnails>.file-preview-frame {
-        height: 155px !important;
+        height: 190px !important;
     }
 
     .main-cel {

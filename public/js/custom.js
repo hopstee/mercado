@@ -114,6 +114,12 @@ $(document).ready(function ()
 	}
 	$('ul.dropdown-menu li a.link-bold').parent().css('backgroundColor', '#0096e8');
 
+	$('.name-form').keypress(function() {
+		if($(this).val().length > 25) {
+			return false;
+		}
+	})
+
 	/*=======================================================================================
 	 cat-collapse Homepage Category Responsive view
 	 =======================================================================================*/

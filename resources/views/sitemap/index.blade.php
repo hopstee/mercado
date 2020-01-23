@@ -48,9 +48,6 @@
 					<div class="col-xl-12">
 						<div class="content-box">
 							<div class="row-featured-category">
-								<!-- <h2>
-									<span class="title-2 title-2-dif" style="font-weight: bold;">{{ t('Sitemap') }}</span>
-								</h2> -->
 								<h2 style="padding-left:15px; padding: 15px 0;">
 									<span style="font-size:20px" class="title-3">{{ t('Sitemap') }}</span>
 								</h2>
@@ -89,17 +86,17 @@
 																	<span class="count"></span>
 																</a>
 																@if (isset($subCats) and $subCats->has($iCat->tid))
-																	<span class="btn-cat-collapsed collapsed"
+																	<span class="notrans-collapse collapsed"
 																		  data-toggle="collapse"
 																		  data-target=".cat-id-{{ $iCat->id . $randomId }}"
 																		  aria-expanded="false"
-																		  style="margin-top: 10px;"
+																		  style="margin: 10px;"
 																	>
 																		<span class="unir-rarrow2"></span>
 																	</span>
 																@endif
 															</h3>
-															<ul class="cat-collapse collapse show cat-id-{{ $iCat->id . $randomId }} long-list-home">
+															<div class="cat-collapse cat-id-{{ $iCat->id . $randomId }} no-transition">
 																@if (isset($subCats) and $subCats->has($iCat->tid))
 																	@foreach ($subCats->get($iCat->tid) as $iSubCat)
 																		<li>
@@ -109,7 +106,7 @@
 																		</li>
 																	@endforeach
 																@endif
-															</ul>
+															</div>
 														</div>
 													@endforeach
 												</div>
@@ -172,6 +169,7 @@
 	<script>
 		var maxSubCats = 15;
 		if ($(window).width() <= 500) {
+			$(".notrans-collapse *").attr("style", "display:block;");
 			$(".list-cats").attr("style", "display:block;");
 			$(".cat-list").attr("style","display:none;");
 		}

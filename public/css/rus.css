@@ -1738,7 +1738,6 @@ input::placeholder {
 #sync1 .owl-prev{
     width: 22px;
     height: 40px;
-    /* margin-top: -20px; */
     position: absolute;
     top: 50%;
 }
@@ -1794,6 +1793,45 @@ input::placeholder {
 }
 
 /* for sitemap */
+
+.no-transition {
+    transition: none !important;
+}
+
+.notrans-collapse *{
+    display:none;
+}
+
+span.notrans-collapse[aria-expanded="false"]{
+    display: inline-block;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+span.notrans-collapse[aria-expanded="true"]{
+    display: inline-block;
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+}
+.cat-collapse:not(.show) {
+    display: none;
+}
+h3.cat-title{
+    display: -webkit-flex;
+    display: flex; 
+    align-items: center;
+    justify-content: space-between;
+}
+
+div.cat-collapse{
+    margin-left: 10px;
+}
+
 .list-cats{
     display: none;
     margin:5px 0px 5px 0px; 

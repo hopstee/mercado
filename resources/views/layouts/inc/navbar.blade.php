@@ -107,7 +107,7 @@
                 @else
                 <li class="nav-item dropdown no-arrow">
                     <!-- <a href="{{ url('/') }}/account" class="dropdown-toggle nav-link" data-toggle="dropdown"> -->
-                    <a href="{{ url('/') }}/account" class="nav-link">
+                    <a href="{{ lurl('/' . trans('routes.personal-data'))  }}" class="nav-link">
                         <i class="unib-user fa"></i>
                         <span>{{ auth()->user()->name }}</span>
                         <!-- <span class="badge badge-pill badge-important count-conversations-with-new-messages">0</span> -->

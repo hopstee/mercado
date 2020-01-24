@@ -208,7 +208,8 @@ return [
     'Remove' => 'Remove',
     'Your Email' => 'Your Email',
     'E-mail for password recovery' => 'E-mail for password recovery',
-    'if you forget password we send it on email' => 'if you forget password we send it on email',
+    'if you forget password we send it on email' => 'If you forget password we send it on email',
+    'Add email' => 'Add your email',
     // Joined
     ' year ago' => ' year ago',
     ' month ago' => ' month ago',

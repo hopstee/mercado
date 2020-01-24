@@ -388,6 +388,8 @@ return [
     'New Password' => 'Nova Senha',
     'Confirm New Password' => 'Confirmar Nova Senha',
     'E-mail for password recovery' => 'E-mail para recuperação de senha',
+    'if you forget password we send it on email' => 'Se você esqueceu a senha, enviamos por e-mail',
+    'Add email' => 'Adicionar o seu e-mail',
     'Preferences' => 'Preferências',
     'I want to receive newsletter.' => 'Quero receber uma newsletter',
     'I want to receive advice on buying and selling.' => 'Quero receber conselhos sobre compra e venda.',

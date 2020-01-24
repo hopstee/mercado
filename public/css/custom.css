@@ -1444,3 +1444,9 @@ span.btn-cat-collapsed[aria-expanded="true"] > span{
     -o-transform: rotate(90deg) !important;
     transform: rotate(90deg) !important;
 }
+.add-page-btn p{
+    text-align: center;
+}
+.add-page-btn a:hover, .add-page-btn a:focus{
+    color: white;
+}

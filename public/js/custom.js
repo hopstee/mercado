@@ -9,15 +9,16 @@ $(document).ready(function ()
 	$(".navbar-toggle").click(function () {
 		$('.mobile-filter-sidebar.xxx').addClass('is-display')
         .prepend("<button style='display:flex; align-items:center; justify-content:center;' class='closeFilter btn go-button'><i style='font-size:14px; ' class='unir-close_l'></i></button>")
-            .animate(sidebarDirectionClose, 250, "linear", function () {
-			});
+            .animate(sidebarDirectionClose, 250, "linear", function () {});
 		$('.menu-overly-mask').addClass('is-visible');
     });
 
     $(".menu-overly-mask").click(function () {
         $(".mobile-filter-sidebar.xxx").removeClass('is-display').animate(sidebarDirection, 250, "linear", function () {
 		});
-		$('.menu-overly-mask').removeClass('is-visible');
+		$('.menu-overly-mask').removeClass('is-visible');		
+		$(".closeFilter").remove();
+
     });
 
     $(document).on('click', '.closeFilter', function () {

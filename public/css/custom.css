@@ -789,7 +789,9 @@ ul.navbar-mobile > a{
     display: block;
 }
 .mobile-filter-sidebar.xxx{
+    height:auto;
     display: none;
+    padding:0px !important;
 }
 #userMenuDropdown.navbar-mobile a{
     padding: 5px 5px;

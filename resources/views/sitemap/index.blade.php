@@ -62,10 +62,10 @@
 															$randomId = '-' . substr(uniqid(rand(), true), 5, 5);
 														?>
 														<div class="cat-list">
-															<h3 class="cat-title rounded cat-title-dif" >
+															<h3 class="cat-title f-category cat-title-dif" >
 																<a href="{{ \App\Helpers\UrlGen::category($iCat) }}" style="display:inline-flex;align-items:center;margin-top:5px;margin-bottom:5px;color: #212121">
 																	{{--	i class="{{ $iCat->icon_class ?? 'icon-ok' }}"></i>--}}
-																	<i><img style="height: 30px; display:inline-block; padding-right: 15px" src="{{ url('storage').'/'.$iCat->picture }}"></i>
+																	<i><img style="height: 25px; display:inline-block; padding-right: 15px" src="{{ url('storage').'/'.$iCat->picture }}"></i>
 																	<p style="display:inline-block;">{{ $iCat->name }}</p>
 																	<span class="count"></span>
 																</a>

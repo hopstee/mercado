@@ -1825,18 +1825,18 @@ h3.cat-title{
     display: flex; 
     align-items: center;
     justify-content: space-between;
+    border: 2.5px 0px 2.5px 0px;
+    margin-bottom: 0px !important;
 }
 
 div.cat-collapse{
     margin-left: 15px;
 }
 
-.list-cats{
-    display: none;
-    margin:5px 0px 5px 0px; 
-}
+
 .cat-list{
     display: block;
+    margin:0px !important;
 }
 @media(max-width:500px){
     .content-box{

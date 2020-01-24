@@ -1804,6 +1804,11 @@ input::placeholder {
     background: #0288d1;
 }
 
+.for-test-inline-items{
+    width: 100%;
+    height: 100px;
+}
+
 /* for sitemap */
 .no-transition {
     transition: none !important;

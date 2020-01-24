@@ -307,22 +307,16 @@ if (isset(auth()->user()->id)) {
                                     </div>
                                     <!-- </ul> -->
 {{--                                <div class="product-view-thumb-wrapper">--}}
-                                    <div class="owl-carousel" id="sync2">
-                                <!-- <ul id="bx-pager" class="product-view-thumb"> -->
-                                        @foreach($post->pictures as $key => $image)
-                                            <div class="item" id="pic">
-                                        <!-- <li> -->
-                                                <!-- <a class="thumb-item-link"  href=""> -->
-                                                    
-                                                    <img src="{{ imgUrl($image->filename, 'small') }}"
-                                                         alt="{{ $titleSlug . '-small-' . $key }}" data-slide-index="{{ $key }}">
-                                                <!-- </a> -->
-                                            </div>
-                                                <!-- </li> -->
-                                        @endforeach
+                                        <div class="owl-carousel" id="sync2">
+                                            @foreach($post->pictures as $key => $image)
+                                                <div class="item" id="pic">
+                                    <div class="for-test-inline-items">
+                                                        <img src="{{ imgUrl($image->filename, 'small') }}"
+                                                            alt="{{ $titleSlug . '-small-' . $key }}" data-slide-index="{{ $key }}">
+                                                </div>
+                                            @endforeach
+                                        </div>
                                     </div>
-                                    <!-- </ul> -->
-{{--                                </div>--}}
                             @else
                                 <!-- <ul class="bxslider"> -->
                                 <div class="owl-carousel" id="sync1">
@@ -922,8 +916,78 @@ if (isset(auth()->user()->id)) {
         var sync1 = $("#sync1");
         var sync2 = $("#sync2");
 
+sync1.owlCarousel({
+            items:1,
+            dots: false,
+            loop:true,
+            autoHeight:true,
+            slideSpeed : 1000,
+            nav: true,
+            // afterAction : syncPosition,
+            responsiveRefreshRate : 200,
+            navText: [
+                '<svg width="100%" height="100%" viewBox="0 0 11 20"><path style="fill:none;stroke-width: 1px;stroke: #000;" d="M9.554,1.001l-8.607,8.607l8.607,8.606"/></svg>',
+                '<svg width="100%" height="100%" viewBox="0 0 11 20" version="1.1"><path style="fill:none;stroke-width: 1px;stroke: #000;" d="M1.054,18.214l8.606,-8.606l-8.606,-8.607"/></svg>'
+            ],
+        }).on('changed.owl.carousel', syncPosition);
+        sync2.owlCarousel({
+            items:15,
+            autoWidth:true,
+            dots: false,
+            smartSpeed: 200,
+            slideSpeed : 500,
+            responsiveRefreshRate : 100
+        });
 
+        function syncPosition(el) {
+            //if you set loop to false, you have to restore this next line
+            //var current = el.item.index;
 
+        $(window).on('load',function () {
+            sync1.owlCarousel({
+                items:1,
+                dots: false,
+                loop: false,
+                autoHeight:true,
+                slideSpeed : 1000,
+                nav: true,
+                responsiveRefreshRate : 200,
+                navText: [
+                    '<svg viewBox="0 0 11 20" version="1.1"><path style="fill:none;stroke-width: 1px;stroke: #fff;" d="M1.054,18.214l8.606,-8.606l-8.606,-8.607"/></svg>'
+                    '<svg viewBox="0 0 11 20"><path style="fill:none;stroke-width: 1px;stroke: #fff;" d="M9.554,1.001l-8.607,8.607l8.607,8.606"/></svg>',
+                ],
+            }).on('changed.owl.carousel', syncPosition);
+            sync2.owlCarousel({
+                loop:false,
+                items: 15,
+                autoWidth: true,
+                dots: false,
+                smartSpeed: 200,
+                slideSpeed : 500,
+                responsiveRefreshRate : 100
+            });
+            
+            function syncPosition(el) {
+                //if you set loop to false, you have to restore this next line
+                var current = el.item.index;
+
+            // sync2.find('.owl-item').first().removeClass("current");
+            sync2
+                .find(".owl-item")
+                .removeClass("current")
+                .eq(current)
+                .addClass("current");
+            var onscreen = sync2.find('.owl-item.active').length - 1;
+            var start = sync2.find('.owl-item.active').first().index();
+            var end = sync2.find('.owl-item.active').last().index();
+            // console.log(start+":"+end+"::"+el.item.index+"::"+(el.item.index - (el.item.count/2) - .5)+";"+count);
+            if (current > end) {
+                sync2.data('owl.carousel').to(current, 100, true);
+            }
+            if (current < start) {
+                sync2.data('owl.carousel').to(current - onscreen, 100, true);
+            }
+        }
 
         $(document).ready(function () {
             
@@ -988,14 +1052,14 @@ if (isset(auth()->user()->id)) {
                 }else if(current == start){
                     sync2.data('owl.carousel').to(current , 100, true);
 
-                }
-            }
-
-            sync2.on("click", ".owl-item", function(e){
+               sync2.on("click", ".owl-item", function(e){
                 e.preventDefault();
-                var number = $(this).index();
                 sync1.data('owl.carousel').to(number, 100, true);
+                var number = $(this).index();
             });
+            sync2.find('.owl-item').first().addClass("current");
+        });
+        $(document).ready(function () {
             // /* bxSlider - Main Images */
             // $('.bxslider').bxSlider({
             //     speed: 300,
@@ -1046,8 +1110,6 @@ if (isset(auth()->user()->id)) {
             $( ".bx-controls-direction" ).append( "<div class='prev' ><i class='unib-larrow2'></i></div>" );
             $( ".bx-controls-direction" ).append( "<div class='prev' ><i class='unib-larrow2'></i></div>" );
             $( ".bx-controls-direction" ).append( "<div class='next' ><i class='unib-rarrow2' ></i></div>" );
-
-            sync2.find('.owl-item').first().addClass("current");
         });
 
 

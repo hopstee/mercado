@@ -17,7 +17,7 @@
 				@if ($categoriesOptions['type_of_display'] == 'c_picture_icon')
 
 					@if (isset($categories) and $categories->count() > 0)
-						<div class="col-lg-2 col-md-3 col-sm-3 col-xs-4 f-category add-page-btn">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 add-page-btn">
 							<a href="{{ \App\Helpers\UrlGen::addPost() }}">
 								<p class="main-text">{{ t('Publish a free ad now') }}</p>
 								<p class="secondary-text">{{ t('and start receiving calls from buyers!') }}</p>

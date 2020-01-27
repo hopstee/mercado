@@ -1480,6 +1480,9 @@ span.btn-cat-collapsed[aria-expanded="true"] > span{
     -o-transform: rotate(90deg) !important;
     transform: rotate(90deg) !important;
 }
+.add-page-btn{
+    padding: 10px;
+}
 .add-page-btn p{
     text-align: center;
 }

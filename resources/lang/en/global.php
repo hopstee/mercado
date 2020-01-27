@@ -154,8 +154,8 @@ return [
     'Reviewed'=>'Reviewed',
     'Declined'=>'Declined',
     'Edited by Admin'=>'Edited by Admin',
-    'Publish a free ad now' => 'Publish a free ad now',
-    'and start receiving calls from buyers!' => 'and start receiving calls from buyers!',
+    'Publish a free ad now' => 'Post and Sell',
+    'and start receiving calls from buyers!' => 'Fast, Easy, Free',
 
     'Reject'=>'Reject',
     'The ad does not correspond Posting Rules'=>'The ad does not correspond Posting Rules',

@@ -63,12 +63,17 @@
 				autoplayTimeout:4000,
 				autoplayHoverPause:true
 			});
-			if($(document).width() >= 575){
-				$("#mobileBanner").attr("style", "display: none;");
-			}
-			else{
-				$("#desktopBanner").attr("style", "display: none;");
-			}
+			window.addEventListener('resize', function(event){
+				if($(document).width() >= 575){
+					$("#mobileBanner").attr("style", "display: none;");
+					$("#desktopBanner").attr("style", "display: block;");
+				}
+				else{
+					$("#desktopBanner").attr("style", "display: none;");
+					$("#mobileBanner").attr("style", "display: block;");
+				}
+			});
+			
 
 		</script>
 

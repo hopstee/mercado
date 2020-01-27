@@ -822,7 +822,7 @@ a.btn.btn-rep {
 /*}*/
 
 .add-page-btn, .all-ads-btn {
-    display: none;
+    display: block;
 }
 
 .add-page-btn {
@@ -1047,11 +1047,13 @@ ul.nav-wizard>li:before {
     border-bottom: none;
 }
 
-@media (max-width: 767px) {
 
+@media (min-width: 575px){
     .add-page-btn, .all-ads-btn {
-        display: unset;
+        display: none;
     }
+}
+@media (max-width: 767px) {
 
     .badge-dif-imp-header {
         position: fixed;

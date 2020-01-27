@@ -64,13 +64,18 @@
 				autoplayHoverPause:true,
 			});
 
-			if($(document).width() >= 575){
-				$("#mobileBanner2").attr("style", "display: none;");
-			}
-			else{
-				$("#desktopBanner2").attr("style", "display: none;");
-				// $("#mobileBanner2").attr("style", "display: none;");
-				$( "#mobileBanner2" ).insertBefore( $( "#categories-home" ) );
-			}
+			
+			window.addEventListener('resize', function(event){
+				if($(document).width() >= 575){
+					$("#mobileBanner2").attr("style", "display: none;");
+					$("#desktopBanner2").attr("style", "display: block;");
+				}
+				else{
+					$("#desktopBanner2").attr("style", "display: none;");
+					// $("#mobileBanner2").attr("style", "display: none;");
+					$( "#mobileBanner2" ).insertBefore( $( "#categories-home" ) );
+					$("#mobileBanner2").attr("style", "display: block;");
+				}
+			});
 		</script>
 @endsection

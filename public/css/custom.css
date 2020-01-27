@@ -281,7 +281,7 @@ a.btn-add-listing,
 button.btn-add-listing,
 .navbar.navbar-site ul.navbar-nav > li.postadd > a.btn-add-listing,
 #homepage a.btn-add-listing {
-    background-color: #ff8f00 !important;
+    background-color: #ff8f00;
 }
 .page-content p {
     font-size: 14px;
@@ -915,6 +915,15 @@ ul.navbar-mobile > a{
     }
     .btn-cat-collapsed{
         right: 15px;
+    }
+    .btn-add-listing.mob-vers{
+        background-image: linear-gradient(to bottom, #ff8f00,#ff8f00 100%);
+    }
+    .btn-add-listing.mob-vers:hover{
+        background-image: linear-gradient(to bottom, #ff7a00,#ff7a00 100%);
+    }
+    .btn-add-listing.mob-vers:focus{
+        background-image: linear-gradient(to bottom, #ff7a00,#ff7a00 100%);
     }
 }
 .contact-form .form-horizontal{

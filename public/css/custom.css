@@ -236,7 +236,6 @@ img.tooltipHere.main-logo-mob {
     border: 1px solid #CFD8DC;
     position: relative;
 }
-
 .btn:hover,
 .btn:active,
 .btn:focus,
@@ -529,6 +528,12 @@ a.nav-link {
 .select2-container--default .select2-selection--single, .select2-dropdown{
     background-color: #f7f9f9;
 }
+.select2-container--default .select2-selection--single:hover{
+    background-color: #dde3e6;
+}
+.select2-container--default .select2-selection--single:focus{
+    background-color: #dde3e6;
+}
 input.form-control.keyword::-webkit-input-placeholder { /* Edge */
     color: #adadad;
 }
@@ -556,6 +561,12 @@ a.btn-add-listing, button.btn-add-listing, .navbar.navbar-site ul.navbar-nav > l
 .navbar.navbar-light .navbar-nav>li.lang-menu .btn, .navbar.navbar-site .navbar-nav>li.lang-menu .btn{
     font-size: 14px;
     background-color: #f7f9f9;
+    border-color: #CFD8DC;
+    color: #212121;
+}
+.navbar.navbar-light .navbar-nav>li.lang-menu .btn:hover{
+    font-size: 14px;
+    background-color: #dde3e6;
     border-color: #CFD8DC;
     color: #212121;
 }

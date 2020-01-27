@@ -22,7 +22,7 @@ $qLocation = request()->get('location');
 <div class="container">
 	
 	<div class="search-row-wrapper search-row-wrapper-dif">
-		<div class="container">
+		<!-- <div class="container"> -->
 			<?php $attr = ['countryCode' => config('country.icode')]; ?>
 			<form id="search" name="search" action="{{ lurl(trans('routes.v-search', $attr), $attr) }}" method="GET">
 				<div class="row m-0 flex-fields flex-fields-dif">
@@ -86,7 +86,7 @@ $qLocation = request()->get('location');
 
 				</div>
 			</form>
-		</div>
+		<!-- </div> -->
 	</div>
 </div>
 

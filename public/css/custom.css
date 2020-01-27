@@ -728,6 +728,16 @@ div.help-block h4 a{
     margin-top: 0;
     text-transform: none;
 }
+/*HOME MOBILE 320*/
+@media (max-width: 320px){
+    .container {
+        min-width: 280px;
+    }
+    .navbar .container{
+        padding-left: unset;
+    }
+}
+
 /*HOME MOBILE 575*/
 @media (max-width: 575px){
     div.f-category {

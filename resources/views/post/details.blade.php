@@ -293,58 +293,22 @@ if (isset(auth()->user()->id)) {
                                     </h1>
 @endif -->
 
+                        <!--posts-image-->
+
                             @if (count($post->pictures) > 0)
-                                <!-- <ul class="bxslider"> -->
-                                    <div class="owl-carousel" id="sync1">
+                                    <div class="owl-carousel owl-theme" id='test-pic'>
                                     @foreach($post->pictures as $key => $image)
-                                        <!-- <li> -->
-                                            <div class="item" id="pic">
+                                            <div class="item fancybox" id="pic" href="{{ imgUrl($image->filename, 'big') }}" data-fancybox="gallery">
                                                 <img src="{{ imgUrl($image->filename, 'big') }}"
                                                      alt="{{ $titleSlug . '-big-' . $key }}">
                                             </div>
-                                                 <!-- </li> -->
                                     @endforeach
                                     </div>
-                                    <!-- </ul> -->
-{{--                                <div class="product-view-thumb-wrapper">--}}
-                                        <div class="owl-carousel" id="sync2">
-                                            @foreach($post->pictures as $key => $image)
-                                                <div class="item" id="pic">
-                                    <div class="for-test-inline-items">
-                                                        <img src="{{ imgUrl($image->filename, 'small') }}"
-                                                            alt="{{ $titleSlug . '-small-' . $key }}" data-slide-index="{{ $key }}">
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                    </div>
                             @else
-                                <!-- <ul class="bxslider"> -->
-                                <div class="owl-carousel" id="sync1">
-                                <!-- <li> -->
-                                    <div class="item" id="noPic">
-                                        <img src="{{ imgUrl(config('larapen.core.picture.default'), 'big') }}"
-                                             alt="img">
-                                    </div>
-                                    <!-- </li> -->
-                                </div>
-                                <!-- </ul> -->
-                                <!-- <div class="product-view-thumb-wrapper"> -->
-                                    <!-- <ul id="bx-pager" class="product-view-thumb"> -->
-                                    <div class="owl-carousel" id="sync2">
-                                    <!-- <li> -->
-                                        <div class="item" id="noPic">
-                                            <!-- <a class="thumb-item-link" data-slide-index="0" href=""> -->
-                                                <img src="{{ imgUrl(config('larapen.core.picture.default'), 'small') }}"
-                                                     alt="img" data-slide-index="0">
-                                            <!-- </a> -->
-                                        </div>
-                                            <!-- </li> -->
-                                    </div>
-                                            <!-- </ul> -->
-                                <!-- </div> -->
+                                <img src="{{ imgUrl(config('larapen.core.picture.default'), 'big') }}"
+                                        alt="img">
                             @endif
-                        <!-- </div> -->
-                        <!--posts-image-->
+
 
 
                         @if (config('plugins.reviews.installed'))
@@ -797,9 +761,16 @@ if (isset(auth()->user()->id)) {
     @else
         <link href="{{ url('assets/plugins/bxslider/jquery.bxslider.css') }}" rel="stylesheet"/>
     @endif
+    <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
 @endsection
 
 @section('after_scripts')
+<script src="https://unpkg.com/swiper/js/swiper.js"></script>
+<script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
     @if (config('services.googlemaps.key'))
         <script src="https://maps.googleapis.com/maps/api/js?key={{ config('services.googlemaps.key') }}"
                 type="text/javascript"></script>
@@ -913,177 +884,19 @@ if (isset(auth()->user()->id)) {
             pagination:false
         });
 
-        var sync1 = $("#sync1");
-        var sync2 = $("#sync2");
-
-sync1.owlCarousel({
-            items:1,
-            dots: false,
-            loop:true,
-            autoHeight:true,
-            slideSpeed : 1000,
-            nav: true,
-            // afterAction : syncPosition,
-            responsiveRefreshRate : 200,
-            navText: [
-                '<svg width="100%" height="100%" viewBox="0 0 11 20"><path style="fill:none;stroke-width: 1px;stroke: #000;" d="M9.554,1.001l-8.607,8.607l8.607,8.606"/></svg>',
-                '<svg width="100%" height="100%" viewBox="0 0 11 20" version="1.1"><path style="fill:none;stroke-width: 1px;stroke: #000;" d="M1.054,18.214l8.606,-8.606l-8.606,-8.607"/></svg>'
-            ],
-        }).on('changed.owl.carousel', syncPosition);
-        sync2.owlCarousel({
-            items:15,
-            autoWidth:true,
-            dots: false,
-            smartSpeed: 200,
-            slideSpeed : 500,
-            responsiveRefreshRate : 100
-        });
-
-        function syncPosition(el) {
-            //if you set loop to false, you have to restore this next line
-            //var current = el.item.index;
-
-        $(window).on('load',function () {
-            sync1.owlCarousel({
-                items:1,
-                dots: false,
+        $('#test-pic').owlCarousel({
+                lazyLoad : true,
+                dots: true,
+                items: 1,
                 loop: false,
-                autoHeight:true,
                 slideSpeed : 1000,
-                nav: true,
+                nav: false,
                 responsiveRefreshRate : 200,
-                navText: [
-                    '<svg viewBox="0 0 11 20" version="1.1"><path style="fill:none;stroke-width: 1px;stroke: #fff;" d="M1.054,18.214l8.606,-8.606l-8.606,-8.607"/></svg>'
-                    '<svg viewBox="0 0 11 20"><path style="fill:none;stroke-width: 1px;stroke: #fff;" d="M9.554,1.001l-8.607,8.607l8.607,8.606"/></svg>',
-                ],
-            }).on('changed.owl.carousel', syncPosition);
-            sync2.owlCarousel({
-                loop:false,
-                items: 15,
-                autoWidth: true,
-                dots: false,
-                smartSpeed: 200,
-                slideSpeed : 500,
-                responsiveRefreshRate : 100
+                dotsEach:1,
             });
-            
-            function syncPosition(el) {
-                //if you set loop to false, you have to restore this next line
-                var current = el.item.index;
 
-            // sync2.find('.owl-item').first().removeClass("current");
-            sync2
-                .find(".owl-item")
-                .removeClass("current")
-                .eq(current)
-                .addClass("current");
-            var onscreen = sync2.find('.owl-item.active').length - 1;
-            var start = sync2.find('.owl-item.active').first().index();
-            var end = sync2.find('.owl-item.active').last().index();
-            // console.log(start+":"+end+"::"+el.item.index+"::"+(el.item.index - (el.item.count/2) - .5)+";"+count);
-            if (current > end) {
-                sync2.data('owl.carousel').to(current, 100, true);
-            }
-            if (current < start) {
-                sync2.data('owl.carousel').to(current - onscreen, 100, true);
-            }
-        }
 
         $(document).ready(function () {
-            
-            sync1.owlCarousel({
-                items:1,
-                dots: false,
-                loop: false,
-                autoHeight:true,
-                slideSpeed : 1000,
-                nav: true,
-                responsiveRefreshRate : 200,
-                navText: [
-                    '<svg viewBox="0 0 11 20"><path style="fill:none;stroke-width: 1px;stroke: #fff;" d="M9.554,1.001l-8.607,8.607l8.607,8.606"/></svg>',
-                    '<svg viewBox="0 0 11 20" version="1.1"><path style="fill:none;stroke-width: 1px;stroke: #fff;" d="M1.054,18.214l8.606,-8.606l-8.606,-8.607"/></svg>'
-                ],
-            }).on('changed.owl.carousel', syncPosition);
-            sync2.owlCarousel({
-                loop:false,
-                items: 15,
-                autoWidth: true,
-                dots: false,
-                smartSpeed: 200,
-                slideSpeed : 500,
-                responsiveRefreshRate : 100
-            });
-            
-            function syncPosition(el) {
-                //if you set loop to false, you have to restore this next line
-                var current = el.item.index;
-
-                //if you set loop to true you have to restore this block
-                // var count = el.item.count-1;
-                // if(el.item.count==2){//не корректно работало с 2 картинками
-                //     var current = Math.round(el.item.index - (el.item.count/2) - .6);
-                // }
-                // else{
-                //     var current = Math.round(el.item.index - (el.item.count/2) - .5);
-                // }
-                // if(current < 0) {
-                //     current = count;
-                // }
-                // if(current > count) {
-                //     current = 0;
-                // }
-                //end block
-
-                sync2
-                    .find(".owl-item")
-                    .removeClass("current")
-                    .eq(current)
-                    .addClass("current");
-
-                var onscreen = sync2.find('.owl-item.active').length - 1;
-                var start = sync2.find('.owl-item.active').first().index();
-                var end = sync2.find('.owl-item.active').last().index();
-                console.log(start+":"+end+"::"+onscreen+"::"+current);
-                if (current > onscreen) {
-                    sync2.data('owl.carousel').to(current-1, 100, true);
-                }
-                if (current < start) {
-                    sync2.data('owl.carousel').to(current - onscreen, 100, true);
-                }else if(current == start){
-                    sync2.data('owl.carousel').to(current , 100, true);
-
-               sync2.on("click", ".owl-item", function(e){
-                e.preventDefault();
-                sync1.data('owl.carousel').to(number, 100, true);
-                var number = $(this).index();
-            });
-            sync2.find('.owl-item').first().addClass("current");
-        });
-        $(document).ready(function () {
-            // /* bxSlider - Main Images */
-            // $('.bxslider').bxSlider({
-            //     speed: 300,
-            //     mode: 'fade',
-            //     pagerCustom: '#bx-pager',
-            //     adaptiveHeight: true,
-            //     preloadImages: 'all',
-            //     onSlideAfter: function ($slideElement, oldIndex, newIndex) {
-            //         @if (!userBrowser('Chrome'))
-            //         $('#bx-pager li:not(.bx-clone)').eq(newIndex).find('a.thumb-item-link').addClass('active');
-            //         @endif
-            //     }
-            // });
-
-            // /* bxSlider - Thumbnails */
-            // @if (userBrowser('Chrome'))
-            // $('#bx-pager').addClass('m-3');
-            // $('#bx-pager .thumb-item-link').unwrap();
-            //         @else
-            // var thumbSlider = $('.product-view-thumb').bxSlider(bxSliderSettings());
-            // $(window).on('resize', function () {
-            //     thumbSlider.reloadSlider(bxSliderSettings());
-            // });
-            // @endif
 
             @if (config('settings.single.show_post_on_googlemap'))
             /* Google Maps */
@@ -1110,6 +923,7 @@ sync1.owlCarousel({
             $( ".bx-controls-direction" ).append( "<div class='prev' ><i class='unib-larrow2'></i></div>" );
             $( ".bx-controls-direction" ).append( "<div class='prev' ><i class='unib-larrow2'></i></div>" );
             $( ".bx-controls-direction" ).append( "<div class='next' ><i class='unib-rarrow2' ></i></div>" );
+
         });
 
 
@@ -1164,41 +978,27 @@ sync1.owlCarousel({
 
         });
 
-        // /* bxSlider - Initiates Responsive Carousel */
-        // function bxSliderSettings() {
-        //     var smSettings = {
-        //         slideWidth: 65,
-        //         minSlides: 1,
-        //         maxSlides: 4,
-        //         slideMargin: 5,
-        //         adaptiveHeight: true,
-        //         pager: false
-        //     };
-        //     var mdSettings = {
-        //         slideWidth: 100,
-        //         minSlides: 1,
-        //         maxSlides: 4,
-        //         slideMargin: 5,
-        //         adaptiveHeight: true,
-        //         pager: false
-        //     };
-        //     var lgSettings = {
-        //         slideWidth: 100,
-        //         minSlides: 3,
-        //         maxSlides: 6,
-        //         pager: false,
-        //         slideMargin: 10,
-        //         adaptiveHeight: true
-        //     };
-
-        //     if ($(window).width() <= 640) {
-        //         return smSettings;
-        //     } else if ($(window).width() > 640 && $(window).width() < 768) {
-        //         return mdSettings;
-        //     } else {
-        //         return lgSettings;
-        //     }
-        // }
-
+        
+        $('.fancybox').fancybox({
+            toolbar: 'auto',
+            scrolling: 'no',
+            mobile: {
+                idleTime: false,
+                clickContent: function(current, event) {
+                    return current.type === "image" ? "toggleControls" : false;
+                },
+                clickSlide: function(current, event) {
+                    return current.type === "image" ? "toggleControls" : "close";
+                },
+                dblclickContent: function(current, event) {
+                    return current.type === "image" ? "zoom" : false;
+                },
+                dblclickSlide: function(current, event) {
+                    return current.type === "image" ? "zoom" : false;
+                }
+            },
+        });
+        $('[data-fancybox="gallery"]').fancybox({
+        });
     </script>
 @endsection

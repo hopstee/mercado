@@ -1718,7 +1718,8 @@ input::placeholder {
 }
 
 /* for images in post */
-#sync1 .item{
+.owl-carousel #pic{
+    max-height: 460px !important; 
     color: #FFF;
     padding:0px;
     -webkit-border-radius: 3px;
@@ -1727,6 +1728,9 @@ input::placeholder {
     text-align: center;
     margin-right: auto;
     margin-left: auto;
+}
+.owl-carousel .owl-item img{
+    width: auto;
 }
 @media(max-width:500px){
     #sync1 .owl-next,
@@ -1741,73 +1745,50 @@ input::placeholder {
         background-color: rgba(105, 110, 114, 0.753);
     }
 }
-#sync1 .owl-next,
-#sync1 .owl-prev{
-    width: 50px;
-    height: 100%;
-    position: absolute;
-    background-color: rgba(105, 110, 114, 0.753);
+
+.owl-carousel#pic {
+    margin-right: auto;
+    margin-left: auto;
+    display:block !important;
 }
-#sync1 svg{
-    width: 50%;
+.owl-carousel *{
+    max-height: 500px !important;
 }
-#sync1 .owl-prev{
-    left: 0%;
-    top: 0;
+.owl-dot.active span{
+    background:#0288d1 !important;
 }
-#sync1 .owl-next{
-    right: 0%;
-    top: 0;
+.owl-dot:hover span{
+    
+    background:#0289d19f !important;
 }
 
-#sync2 .item{
-    background: #C9C9C9;
-    padding: 5px 5px 5px 5px;
-    margin: 0px 10px 0px 0px;
-    color: #FFF;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-    text-align: center;
-    cursor: pointer;
-    width: auto;
+.owl-dot span{
+    background-color: #CFD8DC !important;
 }
-#sync2 .item img{
-    display: block;
-    width: auto;
-    height: auto;
+.fancybox-active { 
+    overflow: hidden 
 }
 
-.owl-carousel {
-    height: auto !important;
-}
-.owl-carousel#sync2 *{
-    max-height: 100px;
-}
-.owl-carousel#sync2 {
-    max-height: 100px;
-}
-
-.owl-carousel .owl-item div#noPic {
+div#noPic {
     display: block;
     height: 50%;
     width: 50%;
 }
-
-.owl-carousel .owl-item div#pic {
-    display: block;
-    height: auto;
-    width: auto;
+.owl-carousel {
+    touch-action: none; 
+}
+div#pic {
+    display: block;    
+    max-width: 460px !important;
+    width: auto !important; 
 }
 
-#sync2 .owl-item.current .item{
-    background: #0288d1;
+@media(max-width:750px){
+    .fancybox-navigation{
+        display:none !important;
+    }
 }
 
-.for-test-inline-items{
-    width: 100%;
-    height: 100px;
-}
 
 /* for sitemap */
 .no-transition {

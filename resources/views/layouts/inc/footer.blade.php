@@ -41,14 +41,14 @@ if (
 			<div class="row">
 				
 				@if (!config('settings.footer.hide_links'))
-					<div class="col-lg-6 col-md-6 col-sm-7 col-6">
+					<div class="col-lg-6 col-md-6 col-sm-7 col-5">
 						<span class="footer-title d-none d-sm-inline"><a href="{{ lurl('page/terms-of-use')}}" >{{ t('Use all links') }}</a></span>
 						<span class="footer-title d-inline d-sm-none"><a href="{{ lurl('page/terms-of-use')}}" >{{ t('Use all links') }}</a></span>
 						<span class="footer-title d-none d-sm-inline"><a href="{{ \App\Helpers\UrlGen::sitemap() }}"> {{ t('Sitemap') }} </a></span>
 						<span class="footer-title d-none d-sm-inline"><a href="{{ lurl(trans('routes.contact-us')) }}"> {{ t('Contact us') }} </a></span>
 					</div>
 						
-					<div class="col-lg-6 col-md-6 col-sm-5 col-6" style="text-align: right;">
+					<div class="col-lg-6 col-md-6 col-sm-5 col-7" style="text-align: right;">
 							<span class="copy-info"> <span class="d-none d-sm-inline">{{ t('Free classifieds in Guinea-Bissau') }}</span> © {{ date('Y') }} {{ config('settings.app.app_name') }}</span>
 					</div>
 					

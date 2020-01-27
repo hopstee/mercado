@@ -528,12 +528,6 @@ a.nav-link {
 .select2-container--default .select2-selection--single, .select2-dropdown{
     background-color: #f7f9f9;
 }
-.select2-container--default .select2-selection--single:hover{
-    background-color: #dde3e6;
-}
-.select2-container--default .select2-selection--single:focus{
-    background-color: #dde3e6;
-}
 input.form-control.keyword::-webkit-input-placeholder { /* Edge */
     color: #adadad;
 }
@@ -658,7 +652,7 @@ a.sell-your-item span i{
 .select2-container--default .select2-results__option--highlighted[aria-selected] {
     /*background-color: #0096e8;*/
     /*color: white !important;*/
-    background-color: #e8e8e8;
+    background-color: #dde3e6;
     color: #555 !important;
 }
 

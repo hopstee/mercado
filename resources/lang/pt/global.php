@@ -465,7 +465,7 @@ return [
     'Top Ads' => 'Top',
     'Featured Ads' => 'Destaque',
     'Save' => 'Guardar',
-    'All Ads' => 'Todos os anúncios',
+    'All Ads' => 'Todos os Anúncios',
     'Professionals' => 'Negócios',
     'Personal' => 'Pessoal',
     'Personals' => 'Pessoais',

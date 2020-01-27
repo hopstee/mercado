@@ -764,6 +764,12 @@ div.help-block h4 a{
         right: 15px;
         top: calc(50% - 6px);
     }
+    div.all-ads-btn{
+        display: flex;
+    }
+    .add-page-btn {
+        display: block;
+    }
 
 }
 a.mob-vers i{
@@ -1478,5 +1484,24 @@ span.btn-cat-collapsed[aria-expanded="true"] > span{
     text-align: center;
 }
 .add-page-btn a:hover, .add-page-btn a:focus{
+    color: white;
+}
+div.all-ads-btn {
+    align-items: center;
+    justify-content: center;
+    height: 52px;
+    background-color: #0288d1;
+    border: 2.5px solid white;
+    border-radius: 5px;
+}
+div.all-ads-btn:hover{
+    background-color: #007cc0;
+}
+div.all-ads-btn:focus{
+    background-color: #007cc0;
+}
+div.all-ads-btn .all-ads {
+    font-weight: bold;
+    padding-bottom: unset;
     color: white;
 }

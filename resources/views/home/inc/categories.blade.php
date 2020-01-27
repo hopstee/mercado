@@ -23,16 +23,7 @@
 								<p class="secondary-text">{{ t('and start receiving calls from buyers!') }}</p>
 							</a>
 						</div>
-						<div class="col-lg-2 col-md-3 col-sm-3 col-xs-4 f-category all-ads-btn">
-							<?php $attr = ['countryCode' => config('country.icode')]; ?>
-							<a href="{{ lurl(trans('routes.v-search', $attr), $attr) }}">
-								<img src="{{ url('images/icons_5_all.png') }}" class="lazyload img-fluid">
-								<h6>
-									<span>{{ t('All Ads') }}</span>
-								</h6>
-								<i class="unir-rarrow2 d-sm-none"></i>
-							</a>
-						</div>
+						
 						@foreach($categories as $key => $cat)
 							<div class="col-lg-2 col-md-3 col-sm-3 col-xs-4 f-category">
 								<a href="{{ \App\Helpers\UrlGen::category($cat) }}">
@@ -51,6 +42,14 @@
 								</a>
 							</div>
 						@endforeach
+						<div class="col-lg-2 col-md-3 col-sm-3 col-xs-4 all-ads-btn">
+							<?php $attr = ['countryCode' => config('country.icode')]; ?>
+							<a href="{{ lurl(trans('routes.v-search', $attr), $attr) }}">
+								<h3 class="all-ads">
+									{{ t('All Ads') }}
+								</h3>
+							</a>
+						</div>
 					@endif
 
 				@elseif (in_array($categoriesOptions['type_of_display'], ['cc_normal_list', 'cc_normal_list_s']))

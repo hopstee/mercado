@@ -830,7 +830,9 @@ a.btn.btn-rep {
     border-radius: 7px;
     margin-bottom: 20px;
 }
-
+.add-page-btn:hover {
+    background: #ff7a00 !important;
+}
 .add-page-btn a {
     color: #fff;
 }

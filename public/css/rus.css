@@ -1791,8 +1791,9 @@ div#noPic {
     height: 50%;
     width: 50%;
 }
-.owl-carousel {
-    touch-action: none; 
+.owl-carousel .owl-stage, .owl-carousel.owl-drag .owl-item, .owl-carousel{ 
+    -ms-touch-action: auto; 
+    touch-action: auto; 
 }
 div#pic {
     display: block;    

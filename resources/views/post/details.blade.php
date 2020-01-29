@@ -903,8 +903,9 @@ if (isset(auth()->user()->id)) {
                 nav: false,
                 responsiveRefreshRate : 200,
                 dotsEach:1,
-        });
-
+                mouseDrag: false,
+                touchDrag: true
+            });
 
         $(document).ready(function () {
             if($(document).width() >= 575){

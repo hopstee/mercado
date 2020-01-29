@@ -1842,12 +1842,18 @@ span.notrans-collapse[aria-expanded="true"]{
 .cat-collapse:not(.show) {
     display: none;
 }
-h3.cat-title{
+
+h3.cat-title,
+#help-down{
     display: -webkit-flex;
-    display: flex; 
+    display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 0px !important;
+}
+
+.help-down.unir-rarrow2{
+    margin:2.5px 5px;
 }
 
 div.cat-collapse{

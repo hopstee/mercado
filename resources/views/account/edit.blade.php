@@ -909,7 +909,7 @@
 							validateInitialCount: true,
 							uploadClass: 'btn btn-primary',
 							// defaultPreviewContent: '<img src="{{ !empty($gravatar) ? $gravatar : url('images/user.png') }}" alt="{{ t('Your Photo or Avatar') }}">' + photoInfo,
-							defaultPreviewContent: '<img src="{{ url('images/userCard.png') }}" alt="{{ t('Your Photo or Avatar') }}">' + photoInfo,
+							defaultPreviewContent: '<img src="{{ url('images/avatar_defaul_image.svg') }}" alt="{{ t('Your Photo or Avatar') }}">' + photoInfo,
 							/* Retrieve current images */
 							/* Setup initial preview with data keys */
 							initialPreview: [

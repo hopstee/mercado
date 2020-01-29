@@ -161,7 +161,7 @@ if (isset(auth()->user()->id)) {
                                     @if (!empty($userPhoto))
                                         <img src="{{ $userPhoto }}" alt="{{ $post->contact_name }}">
                                     @else
-                                        <img src="{{ url('images/userCard.png') }}" alt="{{ $post->contact_name }}">
+                                        <img src="{{ url('images/avatar_defaul_image.svg') }}" alt="{{ $post->contact_name }}">
                                     @endif
                                 </div>
 
@@ -538,7 +538,7 @@ if (isset(auth()->user()->id)) {
                                                 @if (!empty($userPhoto))
                                                     <img src="{{ $userPhoto }}" alt="{{ $post->contact_name }}">
                                                 @else
-                                                    <img src="{{ url('images/userCard.png') }}"
+                                                    <img src="{{ url('images/avatar_defaul_image.svg') }}"
                                                          alt="{{ $post->contact_name }}">
                                                 @endif
                                             </div>
@@ -645,7 +645,7 @@ if (isset(auth()->user()->id)) {
                                         @if (!empty($userPhoto))
                                             <img src="{{ $userPhoto }}" alt="{{ $post->contact_name }}">
                                         @else
-                                            <img src="{{ url('images/userCard.png') }}" alt="{{ $post->contact_name }}">
+                                            <img src="{{ url('images/avatar_defaul_image.svg') }}" alt="{{ $post->contact_name }}">
                                         @endif
                                     </div>
 

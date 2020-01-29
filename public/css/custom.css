@@ -848,6 +848,9 @@ ul.navbar-mobile > a{
 }
 /* MOBILE MEDIA REQUESTS */
 @media (max-width: 767px) {
+    span.grid-view i{
+        padding-left: 0px !important;
+    }
     .listing-filter{
         display: none;
     }

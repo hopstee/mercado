@@ -210,7 +210,7 @@ return [
     'All cities' => 'Todas as Cidades',
     'Confirm' => 'Confirmar',
     'Steps for password recovery' => 'Etapas para recuperação de senha',
-    'Filtres' => 'Filtres pt',
+    'Filtres' => 'Filtros',
     'Edit Details' => 'Editar Detalhes do Anúncio',
     'Edit Photos' => 'Editar Fotos do Anúncio',
     'New password is sent on your email address' => 'New password is sent on your email address pt',

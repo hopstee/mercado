@@ -1502,3 +1502,6 @@ div.all-ads-btn .all-ads {
     padding-bottom: unset;
     color: white;
 }
+.navbar.navbar-site{
+    position: absolute !important;
+}

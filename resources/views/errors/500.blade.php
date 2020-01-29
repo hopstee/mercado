@@ -28,12 +28,14 @@
 					<div class="col-md-12 page-content">
 
 						<div class="error-page" style="margin: 100px 0;">
-							<h2 class="headline text-center" style="font-size: 180px; float: none;"> 500</h2>
+						<img id="errorImage" src="{{ url('images/errors/500.svg') }}">
+						
+							<h2 class="headline text-center" > 500</h2>
 							<div class="text-center m-l-0" style="margin-top: 60px;">
-								<h3 class="m-t-0"><i class="fa fa-warning"></i> 500 Internal Server Error.</h3>
+								<h3 class="m-t-0"><i class="fa fa-warning"></i> {{t('Internal Server Error')}}</h3>
 								<p>
 									<?php
-									$defaultErrorMessage = "An internal server error has occurred. If the error persists please contact the development team.";
+									$defaultErrorMessage = t('Please try again later.</br>We\'re working hard to fix the problem as soon as possible.');
 									?>
 									{!! isset($exception) ? ($exception->getMessage() ? $exception->getMessage() : $defaultErrorMessage) : $defaultErrorMessage !!}
 								</p>

@@ -996,9 +996,21 @@ if (isset(auth()->user()->id)) {
             });
 
         });
+        // custom zoom
+        // Create template for zoom button
+        $.fancybox.defaults.btnTpl.zoom = '<button data-fancybox-zoom class="fancybox-button fancybox-button--zoom" title="Zoom"><svg width="24px" height="24px"  viewBox="0 0 1040 1024"><path d="M1031 969L748 684q97-116 97-267q0-85-33-162t-88.5-133T591 33T429 0Q316 0 220 55.5T68.5 207T13 416.5T68.5 626T220 777.5T429 833q156 0 274-103l282 284q4 4 8.5 6.5t9.5 3t10 0t9.5-3t8.5-6.5q9-9 9-22.5t-9-22.5zM429 768q-96 0-177-47.5T124 592T77 416t47-176t128-128.5T428.5 64T605 111.5T733.5 240T781 416q0 141-98 243q-97 101-236 109h-18zm160-384H461V256q0-13-9.5-22.5t-23-9.5t-22.5 9.5t-9 22.5v128H269q-14 0-23 9.5t-9 22.5t9 22.5t23 9.5h128v128q0 13 9 22.5t22.5 9.5t23-9.5T461 576V448h128q13 0 22.5-9.5T621 416t-9.5-22.5T589 384z" /></svg> </button>';
+
+        // Make it clickable using event delegation
+        $('body').on('click', '[data-fancybox-zoom]', function() {
+        var f = $.fancybox.getInstance();
+
+        if ( f ) {
+            f[ f.isScaledDown() ? 'scaleToActual' : 'scaleToFit' ]();
+        }
+        });
 
         $('.fancybox').fancybox({
-            arrows: false,
+            arrows:false,
             toolbar: 'auto',
             scrolling: 'no',
             mobile: {

@@ -891,7 +891,9 @@ if (isset(auth()->user()->id)) {
             nav:false,
             autoplayTimeout: 3000,
             responsive: resp,
-            pagination:false
+            pagination:false,
+            mouseDrag: true,
+            touchDrag: true
         });
 
         $('#test-pic').owlCarousel({

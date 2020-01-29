@@ -27,7 +27,7 @@
 
 					<div class="col-md-12 page-content">
 
-						<div class="error-page" style="margin: 100px 0;">
+						<div class="error-page" style="margin: 50px 0px 100px 0px;">
 						<img id="errorImage" src="{{ url('images/errors/500.svg') }}">
 						
 							<h2 class="headline text-center" > 500</h2>

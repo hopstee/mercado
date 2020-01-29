@@ -1535,6 +1535,16 @@ input::placeholder {
 }
 
 @media (max-width: 575px){
+    
+    #desktopBanner,
+    #desktopBanner2{
+        display: none;
+    }
+
+    div.all-ads-btn{
+        margin: 20px 0 5px 0;
+    }
+
     #mobileBanner  .owl-item  img{
         display: block;
         margin: 0 auto 25px auto;
@@ -1548,8 +1558,8 @@ input::placeholder {
         width: initial;
     }
 
-    #mobileBanner{
-        margin: 30px auto -10px auto;
+    #mobileBanner .owl-item {
+        margin: 20 auto 0 auto;
     }
 
     #mobileBanner2 .owl-item  img{

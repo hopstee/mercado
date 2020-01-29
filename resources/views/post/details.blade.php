@@ -296,20 +296,30 @@ if (isset(auth()->user()->id)) {
                         <!--posts-image-->
 
                             @if (count($post->pictures) > 0)
+                            <div id="mobileView" >
                                     <div class="owl-carousel owl-theme" id='test-pic'>
                                     @foreach($post->pictures as $key => $image)
-                                            <div class="item fancybox" id="pic" href="{{ imgUrl($image->filename, 'big') }}" data-fancybox="gallery">
+                                            <div class="item fancybox" id="pic" href="{{ imgUrl($image->filename, 'big') }}" data-fancybox="gallery2">
                                                 <img src="{{ imgUrl($image->filename, 'big') }}"
                                                      alt="{{ $titleSlug . '-big-' . $key }}">
                                             </div>
                                     @endforeach
                                     </div>
+                            </div>
+                            <div id="desktopView" >
+                            @foreach($post->pictures as $key => $image)
+                                <div class="items fancybox" href="{{ imgUrl($image->filename, 'big') }}" data-fancybox="gallery1">
+                                    <img src="{{ imgUrl($image->filename, 'big') }}"
+                                            alt="{{ $titleSlug . '-big-' . $key }}">
+                                </div>
+                            @endforeach
+                            </div>
                             @else
                                 <img src="{{ imgUrl(config('larapen.core.picture.default'), 'big') }}"
                                         alt="img">
                             @endif
 
-
+                        <!-- end post images -->
 
                         @if (config('plugins.reviews.installed'))
                             @if (view()->exists('reviews::ratings-single'))
@@ -893,10 +903,18 @@ if (isset(auth()->user()->id)) {
                 nav: false,
                 responsiveRefreshRate : 200,
                 dotsEach:1,
-            });
+        });
 
 
         $(document).ready(function () {
+            if($(document).width() >= 575){
+                $("#mobileView").hide();
+                $("#desktopView").show();
+            }
+            else{
+                $("#desktopView").hide();
+                $("#mobileView").show();
+            }
 
             @if (config('settings.single.show_post_on_googlemap'))
             /* Google Maps */
@@ -978,8 +996,8 @@ if (isset(auth()->user()->id)) {
 
         });
 
-        
         $('.fancybox').fancybox({
+            arrows: false,
             toolbar: 'auto',
             scrolling: 'no',
             mobile: {
@@ -998,7 +1016,17 @@ if (isset(auth()->user()->id)) {
                 }
             },
         });
-        $('[data-fancybox="gallery"]').fancybox({
+
+
+        window.addEventListener('resize', function(event){
+            if($(document).width() >= 575){
+                $("#mobileView").hide();
+                $("#desktopView").show();
+            }
+            else{
+                $("#desktopView").hide();
+                $("#mobileView").show();
+            }
         });
     </script>
 @endsection

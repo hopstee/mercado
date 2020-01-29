@@ -54,7 +54,7 @@
 						@endif
 
 						<div class="table-responsive">
-							<form name="listForm" method="POST" action="{{ lurl(trans('routes.personal-data') .'/'.$pagePath.'/'.trans('routes.delete')) }}">
+							<form name="listForm" method="POST" action="{{ lurl(trans('routes.v-pers-ads-delete',['pagePath'=>$pagePath]),$pagePath) }}">
 								{!! csrf_field() !!}
 								<div class="table-action table-action-dif">
 									<label for="checkAll" class="btn-archive">
@@ -310,7 +310,7 @@
 		{{--                                                    </p>--}}
 		{{--												@endif--}}
 		{{--												<p>--}}
-		{{--                                                    <a class="btn btn-danger btn-sm delete-action" href="{{ lurl(trans('routes.personal-data').'/'.$pagePath.'/'.$post->id.'/'.trans('routes.delete')) }}">--}}
+		{{--                                                    <a class="btn btn-danger btn-sm delete-action" href="{{ lurl(trans('routes.pers-ads-delete-id',['pagePath'=>$pagePath,'id'=>$post->id])) }}">--}}
 		{{--                                                        <i class="fa fa-trash"></i> {{ t('Delete') }}--}}
 		{{--                                                    </a>--}}
 		{{--                                                </p>--}}

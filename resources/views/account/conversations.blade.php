@@ -49,7 +49,7 @@
 						<div style="clear:both"></div>
 						
 						<div class="table-responsive">
-							<form name="listForm" method="POST" action="{{ lurl(trans('routes.personal-data').'/'.trans('routes.'.$pagePath.'').'/'.trans('routes.delete')) }}">
+							<form name="listForm" method="POST" action="{{ lurl(trans('routes.v-pers-conversations-delete')) }}">
 								{!! csrf_field() !!}
 								<div class="table-action table-action-dif">
 									<label for="checkAll" class="btn-archive">
@@ -143,7 +143,7 @@
 														{!! (!empty($conversation->filename) and $disk->exists($conversation->filename)) ? ' <i class="icon-attach-2"></i> ' : '' !!}&nbsp;
 														|&nbsp;
 														<!-- <a href="{{ lurl('account/conversations/' . $conversation->id . '/messages') }}"> -->
-														<a href="{{ lurl(trans('routes.personal-data').'/'.trans('routes.conversations').'/'.$conversation->id.'/'.trans('routes.messages')) }}">
+														<a href="{{ lurl(trans('routes.v-conversations-messages',['id'=>$conversation->id]),$conversation->id) }}">
 															{{  t('Message') }}
 														</a>
 													</div>
@@ -157,7 +157,7 @@
 	{{--													</a>--}}
 	{{--												</p>--}}
 	{{--												<p>--}}
-	{{--													<a class="btn btn-danger btn-sm delete-action" href="{{ lurl('account/conversations/' . $conversation->id . '/delete') }}">--}}
+	{{--													<a class="btn btn-danger btn-sm delete-action" href="{{ lurl( trans('routes.v-pers-conversations-delete-id',['conversatin'=>$conversation->id])) }}">--}}
 	{{--														<i class="fa fa-trash"></i> {{ t('Spam') }}--}}
 	{{--													</a>--}}
 	{{--												</p>--}}

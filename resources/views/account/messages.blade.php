@@ -44,8 +44,8 @@
 						if (isset($conversation) && !empty($conversation) > 0):
 						
 							// Conversation URLs
-							$consUrl = lurl(trans('routes.personal-data').'/' . trans('routes.conversations'));
-							$conDelAllUrl = lurl('account/conversations/' . $conversation->id . '/messages/delete');
+							$consUrl = lurl(trans('routes.conversations'));
+							$conDelAllUrl = lurl(trans('routes.v-pers-conversations-delete-id',['id'=>$conversation->id]),$conversation->id);
 						?>
 						<div class="table-responsive">
 							<form name="listForm" method="POST" action="{{ $conDelAllUrl }}">
@@ -76,6 +76,7 @@
 {{--								</div>--}}
 
 								<?php
+
 									$link = substr($conversation->message, stripos($conversation->message, "| http") + 2);
 									$mes = substr($conversation->message, 0, stripos($conversation->message, " |"));
 								?>

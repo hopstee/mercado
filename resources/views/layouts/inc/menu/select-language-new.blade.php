@@ -43,8 +43,24 @@
 					// $attr['debug'] = '1';
 					
 					// Default
+					// var_dump($attr);
+					// var_dump(isset($attr['catSlug']));
 					// $link = LaravelLocalization::getLocalizedURL($localeCode, null, $attr);
 					$link = lurl(null, $attr, $localeCode);
+
+					// if( is_numeric(strpos($link, $localeCode)) && (strlen($link) > 28) && !isset($attr['catSlug']) && !isset($attr['slug'])){
+					// 	$slug = substr($link , strpos($link, $localeCode) + 3, strlen($link));
+					// 	var_dump($slug);
+					// 	$next = trans('routes', [],config('app.locale')) ;
+					// 	foreach($next as $key => $value){
+					// 		if($value == $slug){
+					// 			$nextURL = $key;
+					// 		}
+					// 	}
+					// 	var_dump(trans('routes.'.$nextURL , [], $localeCode));
+					// // 	$link = lurl( trans('routes.'.$nextURL , [], $localeCode), [] , $localeCode);
+					// }
+
 					$localeCode = strtolower($localeCode);
 					?>
     @endif

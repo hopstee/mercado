@@ -35,14 +35,13 @@ return [
     't-search-tag' => 'tag',
     'v-search-tag' => 'tag/:tag',
 
-    'personal-data' => 'dados-pessoais',
+    // 'personal-data' => 'dados-pessoais',
     'my-ads' => 'meus-anúncios',
     'favourite-ads' => 'anúncios-favoritos',
     'rejected-ads' => 'anúncios-reprovados',
     'archived-ads' => 'anúncios-arquivados',
     'conversations' => 'conversas',
     'logout' => 'sair',
-    'settings' => 'configurações',
     'delete-account' => 'apagar-conta',
     'photo' => 'imagem',
     'photo-delete' => 'imagem-remover',
@@ -50,4 +49,40 @@ return [
     'reply'=>'resposta',
     'messages'=>'mensagem',
 
+
+    'personal-data' => 'dados-pessoais',
+
+    'pers-photo' => 'dados-pessoais/{id}/imagem',
+    'v-pers-photo' => 'dados-pessoais/:id/imagem',
+    'pers-photo-delete' => 'dados-pessoais/{id}/imagem-remover',
+    'v-pers-photo-delete' => 'dados-pessoais/:id/imagem-remover',
+
+    'conversations' => 'conversas',
+    'pers-conversations-delete' => 'conversas/remover',
+    'v-pers-conversations-delete' => 'conversas/remover',
+    'pers-conversations-delete-id' => 'conversas/{id}/remover',
+    'v-pers-conversations-delete-id' => 'conversas/:id/remover',
+
+    'conversations-reply' => 'conversas/{id}/resposta',
+    'v-conversations-reply' => 'conversas/:id/resposta',
+
+    'conversations-messages' => 'conversas/{id}/mensagem',
+    'v-conversations-messages' => 'conversas/:id/mensagem',
+
+    'pers-ads' => 'dados-pessoais/{pagePath}',
+    'v-pers-ads-my' => 'dados-pessoais/meus-anúncios',   
+    'v-pers-ads-archived' => 'dados-pessoais/anúncios-arquivados',
+    'v-pers-ads-favourite' => 'dados-pessoais/anúncios-favoritos',
+    'v-pers-ads-rejected' => 'dados-pessoais/anúncios-reprovados',
+
+    'pers-ads-delete' => 'dados-pessoais/{pagePath}/remover',
+    'v-pers-ads-delete' => 'dados-pessoais/:pagePath/remover',
+
+    'pers-ads-delete-id' => 'dados-pessoais/{pagePath}/{id}/remover',
+    'v-pers-ads-delete-id' => 'dados-pessoais/:pagePath/:id/remover',
+
+    'logout' => 'logout',
+    'pers-settings' => 'configurações',
+    'pers-delete-account' => 'pdados-pessoais/apagar-conta',
+    'pers-delete-account-accept' => 'dados-pessoais/apagar-conta/remover',
 ];

@@ -16,7 +16,7 @@
                     {{ t('Admin users can\'t be deleted by this way.') }}
                 </div>
             @else
-                <form role="form" method="POST" action="{{ lurl( trans('routes.personal-data') . '/' . trans('routes.delete-account')) }}">
+                <form role="form" method="POST" action="{{ lurl(  trans('routes.pers-delete-account-accept')) }}">
                     {!! csrf_field() !!}
                     <div class="modal-body modal-body-dif">
                         <div class="form-group row">
@@ -95,13 +95,13 @@
                 <div class="panel-collapse collapse show" id="MyClassified">
                     <ul class="acc-list">
                         <li>
-                            <a class="navbar-list-item {!! ($pagePath=='') ? 'active' : '' !!}" href="{{ lurl('/') . '/' . trans('routes.personal-data') }}">
+                            <a class="navbar-list-item {!! ($pagePath=='') ? 'active' : '' !!}" href="{{ lurl( trans('routes.personal-data')) }}">
                                 {{--								<i class="icon-home"></i> {{ t('Personal Home') }}--}}
                                 <i class="unir-settings sidebar-icon"></i> {{ t('Personal Data') }}
                             </a>
                         </li>
                         <li>
-                            <a class="navbar-list-item {!! ($pagePath=='my-posts') ? 'active' : '' !!}" href="{{ lurl('/') . '/' . trans('routes.personal-data') . '/' . trans('routes.my-ads') }}">
+                            <a class="navbar-list-item {!! ($pagePath=='my-posts') ? 'active' : '' !!}" href="{{ lurl(trans('routes.v-pers-ads-my')) }}">
                                 {{--							<i class="icon-docs"></i> {{ t('My ads') }}&nbsp;--}}
                                 <i class="unir-ads sidebar-icon"></i> {{ t('My ads') }}
                                 <span class="badge badge-pill badge-dif">
@@ -110,7 +110,7 @@
                             </a>
                         </li>
                         <li>
-                            <a class="navbar-list-item {!! ($pagePath=='favourite') ? 'active' : '' !!}" href="{{ lurl('/') . '/' . trans('routes.personal-data') . '/' . trans('routes.favourite-ads') }}">
+                            <a class="navbar-list-item {!! ($pagePath=='favourite') ? 'active' : '' !!}" href="{{ lurl(trans('routes.v-pers-ads-favourite')) }}">
                                 {{--							<i class="icon-heart"></i> {{ t('Favourite ads') }}&nbsp;--}}
                                 <i class="unir-heart sidebar-icon"></i> {{ t('Favourite ads') }}
                                 <span class="badge badge-pill badge-dif">
@@ -127,7 +127,7 @@
                         {{--							</a>--}}
                         {{--						</li>--}}
                         <li>
-                            <a class="navbar-list-item {!! ($pagePath=='pending-approval') ? 'active' : '' !!}" href="{{ lurl('/') . '/' . trans('routes.personal-data') . '/' . trans('routes.rejected-ads')}}">
+                            <a class="navbar-list-item {!! ($pagePath=='pending-approval') ? 'active' : '' !!}" href="{{ lurl(trans('routes.v-pers-ads-rejected')) }}">
                                 {{--							<i class="icon-hourglass"></i> {{ t('Pending approval') }}&nbsp;--}}
                                 <i class="unir-clock sidebar-icon"></i> {{ t('Rejected ads') }}
                                 <span class="badge badge-pill badge-dif">
@@ -136,7 +136,7 @@
                             </a>
                         </li>
                         <li>
-                            <a class="navbar-list-item {!! ($pagePath=='archived') ? 'active' : '' !!}" href="{{ lurl('/') . '/' . trans('routes.personal-data') . '/' . trans('routes.archived-ads')}}">
+                            <a class="navbar-list-item {!! ($pagePath=='archived') ? 'active' : '' !!}" href="{{ lurl(trans('routes.v-pers-ads-archived')) }}">
                                 {{--							<i class="icon-folder-close"></i> {{ t('Archived ads') }}&nbsp;--}}
                                 <i class="unir-folder sidebar-icon"></i> {{ t('Archived ads') }}
                                 <span class="badge badge-pill badge-dif">
@@ -145,7 +145,7 @@
                             </a>
                         </li>
                         <li>
-                            <a class="navbar-list-item {!! ($pagePath=='conversations') ? 'active' : '' !!}" href="{{ lurl('/') . '/' . trans('routes.personal-data') . '/' . trans('routes.conversations') }}">
+                            <a class="navbar-list-item {!! ($pagePath=='conversations') ? 'active' : '' !!}" href="{{ lurl(trans('routes.conversations')) }}">
                                 {{--							<i class="icon-mail-1"></i> {{ t('Conversations') }}&nbsp;--}}
                                 <i class="unir-mail sidebar-icon"></i> {{ t('Conversations') }}
                                 <span class="badge badge-pill badge-dif">
@@ -282,7 +282,7 @@
                 <div class="panel-collapse collapse" id="TerminateAccount">
                     <ul class="acc-list">
                         <li>
-                            <a href="#deleteAcc" class="navbar-list-item {!! ($pagePath=='close') ? 'active' : '' !!}" href="{{ lurl(trans('routes.delete-account') . '/' . trans('routes.delete')) }}" data-toggle="modal">
+                            <a href="#deleteAcc" class="navbar-list-item {!! ($pagePath=='close') ? 'active' : '' !!}" href="{{ lurl(trans('routes.pers-delete-account') ) }}" data-toggle="modal">
                                 {{--								<i class="icon-cancel-circled "></i> {{ t('Close account') }}--}}
                                 <i class="unir-close sidebar-icon"></i> {{ t('Delete Account') }}
                             </a>

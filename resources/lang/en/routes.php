@@ -36,18 +36,46 @@ return [
     't-search-tag' => 'tag',
     'v-search-tag' => 'tag/:tag',
 
+
     'personal-data' => 'personal-data',
-    'my-ads' => 'my-ads',
+
+    'pers-photo' => 'personal-data/{id}/photo',
+    'v-pers-photo' => 'personal-data/:id/photo',
+    'pers-photo-delete' => 'personal-data/{id}/photo-delete',
+    'v-pers-photo-delete' => 'personal-data/:id/photo-delete',
+
+    'conversations' => 'conversations',
+    'pers-conversations-delete' => 'conversations/delete',
+    'v-pers-conversations-delete' => 'conversations/delete',
+    'pers-conversations-delete-id' => 'conversations/{id}/delete',
+    'v-pers-conversations-delete-id' => 'conversations/:id/delete',
+
+    'conversations-reply' => 'conversations/{id}/reply',
+    'v-conversations-reply' => 'conversations/:id/reply',
+
+    'conversations-messages' => 'conversations/{id}/messages',
+    'v-conversations-messages' => 'conversations/:id/messages',
+
+    'pers-ads' => 'personal-data/{pagePath}',
+    'v-pers-ads-my' => 'personal-data/my-ads',   
+    'v-pers-ads-archived' => 'personal-data/archived-ads',
+    'v-pers-ads-favourite' => 'personal-data/favourite-ads',
+    'v-pers-ads-rejected' => 'personal-data/rejected-ads',
+
+    'pers-ads-delete' => 'personal-data/{pagePath}/delete',
+    'v-pers-ads-delete' => 'personal-data/:pagePath/delete',
+
+    'pers-ads-delete-id' => 'personal-data/{pagePath}/{id}/delete',
+    'v-pers-ads-delete-id' => 'personal-data/:pagePath/:id/delete',
+
+    'my-ads'=>'my-ads',
     'favourite-ads' => 'favourite-ads',
     'rejected-ads' => 'rejected-ads',
     'archived-ads' => 'archived-ads',
-    'conversations' => 'conversations',
+
     'logout' => 'logout',
-    'settings' => 'settings',
-    'delete-account' => 'delete-account',
-    'photo' => 'photo',
-    'photo-delete' => 'photo-delete',
+    'pers-settings' => 'settings',
+    'pers-delete-account' => 'personal-data/delete-account',
+    'pers-delete-account-accept' => 'personal-data/delete-account/delete',
     'delete'=>'delete',
-    'reply'=>'reply',
-    'messages'=>'messages',
 ];

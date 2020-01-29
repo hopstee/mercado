@@ -194,7 +194,7 @@ class EditController extends AccountBaseController
 			
 			if (!empty($user->photo)) {
 				// Get Deletion Url
-				$initialPreviewConfigUrl = lurl(trans('routes.personal-data') .'/' . $user->id . '/' .trans('routes.photo-delete'));
+				$initialPreviewConfigUrl = lurl(trans('routes.pers-photo-delete',['id'=>$user->id]),$user->id );
 				
 				// Build Bootstrap-Input plugin's parameters
 				$data['initialPreview'][] = imgUrl($user->photo);

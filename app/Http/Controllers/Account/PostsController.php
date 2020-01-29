@@ -53,7 +53,7 @@ class PostsController extends AccountBaseController
 	public function getPage($pagePath)
 	{
 		view()->share('pagePath', $pagePath);
-		
+
 		switch ($pagePath) {
 			case trans('routes.my-ads'):
 				return $this->getMyPosts();

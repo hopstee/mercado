@@ -28,7 +28,7 @@
 				</div>
 				<div class="modal-footer modal-footer-dif modal-footer-user">
 					<div class="modal-chose">
-						<form role="form" method="POST" action="{{ lurl(trans('routes.personal-data') . '/' . auth()->user()->id . '/' . trans('routes.photo-delete') ) }}" enctype="multipart/form-data">
+						<form role="form" method="POST" action="{{ lurl( trans('routes.v-pers-photo-delete',['id'=>$user->id]),$user->id ) }}" enctype="multipart/form-data">
 							<button type="submit" class="btn btn-dif btn-grey">{{ t('Delete') }}</button>
 						</form>
 					</div>
@@ -87,7 +87,7 @@
 
 								<div class="card card-default card-dif">
 									<div class="panel-collapse panel-collapse-dif collapse {{ (old('panel')=='' or old('panel')=='photoPanel') ? 'show' : '' }}" id="photoPanel">
-										<form name="details" class="form-horizontal" role="form" method="POST" action="{{ lurl(trans('routes.personal-data').'/'.$user->id.'/'.trans('routes.photo')) }}">
+										<form name="details" class="form-horizontal" role="form" method="POST" action="{{ lurl(trans('routes.v-pers-photo',['id' => $user->id]),$user->id) }}">
 											<?php $photoError = (isset($errors) and $errors->has('photo')) ? ' is-invalid' : ''; ?>
 											<div class="photo-field photo-field-dif">
 												<div class="file-loading">
@@ -117,7 +117,7 @@
 									<div>
 										<!-- Number of messages -->
 										<p>
-											<a href="{{ lurl(trans('routes.personal-data').'/'.trans('routes.conversations')) }}">
+											<a href="{{ lurl(trans('routes.conversations')) }}">
 												{{ t('Conversations') }}
 											</a>
 											{{ isset($countConversations) ? \App\Helpers\Number::short($countConversations) : 0 }}
@@ -135,7 +135,7 @@
 									<div>
 										<!-- Number of visitors -->
 										<p>
-											<a href="{{ lurl(trans('routes.personal-data').'/'.trans('routes.my-ads')) }}">
+											<a href="{{ lurl(trans('routes.v-pers-ads-my')) }}">
 												{{ t('Views') }}
 											</a>
 											<?php $totalPostsVisits = (isset($countPostsVisits) and $countPostsVisits->total_visits) ? $countPostsVisits->total_visits : 0 ?>
@@ -154,7 +154,7 @@
 									<div>
 										<!-- Number of ads -->
 										<p>
-											<a href="{{ lurl(trans('routes.personal-data').'/'.trans('routes.my-ads')) }}">
+											<a href="{{ lurl(trans('routes.v-pers-ads-my')) }}">
 												{{ t('Ads') }}
 											</a>
 											{{ \App\Helpers\Number::short($countPosts) }}
@@ -172,7 +172,7 @@
 									<div>
 										<!-- Number of favorites -->
 										<p>
-											<a href="{{ lurl(trans('routes.personal-data').'/'.trans('routes.favourite-ads'))  }}">
+											<a href="{{lurl(trans('routes.v-pers-ads-favourite')) }}">
 												{{ t('Favorites') }}
 											</a>
 											{{ \App\Helpers\Number::short($countFavoritePosts) }}
@@ -272,7 +272,7 @@
 									</h3>
 								</div>
 								<div class="panel-collapse {{ (old('panel')=='settingsPanel') ? 'show' : '' }} inner-ads-box" id="settingsPanel">
-									<form name="settings" class="form-horizontal" role="form" method="POST" action="{{ lurl(trans('routes.personal-data') . '/' . trans('routes.settings')) }}">
+									<form name="settings" class="form-horizontal" role="form" method="POST" action="{{ lurl( trans('routes.pers-settings')) }}">
 										{!! csrf_field() !!}
 										<input name="_method" type="hidden" value="PUT">
 										<input name="panel" type="hidden" value="settingsPanel">
@@ -895,7 +895,7 @@
 							showCaption: false,
 							showPreview: true,
 							allowedFileExtensions: {!! getUploadFileTypes('image', true) !!},
-							uploadUrl: '{{ lurl(trans('routes.personal-data') . '/' . $user->id . '/'.trans('routes.photo')) }}',
+							uploadUrl: '{{ lurl(trans('routes.v-pers-photo',['id'=>$user->id]),$user->id ) }}',
 							uploadAsync: false,
 							showBrowse: false,
 							showCancel: true,

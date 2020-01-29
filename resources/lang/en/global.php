@@ -565,7 +565,7 @@ return [
     'Page not found' => 'Page not found',
     'Oops ! Error 404. Page not found.' => 'Oops ! Error 404. Page not found.',
     'Meanwhile, you may <a href=":url">return to homepage</a>' => 'Meanwhile, you may <a href=":url">return to homepage</a>',
-    
+    'Return to <a href="/">homepage</a>'=>'Return to <a href="/en">homepage</a>',
     'views' => 'views',
     'View More' => 'View More',
     'View Less' => 'View Less',

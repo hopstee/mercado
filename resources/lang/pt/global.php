@@ -507,6 +507,7 @@ return [
     'Page not found' => 'Página não encontrada',
     'Oops ! Error 404. Page not found.' => 'Oops! Erro 404 - Página Não Encontrada.',
     'Meanwhile, you may <a href=":url">return to homepage</a>' => 'Enquanto isso, você pode <a href=":url">retornar à página inicial </a>',
+    'Return to <a href="/">homepage</a>'=>'Retornar à <a href="/pt">página inicial</a>',
     'views' => 'vistas',
     'Views' => 'Visualizações',
     'View More' => 'Ver Mais',

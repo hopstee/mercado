@@ -534,6 +534,8 @@ table#addManageTable > thead > tr {
 
 .user-panel-sidebar ul li a {
     padding: 5px 10px 5px 0px;
+    font-size: 14px;
+    font-weight: normal;
 }
 
 .collapse:not(.show) {

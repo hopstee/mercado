@@ -1719,8 +1719,12 @@ input::placeholder {
     color: #dc3545;
 }
 
-.main-container.pers-home .collapse:not(.show){
+/* ??????????????? */
+/* .main-container.pers-home .collapse:not(.show){
     display: block !important;
+} */
+h5.collapse-title.no-border{
+    font-weight: 500;
 }
 
 .cab-cel.cel-dif.cal-acc .form-group.flex-block.gender{

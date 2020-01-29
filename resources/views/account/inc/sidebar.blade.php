@@ -90,7 +90,7 @@
             <div class="collapse-box">
                 <h5 class="collapse-title no-border">
                     {{ t('My Account') }}&nbsp;
-                    <a href="#MyClassified" data-toggle="collapse" class="pull-right"><i class="fa fa-angle-down"></i></a>
+                    <!-- <a href="#MyClassified" data-toggle="collapse" class="pull-right"><i class="fa fa-angle-down"></i></a> -->
                 </h5>
                 <div class="panel-collapse collapse show" id="MyClassified">
                     <ul class="acc-list">

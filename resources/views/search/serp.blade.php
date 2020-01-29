@@ -279,8 +279,31 @@
 
 						<!-- <div id="postsList" class="adds-wrapper row no-margin d-flex justify-content-between"> -->
 						<div id="postsList" class="adds-wrapper row no-margin">
-
 							@include('search.inc.posts')
+							<div class="toTop">
+                                <div id="newaddfade">
+									<a href="{{ \App\Helpers\UrlGen::addPost() }}">
+										<i style="font-size: 24px; margin-right: 10px;" class="unir-add"></i><span>{{t("Place an Ad")}}</span>
+									</a>
+								</div>
+                            </div>
+							<script type="text/javascript">
+								var lastScrollTop = 0;
+								$(function() {
+									$(window).scroll(function() {
+										if ($('body').width() <= 765) {
+											var st = $(this).scrollTop();
+											if(st < lastScrollTop && st>80) {
+												$('#newaddfade').css('display','flex');
+												$('#newaddfade').fadeIn();
+											} else {
+												$('#newaddfade').fadeOut(1000);
+											}
+											lastScrollTop = st;
+										}
+									});
+								});
+							</script>
 						</div>
 
 						<!-- <div class="tab-box save-search-bar text-center">

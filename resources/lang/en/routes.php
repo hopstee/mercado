@@ -97,4 +97,10 @@ return [
     'posts-create-finish' => 'posts/create/{tmpToken}/finish',
     'v-posts-create-finish' => 'posts/create/:tmpToken/finish',
 
+    'terms-of-use' => 'terms-of-use',
+    'privacy-policy' => 'privacy-policy',
+    'posting-rules' => 'posting-rules',
+    'tips' => 'tips',
+    'faq' => 'faq',
+
 ];

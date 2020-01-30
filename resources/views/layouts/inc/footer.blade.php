@@ -42,8 +42,8 @@ if (
 				
 				@if (!config('settings.footer.hide_links'))
 					<div class="col-lg-6 col-md-6 col-sm-7 col-5">
-						<span class="footer-title d-none d-sm-inline"><a href="{{ lurl('page/terms-of-use')}}" >{{ t('Use all links') }}</a></span>
-						<span class="footer-title d-inline d-sm-none"><a href="{{ lurl('page/terms-of-use')}}" >{{ t('Use all links') }}</a></span>
+						<span class="footer-title d-none d-sm-inline"><a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.terms-of-use')])) }}" >{{ t('Use all links') }}</a></span>
+						<span class="footer-title d-inline d-sm-none"><a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.terms-of-use')]))}} " >{{ t('Use all links') }}</a></span>
 						<span class="footer-title d-none d-sm-inline"><a href="{{ \App\Helpers\UrlGen::sitemap() }}"> {{ t('Sitemap') }} </a></span>
 						<span class="footer-title d-none d-sm-inline"><a href="{{ lurl(trans('routes.contact-us')) }}"> {{ t('Contact us') }} </a></span>
 					</div>

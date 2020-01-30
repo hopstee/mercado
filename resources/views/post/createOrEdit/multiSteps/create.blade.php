@@ -476,13 +476,13 @@
 					<div class="help-block sticky-top">
 						<h3 class="title-3 py-3">{{ t('Help links') }}</h3>
 						<div class="text-content text-left from-wysiwyg">
-							<h4><a href="{{ lurl('page/terms-of-use')}}">{{ t('Terms of Use') }}</a></h4>
-							<h4><a href="{{ lurl('page/privacy-policy')}}">{{ t('Privacy Policy') }}</a></h4>
-							<h4><a href="{{ lurl('page/posting-rules')}}">{{ t('Posting Rules') }}</a></h4>
-							<h4><a href="{{ lurl('page/tips')}}">{{ t('Tips for Users') }}</a></h4>
-							<h4><a href="{{ lurl('page/faq')}}">{{ t('FAQ') }}</a></h4>
-							<h4><a href="{{ lurl('sitemap')}}">{{ t('Sitemap') }}</a></h4>
-							<h4><a href="{{ lurl('contact')}}">{{ t('Contact Us') }}</a></h4> 
+							<h4><a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.terms-of-use')])) }}">{{ t('Terms of Use') }}</a></h4>
+							<h4><a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.privacy-policy')])) }}">{{ t('Privacy Policy') }}</a></h4>
+							<h4><a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.posting-rules')])) }}">{{ t('Posting Rules') }}</a></h4>
+							<h4><a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.tips')])) }}">{{ t('Tips for Users') }}</a></h4>
+							<h4><a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.faq')])) }}">{{ t('FAQ') }}</a></h4>
+							<h4><a href="{{ lurl(trans('routes.sitemap')) }}">{{ t('Sitemap') }}</a></h4> 
+							<h4><a href="{{ lurl(trans('routes.contact-us'))}}">{{ t('Contact Us') }}</a></h4> 
 						</div>
 					</div>
                 </div>

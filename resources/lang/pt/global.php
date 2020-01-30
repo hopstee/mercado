@@ -234,7 +234,7 @@ return [
     'Your ad was approved.'=>'O seu anúncio foi aprovado.',
 
     // R.S
-
+    '! Add e-mail for password recovery.' => '! Adicionar e-mail para recuperação de senha.',
     'Email' => 'Email',
     'Please repeat your password' => 'Por favor, repita sua Palavra Passe',
     'At least :num characters' => 'Pelo menos :num caracteres',

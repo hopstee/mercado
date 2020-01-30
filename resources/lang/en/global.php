@@ -131,6 +131,7 @@ return [
     'Phone' => 'Phone',
 
     // R.S
+    '! Add e-mail for password recovery.' => '! Add e-mail for password recovery.',
     'Enter your phone number' => 'Enter your phone number to be unban',
     'The phone field is required.' => 'The phone field is required.',
     'Within a few minutes you will receive sms with' => 'Within a few minutes you will receive SMS with',

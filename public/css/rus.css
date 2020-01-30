@@ -1909,3 +1909,11 @@ hr{
     }
 }
 
+.col-xl-12.email-warning{
+    padding: unset;
+}
+
+.col-xl-12.email-warning > .alert.alert-warning{
+    margin-bottom: 20px;
+}
+

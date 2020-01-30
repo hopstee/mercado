@@ -45,8 +45,13 @@
 					@include('account.inc.sidebar')
 				</div>
 				<!--/.page-sidebar-->
+				
 
 				<div class="col-md-9 page-content">
+
+					@if( !isset($user->email)  )
+						@include('layouts.email_warning')
+					@endif
 
 					@include('flash::message')
 
@@ -1051,12 +1056,6 @@
 					modal_userInfo = false;
 				});
 				
-				$(window).on('load',function(){
-					var email = document.getElementById("email").value;
-					if(email===""){
-						$('#checkEmailModal').modal('show');
-					}
-    			});
 				// $(".btn.btn-dif.btn-grey").hover(function(value){
 				// 	console.log(value);
 				// 	// value. = ("bgcolr","#6b8096 !important");

@@ -272,17 +272,24 @@ Route::group([
 
             // MultiSteps Post creation
             Route::group(['namespace' => 'CreateOrEdit\MultiSteps'], function ($router) {
-                Route::get('posts/create/{tmpToken?}', 'CreateController@getForm');
-                Route::post('posts/create', 'CreateController@postForm');
-                // R.S
-                Route::get('posts/create/{tmpToken}/register', 'CreateController@wantToRegsiter');
-                Route::post('posts/create/{tmpToken}', 'CreateController@refuseToRegisterPostForm');
-                Route::get('posts/create/{tmpToken}/code/check', 'CreateController@codeCheck');
-                Route::post('posts/create/{tmpToken}/code/check', 'CreateController@searcPostsByUserId');
+                Route::get(trans('routes.posts-create-back'), 'CreateController@getForm');
+                Route::get(trans('routes.posts') . '/' . trans('routes.create'), 'CreateController@getForm');
+                Route::post(trans('routes.posts') . '/' . trans('routes.create'), 'CreateController@postForm');
 
-                Route::put('posts/create/{tmpToken}', 'CreateController@postForm');
-                Route::get('posts/create/{tmpToken}/photos', 'PhotoController@getForm');
-                Route::post('posts/create/{tmpToken}/photos', 'PhotoController@postForm');
+                // R.S
+                // Route::get('posts/create/{tmpToken}/register', 'CreateController@wantToRegsiter');
+                // Route::post('posts/create/{tmpToken}', 'CreateController@refuseToRegisterPostForm');
+                // Route::get('posts/create/{tmpToken}/code/check', 'CreateController@codeCheck');
+                // Route::post('posts/create/{tmpToken}/code/check', 'CreateController@searcPostsByUserId');
+
+                // Route::put('posts/create/{tmpToken}', 'CreateController@postForm');
+                // Route::get(trans('routes.posts') . '/' . trans('routes.create') . '/' . '{tmpToken}' . '/' . trans('routes.photos'), 'PhotoController@getForm');
+                // Route::post(trans('routes.posts') . '/' . trans('routes.create') . '/' . '{tmpToken}' . '/' . trans('routes.photos'), 'PhotoController@postForm');
+
+                Route::put(trans('routes.posts') . '/' . trans('routes.create') .'/{tmpToken}', 'CreateController@postForm');
+                Route::get(trans('routes.posts-create-photo',[],config('app.local')), 'PhotoController@getForm');
+                Route::post(trans('routes.posts-create-photo',[],config('app.local')), 'PhotoController@postForm');
+
                 Route::post('posts/create/{tmpToken}/photos/{id}/delete', 'PhotoController@delete');
                 Route::get('posts/create/{tmpToken}/payment', 'PaymentController@getForm');
                 Route::post('posts/create/{tmpToken}/payment', 'PaymentController@postForm');

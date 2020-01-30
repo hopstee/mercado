@@ -15,6 +15,8 @@
 
 namespace App\Helpers;
 
+use App\Models\Category;
+
 
 class UrlGen
 {
@@ -71,7 +73,7 @@ class UrlGen
             return '#';
 		}
 
-		$uri = "/user" . "/" . $userId . "/posts" ;
+		$uri =  "/" . trans('routes.user') . "/" . $userId . "/". trans('routes.posts');
 
 		return $uri;
 	}
@@ -111,12 +113,12 @@ class UrlGen
 	{
 		if (!$httpError) {
 			$url = (config('settings.single.publication_form_type') == '2')
-				? lurl('create')
-				: lurl('posts/create');
+				? lurl('/' . trans('routes.create'))
+				: lurl('/' . trans('routes.posts') . '/' . trans('routes.create'));
 		} else {
 			$url = (config('settings.single.publication_form_type') == '2')
-				? url(config('app.locale') . '/create')
-				: url(config('app.locale') . '/posts/create');
+				? lurl('/' . trans('routes.create'))
+				: lurl('/' . trans('routes.posts') . '/' . trans('routes.create'));
 		}
 
 		return $url;

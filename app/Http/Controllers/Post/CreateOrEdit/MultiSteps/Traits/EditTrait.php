@@ -39,7 +39,7 @@ trait EditTrait
         $data = [];
 
         // Get Post
-        if (getSegment(2) == 'create') {
+        if (getSegment(2) == trans('routes.create')) {
             if (!session()->has('tmpPostId')) {
                 return redirect('posts/create');
             }

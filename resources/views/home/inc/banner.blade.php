@@ -12,7 +12,7 @@
 							@foreach($bigBanners as $banner)
 								<div class="owl-item">
 									<div class="item">
-										<a  href="{{  url('posts/create') }}">
+										<a  href="{{  lurl(trans('routes.posts-create')) }}">
 											<?php $url = url('storage') . "/" . $banner ;?>
 											<img src="{{  $url }}">
 										</a>
@@ -36,7 +36,7 @@
 							@foreach($smallBanners as $banner)
 								<div class="owl-item">
 									<div class="item">
-										<a  href="{{  url('posts/create') }}">
+										<a  href="{{  lurl(trans('routes.posts-create')) }}">
 										<?php $urlSmall = url('storage') . "/" . $banner ;?>
 											<img src="{{  $urlSmall }}">
 										</a>

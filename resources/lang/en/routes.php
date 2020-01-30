@@ -37,6 +37,7 @@ return [
     'v-search-tag' => 'tag/:tag',
 
 
+    'user' => 'user',
     'personal-data' => 'personal-data',
 
     'pers-photo' => 'personal-data/{id}/photo',
@@ -78,4 +79,22 @@ return [
     'pers-delete-account' => 'personal-data/delete-account',
     'pers-delete-account-accept' => 'personal-data/delete-account/delete',
     'delete'=>'delete',
+    'reply'=>'reply',
+    'messages'=>'messages',
+
+    'create' => 'create',
+    'posts' => 'posts',
+    'photos' => 'photos',
+
+    'posts-create' => 'posts/create',
+
+    'posts-create-back' => 'posts/create/{tmpToken}',
+    'v-posts-create-back' => 'posts/create/:tmpToken',
+
+    'posts-create-photo' => 'posts/create/{tmpToken}/photos',
+    'v-posts-create-photo' => 'posts/create/:tmpToken/photos',
+
+    'posts-create-finish' => 'posts/create/{tmpToken}/finish',
+    'v-posts-create-finish' => 'posts/create/:tmpToken/finish',
+
 ];

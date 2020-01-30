@@ -244,7 +244,8 @@ class CreateController extends FrontController
         // 	$nextStepUrl = config('app.locale') . '/posts/create/' . $post->tmp_token . '/register';
         // }else{
         // Get Next URL
-        $nextStepUrl = config('app.locale') . '/posts/create/' . $post->tmp_token . '/photos';
+        // $nextStepUrl = config('app.locale') . '/posts/create/' . $post->tmp_token . '/photos';
+        $nextStepUrl = lurl(trans('routes.posts') . '/' . trans('routes.create') . '/' . $post->tmp_token . '/' . trans('routes.photos'));
 
         // }
 
@@ -314,8 +315,6 @@ class CreateController extends FrontController
             }
 
         }
-        // var_dump($nextStepUrl);
-        // die();
         // Redirection
         return redirect($nextStepUrl);
     }

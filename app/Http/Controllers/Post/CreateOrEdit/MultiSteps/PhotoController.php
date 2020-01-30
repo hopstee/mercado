@@ -98,7 +98,7 @@ class PhotoController extends FrontController
         $data = [];
 
         // Get Post
-        if (getSegment(2) == 'create') {
+        if (getSegment(2) == trans('routes.create',[],config('app.local'))) {
             if (!session()->has('tmpPostId')) {
                 return redirect('posts/create');
             }
@@ -134,7 +134,7 @@ class PhotoController extends FrontController
 
 
         // Get next step URI
-        $creationPath = (getSegment(2) == 'create') ? 'create/' : '';
+        $creationPath = (getSegment(2) == trans('routes.create',[],config('app.local'))) ? 'create/' : '';
         if (
             isset($this->data['countPackages']) &&
             isset($this->data['countPaymentMethods']) &&
@@ -147,7 +147,7 @@ class PhotoController extends FrontController
             if (getSegment(2) == 'create') {
                 $nextStepUrl = config('app.locale') . '/posts/create/' . $postIdOrToken . '/finish';
             } else {
-                $nextStepUrl = UrlGen::postUri($post);
+                $nextStepUrl = UrlGen::postUri($post, config('app.locale'));
             }
             $nextStepLabel = t('Finish');
         }

@@ -367,7 +367,7 @@ class BaseController extends FrontController
         $slugs = explode('/', $fullPath);
         $tree = collect([]);
         foreach ($slugs as $s) {
-            $cat = Category::trans()->where('slug', '=', $s)->firstOrFail();
+            $cat = Category::where('slug', '=', $s)->firstOrFail();
             $tree->push($cat);
         }
         return $tree;

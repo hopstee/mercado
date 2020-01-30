@@ -26,7 +26,8 @@
 						
 						@foreach($categories as $key => $cat)
 							<div class="col-lg-2 col-md-3 col-sm-3 col-xs-4 f-category">
-								<a href="{{ \App\Helpers\UrlGen::category($cat) }}">
+								<!-- <a href="{{ \App\Helpers\UrlGen::category($cat) }}"> -->
+								<a href="{{ lurl(\App\Helpers\UrlGen::category($cat)) }}">
 									<img src="{{ imgUrl($cat->picture, 'cat') }}" class="lazyload img-fluid" alt="{{ $cat->name }}">
 									<h6>
 										<span>{{ $cat->name }}</span>

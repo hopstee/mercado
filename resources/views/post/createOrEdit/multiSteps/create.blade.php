@@ -39,7 +39,7 @@
 						<div class="row">
 							<div class="col-xl-12">
 
-								<form class="form-horizontal" id="postForm" method="POST" action="/posts/create" enctype="multipart/form-data">
+								<form class="form-horizontal" id="postForm" method="POST" action="{{ lurl(trans('routes.posts-create'))}}" enctype="multipart/form-data">
 									{!! csrf_field() !!}
 									<fieldset>
 

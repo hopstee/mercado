@@ -372,7 +372,7 @@ class DetailsController extends FrontController
 		// 	flash($e->getMessage())->error();
 		// }
 
-		return redirect(UrlGen::postUri($post));
+		return redirect(UrlGen::postUri($post, config('app.locale') ));
 	}
 
 	/**

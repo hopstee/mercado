@@ -15,13 +15,13 @@ return [
     'search' => 'buscar',
     't-search' => 'buscar',
     'v-search' => 'buscar',
-    'job-search' => 'category/jobs-pt',
-    'search-subCat' => 'category/{catSlug}/{subCatSlug}',
-    't-search-subCat' => 'category',
-    'v-search-subCat' => 'category/:catSlug/:subCatSlug',
-    'search-cat' => 'category/{catSlug}',
-    't-search-cat' => 'category',
-    'v-search-cat' => 'category/:catSlug',
+    'job-search' => 'categoria/jobs-pt',
+    'search-subCat' => 'categoria/{catSlug}/{subCatSlug}',
+    't-search-subCat' => 'categoria',
+    'v-search-subCat' => 'categoria/:catSlug/:subCatSlug',
+    'search-cat' => 'categoria/{catSlug}',
+    't-search-cat' => 'categoria',
+    'v-search-cat' => 'categoria/:catSlug',
     'search-city' => 'free-ads/{city}/{id}',
     't-search-city' => 'free-ads',
     'v-search-city' => 'free-ads/:city/:id',
@@ -49,6 +49,22 @@ return [
     'reply'=>'resposta',
     'messages'=>'mensagem',
 
+    'create' => 'crio',
+    'posts' => 'publicados',
+    'photos' => 'fotos',
+
+
+    'user' => 'utilizador',
+    'posts-create' => 'publicados/crio',
+    
+    'posts-create-back' => 'publicados/crio/{tmpToken}',
+    'v-posts-create-back' => 'publicados/crio/:tmpToken',
+
+    'posts-create-photo' => 'publicados/crio/{tmpToken}/fotos',
+    'v-posts-create-photo' => 'publicados/crio/:tmpToken/fotos',
+
+    'posts-create-finish' => 'publicados/crio/{tmpToken}/finish',
+    'v-posts-create-finish' => 'publicados/crio/:tmpToken/finish',
 
     'personal-data' => 'dados-pessoais',
 

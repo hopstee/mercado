@@ -51,8 +51,7 @@ if ($post->category) {
 
 						<div class="row">
 							<div class="col-xl-12">
-
-								<form class="form-horizontal" id="postForm" method="POST" action="{{ url()->current() }}" enctype="multipart/form-data">
+								<form class="form-horizontal" id="postForm" method="POST" action="{{ trans('routes.posts-create') }}" enctype="multipart/form-data">
 									{!! csrf_field() !!}
 									<input name="_method" type="hidden" value="PUT">
 									<input type="hidden" name="post_id" value="{{ $post->id }}">

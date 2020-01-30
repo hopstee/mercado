@@ -101,7 +101,7 @@
                             </a>
                         </li>
                         <li>
-                            <a class="navbar-list-item {!! ($pagePath=='my-posts') ? 'active' : '' !!}" href="{{ lurl(trans('routes.v-pers-ads-my')) }}">
+                            <a class="navbar-list-item {!! ($pagePath=='my-ads') ? 'active' : '' !!}" href="{{ lurl(trans('routes.v-pers-ads-my')) }}">
                                 {{--							<i class="icon-docs"></i> {{ t('My ads') }}&nbsp;--}}
                                 <i class="unir-ads sidebar-icon"></i> {{ t('My ads') }}
                                 <span class="badge badge-pill badge-dif">
@@ -110,7 +110,7 @@
                             </a>
                         </li>
                         <li>
-                            <a class="navbar-list-item {!! ($pagePath=='favourite') ? 'active' : '' !!}" href="{{ lurl(trans('routes.v-pers-ads-favourite')) }}">
+                            <a class="navbar-list-item {!! ($pagePath=='favourite-ads') ? 'active' : '' !!}" href="{{ lurl(trans('routes.v-pers-ads-favourite')) }}">
                                 {{--							<i class="icon-heart"></i> {{ t('Favourite ads') }}&nbsp;--}}
                                 <i class="unir-heart sidebar-icon"></i> {{ t('Favourite ads') }}
                                 <span class="badge badge-pill badge-dif">
@@ -127,7 +127,7 @@
                         {{--							</a>--}}
                         {{--						</li>--}}
                         <li>
-                            <a class="navbar-list-item {!! ($pagePath=='pending-approval') ? 'active' : '' !!}" href="{{ lurl(trans('routes.v-pers-ads-rejected')) }}">
+                            <a class="navbar-list-item {!! ($pagePath=='rejected-ads') ? 'active' : '' !!}" href="{{ lurl(trans('routes.v-pers-ads-rejected')) }}">
                                 {{--							<i class="icon-hourglass"></i> {{ t('Pending approval') }}&nbsp;--}}
                                 <i class="unir-clock sidebar-icon"></i> {{ t('Rejected ads') }}
                                 <span class="badge badge-pill badge-dif">
@@ -136,7 +136,7 @@
                             </a>
                         </li>
                         <li>
-                            <a class="navbar-list-item {!! ($pagePath=='archived') ? 'active' : '' !!}" href="{{ lurl(trans('routes.v-pers-ads-archived')) }}">
+                            <a class="navbar-list-item {!! ($pagePath=='archived-ads') ? 'active' : '' !!}" href="{{ lurl(trans('routes.v-pers-ads-archived')) }}">
                                 {{--							<i class="icon-folder-close"></i> {{ t('Archived ads') }}&nbsp;--}}
                                 <i class="unir-folder sidebar-icon"></i> {{ t('Archived ads') }}
                                 <span class="badge badge-pill badge-dif">

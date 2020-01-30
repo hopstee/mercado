@@ -1855,6 +1855,37 @@ hr{
     border-top: 1px solid #CFD8DC;
 }
 
+.notrans-collapse{
+    margin: 10px;
+}
+
+@media(min-width:576px){
+    .notrans-collapse.collapsed{
+        margin: 0px;
+    }
+}
+
+@media(min-width:575px){
+    .col-md-4{
+        padding-right:0px !important;
+        padding-left:15px !important;
+    }
+    .last-column{
+        padding-right:15px !important;
+    }
+}
+
+@media(min-width:768px){
+    .col-md-4{
+        padding-right:15px !important;
+        padding-left:15px !important;
+    }
+    .last-column{
+        padding-right:15px !important;
+    }
+}
+
+
 /* for errorpage */
 
 #errorImage{

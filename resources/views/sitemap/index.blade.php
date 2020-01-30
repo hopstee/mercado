@@ -74,7 +74,6 @@
 																		  data-toggle="collapse"
 																		  data-target=".cat-id-{{ $iCat->id . $randomId }}"
 																		  aria-expanded="false"
-																		  style="margin: 10px;"
 																	>
 																		<span class="unir-rarrow2"></span>
 																	</span>
@@ -152,9 +151,19 @@
 	@parent
 	<script>
 		var maxSubCats = 15;
-		if ($(window).width() <= 500) {
-			$(".notrans-collapse *").attr("style", "display:block;");
+		function dependentSize(){
+			if ($(window).width() <= 575) {
+				$(".notrans-collapse *").attr("style", "display:block;");
+			}else{
+				$(".notrans-collapse *").attr("style", "display:none;");
+
+			}		
 		}
+		dependentSize();
+		window.addEventListener('resize', function(event){
+            dependentSize();
+        });
+		
 	</script>
 	
 @endsection

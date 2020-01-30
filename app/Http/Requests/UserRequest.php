@@ -164,15 +164,33 @@ class UserRequest extends Request
 	private function updateRules($router, $files, $config)
 	{
 		if (Str::contains(Route::currentRouteAction(), 'Account\EditController@updateSettings')) {
-			$rules = [
-				'password' => [
-					'min:' . config('larapen.core.passwordLength.min', 4),
-					'max:' . config('larapen.core.passwordLength.max', 60),
-					// 'dumbpwd',
-					'confirmed'
-				],
-				'email'     => ['email', new EmailRule(), new BlacklistEmailRule(), new BlacklistDomainRule()],
-			];
+			// $rules = [
+			// 	'password' => [
+			// 		'min:' . config('larapen.core.passwordLength.min', 4),
+			// 		'max:' . config('larapen.core.passwordLength.max', 60),
+			// 		// 'dumbpwd',
+			// 		'confirmed'
+			// 	],
+			// 	'email'     => ['email', new EmailRule(), new BlacklistEmailRule(), new BlacklistDomainRule()],
+			// ];
+			if(isEnabledField('password') && !is_null($this->input('password'))){
+				$rules = [
+					'password' => [
+						'min:' . config('larapen.core.passwordLength.min', 4),
+						'max:' . config('larapen.core.passwordLength.max', 60),
+						// 'dumbpwd',
+						'confirmed'
+					],
+				];
+			}
+			if(isEnabledField('email') && !is_null($this->input('email'))){
+				$rules = [
+					'email' => ['email',
+						new EmailRule(), 
+						new BlacklistEmailRule(), 
+						new BlacklistDomainRule()],
+				];
+			}
 		} else {
 			// Check if these fields has changed
 			$emailChanged = ($this->input('email') != auth()->user()->email);

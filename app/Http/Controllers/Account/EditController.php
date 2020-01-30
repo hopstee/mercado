@@ -282,10 +282,10 @@ class EditController extends AccountBaseController
 			$user->password = Hash::make($request->input('password'));
 		}
 		if ($request->filled('email')) {
-		    $user->email = $request->input('email');
+			$user->email = $request->input('email');
 		}
 		$user->save();
-		
+
 		flash(t("Your settings account has updated successfully."))->success();
 		
 		return redirect(config('app.locale') . '/' . trans('routes.personal-data'));

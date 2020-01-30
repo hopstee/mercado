@@ -786,6 +786,7 @@ return [
     'Click here to see' => 'Clique aqui para ver',
     'Reply to' => 'Responta a',
     'Message...' => 'Mensagem...',
+    'Message'=>'Mensagem',
     'Started by' => 'Começado por',
     'Created by' => 'Criado por',
     ':number max' => ':number máximo',

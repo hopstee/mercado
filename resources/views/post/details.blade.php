@@ -517,22 +517,6 @@ if (isset(auth()->user()->id)) {
 
                                     {!! genPhoneNumberBtn($post, true) !!}
                                     {!! genEmailContactBtn($post, true) !!}
-                                    <!-- <a href="{{ \App\Helpers\UrlGen::editPost($post) }}"
-                                            class="btn btn-default btn-block message">
-                                                <i class="unir-edit"></i> {{ t('Update the Details') }}
-                                            </a>
-                                            @if (config('settings.single.publication_form_type') == '1')
-                                        <a href="{{ lurl('posts/' . $post->id . '/photos') }}"
-                                                class="btn btn-default btn-block message">
-                                                    <i class="unir-edit"></i> {{ t('Update Photos') }}
-                                                </a>
-                                                @if (isset($countPackages) and isset($countPaymentMethods) and $countPackages > 0 and $countPaymentMethods > 0)
-                                            <a href="{{ lurl('posts/' . $post->id . '/payment') }}"
-                                                    class="btn btn-success btn-block">
-                                                        <i class="icon-ok-circled2"></i> {{ t('Make It Premium') }}
-                                                    </a>
-                                                @endif
-                                    @endif -->
                                         <div class="block-cell user">
                                             <div class="cell-media cart-user-photo">
                                                 @if (!empty($userPhoto))
@@ -963,32 +947,51 @@ if (isset(auth()->user()->id)) {
                 $("#terms>a").text(" <?php echo t("Terms & Conditions") ?> ");
             }
         });
-        
-        if ($(window).width() <= 992) {
-            $(".footer-content .row").attr("style", "padding-bottom: 40px;");
+        function dependentSize(){
+            if ($(window).width() < 992) {
+                $(".footer-content .row").attr("style", "padding-bottom: 40px;");
+                
+                $(".new-button.phoneBtn").removeAttr("data-toggle");
+                $(".new-button.phoneBtn").removeAttr("data-target");
+                
+                $("#desktopView").hide();
+                $("#mobileView").show();
+                if($(".new-button.phoneBtn").length===0){
+                    $(".new-button.messageBtn").css("width","100%");
+                }
+            }else{
+                $(".new-button.phoneBtn .btn-user-card").removeAttr("href");//убираем функционал звонка с pc
 
+                $("#mobileView").hide();
+                $("#desktopView").show();
 
-            $(".unir-phone.btn.btn-success.phoneBlock.btn-block").on("click", function () {
-                $(".new-button.phoneBtn .btn-user-card").parent("click");
+                $(".unir-close").on("click", function(){
+                    $(".user-info-modal").attr("style","display:none;");
+                    modal_userInfo = false;
+                    $('.menu-overly-mask').removeClass('is-visible');
+                });
+            }
+        }
+        dependentSize();
+
+        $(".unir-phone.btn.btn-success.phoneBlock.btn-block").on("click", function () {
+                $("#call").click();
                 console.log("clicked");
             });
-        }
-
+            
         var modal_userInfo = false;
 
 
 
-        if ($(window).width() >= 992) {//убираем функционал звонка с pc
-            $(".new-button.phoneBtn .btn-user-card").removeAttr("href");
+        
+        
+        // var tmpPhone=document.getElementById("call").innerHTML;
 
-            $(".unir-close").on("click", function(){
-                $(".user-info-modal").attr("style","display:none;");
-                modal_userInfo = false;
-                $('.menu-overly-mask').removeClass('is-visible');
-                // console.log("Modal close x ");
-            });
-
-        }
+        // if($(window).width() <= 351){
+        //     document.getElementById("chat").innerHTML='<span class="right-from-image" id="chat" style="font-size: 16px !important;">  {{t('Message') }}  </span></a></div>';
+        //         document.getElementById("call").innerHTML=tmpPhone.slice(5);
+        //         document.getElementById("call").style='font-size:16px !important';
+        // }
 
 
         $(".make-favorite").on("click", function () {
@@ -1034,14 +1037,8 @@ if (isset(auth()->user()->id)) {
 
 
         window.addEventListener('resize', function(event){
-            if($(document).width() >= 575){
-                $("#mobileView").hide();
-                $("#desktopView").show();
-            }
-            else{
-                $("#desktopView").hide();
-                $("#mobileView").show();
-            }
+            dependentSize();
+
         });
     </script>
 @endsection

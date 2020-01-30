@@ -85,7 +85,7 @@
         position: fixed;
         left: 0px ;
         bottom: 0px !important;
-        width: 49.8% !important;
+        width: 49.8% ;
         background-color: #47BD99;
         border-radius: 3px;
     }
@@ -329,6 +329,7 @@
     border: none !important;
     width: 60px !important;
     display:inline-block;
+    
 }
 
 .new-button.messageBtn .message:hover,
@@ -336,6 +337,13 @@
     background-color: #36a986 !important;
 }
 
+@media(max-width:993px){
+    .new-button.messageBtn .unir-mail.btn.btn-success.btn-block:hover,
+    .btn.phoneBlock:hover
+    {
+        background-color: #47BD99 !important;
+    }
+}
 .btn.phoneBlock:hover{
     background-color: #36a986;
 }
@@ -1255,17 +1263,19 @@ a.sell-your-item-cart{
 .next-green:hover{
     background-color: #36a986 !important;
 }
+.unir-mail.btn.btn-success.btn-block{
+    margin-top: unset !important;
+    background-color: #47BD99;
+    border: none !important;
+    width: 60px !important;
+    display: inline-block;
+}
 
 @media (max-width: 400px) {
 
-    .new-button.phoneBtn,
-    .new-button.messageBtn{
-        height: 35px !important;
-    }
-
     .new-button.phoneBtn > a > i,
     .new-button.messageBtn > a > i{
-        width: 40px !important;
+        width: 50px;
     }
 }
 
@@ -1280,42 +1290,6 @@ a.sell-your-item-cart{
 
     .right-from-image{
         margin-left: 3px;
-    }
-
-}
-
-@media (max-width: 992px) {
-    
-    .new-button.phoneBtn,
-    .new-button.messageBtn{
-        width: 25% !important;
-        height: 40px !important;
-    }
-
-
-}
-
-
-@media (max-width: 800px) {
-    .new-button.phoneBtn,
-    .new-button.messageBtn{
-        width: 32% !important;
-    }
-}
-
-
-@media (max-width: 650px) {
-    .new-button.phoneBtn,
-    .new-button.messageBtn{
-        width: 38% !important;
-    }
-
-}
-
-@media (max-width: 500px) {
-    .new-button.phoneBtn,
-    .new-button.messageBtn{
-        width: 49.89% !important;
     }
 
 }
@@ -1346,7 +1320,15 @@ a.sell-your-item-cart{
     display: flex;
     cursor: pointer;
     color: #212121;
+    align-items: center;
+    /* justify-content: center; */
 }
+/* @media(max-width:992px){
+    .card-content-cart .btn-user-card{
+        justify-content: center;
+    }
+    
+} */
 
 #postForm .col-xl-12.col-xl-12-dif{
     border: unset !important;
@@ -1490,13 +1472,7 @@ input::placeholder {
     } */
 }
 
-.unir-mail.btn.btn-success.btn-block{
-    margin-top: unset !important;
-    background-color: #47BD99;
-    border: none !important;
-    width: 60px !important;
-    display: inline-block;
-}
+
 
 @media (max-width: 767px){
 
@@ -1686,9 +1662,9 @@ input::placeholder {
 
 @media (min-width: 765px) {
 
-    #postsList .item-list.item-inline{
-        width: 25% !important;
-    }
+    .category-list.make-grid #postsList .item-list.item-inline{
+       width: 25% !important;
+   }
 }
 
 @media (max-width: 765px) {
@@ -1805,7 +1781,7 @@ div#pic {
     border:1px solid #CFD8DC;
     display: inline-block;
     position: relative;
-    max-height: 99px;
+    height: 99px;
 }
 
 #desktopView .items img{
@@ -1909,6 +1885,31 @@ hr{
     }
 }
 
+
+/* for button call and chat */
+@media(max-width:992px){
+
+    .card-content-cart{
+        z-index:1000;
+        left:0px;
+        bottom:0px !important;
+        cursor: pointer;
+        position: fixed;
+        height: 40px !important;
+        width: 100%;
+    }
+    .new-button.phoneBtn,
+    .new-button.messageBtn{
+        height: 40px !important;
+        display: flex;
+        justify-content: center;
+    }
+    .unir-phone.btn.btn-success.phoneBlock.btn-block,
+    .unir-mail.btn.btn-success.btn-block{
+        width: 30px !important;
+        padding:8px 0px;
+    }
+}
 .col-xl-12.email-warning{
     padding: unset;
 }

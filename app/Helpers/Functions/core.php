@@ -2917,7 +2917,7 @@ function genEmailContactBtn($post = null, $btnBlock = false, $iconOnly = false)
 
 	if ($iconOnly) {
 		$out .= '<a href="' . $btnLink . '" data-toggle="modal">';
-		$out .= '<i class="icon-mail tooltipHere" data-toggle="tooltip" data-original-title="' . t('Send a message') . '"></i>';
+		$out .= '<i class="icon-mail tooltipHere" data-toggle="tooltip" data-original-title="' . t('MessageLabel') . '"></i>';
 		$out .= '</a>';
 	} else {
 		if ($btnBlock) {
@@ -2927,7 +2927,7 @@ function genEmailContactBtn($post = null, $btnBlock = false, $iconOnly = false)
 		$out .= '<div class="new-button messageBtn" data-target="#contactUser" data-toggle="modal"><a  class="btn-user-card" >';
 		// $out .= "<img src=" . url('images/menu_light.svg') . " class='sidebar-image'>";
 		$out .= '<i class="unir-mail btn btn-success btn-block"  href="' . $btnLink . '"></i> ';
-		$out .= '<span class="right-from-image" id="chat">  ' . t('Send a message') . '</span></a></div>';
+		$out .= '<span class="right-from-image" id="chat">  ' . t('MessageLabel') . '</span></a></div>';
 
 	}
 
@@ -2949,12 +2949,12 @@ function genPhoneNumberBtn($post, $btnBlock = false)
 		return $out;
 	}
 
-	$btnLink = 'tel:' . spacedNumber($post->phone);
+	$btnLink = 'tel:' . spacedNumber($post->phone,true);
 
 	$btnAttr = '';
 	$btnClass = ' phoneBlock'; // for the JS showPhone() function
 	$btnHint = t('Click to see');
-	$phone = spacedNumber($post->phone);
+	$phone = spacedNumber($post->phone,true);
 	if (config('settings.single.hide_phone_number')) {
 		if (config('settings.single.hide_phone_number') == '1') {
 			$phone = maskPhoneNumber($phone, 3, true);
@@ -2995,7 +2995,7 @@ function genPhoneNumberBtn($post, $btnBlock = false)
 	$out .= '<div class="new-button phoneBtn" data-toggle="modal" data-target="#phoneModal"><a class="btn-user-card" href="' . $btnLink . '" >';
 	$out .= '<i class="unir-phone btn btn-success' . $btnClass . $btnAttr . '"> </i>';
 
-	$out .= '<span class="right-from-image" id="call">'. spacedNumber($phone) . '</span></a></div>';
+	$out .= '<span class="right-from-image" id="call">'. shortNumber($phone) . '</span></a></div>';
 
 
 	return $out;
@@ -3007,12 +3007,29 @@ function genPhoneNumberBtn($post, $btnBlock = false)
  * R.S
  * @param $phone
  */
-function spacedNumber($phone){
-
+function spacedNumber($phone, $full){
 
 	if(  preg_match( '/^\+(\d{3})(\d{2})(\d{3})(\d{4})$/', $phone,  $matches ) && ( strlen($phone) == 13))
 	{
-		$phone = "+" . $matches[1] . ' ' . $matches[2] . ' ' . $matches[3] ;
+		if(!$full){
+			$phone = "+" . $matches[1] . ' ' . $matches[2] . ' ' . $matches[3] ;
+		}else{
+			$phone = $matches[2] . ' ' . $matches[3] ;
+		}
+		
+		if(isset($matches[4])){
+			$phone .= ' ' .$matches[4];
+		}
+	}
+	// TODO IF NUMBER IF 
+		return $phone;
+}
+
+function shortNumber($phone){
+
+	if( preg_match( '/^\+(\d{3})\s(\d{2})\s(\d{3})\s(\d{4})$/', $phone,  $matches ))
+	{
+		$phone = $matches[2] . ' ' . $matches[3] ;
 		
 		if(isset($matches[4])){
 			$phone .= ' ' .$matches[4];

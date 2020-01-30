@@ -810,7 +810,7 @@ ul.navbar-mobile > a{
     display: block;
 }
 .mobile-filter-sidebar.xxx{
-    height:auto;
+    height:100%;
     display: none;
     padding:0px !important;
 }

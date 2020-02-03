@@ -316,6 +316,7 @@ return [
     'City' => 'City',
     'Select a city' => 'Select a city',
     'Cities' => 'Cities',
+    'Add up to :pictures_number pictures. Use real pictures of your product, not catalogs.'=>'Add up to :pictures_number pictures. Use real pictures of your product, not catalogs.',
     
     'How to sell quickly?' => 'How to sell quickly?',
     'Use a brief title and description of the item' => 'Use a brief title and description of the item',
@@ -1015,6 +1016,7 @@ return [
 	'Picture #:number' => 'Picture #:number...',
 	'Login with LinkedIn' => 'Login with <strong>LinkedIn</strong>',
 
+    '/'=>"/en",
 
 
 

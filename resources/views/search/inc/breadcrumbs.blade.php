@@ -1,7 +1,7 @@
 <div class="container">
 	<nav aria-label="breadcrumb" role="navigation" class="search-breadcrumb">
 		<ol class="breadcrumb">
-			<li class="breadcrumb-item breadcrumb-home"><a href="{{ lurl('/') }}">{{ t('Home') }}</a></li>
+			<li class="breadcrumb-item breadcrumb-home"><a href="{{ t('/') }}">{{ t('Home') }}</a></li>
 			<li class="breadcrumb-item">
 				<?php $attr = ['countryCode' => config('country.icode')]; ?>
 				<a href="{{ lurl(trans('routes.v-search', $attr), $attr) }}">

@@ -37,8 +37,7 @@ return [
     'v-search-tag' => 'tag/:tag',
 
     'category' => 'categoria',
-
-    // 'personal-data' => 'dados-pessoais',
+    'personal-data' => 'dados-pessoais',
     'my-ads' => 'meus-anúncios',
     'favourite-ads' => 'anúncios-favoritos',
     'rejected-ads' => 'anúncios-reprovados',

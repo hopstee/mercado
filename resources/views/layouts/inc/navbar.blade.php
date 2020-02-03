@@ -90,18 +90,18 @@
                 <li class="nav-item" style="padding:10px 0px;">
                         <a id="help-down" class="dropdown-toggle" data-toggle="dropdown" style="font-weight:bold;font-size:14px;padding:5px 5px; display:block;"><i class="unib-info"></i> {{ t('Help links') }}<i style="float: right;" class="help-down unir-rarrow2"></i></a>
                         <ul id="userMenuDropdown" class="dropdown-menu navbar-mobile user-menu dropdown-menu-right" style="border: none;">
-                            <a href="{{ lurl('page/terms-of-use')}}"><i
+                            <a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.terms-of-use')])) }}"><i
                                     class="unir-sheild">&nbsp;</i>{{ t('Terms of Use') }}</a>
-                            <a href="{{ lurl('page/privacy-policy')}}"><i
+                            <a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.privacy-policy')])) }}"><i
                                     class="unir-note">&nbsp;</i>{{ t('Privacy Policy') }}</a>
-                            <a href="{{ lurl('page/posting-rules')}}"><i
+                            <a href="{{lurl(trans('routes.v-page',['slug'=>trans('routes.posting-rules')])) }}"><i
                                     class="unir-pencil">&nbsp;</i>{{ t('Posting Rules') }}</a>
-                            <a href="{{ lurl('page/tips')}}"><i class="unir-safe">&nbsp;</i>{{ t('Tips for Users') }}</a>
-                            <a href="{{ lurl('page/faq')}}"><i
+                            <a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.tips')])) }}"><i class="unir-safe">&nbsp;</i>{{ t('Tips for Users') }}</a>
+                            <a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.faq')])) }}"><i
                                     class="unir-cards">&nbsp;</i>{{ t('FAQ') }}</a>
-                            <a href="{{ lurl('sitemap')}}"><i style="font-size: 13.6px;"
+                            <a href="{{ lurl(trans('routes.sitemap')) }}"><i style="font-size: 13.6px;"
                                     class="unir-list">&nbsp;</i>{{ t('Sitemap') }}</a>
-                            <a href="{{ lurl('contact-us')}}"><i class="unir-mail">&nbsp;</i>{{ t('Contact Us') }}</a>
+                            <a href="{{ lurl(trans('routes.contact-us'))}}"><i class="unir-mail">&nbsp;</i>{{ t('Contact Us') }}</a>
                         </ul>
                 </li>
                 @else
@@ -155,18 +155,18 @@
                 <li class="nav-item" style="padding:10px 0px;">
                         <a id="help-down" class="dropdown-toggle" data-toggle="dropdown" style="font-weight:bold;font-size:14px;padding:5px 5px; display:block;"><i class="unib-info"></i> {{ t('Help links') }}<i style="float: right;" class="help-down unir-rarrow2"></i></a>
                         <ul id="userMenuDropdown" class="dropdown-menu navbar-mobile user-menu dropdown-menu-right" style="border: none;">
-                            <a href="{{ lurl('page/terms-of-use')}}"><i
-                                    class="unir-note">&nbsp;</i>{{ t('Terms of Use') }}</a>
-                            <a href="{{ lurl('page/privacy-policy')}}"><i
-                                    class="unir-sheild">&nbsp;</i>{{ t('Privacy Policy') }}</a>
-                            <a href="{{ lurl('page/posting-rules')}}"><i
+                            <a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.terms-of-use')])) }}"><i
+                                    class="unir-sheild">&nbsp;</i>{{ t('Terms of Use') }}</a>
+                            <a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.privacy-policy')])) }}"><i
+                                    class="unir-note">&nbsp;</i>{{ t('Privacy Policy') }}</a>
+                            <a href="{{lurl(trans('routes.v-page',['slug'=>trans('routes.posting-rules')])) }}"><i
                                     class="unir-pencil">&nbsp;</i>{{ t('Posting Rules') }}</a>
-                            <a href="{{ lurl('page/tips')}}"><i class="unir-info">&nbsp;</i>{{ t('Tips for Users') }}</a>
-                            <a href="{{ lurl('page/faq')}}"><i
-                                    class="unir-search">&nbsp;</i>{{ t('FAQ') }}</a>
-                            <a href="{{ lurl('sitemap')}}"><i style="font-size: 13.6px;"
+                            <a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.tips')])) }}"><i class="unir-safe">&nbsp;</i>{{ t('Tips for Users') }}</a>
+                            <a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.faq')])) }}"><i
+                                    class="unir-cards">&nbsp;</i>{{ t('FAQ') }}</a>
+                            <a href="{{ lurl(trans('routes.sitemap')) }}"><i style="font-size: 13.6px;"
                                     class="unir-list">&nbsp;</i>{{ t('Sitemap') }}</a>
-                            <a href="{{ lurl('contact-us')}}"><i class="unir-mail">&nbsp;</i>{{ t('Contact Us') }}</a>
+                            <a href="{{ lurl(trans('routes.contact-us'))}}"><i class="unir-mail">&nbsp;</i>{{ t('Contact Us') }}</a>
                         </ul>
                 </li>
                 @endif

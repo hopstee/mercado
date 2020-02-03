@@ -607,6 +607,7 @@ button.go-button{
     padding-bottom: 0% !important;
     margin-top: 4px;
     padding-top: 14px;
+    word-wrap:break-word;
 }
 
 .enable-long-words-posts > strong{

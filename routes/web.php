@@ -444,7 +444,7 @@ Route::group([
         $router->pattern('username', '[a-zA-Z0-9]+');
         Route::get(LaravelLocalization::transRoute('routes.search'), 'Search\SearchController@index');
         Route::get(LaravelLocalization::transRoute('routes.search-user'), 'Search\UserController@index');
-        Route::get('user/{id}/posts', 'Search\UserController@searchPostsByUserId');
+        Route::get(trans('routes.user') . '/{id}' . '/' .trans('routes.posts'), 'Search\UserController@searchPostsByUserId');
         Route::get(LaravelLocalization::transRoute('routes.search-username'), 'Search\UserController@profile');
         Route::get(LaravelLocalization::transRoute('routes.search-tag'), 'Search\TagController@index');
         Route::get(LaravelLocalization::transRoute('routes.search-city'), 'Search\CityController@index');

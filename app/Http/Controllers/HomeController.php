@@ -443,7 +443,7 @@ class HomeController extends FrontController
 				$categories = Category::trans()->where('parent_id', 0)->take($maxItems)->orderBy('lft')->get();
 
 				return $categories;
-			});
+			}); 
 			// var_dump($categories);
 
 			// R.S
@@ -455,6 +455,7 @@ class HomeController extends FrontController
 						$category = Category::where('id', $val->translation_of)->take($maxItems)->orderBy('lft')->get();
 						//Leave The Original Name of Category
 						$category[0]->name = $categories[$key]->name;
+						$category[0]->slug = $categories[$key]->slug;
 						unset($categories[$key]);
 						$categories[$key] =  $category[0];
 					}

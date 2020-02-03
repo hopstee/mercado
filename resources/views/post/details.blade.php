@@ -641,8 +641,8 @@ if (isset(auth()->user()->id)) {
                                     ?>
                                     <div class="cell-content">
                                         <span class="name">
-											@if (isset($user) and !empty($user))
-                                                <a href="{{ \App\Helpers\UrlGen::userPosts($post->user_id) }}">
+                                            @if (isset($user) and !empty($user))
+                                                <a href="{{ lurl(\App\Helpers\UrlGen::userPosts($post->user_id)) }}">
 													{{ $post->contact_name }}
                                                 </a>
                                             @else

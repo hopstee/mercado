@@ -184,6 +184,7 @@ class UrlGen
 				$url = '#';
 			}
 		} else {
+			// var_dump(  Category::trans()->where( 'slug', $entry->slug)->firstOrFail()->slug  );
 			if (isset($entry->slug)) {
 				$attr = [
 					'countryCode' => $countryCode,

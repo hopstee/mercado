@@ -64,7 +64,7 @@ class CategoryController extends BaseController
         if ($languageCode != "en") {
             $this->baseCatURL .= "/" . $languageCode;
         }
-        $this->baseCatURL .= "/category";
+        $this->baseCatURL .= "/" . trans('routes.category');
         $this->baseURL = $this->baseCatURL;
 
         $this->categoryTree->each(function ($i) {

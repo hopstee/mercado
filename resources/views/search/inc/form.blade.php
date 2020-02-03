@@ -78,7 +78,7 @@ $qLocation = request()->get('location');
 						</button>
 					</div>
 
-					@if(isset($SubCatId))
+					@if(isset($SubCatId))  
 						<input id="subCatId" name="sc" type="hidden" value="{{ $SubCatId }}">
 					@endif
 

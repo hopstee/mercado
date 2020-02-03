@@ -91,7 +91,7 @@ class SearchController extends BaseController
             if ($languageCode != "en") {
                 $this->baseCatURL .= "/" . $languageCode;
             }
-            $this->baseCatURL .= "/search";
+            $this->baseCatURL .= "/" . trans('routes.search');
             $this->baseURL = $this->baseCatURL;
 
             view()->share('baseCatURL', $this->baseCatURL);

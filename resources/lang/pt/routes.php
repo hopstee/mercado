@@ -16,7 +16,7 @@ return [
     'search' => 'buscar',
     't-search' => 'buscar',
     'v-search' => 'buscar',
-    'job-search' => 'categoria/jobs-pt',
+    'job-search' => 'categoria/empregos',
     'search-subCat' => 'categoria/{catSlug}/{subCatSlug}',
     't-search-subCat' => 'categoria',
     'v-search-subCat' => 'categoria/:catSlug/:subCatSlug',
@@ -35,6 +35,8 @@ return [
     'search-tag' => 'tag/{tag}',
     't-search-tag' => 'tag',
     'v-search-tag' => 'tag/:tag',
+
+    'category' => 'categoria',
 
     // 'personal-data' => 'dados-pessoais',
     'my-ads' => 'meus-anúncios',

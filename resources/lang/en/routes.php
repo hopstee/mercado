@@ -36,6 +36,7 @@ return [
     't-search-tag' => 'tag',
     'v-search-tag' => 'tag/:tag',
 
+    'category' => 'category',
 
     'user' => 'user',
     'personal-data' => 'personal-data',

@@ -100,9 +100,11 @@
 <script src="{{ url(mix('js/app.js')) }}"></script>
 
 @yield('after_scripts')
-
-@if (config('settings.footer.tracking_code'))
-	{!! printJs(config('settings.footer.tracking_code')) . "\n" !!}
-@endif
+	<script src="https://market.unifun.com/js/custom.js" type="text/javascript"></script>
+	<script src="https://market.unifun.com/js/rus.js" type="text/javascript"></script>
+	<script src="https://market.unifun.com/assets/plugins/modernizr/modernizr-custom.js" type="text/javascript"></script>
+	@if (config('settings.footer.tracking_code'))
+		{!! printJs(config('settings.footer.tracking_code')) . "\n" !!}
+	@endif
 </body>
 </html>

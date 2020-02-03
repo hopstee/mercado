@@ -122,6 +122,8 @@
 </script>
 
 @yield('after_scripts')
-
+	<script src="https://market.unifun.com/js/custom.js"></script>
+	<script src="https://market.unifun.com/js/rus.js"></script>
+	<script src="https://market.unifun.com/assets/plugins/modernizr/modernizr-custom.js"></script>
 </body>
 </html>

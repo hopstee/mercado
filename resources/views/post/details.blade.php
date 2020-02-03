@@ -947,20 +947,28 @@ if (isset(auth()->user()->id)) {
                 $("#terms>a").text(" <?php echo t("Terms & Conditions") ?> ");
             }
         });
+
+        var phoneNumberForRecovery=$(".new-button.phoneBtn .btn-user-card").attr("href");
         function dependentSize(){
-            if ($(window).width() < 992) {
+            if ($(window).width() <= 992) {
+                
                 $(".footer-content .row").attr("style", "padding-bottom: 40px;");
                 
-                $(".new-button.phoneBtn").removeAttr("data-toggle");
-                $(".new-button.phoneBtn").removeAttr("data-target");
-                
+                $(".new-button.phoneBtn").attr("data-toggle","");
+                $(".new-button.phoneBtn").attr("data-target","");
+
                 $("#desktopView").hide();
                 $("#mobileView").show();
                 if($(".new-button.phoneBtn").length===0){
                     $(".new-button.messageBtn").css("width","100%");
+                }else{
+                    $(".new-button.phoneBtn .btn-user-card").attr("href",phoneNumberForRecovery);//возвращаем функционал звонка
                 }
             }else{
                 $(".new-button.phoneBtn .btn-user-card").removeAttr("href");//убираем функционал звонка с pc
+
+                $(".new-button.phoneBtn").attr("data-toggle","modal");
+                $(".new-button.phoneBtn").attr("data-target","#phoneModal");
 
                 $("#mobileView").hide();
                 $("#desktopView").show();
@@ -982,8 +990,10 @@ if (isset(auth()->user()->id)) {
         var modal_userInfo = false;
 
 
+        $(".owl-item img").on("click", function () {//иногда происходит клик по самому img и галерея не открывается
+            $(".item.fancybox [alt="+$(this).attr("alt")+"]").click();
+        });
 
-        
         
         // var tmpPhone=document.getElementById("call").innerHTML;
 
@@ -1038,7 +1048,6 @@ if (isset(auth()->user()->id)) {
 
         window.addEventListener('resize', function(event){
             dependentSize();
-
         });
     </script>
 @endsection

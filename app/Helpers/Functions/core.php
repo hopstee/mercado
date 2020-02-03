@@ -2949,12 +2949,12 @@ function genPhoneNumberBtn($post, $btnBlock = false)
 		return $out;
 	}
 
-	$btnLink = 'tel:' . spacedNumber($post->phone,true);
+	$btnLink = 'tel:' . spacedNumber($post->phone);
 
 	$btnAttr = '';
 	$btnClass = ' phoneBlock'; // for the JS showPhone() function
 	$btnHint = t('Click to see');
-	$phone = spacedNumber($post->phone,true);
+	$phone = spacedNumber($post->phone);
 	if (config('settings.single.hide_phone_number')) {
 		if (config('settings.single.hide_phone_number') == '1') {
 			$phone = maskPhoneNumber($phone, 3, true);
@@ -3007,15 +3007,11 @@ function genPhoneNumberBtn($post, $btnBlock = false)
  * R.S
  * @param $phone
  */
-function spacedNumber($phone, $full){
+function spacedNumber($phone){
 
 	if(  preg_match( '/^\+(\d{3})(\d{2})(\d{3})(\d{4})$/', $phone,  $matches ) && ( strlen($phone) == 13))
 	{
-		if(!$full){
-			$phone = "+" . $matches[1] . ' ' . $matches[2] . ' ' . $matches[3] ;
-		}else{
-			$phone = $matches[2] . ' ' . $matches[3] ;
-		}
+		$phone = "+" . $matches[1] . ' ' . $matches[2] . ' ' . $matches[3] ;
 		
 		if(isset($matches[4])){
 			$phone .= ' ' .$matches[4];

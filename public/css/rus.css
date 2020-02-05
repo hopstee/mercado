@@ -67,27 +67,9 @@
         height: 7%;
     }
 
-    .new-button.phoneBtn{
-        position: fixed;
-        right: 0px !important;
-        bottom: 0px !important;
-        width:  49.8% !important;
-        background-color: #47BD99;
-        border-radius: 3px;
-    }
-
     .new-button.phoneBtn > a > span,
     .new-button.messageBtn > span{
         vertical-align: -webkit-baseline-middle;
-    }
-
-    .new-button.messageBtn{
-        position: fixed;
-        left: 0px ;
-        bottom: 0px !important;
-        width: 49.8% ;
-        background-color: #47BD99;
-        border-radius: 3px;
     }
 
     .new-button .right-from-image,

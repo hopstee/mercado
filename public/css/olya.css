@@ -235,8 +235,24 @@ hr{
     }
     .unir-phone.btn.btn-success.phoneBlock.btn-block,
     .unir-mail.btn.btn-success.btn-block{
-        width: 30px !important;
-        padding:8px 0px;
+        width: 35px !important;
+        padding:0px;
+    }
+
+    .new-button.messageBtn,
+    .new-button.phoneBtn{
+        position: fixed;
+        bottom: 0px !important;
+        width: 49.8% ;
+        background-color: #47BD99;
+        border-radius: 3px;
+    }
+
+    .new-button.phoneBtn{
+        right: 0px !important;
+    }
+    .new-button.messageBtn{
+        left: 0px !important;
     }
 }
 .col-xl-12.email-warning{
@@ -245,6 +261,9 @@ hr{
 
 .col-xl-12.email-warning > .alert.alert-warning{
     margin-bottom: 20px;
+}
+.new-button > a .unir-phone::before{
+    font-size: 22px;
 }
 
 /* for similar ads */

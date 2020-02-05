@@ -180,7 +180,6 @@ if (isset(auth()->user()->id)) {
                                     @else
                                         {{ $post->contact_name }}
                                     @endif
-
                                     @if (isset($user) and !empty($user) and isset($joined))
                                         <div class="grid-col">
                                         <div class="col gray">
@@ -513,10 +512,12 @@ if (isset(auth()->user()->id)) {
                             @if (auth()->check() and auth()->user()->getAuthIdentifier() == $post->user_id)
                                 <div class="card-content-cart">
                                 <!-- <div>{{ t('Manage Ad') }}</div>xx -->
-                                @if (auth()->user()->id == $post->user_id)
-
                                     {!! genPhoneNumberBtn($post, true) !!}
-                                    {!! genEmailContactBtn($post, true) !!}
+                                    @if(isset($user) and !empty($user) and isset($joined) and $joined)
+                                        {!! genEmailContactBtn($post, true) !!}
+                                    @endif
+                                </div>
+                                    @if (auth()->user()->id == $post->user_id)
                                         <div class="block-cell user">
                                             <div class="cell-media cart-user-photo">
                                                 @if (!empty($userPhoto))
@@ -563,11 +564,7 @@ if (isset(auth()->user()->id)) {
                                                 @endif
                                             </div>
                                         </div>
-                                    @else
-                                        {!! genPhoneNumberBtn($post, true) !!}
-                                        {!! genEmailContactBtn($post, true) !!}
                                     @endif
-                                </div>
                             @else
                                 <div class="card-content-cart">
                                     <?php $evActionStyle = 'style="border-top: 0;"'; ?>
@@ -591,7 +588,9 @@ if (isset(auth()->user()->id)) {
                                             @endif
                                         @else
                                             {!! genPhoneNumberBtn($post, true) !!}
-                                            {!! genEmailContactBtn($post, true) !!}
+                                                @if(isset($user) and !empty($user) and isset($joined) and $joined)
+                                                    {!! genEmailContactBtn($post, true) !!}
+                                                @endif
                                         @endif
                                         <?php
                                         try {
@@ -621,7 +620,9 @@ if (isset(auth()->user()->id)) {
                                         ?>
                                     @else
                                         {!! genPhoneNumberBtn($post, true) !!}
-                                        {!! genEmailContactBtn($post, true) !!}
+                                            @if(isset($user) and !empty($user) and isset($joined) and $joined)
+                                                {!! genEmailContactBtn($post, true) !!}
+                                            @endif
                                     @endif
                                 </div>
                                 <div class="block-cell user">
@@ -869,9 +870,9 @@ if (isset(auth()->user()->id)) {
         $('#similarAds').owlCarousel({
             
             items: carouselItems,
-            loop: loop,
+            loop: false,
             dots: false,
-            autoplay: true,
+            // autoplay: true,
             nav:false,
             autoplayTimeout: 3000,
             responsive: resp,
@@ -948,6 +949,8 @@ if (isset(auth()->user()->id)) {
             }
         });
 
+
+
         var phoneNumberForRecovery=$(".new-button.phoneBtn .btn-user-card").attr("href");
         function dependentSize(){
             if ($(window).width() <= 992) {
@@ -963,6 +966,10 @@ if (isset(auth()->user()->id)) {
                     $(".new-button.messageBtn").css("width","100%");
                 }else{
                     $(".new-button.phoneBtn .btn-user-card").attr("href",phoneNumberForRecovery);//возвращаем функционал звонка
+                }
+
+                if($(".new-button.messageBtn").length===0){
+                    $(".new-button.phoneBtn").css("width","100%");
                 }
             }else{
                 $(".new-button.phoneBtn .btn-user-card").removeAttr("href");//убираем функционал звонка с pc
@@ -984,8 +991,11 @@ if (isset(auth()->user()->id)) {
 
         $(".unir-phone.btn.btn-success.phoneBlock.btn-block").on("click", function () {
                 $("#call").click();
-                console.log("clicked");
             });
+        // $(".phoneBtn").on("click",function () {
+        //     console.log("sdvsdvs");
+        //     $("#call").click();
+        // });
             
         var modal_userInfo = false;
 
@@ -1006,7 +1016,6 @@ if (isset(auth()->user()->id)) {
 
         $(".make-favorite").on("click", function () {
             $(".right15").on('load', function () {
-                // console.log("Ready");
                 $(".make-favorite .right15").attr("style", "margin-right: 5px;");
             });
 

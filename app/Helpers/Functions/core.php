@@ -2992,7 +2992,7 @@ function genPhoneNumberBtn($post, $btnBlock = false)
 	}
 
 	// Generate the Phone Number button
-	$out .= '<div class="new-button phoneBtn" data-toggle="modal" data-target="#phoneModal"><a class="btn-user-card" href="' . $btnLink . '" >';
+	$out .= '<div class="new-button phoneBtn" data-toggle="modal" data-target="#phoneModal"><a class="btn-user-card new-button phoneBtn" href="' . $btnLink . '" >';
 	$out .= '<i class="unir-phone btn btn-success' . $btnClass . $btnAttr . '"> </i>';
 
 	$out .= '<span class="right-from-image" id="call">'. shortNumber($phone) . '</span></a></div>';

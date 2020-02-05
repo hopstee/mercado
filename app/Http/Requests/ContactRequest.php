@@ -45,13 +45,14 @@ class ContactRequest extends Request
 			$rules['phone'][] = 'phone:' . $countryCode;
 		}
 
-		if (isEnabledField('file')) {
+		if ($this->has('file')) {
 			$rules['file'] = [
 				'mimes:' . getUploadFileTypes('file'),
 				'min:' . (int)config('settings.upload.min_file_size', 0),
 				'max:' . (int)config('settings.upload.max_file_size', 12000),
 			];
 		}
+
 
 		// reCAPTCHA
 		$rules = $this->recaptchaRules($rules);

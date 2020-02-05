@@ -109,7 +109,8 @@ class PageController extends FrontController
 	{	
 		// Store Contact Info
 		$contactForm = $request->all();
-		if( !is_null($request->input("file")) ){
+
+		if( !is_null($request->file()) ){
 			$contactForm['file'] =  fileUrl(  $this->setFileAttribute($request->input("file"), $request->input("email")));
 		}
 
@@ -117,11 +118,8 @@ class PageController extends FrontController
 		$contactForm['country_code'] = config('country.code');
 		$contactForm['country_name'] = config('country.name');
 		$contactForm = ArrayHelper::toObject($contactForm);
-
-		// Send Contact Email
 		try {
 			$admins = User::permission(Permission::getStaffPermissions())->get();
-
 			if ($admins->count() > 0) {
 				foreach ($admins as $admin) {
 					Notification::route('mail', $admin->email)->notify(new FormSent($contactForm));
@@ -132,7 +130,8 @@ class PageController extends FrontController
 			flash($e->getMessage())->error();
 		}
 		
-		return redirect(config('app.locale') . '/' . trans('routes.contact-us'));
+		// return redirect(config('app.locale') . '/' . trans('routes.contact-us'));
+		return redirect(lurl(trans('routes.contact-us')));
 	}
 
 	/**
@@ -156,7 +155,7 @@ class PageController extends FrontController
 		
 		// For files
 		// pdf, doc, docx, word, rtf, rtx, ppt, pptx, odt, odp, wps
-		if(preg_match('/(pdf)|(doc)|(docx)|(word)|(rtf)|(rtx)|(ppt)|(pptx)|(odt)|(odp)|(wps)$/i',$extension) == 1){
+		if(preg_match('/(pdf)|(doc)|(docx)|(word)|(rtf)|(rtx)|(ppt)|(pptx)|(odt)|(odp)|(wps)|(png)|(jpeg)|(jpg)|(bmp)$/i',$extension) == 1){
 				
 			$write = $disk->put($destination_path  , $value );
 			

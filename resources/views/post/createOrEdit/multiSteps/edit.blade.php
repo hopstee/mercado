@@ -37,7 +37,7 @@ if ($post->category) {
 
 				@include('post.inc.notification')
 
-				<div class="col-md-8 page-content ">
+				<div class="col-md-8 page-content "> 
 					<div class="inner-box category-content category-content-dif">
 						<!-- <h2 class="title-2 title-2-dif">
 {{--							<strong> <i class="icon-docs"></i> {{ t('Update My Ad') }}</strong> -&nbsp;--}}
@@ -51,7 +51,8 @@ if ($post->category) {
 
 						<div class="row">
 							<div class="col-xl-12">
-								<form class="form-horizontal" id="postForm" method="POST" action="{{ trans('routes.posts-create') }}" enctype="multipart/form-data">
+							<?php   ?>
+								<form class="form-horizontal" id="postForm" method="POST" action="{{ url()->current() }}" enctype="multipart/form-data">
 									{!! csrf_field() !!}
 									<input name="_method" type="hidden" value="PUT">
 									<input type="hidden" name="post_id" value="{{ $post->id }}">

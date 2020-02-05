@@ -45,7 +45,7 @@
 						@endforeach
 						<div class="col-lg-2 col-md-3 col-sm-3 col-xs-4 all-ads-btn">
 							<?php $attr = ['countryCode' => config('country.icode')]; ?>
-							<a href="{{ lurl(trans('routes.v-search', $attr), $attr) }}">
+							<a href="{{ lurl(trans('routes.v-search', $attr), $attr) }}" id="all-ads">
 								<h3 class="all-ads">
 									{{ t('All Ads') }}
 								</h3>

@@ -870,9 +870,9 @@ if (isset(auth()->user()->id)) {
         $('#similarAds').owlCarousel({
             
             items: carouselItems,
-            loop: false,
+            loop:  loop,
             dots: false,
-            // autoplay: true,
+            autoplay:  true,
             nav:false,
             autoplayTimeout: 3000,
             responsive: resp,

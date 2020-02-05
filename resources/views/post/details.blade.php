@@ -502,7 +502,6 @@ if (isset(auth()->user()->id)) {
 
                 <div class="col-lg-3 page-sidebar-right">
                     <aside>
-
                         <div class="card card-user-info sidebar-card">
                                     <span class="back">
                                         <a href="{{ rawurldecode(url()->previous()) }}">
@@ -527,9 +526,10 @@ if (isset(auth()->user()->id)) {
                                                          alt="{{ $post->contact_name }}">
                                                 @endif
                                             </div>
+
                                             <div class="cell-content">
                                                 <span class="name">
-                                                    @if (isset($user) and !empty($user))
+                                                    @if ($post->user_id!=='0')
                                                         <a href="{{ lurl(\App\Helpers\UrlGen::userPosts($post->user_id)) }}">
                                                             {{ $post->contact_name }}
                                                         </a>
@@ -642,7 +642,7 @@ if (isset(auth()->user()->id)) {
                                     ?>
                                     <div class="cell-content">
                                         <span class="name">
-                                            @if (isset($user) and !empty($user))
+                                            @if ($post->user_id!=='0')
                                                 <a href="{{ lurl(\App\Helpers\UrlGen::userPosts($post->user_id)) }}">
 													{{ $post->contact_name }}
                                                 </a>

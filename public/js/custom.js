@@ -121,6 +121,44 @@ $(document).ready(function ()
 		}
 	})
 
+	// E.K.
+	$('.additional-action-btn').on('click', function(e) {
+		let el = $(this).parent().find('.btn-add-action');
+		if (!el.hasClass('change-scale')) {
+			$('.additional-action-btn').removeClass('btn-secondary');
+			$('.additional-action-btn').addClass('btn-primary');
+			$('.additional-action-btn').find('i').removeClass('unir-close_l');
+			$('.additional-action-btn').find('i').addClass('unir-settings');
+			// $(this).removeClass('btn-primary');
+			$(this).addClass('btn-secondary');
+			$(this).find('i').removeClass('unir-settings');
+			$(this).find('i').addClass('unir-close_l');
+			// $('.additional-action-btn').parent().find('.btn-add-action').hide();
+			$('.additional-action-btn').parent().find('.btn-add-action').removeClass('change-scale');
+			// el.show();
+			el.addClass('change-scale');
+		} else {
+			$(this).removeClass('btn-secondary');
+			// $(this).addClass('btn-primary');
+			$(this).find('i').removeClass('unir-close_l');
+			$(this).find('i').addClass('unir-settings');
+			// el.hide();
+			el.removeClass('change-scale');
+		}
+	});
+
+	$(document).on('click', function(e) {
+		var sel = $('.additional-action-btn');
+		if (sel.has(e.target).length === 0) {
+			// sel.parent().find('.btn-add-action').hide();
+			sel.parent().find('.btn-add-action').removeClass('change-scale');
+			sel.removeClass('btn-secondary');
+			sel.addClass('btn-primary');
+			sel.find('i').removeClass('unir-close_l');
+			sel.find('i').addClass('unir-settings');
+		}
+	});
+
 	/*=======================================================================================
 	 cat-collapse Homepage Category Responsive view
 	 =======================================================================================*/

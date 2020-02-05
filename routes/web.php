@@ -380,6 +380,7 @@ Route::group([
             Route::get(trans('routes.personal-data').'/'.trans('routes.my-ads'). '/'.'{id}'  . '/offline', 'PostsController@getMyPosts');
             Route::get('account/archived/{id}/repost', 'PostsController@getArchivedPosts');
             Route::get(trans('routes.pers-ads-delete-id'), 'PostsController@destroy');
+            Route::get(trans('routes.personal-data') . '{pagePath}' . '/' . '{id}' . '/delete', 'PostsController@destroy');
             Route::post(trans('routes.pers-ads-delete') , 'PostsController@destroy');
 
             // Conversations

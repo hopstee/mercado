@@ -157,7 +157,7 @@
 											$countryFlagPath = 'images/flags/16/' . strtolower($post->country_code) . '.png';
 										?>
 										<tr>
-											<td style="width:2%" class="add-img-selector cel-borderless col-2">
+											<td style="width:2%" class="add-img-selector cel-borderless col-2 cel-mob">
 												<!-- <div class="checkbox">
 													<label><input type="checkbox" name="entries[]" value="{{ $post->id }}"></label>
 												</div> -->
@@ -176,7 +176,7 @@
 											<td style="width:14%" class="add-img-td cel-borderless mobile-cab-cel col-4">
 												<a href="{{ $postUrl }}"><img class="img-thumbnail img-fluid" src="{{ $postImg }}" alt="img"></a>
 												<div class="mobile-view">
-													<p>
+													<p class="title">
 														<strong>
 															<a href="{{ $postUrl }}" title="{{ $post->title }}">{{ \Illuminate\Support\Str::limit($post->title, 40) }}</a>
 														</strong>
@@ -198,11 +198,11 @@
 															@endif
 														@endif
 													</p>
-													<p>
+													<p class="add-info">
 														<strong><i class="unir-clock" title="{{ t('Posted On') }}"></i></strong>&nbsp;
 														{{ $post->created_at->formatLocalized(config('settings.app.default_datetime_format')) }}
 													</p>
-													<p>
+													<p class="add-info">
 														<strong><i class="unir-eye" title="{{ t('Visitors') }}"></i></strong> {{ $post->visits ?? 0 }}
 														<strong><i class="unir-location" title="{{ t('Located In') }}"></i></strong> {{ !empty($post->city) ? $post->city->name : '-' }}
 													<!-- start test -->
@@ -213,7 +213,7 @@
 													</p>
 												</div>
 
-												<div class="mobile-view">
+												<div class="mobile-view price">
 													<strong>
 														@if ($post->price > 0)
 															{!! \App\Helpers\Number::money($post->price) !!}
@@ -284,16 +284,34 @@
 													</strong>
 												</div>
 											</td>
-											@if($pagePath!= trans('routes.favourite-ads'))
 												<td style="width:17%" class="action-td cel-borderless border-right">
 													<div>
-		{{--												@if (in_array($pagePath, [trans('routes.my-ads')]) and $post->user_id==$user->id and $post->archived==0)--}}
 															<p>
-																<a class="btn btn-primary btn-sm btn-edit navbar-list-item navbar-list-btn" href="{{ \App\Helpers\UrlGen::editPost($post) }}">
-																	<i class="unir-edit edit-icon"></i>
-																</a>
+																@if ($pagePath==trans('routes.my-ads') || $pagePath==trans('routes.archived-ads') || $pagePath==trans('routes.rejected-ads'))
+																	<a class="btn btn-primary btn-sm navbar-list-item navbar-list-btn btn-edit" href="{{ \App\Helpers\UrlGen::editPost($post) }}">
+																		<i class="unir-edit edit-icon"></i>
+																	</a>
+																	<a class="btn btn-primary btn-sm navbar-list-item navbar-list-btn additional-action-btn">
+																		<i class="unir-settings edit-icon"></i>
+																	</a>	
+																	<a class="btn btn-primary btn-mob-edit btn-add-action" href="{{ \App\Helpers\UrlGen::editPost($post) }}">
+																		{{ t('Edit') }}
+																	</a>
+																	@if ($pagePath==trans('routes.archived-ads'))
+																		<a class="btn btn-primary btn-mob-archive btn-add-action btn-grey" href="{{ lurl(trans('routes.personal-data') . '/' . $pagePath . '/' . $post->id . '/delete') }}">
+																			{{ t('Delete') }}
+																		</a>
+																	@else
+																		<a class="btn btn-primary btn-mob-archive btn-add-action btn-grey" href="{{ lurl(trans('routes.personal-data').'/'.$pagePath.'/'.$post->id.'/offline') }}">
+																			{{ t('Archive') }}
+																		</a>
+																	@endif
+																@elseif ($pagePath==trans('routes.favourite-ads'))
+																	<a class="btn btn-primary btn-sm navbar-list-item navbar-list-btn additional-delete-btn btn-grey" href="{{ lurl(trans('routes.personal-data') . '/' . $pagePath . '/' . $post->id . '/delete') }}">
+																		<i class="far fa-trash-alt"></i>
+																	</a>
+																@endif
 															</p>
-		{{--												@endif--}}
 		{{--												@if (in_array($pagePath, [trans('routes.my-ads')]) and isVerifiedPost($post) and $post->archived==0)--}}
 		{{--													<p>--}}
 		{{--														<a class="btn btn-warning btn-sm confirm-action" href="{{ lurl(trans('routes.personal-data').'/'.$pagePath.'/'.$post->id.'/offline') }}">--}}
@@ -316,7 +334,6 @@
 		{{--                                                </p>--}}
 													</div>
 												</td>
-											@endif
 										</tr>
 										<?php endforeach; ?>
 										<?php endif; ?>

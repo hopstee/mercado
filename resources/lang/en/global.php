@@ -730,6 +730,7 @@ return [
 	'The code does not match your email.' => 'The code does not match your email.',
     'The code does not match your phone number.' => 'The code does not match your phone number.',
     'The entered value is not registered with us.' => 'The entered value is not registered with us.',
+    'The entered value is registered with us.'=>'The entered value is registered with us.',
     'demo_mode_message' => 'This feature has been turned off in demo mode.',
     'Photo' => 'Photo',
     'Option' => 'Option',

@@ -626,6 +626,7 @@ return [
     'The code does not match your email.' => 'O código não corresponde ao seu email.',
     'The code does not match your phone number.' => 'O código não corresponde ao seu número de telefone.',
     'The entered value is not registered with us.' => 'O valor inserido não está registrado conosco.',
+    'The entered value is registered with us.'=>'O valor inserido é registrado conosco.',
     'demo_mode_message' => 'Esta função foi desligada no modo de demonstração.',
     'Photo' => 'Foto',
     'Option' => 'Opção',

@@ -1269,13 +1269,7 @@ a.sell-your-item-cart{
     }
 }
 
-@media (max-width: 1200px) {
 
-    .right-from-image{
-        margin-left: 3px;
-    }
-
-}
 
 .product-view-thumb-wrapper.bx-wrapper{
     height: 100%;

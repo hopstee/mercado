@@ -188,6 +188,14 @@ class CreateController extends FrontController
             $phoneVerificationRequired = config('settings.sms.phone_verification') == 1 && $request->filled('phone');
         }
 
+//        If not auth user will check that entered number don't exists in DB
+        if(!auth()->check()) {
+            $user = User::where('phone', $request->input('phone'))->first();
+            if (!empty($user)) {
+                return back()->withErrors(['phone' => t('The entered value is registered with us.')])->withInput();
+            }
+        }
+
         // New Post
         $post = new Post();
         $input = $request->only($post->getFillable());

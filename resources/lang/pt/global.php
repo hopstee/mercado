@@ -558,6 +558,7 @@ return [
     'Email address not found. You can\'t use your :provider account on our website.' => 'Endereço de e-mail não encontrado. Você não pode usar sua conta de login em nosso site.',
     'Payable Amount' => 'Valor a pagar',
     'Home - Featured Ads' => 'Anúncios em <span style="font-weight: bold;">Destaque</span>',
+    'Internal Server Error'=>'Erro Interno do Servidor',
     'More ads at :distance :unit around :city' => 'Mais anúncios em :distance :unit em redor de <span style="font-weight: bold;">:city</span>',
     'Error' => 'Erro',
     'And' => 'e',

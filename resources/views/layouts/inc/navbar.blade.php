@@ -84,11 +84,11 @@
                         {{ t('Log In') }}</a>
                     @endif
                 </li>
-                <li class="nav-item">
+                <li class="nav-item flex">
                     <a href="{{ lurl(trans('routes.register')) }}" class="nav-link"><i class="unib-lock"></i> {{ t('Register') }}</a>
                 </li>
-                <li class="nav-item" style="padding:10px 0px;">
-                        <a id="help-down" class="dropdown-toggle" data-toggle="dropdown" style="font-weight:bold;font-size:14px;padding:5px 5px; display:block;"><i class="unib-info"></i> {{ t('Help links') }}<i style="float: right;" class="help-down unir-rarrow2"></i></a>
+                <li class="nav-item flex" style="padding:10px 0px;">
+                        <a id="help-down" class="dropdown-toggle" data-toggle="dropdown" style="font-weight:bold;font-size:14px;padding:5px 5px; display:block;"><i class="unib-info">&ensp;</i> {{ t('Help links') }}<i style="float: right;" class="help-down unir-rarrow2"></i></a>
                         <ul id="userMenuDropdown" class="dropdown-menu navbar-mobile user-menu dropdown-menu-right" style="border: none;">
                             <a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.terms-of-use')])) }}"><i
                                     class="unir-sheild">&nbsp;</i>{{ t('Terms of Use') }}</a>
@@ -105,11 +105,10 @@
                         </ul>
                 </li>
                 @else
-                <li class="nav-item dropdown no-arrow">
+                <li class="nav-item flex dropdown no-arrow"> 
                     <!-- <a href="{{ url('/') }}/account" class="dropdown-toggle nav-link" data-toggle="dropdown"> -->
-                    <a href="{{ lurl('/' . trans('routes.personal-data'))  }}" class="nav-link">
-                        <i class="unib-user fa"></i>
-                        <span>{{ auth()->user()->name }}</span>
+                    <a href="{{ lurl('/' . trans('routes.personal-data'))  }}" class="nav-link" style="display: flex;align-items: center;"> 
+                        <i class="unib-user fa">&nbsp;</i>{{ auth()->user()->name }}
                         <!-- <span class="badge badge-pill badge-important count-conversations-with-new-messages">0</span> -->
                         <!-- <div class="count-conversations-with-new-messages" id="badge-nm">0</div> -->
                         <img class="count-conversations-with-new-messages" id="badge-notif-nm" src="/images/notifications.svg" alt="">
@@ -141,19 +140,19 @@
                                         class="unir-cards"></i> {{ t('Transactions') }}</a></li>
                         </ul> -->
                 </li>
-                <li class="nav-item">
+                <li class="nav-item flex">
                     @if (app('impersonate')->isImpersonating())
                     <a href="{{ route('impersonate.leave') }}" class="nav-link">
-                        <i class="unib-exit">&nbsp;</i>{{ t('Leave') }}
+                        <span><i class="unib-exit">&nbsp;</i>{{ t('Leave') }}</span>
                     </a>
                     @else
                     <a href="{{ lurl(trans('routes.logout')) }}" class="nav-link">
-                        <i class="unib-exit">&nbsp;</i>{{ t('Log Out') }}
+                        <span><i class="unib-exit">&nbsp;</i>{{ t('Log Out') }}</span>
                     </a>
                     @endif
                 </li>
                 <li class="nav-item" style="padding:10px 0px;">
-                        <a id="help-down" class="dropdown-toggle" data-toggle="dropdown" style="font-weight:bold;font-size:14px;padding:5px 5px; display:block;"><i class="unib-info"></i> {{ t('Help links') }}<i style="float: right;" class="help-down unir-rarrow2"></i></a>
+                        <a id="help-down" class="dropdown-toggle" data-toggle="dropdown" style="font-weight:bold;font-size:14px;padding:5px 5px;"><span><i class="unib-info">&ensp;</i> {{ t('Help links') }}</span><i style="float: right;" class="help-down unir-rarrow2"></i></a>
                         <ul id="userMenuDropdown" class="dropdown-menu navbar-mobile user-menu dropdown-menu-right" style="border: none;">
                             <a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.terms-of-use')])) }}"><i
                                     class="unir-sheild">&nbsp;</i>{{ t('Terms of Use') }}</a>

@@ -807,7 +807,8 @@ ul.navbar-mobile > li.nav-item > a{
     font-weight: 700;
 }
 ul.navbar-mobile > a{
-    display: block;
+    display: flex;
+    align-items: center;
 }
 .mobile-filter-sidebar.xxx{
     height:100%;
@@ -1003,13 +1004,13 @@ ul.navbar-mobile > a{
 #toc_container ul ul {
     margin-left: 1.5em;
 }
-#help-down[aria-expanded=false] i {
+#help-down[aria-expanded=false] i.help-down {
     -webkit-transform: rotate(0);
     -moz-transform: rotate(0);
     -o-transform: rotate(0);
     transform: rotate(0);
 }
-#help-down[aria-expanded=true] i {
+#help-down[aria-expanded=true] i.help-down {
     -webkit-transition: all ease .2s;
     -moz-transition: all ease .2s;
     -o-transition: all ease .2s;
@@ -1555,4 +1556,12 @@ div.all-ads-btn .all-ads {
 }
 .navbar.navbar-site{
     position: absolute !important;
+}
+a#help-down span{
+    display: flex;
+    align-items: center;
+}
+li.nav-item.flex a span{
+    display: flex; 
+    align-items: center;
 }

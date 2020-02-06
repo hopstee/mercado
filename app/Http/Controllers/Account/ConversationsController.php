@@ -300,7 +300,8 @@ class ConversationsController extends AccountBaseController
 				flash(t("Selected сonversations have been deleted."))->success();
 		}
 		
-		return back();
+		// return back();
+		return redirect(lurl(trans('routes.conversations')));
 	}
 	
 	/**

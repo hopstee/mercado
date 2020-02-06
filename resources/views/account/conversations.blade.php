@@ -127,25 +127,33 @@
 												<div style="word-break:break-all;">
 													<div class="conversation-info receive-info">
 														<strong class="conversation-main">{{ t('Date') }}:</strong>
-														&nbsp{{ $conversation->created_at->formatLocalized(config('settings.app.default_datetime_format_mod')) }}
-														@if (\App\Models\Message::conversationHasNewMessages($conversation))
-															<!-- <span class="badge badge-pill badge-important new-messages badge-dif-imp">{{ $conversation->new_messages }}</span> -->
-															<!-- <div style="width: 18px; height: 18px; line-height: 19px;" class="new-messages" id="badge-nm">{{ $conversation->new_messages }}</div> -->
-															<img class="new-messages" id="badge-notif-nm" src="/images/notifications.svg" alt="">
-														@endif
+														<p>
+															{{ $conversation->created_at->formatLocalized(config('settings.app.default_datetime_format_mod')) }}
+															@if (\App\Models\Message::conversationHasNewMessages($conversation))
+																<!-- <span class="badge badge-pill badge-important new-messages badge-dif-imp">{{ $conversation->new_messages }}</span> -->
+																<!-- <div style="width: 18px; height: 18px; line-height: 19px;" class="new-messages" id="badge-nm">{{ $conversation->new_messages }}</div> -->
+																<img class="new-messages" id="badge-notif-nm" src="/images/notifications.svg" alt="">
+															@endif
+														</p>
 													</div>
 {{--													<br>--}}
-													<div class="conversation-info">
-														<strong class="conversation-main">{{ t('Ad') }}:</strong>&nbsp{{ $conversation->subject }}
+													<div class="conversation-info message-title">
+														<strong class="conversation-main">{{ t('Ad') }}:</strong>
+														<p>
+															{{ $conversation->subject }}
+														</p>
 													</div>
 													<div class="conversation-info">
-														<strong class="conversation-main">{{ t('Sender') }}:</strong>&nbsp{{ \Illuminate\Support\Str::limit($conversation->from_name, 50) ?? "Unregistered user" }}
-														{!! (!empty($conversation->filename) and $disk->exists($conversation->filename)) ? ' <i class="icon-attach-2"></i> ' : '' !!}&nbsp;
-														|&nbsp;
-														<!-- <a href="{{ lurl('account/conversations/' . $conversation->id . '/messages') }}"> -->
-														<a href="{{ lurl(trans('routes.v-conversations-messages',['id'=>$conversation->id]),$conversation->id) }}">
-															{{  t('Message') }}
-														</a>
+														<strong class="conversation-main">{{ t('Sender') }}:</strong>
+														<p>
+															{{ \Illuminate\Support\Str::limit($conversation->from_name, 50) ?? "Unregistered user" }}
+															{!! (!empty($conversation->filename) and $disk->exists($conversation->filename)) ? ' <i class="icon-attach-2"></i> ' : '' !!}&nbsp;
+															|&nbsp;
+															<!-- <a href="{{ lurl('account/conversations/' . $conversation->id . '/messages') }}"> -->
+															<a href="{{ lurl(trans('routes.v-conversations-messages',['id'=>$conversation->id]),$conversation->id) }}">
+																{{  t('Message') }}
+															</a>
+														</p>
 													</div>
 												</div>
 											</td>

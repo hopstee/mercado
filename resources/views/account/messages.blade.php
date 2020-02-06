@@ -45,7 +45,7 @@
 						
 							// Conversation URLs
 							$consUrl = lurl(trans('routes.conversations'));
-							$conDelAllUrl = lurl(trans('routes.v-pers-conversations-delete-id',['id'=>$conversation->id]),$conversation->id);
+							$conDelAllUrl = lurl(trans('routes.v-pers-conversations-delete',['id'=>$conversation->id]));
 						?>
 						<div class="table-responsive">
 							<form name="listForm" method="POST" action="{{ $conDelAllUrl }}">
@@ -100,15 +100,17 @@
 											<!-- <strong>{{ t("Sender's Email") }}:</strong> {{ $conversation->from_email ?? '--' }}<br> -->
 											<strong>{{ t("Sender's Phone") }}:</strong> {{ $conversation->from_phone ?? '--' }}<br>
 											<hr>
-											@if($conversation->from_user_id == 1)
-											
-												{!! nl2br($conversation->message) !!}
-											@endif
-									
-											{{ $mes }}
-											@if (!empty($conversation->filename) and $disk->exists($conversation->filename))
-												<br><br><a class="btn btn-info" href="{{ fileUrl($conversation->filename) }}">{{ t('Download') }}</a>
-											@endif
+											<p style="word-break: break-all;">
+												@if($conversation->from_user_id == 1)
+												
+													{!! nl2br($conversation->message) !!}
+												@endif
+										
+												{{ $mes }}
+												@if (!empty($conversation->filename) and $disk->exists($conversation->filename))
+													<br><br><a class="btn btn-info" href="{{ fileUrl($conversation->filename) }}">{{ t('Download') }}</a>
+												@endif
+											</p>
 											<hr>
 											<a class="btn btn-primary btn-default btn-default-cab mes-reply btn-green" href="#" data-toggle="modal" data-target="#replyTo{{ $conversation->id }}">
 												{{ t('Reply') }}
@@ -168,6 +170,11 @@
 									<?php endif; ?>
 									</tbody>
 								</table>
+								<div class="conversation-delete-btn">
+									<button type="submit" class="btn btn-default btn-default-cab btn-grey btn-delete">
+										{{ t('Delete') }}
+									</button>
+								</div>
 								
 								@if (isset($messages) && $messages->count() > 0)
 {{--								<div class="table-action">--}}

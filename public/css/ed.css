@@ -546,7 +546,7 @@ table#addManageTable > thead > tr {
 }
 
 td.cel-borderless.reply-message {
-    padding-left: 70px !important;
+    padding-left: 50px !important;
 }
 
 .table-head {
@@ -1114,12 +1114,45 @@ ul.nav-wizard>li:before {
     transition: .1s;
 }
 
+.conversation-info.message-title p {
+    width: calc(100% - 70px);
+}
+
+.conversation-info.message-title {
+    align-items: baseline;
+}
+
+.conversation-delete-btn {
+    display: none;
+}
+
 @media (min-width: 575px){
     .add-page-btn, .all-ads-btn {
         display: none;
     }
 }
 @media (max-width: 767px) {
+
+    #addManageTable tbody tr td.add-img-selector {
+        display: none;
+    }
+
+    a.btn.mes-reply {
+        width: 100% !important;
+    }
+
+    .conversation-delete-btn {
+        display: block;
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .conversation-delete-btn .btn-delete {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100% !important;
+    }
 
     .table-head {
         display: none;

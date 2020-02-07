@@ -365,7 +365,7 @@ $(document).ready(function ()
 
 	$(".filter-toggle").click(function () {
 		$('.mobile-filter-sidebar')
-			.prepend("<div class='closeFilter'>X</div>")
+			.prepend("<div class='closeFilter'><i class='unir-close_l'></i></div>")
 			.animate(sidebarDirectionClose, 250, "linear", function () {
 			});
 		$('.menu-overly-mask').addClass('is-visible');

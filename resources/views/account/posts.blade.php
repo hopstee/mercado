@@ -284,56 +284,68 @@
 													</strong>
 												</div>
 											</td>
-												<td style="width:17%" class="action-td cel-borderless border-right">
+											<td style="width:17%" class="action-td cel-borderless border-right mobile-table-view">
+												<div>
+													<p>
+														@if ($pagePath==trans('routes.my-ads') || $pagePath==trans('routes.archived-ads') || $pagePath==trans('routes.rejected-ads'))
+															<a class="btn btn-primary btn-sm navbar-list-item navbar-list-btn btn-edit" href="{{ \App\Helpers\UrlGen::editPost($post) }}">
+																<i class="unir-edit edit-icon"></i>
+															</a>
+															<a class="btn btn-primary btn-sm navbar-list-item navbar-list-btn additional-action-btn">
+																<i class="unir-settings edit-icon"></i>
+															</a>	
+															<a class="btn btn-primary btn-mob-edit btn-add-action" href="{{ \App\Helpers\UrlGen::editPost($post) }}">
+																{{ t('Edit') }}
+															</a>
+															@if ($pagePath==trans('routes.archived-ads'))
+																<a class="btn btn-primary btn-mob-archive btn-add-action btn-grey" href="{{ lurl(trans('routes.personal-data') . '/' . $pagePath . '/' . $post->id . '/delete') }}">
+																	{{ t('Delete') }}
+																</a>
+															@else
+																<a class="btn btn-primary btn-mob-archive btn-add-action btn-grey" href="{{ lurl(trans('routes.personal-data').'/'.$pagePath.'/'.$post->id.'/offline') }}">
+																	{{ t('Archive') }}
+																</a>
+															@endif
+														@elseif ($pagePath==trans('routes.favourite-ads'))
+															<a class="btn btn-primary btn-sm navbar-list-item navbar-list-btn additional-delete-btn btn-grey" href="{{ lurl(trans('routes.personal-data') . '/' . $pagePath . '/' . $post->id . '/delete') }}">
+																<i class="far fa-trash-alt"></i>
+															</a>
+														@endif
+													</p>
+												</div>
+											</td>
+											@if($pagePath!=trans('routes.favourite-ads'))
+												<td style="width:17%" class="action-td cel-borderless border-right desctop-table-view">
 													<div>
-															<p>
-																@if ($pagePath==trans('routes.my-ads') || $pagePath==trans('routes.archived-ads') || $pagePath==trans('routes.rejected-ads'))
-																	<a class="btn btn-primary btn-sm navbar-list-item navbar-list-btn btn-edit" href="{{ \App\Helpers\UrlGen::editPost($post) }}">
-																		<i class="unir-edit edit-icon"></i>
+														<p>
+															@if ($pagePath==trans('routes.my-ads') || $pagePath==trans('routes.archived-ads') || $pagePath==trans('routes.rejected-ads'))
+																<a class="btn btn-primary btn-sm navbar-list-item navbar-list-btn btn-edit" href="{{ \App\Helpers\UrlGen::editPost($post) }}">
+																	<i class="unir-edit edit-icon"></i>
+																</a>
+																<a class="btn btn-primary btn-sm navbar-list-item navbar-list-btn additional-action-btn">
+																	<i class="unir-settings edit-icon"></i>
+																</a>	
+																<a class="btn btn-primary btn-mob-edit btn-add-action" href="{{ \App\Helpers\UrlGen::editPost($post) }}">
+																	{{ t('Edit') }}
+																</a>
+																@if ($pagePath==trans('routes.archived-ads'))
+																	<a class="btn btn-primary btn-mob-archive btn-add-action btn-grey" href="{{ lurl(trans('routes.personal-data') . '/' . $pagePath . '/' . $post->id . '/delete') }}">
+																		{{ t('Delete') }}
 																	</a>
-																	<a class="btn btn-primary btn-sm navbar-list-item navbar-list-btn additional-action-btn">
-																		<i class="unir-settings edit-icon"></i>
-																	</a>	
-																	<a class="btn btn-primary btn-mob-edit btn-add-action" href="{{ \App\Helpers\UrlGen::editPost($post) }}">
-																		{{ t('Edit') }}
-																	</a>
-																	@if ($pagePath==trans('routes.archived-ads'))
-																		<a class="btn btn-primary btn-mob-archive btn-add-action btn-grey" href="{{ lurl(trans('routes.personal-data') . '/' . $pagePath . '/' . $post->id . '/delete') }}">
-																			{{ t('Delete') }}
-																		</a>
-																	@else
-																		<a class="btn btn-primary btn-mob-archive btn-add-action btn-grey" href="{{ lurl(trans('routes.personal-data').'/'.$pagePath.'/'.$post->id.'/offline') }}">
-																			{{ t('Archive') }}
-																		</a>
-																	@endif
-																@elseif ($pagePath==trans('routes.favourite-ads'))
-																	<a class="btn btn-primary btn-sm navbar-list-item navbar-list-btn additional-delete-btn btn-grey" href="{{ lurl(trans('routes.personal-data') . '/' . $pagePath . '/' . $post->id . '/delete') }}">
-																		<i class="far fa-trash-alt"></i>
+																@else
+																	<a class="btn btn-primary btn-mob-archive btn-add-action btn-grey" href="{{ lurl(trans('routes.personal-data').'/'.$pagePath.'/'.$post->id.'/offline') }}">
+																		{{ t('Archive') }}
 																	</a>
 																@endif
-															</p>
-		{{--												@if (in_array($pagePath, [trans('routes.my-ads')]) and isVerifiedPost($post) and $post->archived==0)--}}
-		{{--													<p>--}}
-		{{--														<a class="btn btn-warning btn-sm confirm-action" href="{{ lurl(trans('routes.personal-data').'/'.$pagePath.'/'.$post->id.'/offline') }}">--}}
-		{{--															 <i class="icon-eye-off"></i> {{ t('Offline') }}--}}
-		{{--															<i class="icon-eye-off"></i> {{ t('Archive') }}--}}
-		{{--														</a>--}}
-		{{--													</p>--}}
-		{{--												@endif--}}
-		{{--												@if (in_array($pagePath, [trans('routes.archived-ads')]) and $post->user_id==$user->id and $post->archived==1)--}}
-		{{--													<p>--}}
-		{{--                                                        <a class="btn btn-info btn-sm confirm-action" href="{{ lurl(trans('routes.personal-data').'/'.$pagePath.'/'.$post->id.'/repost') }}">--}}
-		{{--                                                            <i class="fa fa-recycle"></i> {{ t('Repost') }}--}}
-		{{--                                                        </a>--}}
-		{{--                                                    </p>--}}
-		{{--												@endif--}}
-		{{--												<p>--}}
-		{{--                                                    <a class="btn btn-danger btn-sm delete-action" href="{{ lurl(trans('routes.pers-ads-delete-id',['pagePath'=>$pagePath,'id'=>$post->id])) }}">--}}
-		{{--                                                        <i class="fa fa-trash"></i> {{ t('Delete') }}--}}
-		{{--                                                    </a>--}}
-		{{--                                                </p>--}}
+															@elseif ($pagePath==trans('routes.favourite-ads'))
+																<a class="btn btn-primary btn-sm navbar-list-item navbar-list-btn additional-delete-btn btn-grey" href="{{ lurl(trans('routes.personal-data') . '/' . $pagePath . '/' . $post->id . '/delete') }}">
+																	<i class="far fa-trash-alt"></i>
+																</a>
+															@endif
+														</p>
 													</div>
 												</td>
+											@endif
 										</tr>
 										<?php endforeach; ?>
 										<?php endif; ?>

@@ -1126,6 +1126,14 @@ ul.nav-wizard>li:before {
     display: none;
 }
 
+.action-td.desctop-table-view {
+    display: table-cell;
+}
+
+.action-td.mobile-table-view {
+    display: none;
+}
+
 @media (min-width: 575px){
     .add-page-btn, .all-ads-btn {
         display: none;
@@ -1135,6 +1143,14 @@ ul.nav-wizard>li:before {
 
     #addManageTable tbody tr td.add-img-selector {
         display: none;
+    }
+
+    .action-td.desctop-table-view {
+        display: none;
+    }
+    
+    .action-td.mobile-table-view {
+        display: table-cell;
     }
 
     a.btn.mes-reply {

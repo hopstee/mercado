@@ -212,13 +212,13 @@
 											<li>
 												<a href="{!! qsurl($fullUrlNoParams, array_merge(request()->except('orderBy'), ['orderBy'=>'priceAsc']), null, false) !!}" rel="nofollow"
                                                 class="{{ (request()->get('orderBy')=='priceAsc') ? "link-bold" : "" }}">
-													{{ t('Price : Low to High') }}
+													{{ t('Price: Low to High') }}
 												</a>
 											</li>
 											<li>
 												<a href="{!! qsurl($fullUrlNoParams, array_merge(request()->except('orderBy'), ['orderBy'=>'priceDesc']), null, false) !!}" rel="nofollow"
                                                     class="{{ (request()->get('orderBy')=='priceDesc') ? "link-bold" : "" }}">
-                                                    {{ t('Price : High to Low') }}
+                                                    {{ t('Price: High to Low') }}
 												</a>
 											</li>
 {{--											<li>--}}

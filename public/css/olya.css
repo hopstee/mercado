@@ -281,6 +281,13 @@ hr{
 }
 
 
+/*for list ads*/
+@media (max-width: 768px) and (min-width: 300px) {
+    .category-list:not(.make-grid):not(.make-compact) .add-desc-box {
+        width: 70%;
+    }
+}
+
 /*for * in create post*/
 [for="contact_name"] sup{
     color:#dc3545;
@@ -292,3 +299,4 @@ hr{
         height: 78px !important;
     }
 }
+

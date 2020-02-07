@@ -561,7 +561,7 @@ function listView(selecter) {
 		$('.item-list .add-desc-box').removeClass("col-md-9").addClass("col-md-6");
 	} else {
 		/* $('.item-list .add-desc-box').removeClass("col-sm-9").addClass("col-sm-7"); */
-		$('.item-list .add-desc-box').removeClass("col-md-9").addClass("col-md-7");
+		$('.item-list .add-desc-box').removeClass("col-md-9").addClass("col-md-10");
 	}
 
 	$(function () {
@@ -602,7 +602,7 @@ function compactView(selecter) {
 		$('.item-list .add-desc-box').addClass("col-md-9").removeClass('col-md-6');
 	} else {
 		/* $('.item-list .add-desc-box').toggleClass("col-sm-9 col-sm-7"); */
-		$('.item-list .add-desc-box').addClass("col-md-9").removeClass('col-md-7');
+		$('.item-list .add-desc-box').addClass("col-md-9").removeClass('col-md-10');
 	}
 
 	$(function () {

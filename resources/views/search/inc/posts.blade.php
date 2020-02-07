@@ -108,7 +108,7 @@ if (!isset($cacheExpiration)) {
                 </div>
             </div>
 
-            <div class="col-md-7 add-desc-box">
+            <div class="col-md-10 add-desc-box">
                 <div class="items-details">
                     <h4 class="item-price ellipsis-text">
                         @if (isset($liveCat->type))

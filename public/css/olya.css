@@ -185,7 +185,6 @@ hr{
 
 
 /* for errorpage */
-
 #errorImage{
     display: block;
     margin-left: auto;
@@ -279,4 +278,11 @@ hr{
 }
 #all-ads h3{
     text-align: center;
+}
+
+/*for navbar*/
+@media(max-width:575px) {
+    .navbar-identity {
+        height: 78px !important;
+    }
 }

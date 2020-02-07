@@ -280,6 +280,12 @@ hr{
     text-align: center;
 }
 
+
+/*for * in create post*/
+[for="contact_name"] sup{
+    color:#dc3545;
+}
+
 /*for navbar*/
 @media(max-width:575px) {
     .navbar-identity {

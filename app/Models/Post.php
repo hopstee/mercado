@@ -352,7 +352,7 @@ class Post extends BaseModel implements Feedable
 		
 		if (config('settings.single.posts_review_activation')) {
 //			$builder->where('reviewed', 1);
-                        $builder->where('reviewed', '>', 0);
+                        $builder->whereIn('reviewed', [1,2]);
 		}
 		
 		return $builder;

@@ -429,7 +429,7 @@ class DetailsController extends FrontController
 			$reviewedCondition = '';
 			if (config('settings.single.posts_review_activation')) {
 //				$reviewedCondition = ' AND tPost.reviewed = 1';
-                                $reviewedCondition = ' AND tPost.reviewed > 0';
+                                $reviewedCondition = ' AND tPost.reviewed IN (1, 2)';
 			}
 				// ORDER BY tPost.id DESC
 			$sql = 'SELECT tPost.* ' . '
@@ -512,7 +512,7 @@ class DetailsController extends FrontController
 		$reviewedCondition = '';
 		if (config('settings.single.posts_review_activation')) {
 //			$reviewedCondition = ' AND tPost.reviewed = 1';
-                        $reviewedCondition = ' AND tPost.reviewed > 0';
+                        $reviewedCondition = ' AND tPost.reviewed IN (1, 2)';
 		}
 
 		// Init. Distance SQL vars

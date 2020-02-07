@@ -21,7 +21,7 @@
 									@if (isset($post) and !empty($post))
 										<a href="{{ lurl(trans('routes.v-posts-create-photo',['tmpToken'=>$post->tmp_token]), $post->tmp_token) }}">{{ t('Ad Photos') }}</a>
 									@else
-										<a>{{ t('Ad Photos') }}</a>
+										<a>{{ t('Photos') }}</a>
 									@endif
 								</li>
 								<div class="block-arr"></div>

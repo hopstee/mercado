@@ -638,6 +638,7 @@ return [
     'Home - Latest Jobs' => 'Novos <span style="font-weight: bold;">Empregos e CVs</span>',
     'Home - Sponsored Ads' => 'Anúncios <span style="font-weight: bold;">patrocinados</span>',
     'Ad Photos' => 'Fotos do Anúncio',
+    'Photos'=>'Fotos',
     'Images' => 'Imagens',
     'Preview' => 'Previsualizar',
     'Done' => 'Concluido',

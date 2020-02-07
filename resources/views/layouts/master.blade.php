@@ -125,6 +125,8 @@
 	<script src="{{ url('assets/js/pace.min.js') }}"></script>
 	<script src="{{ url('js/custom.js') }}"></script>
 	<script src="{{ url('js/rus.js') }}"></script>
+{{--	<script src="{{ url('js/olya.js') }}"></script>--}}
+
 	<script src="{{ url('assets/plugins/modernizr/modernizr-custom.js') }}"></script>
 	
 	@section('recaptcha_scripts')

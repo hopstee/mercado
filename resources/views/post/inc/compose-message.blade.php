@@ -123,6 +123,7 @@
 								  placeholder="{{ t('Your message here...') }}"
 								  rows="5"
 						>{{ old('message') }}</textarea>
+						<small id="textarea-feedback" class="form-text text-muted"></small>
 					</div>
 
 					@if (isset($parentCat) and isset($parentCat->type) and in_array($parentCat->type, ['job-offer']))

@@ -50,7 +50,7 @@
 							</div>
 						@else
 							@if (count($field->default) > 0)
-								@if($field->name != "Features")
+								@if($field->name != "Features" && $field->translation_of != 6)
 									<div class="detail-line col-sm-6 col-xs-12 pb-2 pl-1 pr-1 white">
 										<div class="dotted no-left-padding">
 											<span class="detail-line-label weight400">{{ $field->name }}</span>
@@ -64,11 +64,25 @@
 										</div>
 									</div>
 								@endif
+								@if($field->translation_of == 6)
+									<div class="detail-line col-sm-12 col-xs-12 pb-2 pl-1 pr-1 white">
+										<div class="dotted no-left-padding">
+											<span class="detail-line-label weight400">{{ $field->name }}</span>
+										</div>
+										<div>
+										<ul class="equip-list">
+												@foreach($field->default as $valueItem)
+													@continue(!isset($valueItem->value))
+													<li>-&ensp;{{ $valueItem->value }}</li>
+												@endforeach
+											</ul>
+										</div>
+									</div>
+								@endif
 							@endif
 						@endif
 					@endif
 				@endforeach
-
 				<!-- Featurs -->
 				@foreach($customFields as $field)
 				<?php

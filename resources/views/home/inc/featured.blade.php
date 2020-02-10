@@ -7,7 +7,6 @@ if (!isset($cacheExpiration)) {
 @if (isset($featured) and !empty($featured) and !empty($featured->posts))
 
 <div class="container">
-    <hr>
     <div class="col-xl-12 content-box layout-section">
         <div class="row row-featured row-featured-category">
             <div class="col-xl-12 box-title">

@@ -31,13 +31,13 @@
 									<img src="{{ imgUrl($cat->picture, 'cat') }}" class="lazyload img-fluid" alt="{{ $cat->name }}">
 									<h6>
 										<span>{{ $cat->name }}</span>
-										@if (isset($categoriesOptions['count_categories_posts']) and $categoriesOptions['count_categories_posts'])
+										<!-- @if (isset($categoriesOptions['count_categories_posts']) and $categoriesOptions['count_categories_posts'])
 											@if ($cat->children->count() > 0)
 												&nbsp;{{ $cat->posts->count() + $cat->childrenPosts->count() }}
 											@else
 												&nbsp;{{ $cat->childrenPosts->count() }}
 											@endif
-										@endif
+										@endif -->
 									</h6>
 									<i class="unir-rarrow2 d-sm-none"></i>
 								</a>

@@ -732,40 +732,6 @@ div.help-block h4 a{
     }
 }
 
-/*HOME MOBILE 575*/
-@media (max-width: 575px){
-    div.f-category {
-        width: 100%;
-        text-align: left;
-        position: relative;
-        padding: 15px 15px;
-
-    }
-    .f-category img {
-        display: inline-block;
-        margin: unset;
-        height: 25px;
-        padding: 0px 5px 0px 0px;
-    }
-    .f-category h6{
-        display: inline-block;
-        margin: 0;
-        vertical-align: middle;
-        padding-left: 5px;
-    }
-    div.f-category a i {
-        position: absolute;
-        right: 15px;
-        top: calc(50% - 6px);
-    }
-    div.all-ads-btn{
-        display: flex;
-    }
-    .add-page-btn {
-        display: block;
-    }
-
-}
 a.mob-vers i{
     width: 100%;
     font-size: 24px;
@@ -1604,4 +1570,65 @@ a#help-down span{
 li.nav-item.flex a span{
     display: flex; 
     align-items: center;
+}
+ul.equip-list{
+    margin:0px;
+    list-style-position:inside;
+    -moz-column-count:2;
+    -webkit-column-count:2;
+    column-count:2;
+    list-style-type:none;
+}
+/*HOME MOBILE 575*/
+@media (max-width: 575px){
+    div.f-category {
+        width: 100%;
+        text-align: left;
+        position: relative;
+        padding: 15px 15px;
+
+    }
+    .f-category img {
+        display: inline-block;
+        margin: unset;
+        height: 25px;
+        padding: 0px 5px 0px 0px;
+    }
+    .f-category h6{
+        display: inline-block;
+        margin: 0;
+        vertical-align: middle;
+        padding-left: 5px;
+    }
+    div.f-category a i {
+        position: absolute;
+        right: 15px;
+        top: calc(50% - 6px);
+    }
+    div.all-ads-btn{
+        display: flex;
+    }
+    .add-page-btn {
+        display: block;
+    }
+    ul.equip-list{
+        -moz-column-count:1;
+        -webkit-column-count:1;
+        column-count:1;
+    }
+}
+@media (max-width: 991px){
+    .inner-box {
+        margin-bottom: 10px;
+    }
+    .block-cell.user{
+        border-top:  1px solid #CFD8DC !important;
+        border-bottom: 1px solid #CFD8DC !important; 
+        position: unset !important; 
+    }
+    .owl-theme .owl-nav, .back{
+        display: none;
+        height: 0px;
+        margin-top: 0px;
+    }
 }

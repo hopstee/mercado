@@ -103,10 +103,12 @@
 									</div>
 									<div class="user-info">
 										<span class="page-sub-header-sub">
-											{{ t('Previous Log In') }}: </br> {{ $user->last_login_at->formatLocalized(config('settings.app.default_datetime_format')) }}
+											{{ t('Previous Log In') }}: </br> {{ $user->last_login_at->formatLocalized(config('settings.app.default_date_format_mod')) }}
 										</span>
 										</br>
-										<span class="on-site-date"></span>
+										<span class="on-site-date">
+											{{ t('On site since') }}: </br> {{ $user->created_at->formatLocalized(config('settings.app.default_date_format_mod')) }}
+										</span>
 									</div>
 								</div>
 							</div>
@@ -876,7 +878,7 @@
 
 			<script>
 				$(document).ready(function() {
-					$('.on-site-date').text('{{ $ans }}');
+					// $('.on-site-date').text('{{ $ans }}');
 					// $('.file-default-preview img').attr('src', '/images/userCard.png');
 				})
 			</script>

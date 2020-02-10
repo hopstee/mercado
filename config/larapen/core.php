@@ -242,7 +242,7 @@ return [
      */
 	'defaultDateFormat'     => '%d %B %Y',
 	'defaultDatetimeFormat' => '%d %B %Y %H:%M',
-        'defaultDatetimeFormatMod' => '%d %b %Y %H:%M',
+        'defaultDateFormatMod' => '%d %b %Y',
 	'defaultTimezone'       => 'America/New_York',
 	
 	/*

@@ -215,9 +215,9 @@ class Setting extends BaseModel
 				if (!isset($value['default_datetime_format'])) {
 					$value['default_datetime_format'] = config('larapen.core.defaultDatetimeFormat');
 				}
-                                if (!isset($value['default_datetime_format_mod'])) {
-                                    $value['default_datetime_format_mod'] = config('larapen.core.defaultDatetimeFormatMod');
-                                }
+				if (!isset($value['default_date_format_mod'])) {
+					$value['default_date_format_mod'] = config('larapen.core.defaultDateFormatMod');
+				}
 				if (!isset($value['default_timezone'])) {
 					$value['default_timezone'] = config('larapen.core.defaultTimezone');
 				}

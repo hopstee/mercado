@@ -204,7 +204,7 @@ return [
     'Oct' => 'Oct',
     'Nov' => 'Nov',
     'Dec' => 'Dec',
-    'On site since ' => 'Registado desde ',
+    'On site since' => 'Registado desde',
 
     'tell seller that you found this ad on Mercado.Gratis' => 'Diga ao vendedor que você encontrou este anúncio no Mercado.gratis',
     'All cities' => 'Todas as Cidades',

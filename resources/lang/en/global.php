@@ -179,7 +179,7 @@ return [
     'Oct' => 'Oct',
     'Nov' => 'Nov',
     'Dec' => 'Dec',
-    'On site since ' => 'On site since ',
+    'On site since' => 'On site since',
 
 
     'The phone has already been taken.' => 'The phone has already been taken.',

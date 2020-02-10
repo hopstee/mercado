@@ -74,7 +74,7 @@
 
 				<!-- Content -->
 				<div class="{{ $contentColSm }} page-content col-thin-left no-padding">
-					<div class="category-list{{ ($contentColSm == 'col-md-12') ? ' noSideBar' : '' }}">
+					<div id="serpPosts" class="category-list{{ ($contentColSm == 'col-md-12') ? ' noSideBar' : '' }}">
 						<div class="tab-box">
 
 							<!-- Nav tabs -->

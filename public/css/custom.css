@@ -1471,6 +1471,12 @@ div.filter-content .form-check .cntr,
 .pagination-bar.mb-5{
     margin-bottom: 2rem!important;
 }
+@media (max-width: 375px) {
+    .pagination-sm .page-link {
+        padding: 5px 8px !important;
+        font-size: .8rem;
+    }
+}
 .pagination-sm .page-link{
     padding: 5px 12px;
 }
@@ -1556,6 +1562,40 @@ div.all-ads-btn .all-ads {
 }
 .navbar.navbar-site{
     position: absolute !important;
+}
+.pagination.justify-content-between.align-items-center{
+    padding: 0px 15px;
+}
+.page-link.mob-page:after{
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 10px;
+    height: 10px;
+    border-left: 3px solid #0288d1;
+    border-top: 3px solid #0288d1;
+    backface-visibility: hidden;
+    box-sizing: border-box;
+    z-index: 99;
+}
+.page-link.next-page:after{
+    transform: translateY(-50%) rotate(135deg);
+    right: calc(50% - 4px);
+}
+.page-link.previous-page:after{
+    transform: translateY(-50%) rotate(-45deg);
+    left: calc(50% - 4px);
+}
+.disabled .page-link:after{
+    border-left: 3px solid #8394a6;
+    border-top: 3px solid #8394a6;
+}
+.page-link.mob-page{
+    width: 40px;
+    height: 30px;
+    background-color: #f8f9fa !important;
+    border-radius: 3px;
+
 }
 a#help-down span{
     display: flex;

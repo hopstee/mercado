@@ -318,7 +318,10 @@
 						</div> -->
 					</div>
 
-					<nav class="pagination-bar mb-5 pagination-sm" aria-label="">
+					<nav class="d-md-none pagination-bar mb-5 pagination-sm" aria-label="">
+						{{ $paginator->links('vendor.pagination.simple-bootstrap-4') }}
+					</nav>
+					<nav class="d-none d-md-block pagination-bar mb-5 pagination-sm" aria-label="">
 						{!! $paginator->appends(request()->query())->render() !!}
 					</nav>
 

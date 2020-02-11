@@ -26,7 +26,7 @@
 
 					@if (Session::has('message'))
 						<div class="alert alert-danger">
-							<button type="button" class="close" data-dismiss="alert" aria-hidden="true"><i class="unir-close"></i></button>
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 							{{ session('message') }}
 						</div>
 					@endif

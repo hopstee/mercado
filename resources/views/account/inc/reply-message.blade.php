@@ -14,7 +14,9 @@
 				<div class="modal-body enable-long-words modal-body-dif">
 					@if (isset($errors) and $errors->any())
 						<div class="alert alert-danger">
-							<ul class="list list-check">
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+
+							<ul class="list list-error">
 								@foreach($errors->all() as $error)
 									<li>{{ $error }}</li>
 								@endforeach

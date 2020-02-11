@@ -297,8 +297,6 @@ hr{
     text-align: center;
 }
 
-
-
 /*for list ads*/
 @media (max-width: 768px) and (min-width: 300px) {
     .category-list:not(.make-grid):not(.make-compact) .add-desc-box {
@@ -310,11 +308,26 @@ hr{
 [for="contact_name"] sup{
     color:#dc3545;
 }
-
+.list-error > li {
+    margin-bottom: 3px;
+    padding-left: 18px;
+    position: relative;
+}
 /*for navbar*/
 @media(max-width:575px) {
     .navbar-identity {
         height: 78px !important;
     }
+}
+.list-error > li:before {
+    position: absolute;
+    font-family: fontello;
+    content: "-";
+    left: 0;
+    top: 0;
+}
+
+ul.list.list-error{
+    width:95%;
 }
 

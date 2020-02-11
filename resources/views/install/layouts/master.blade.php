@@ -57,8 +57,9 @@
 
 				@if (isset($errors) and $errors->any())
 					<div class="alert alert-danger mt-4">
-						<ul class="list list-check">
-							@foreach ($errors->all() as $error)
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+						<ul class="list list-error">
+						@foreach ($errors->all() as $error)
 								<li>{!! $error !!}</li>
 							@endforeach
 						</ul>

@@ -24,7 +24,9 @@
 					@if (isset($errors) and $errors->any())
 						<div class="col-xl-12" style="padding-left:0px;">
 							<div class="alert alert-danger">
-								<ul class="list list-check">
+								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+
+								<ul class="list list-error">
 									@foreach ($errors->all() as $error)
 										@if (count($errors->all()) < 2)
 											<li class="remTicks">{{ $error }}</li>

@@ -562,9 +562,9 @@ if (!function_exists("createFieldNodeTree")) {
                     <small id="custom-input-feedback" class="form-text text-muted">{{ $field->max }} {{ t('characters left') }}</small>
                 </div>
                 <script>
-                    function leftCharacters(d){
-                        var smallTag = $(d).parent().children('small').prevObject[0].lastElementChild,
-                            text_max = d.getAttribute("data-special"),
+                    function leftCharacters(e){
+                        var smallTag = $(e).parent().children('small').prevObject[0].lastElementChild,
+                            text_max = e.getAttribute("data-special"),
                             text_length = $(smallTag)[0].previousElementSibling.selectionEnd,
                             text_remaining = text_max - text_length;
 

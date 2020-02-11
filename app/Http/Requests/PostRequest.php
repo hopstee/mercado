@@ -42,7 +42,7 @@ class PostRequest extends Request
 		$rules = [
 			'category_id'  => ['required', 'not_in:0'],
 			'post_type_id' => ['required', 'not_in:0'],
-			'title'        => ['required', new BetweenRule(10, 55), new BlacklistTitleRule()],
+			'title'        => ['required', new BetweenRule(5, 55), new BlacklistTitleRule()],
 			'description'  => ['required', new BetweenRule(5, 6000), new BlacklistWordRule()],
 			'contact_name' => ['required', new BetweenRule(2, 200)],
 			// 'email'        => ['max:100', new BlacklistEmailRule(), new BlacklistDomainRule()],

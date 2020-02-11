@@ -202,7 +202,7 @@ if ($post->category) {
 																name="description"
 																rows="10"
 														>{{ old('description', $post->description) }}</textarea>
-														<small id="" class="form-text text-muted">{{ t('Describe what makes your ad unique from 5 to 3000 characters.') }}</small>
+														<small id="textarea-feedback" class="form-text text-muted">{{ t('Describe what makes your ad unique from 5 to 3000 characters.') }}</small>
 													</div>
 												</div>
 
@@ -545,19 +545,41 @@ if ($post->category) {
 	
 	<script>
 		$(document).ready(function() {
-			var text_max = 55;
-			$('#input-feedback').html('A great title from 10 to 55 characters');
+			var text_max = 55,
+			text_remaining = $('#title').val().length;
+			$('#input-feedback').html(text_max - text_remaining + "{{ t('characters left') }}");
 
 			$('#title').keyup(function() {
-				var text_length = $('#title').val().length;
-				var text_remaining = text_max - text_length;
+				var text_length = $(this).val().length,
+					text_remaining = text_max - text_length;
 
 				if (text_length === 0) {
-					$('#input-feedback').html('A great title from 10 to 55 characters');
+					$('#input-feedback').html(text_max + "{{ t('characters left') }}");
 				} else if (text_length > text_max) {
 					$('#input-feedback').html('Too many characters');
 				} else {
-					$('#input-feedback').html(text_remaining + ' characters left');
+					$('#input-feedback').html(text_remaining + "{{ t('characters left') }}");
+				}
+			});
+		});
+	</script>
+
+	<script>
+		$(document).ready(function() {
+			var textarea_max = 6000,
+			text_remaining = $('.simditor-body').children('p').text().length;
+			$('#textarea-feedback').html(textarea_max - text_remaining + "{{ t('characters left') }}");
+
+			$('.simditor-body').keyup(function() {
+				var textarea_length = $(this).children('p').text().length,
+					textarea_remaining = textarea_max - textarea_length;
+
+				if (textarea_length === 0) {
+					$('#textarea-feedback').html(textarea_max + "{{ t('characters left') }}");
+				} else if (textarea_length > textarea_max) {
+					$('#textarea-feedback').html('Too many characters');
+				} else {
+					$('#textarea-feedback').html(textarea_remaining + "{{ t('characters left') }}");
 				}
 			});
 		});

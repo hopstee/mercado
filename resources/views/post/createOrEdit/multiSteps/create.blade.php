@@ -618,8 +618,9 @@
 
 	<script>
 		$(document).ready(function() {
-			var text_max = 55;
-			$('#input-feedback').html(text_max + "{{ t('characters left') }}");
+			var text_max = 55,
+			text_remaining = $('#title').val().length;
+			$('#input-feedback').html(text_max - text_remaining + "{{ t('characters left') }}");
 
 			$('#title').keyup(function() {
 				var text_length = $(this).val().length,
@@ -638,8 +639,9 @@
 	
 	<script>
 		$(document).ready(function() {
-			var textarea_max = 6000;
-			$('#textarea-feedback').html(textarea_max + "{{ t('characters left') }}");
+			var textarea_max = 6000,
+			text_remaining = $('.simditor-body').children('p').text().length;
+			$('#textarea-feedback').html(textarea_max - text_remaining + "{{ t('characters left') }}");
 
 			$('.simditor-body').keyup(function() {
 				var textarea_length = $(this).children('p').text().length,

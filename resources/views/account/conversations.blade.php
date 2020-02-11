@@ -49,7 +49,7 @@
 						<div style="clear:both"></div>
 						
 						<div class="table-responsive">
-							<form name="listForm" method="POST" action="{{ lurl(trans('routes.v-pers-conversations-delete')) }}">
+							<form name="listForm" method="POST" action="{{ lurl(trans('routes.v-pers-conversations-delete', [])) }}">
 								{!! csrf_field() !!}
 								<div class="table-action table-action-dif">
 									<label for="checkAll" class="btn-archive">

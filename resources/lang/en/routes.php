@@ -47,8 +47,8 @@ return [
     'v-pers-photo-delete' => 'personal-data/:id/photo-delete',
 
     'conversations' => 'conversations',
-    'pers-conversations-delete' => 'conversations/{id}/delete',
-    'v-pers-conversations-delete' => 'conversations/:id/delete',
+    'pers-conversations-delete' => 'conversations/delete',
+    'v-pers-conversations-delete' => 'conversations/delete',
     'pers-conversations-delete-id' => 'conversations/{id}/delete',
     'v-pers-conversations-delete-id' => 'account/conversations/:id/messages/delete',
 

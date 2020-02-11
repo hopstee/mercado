@@ -59,12 +59,14 @@ class EditController extends AccountBaseController
 			->first();
 		$data['countPosts'] = Post::currentCountry()
 			->where('user_id', auth()->user()->id)
+			->reviewed()
 			->count();
 		$data['countFavoritePosts'] = SavedPost::whereHas('post', function ($query) {
 			$query->currentCountry();
 		})->where('user_id', auth()->user()->id)
 			->count();
 		
+			 
 		// Meta Tags
 		MetaTag::set('title', t('My account'));
 		MetaTag::set('description', t('My account on :app_name', ['app_name' => config('settings.app.app_name')]));

@@ -353,6 +353,7 @@ return [
 
     'Wrong Category' => 'Wrong Category pt',
     'Wrong Posting Rules' => 'Wrong Posting Rules pt',
+    'In process' => 'In process',
     
     'Unactivated' => 'Unactivated',
     'Posts Stats' => 'Posts Stats',

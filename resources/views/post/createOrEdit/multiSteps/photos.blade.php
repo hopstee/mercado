@@ -169,7 +169,9 @@
             if (getSegment(2) == 'create') {
                 $uploadUrl = lurl('posts/create/' . $post->tmp_token . '/photos/');
             } else {
-                $uploadUrl = lurl('posts/' . $post->id . '/photos/');
+                // $uploadUrl = lurl('posts/' . $post->id . '/photos/');
+                $uploadUrl = lurl(trans('routes.v-posts-photos', ['id'=>$post->id]),$post->id);
+
             }
 
         ?>

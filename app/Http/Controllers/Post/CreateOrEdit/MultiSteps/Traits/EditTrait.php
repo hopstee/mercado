@@ -206,7 +206,8 @@ trait EditTrait
         // Get Next URL
         $creationPath = (getSegment(2) == 'create') ? 'create/' : '';
 		flash(t("Your ad has been updated."))->success();
-		$nextStepUrl = config('app.locale') . '/posts/' . $creationPath . $postIdOrToken . '/photos';
+		// $nextStepUrl = config('app.locale') . '/posts/' . $creationPath . $postIdOrToken . '/photos';
+		$nextStepUrl = lurl(trans('routes.v-posts-photos',['id'=>$postIdOrToken]), $postIdOrToken) ;
 
         // Send Email Verification message
         if ($emailVerificationRequired) {

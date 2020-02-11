@@ -26,9 +26,9 @@ return [
     'search-city' => 'free-ads/{city}/{id}',
     't-search-city' => 'free-ads',
     'v-search-city' => 'free-ads/:city/:id',
-    'search-user' => 'users/{id}/ads',
-    't-search-user' => 'users',
-    'v-search-user' => 'users/:id/ads',
+    'search-user' => 'utilizador/{id}/publicados',
+    't-search-user' => 'utilizador',
+    'v-search-user' => 'utilizador/:id/publicados',
     'search-username' => 'profile/{username}',
     't-search-username' => 'profile',
     'v-search-username' => 'profile/:username',
@@ -109,5 +109,13 @@ return [
     'posting-rules' => 'pegras-de-publicação',
     'tips' => 'dicas-utilizadores',
     'faq' => 'perguntas-frequentes',
+
+    'edit' => 'editar',
+
+    'posts-edit' => 'publicados/{id}/editar',
+    'v-posts-edit' => 'publicados/:id/editar',
+
+    'posts-photos' => 'publicados/{id}/fotos',
+    'v-posts-photos' => 'publicados/:id/fotos',
 
 ];

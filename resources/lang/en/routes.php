@@ -104,4 +104,11 @@ return [
     'tips' => 'tips',
     'faq' => 'faq',
 
+    'edit' => 'edit',
+    'posts-edit' => 'posts/{id}/edit',
+    'v-posts-edit' => 'posts/:id/edit',
+
+    'posts-photos' => 'posts/{id}/photos',
+    'v-posts-photos' => 'posts/:id/photos',
+
 ];

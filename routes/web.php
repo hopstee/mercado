@@ -322,10 +322,10 @@ Route::group([
 
                 // MultiSteps Post edition
                 Route::group(['namespace' => 'CreateOrEdit\MultiSteps'], function ($router) {
-                    Route::get('posts/{id}/edit', 'EditController@getForm');
-                    Route::put('posts/{id}/edit', 'EditController@postForm');
-                    Route::get('posts/{id}/photos', 'PhotoController@getForm');
-                    Route::post('posts/{id}/photos', 'PhotoController@postForm');
+                    Route::get(trans('routes.posts-edit'), 'EditController@getForm');
+                    Route::put(trans('routes.posts-edit'), 'EditController@postForm');
+                    Route::get(trans('routes.posts-photos'), 'PhotoController@getForm');
+                    Route::post(trans('routes.posts-photos'), 'PhotoController@postForm');
                     Route::post('posts/{token}/photos/{id}/delete', 'PhotoController@delete');
                     Route::get('posts/{id}/payment', 'PaymentController@getForm');
                     Route::post('posts/{id}/payment', 'PaymentController@postForm');
@@ -445,7 +445,8 @@ Route::group([
         $router->pattern('username', '[a-zA-Z0-9]+');
         Route::get(LaravelLocalization::transRoute('routes.search'), 'Search\SearchController@index');
         Route::get(LaravelLocalization::transRoute('routes.search-user'), 'Search\UserController@index');
-        Route::get(trans('routes.user') . '/{id}' . '/' .trans('routes.posts'), 'Search\UserController@searchPostsByUserId');
+        // Route::get(trans('routes.user') . '/{id}' . '/' .trans('routes.posts'), 'Search\UserController@searchPostsByUserId');
+        Route::get(trans('routes.search'), 'Search\UserController@searchPostsByUserId');
         Route::get(LaravelLocalization::transRoute('routes.search-username'), 'Search\UserController@profile');
         Route::get(LaravelLocalization::transRoute('routes.search-tag'), 'Search\TagController@index');
         Route::get(LaravelLocalization::transRoute('routes.search-city'), 'Search\CityController@index');

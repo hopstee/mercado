@@ -183,7 +183,7 @@ class UserRequest extends Request
 					],
 				];
 			}
-			if(isEnabledField('email') && !is_null($this->input('email'))){
+			elseif(isEnabledField('email') && !is_null($this->input('email'))){
 				$rules = [
 					'email' => ['email',
 						new EmailRule(), 

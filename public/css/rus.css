@@ -1626,6 +1626,9 @@ input::placeholder {
     padding: 7px 10px 5px 15px !important;
 }
 
+#userPanel.inner-ads-box.collapse:not(.show){
+    display: unset !important;
+}
 
 @media (min-width: 765px) {
 

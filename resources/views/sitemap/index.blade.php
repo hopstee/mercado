@@ -74,12 +74,13 @@
 																		  data-toggle="collapse"
 																		  data-target=".cat-id-{{ $iCat->id . $randomId }}"
 																		  aria-expanded="false"
+																		  href=".cat-id-{{ $iCat->id . $randomId }}"
 																	>
 																		<span class="unir-rarrow2"></span>
 																	</span>
 																@endif
 															</h3>
-															<div class="cat-collapse cat-id-{{ $iCat->id . $randomId }} no-transition">
+															<div class="cat-id-{{ $iCat->id . $randomId }} no-transition collapse">
 																@if (isset($subCats) and $subCats->has($iCat->tid))
 																	@foreach ($subCats->get($iCat->tid) as $iSubCat)
 																		<li>
@@ -151,18 +152,29 @@
 	@parent
 	<script>
 		var maxSubCats = 15;
+		var collapse = $('.no-transition.collapse');
+
 		function dependentSize(){
 			if ($(window).width() <= 575) {
 				$(".notrans-collapse *").attr("style", "display:block;");
+
 			}else{
 				$(".notrans-collapse *").attr("style", "display:none;");
+			}
 
-			}		
+			if ($(this).width() >= 767) {
+				collapse.addClass('show');
+			}
 		}
 		dependentSize();
 		window.addEventListener('resize', function(event){
             dependentSize();
         });
+
+		$('.notrans-collapse').on('click',function(){
+			$($(this).data('target')).collapse('toggle');
+		});
+
 		
 	</script>
 	

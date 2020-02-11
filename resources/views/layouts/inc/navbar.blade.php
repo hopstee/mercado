@@ -68,6 +68,7 @@
                                 <span style="font-weight:bold;">{{ t('Change Language') }}</span><span
                                     class="lang-name"> {!! $properties['native'] !!}</span>
                             </a>
+                            <div class="closeFilter" style="right: 0px"><i class="unir-close_l"></i></div>
                         </li>
                         @endif
                         @endforeach
@@ -87,8 +88,8 @@
                 <li class="nav-item flex">
                     <a href="{{ lurl(trans('routes.register')) }}" class="nav-link"><i class="unib-lock"></i> {{ t('Register') }}</a>
                 </li>
-                <li class="nav-item flex" style="padding:10px 0px;">
-                        <a id="help-down" class="dropdown-toggle" data-toggle="dropdown" style="font-weight:bold;font-size:14px;padding:5px 5px; display:block;"><i class="unib-info">&ensp;</i> {{ t('Help links') }}<i style="float: right;" class="help-down unir-rarrow2"></i></a>
+                <li class="nav-item dropdown show" style="padding:10px 0px;">
+                        <a id="help-down" class="dropdown-toggle" aria-expanded="true" data-toggle="dropdown" style="font-weight:bold;font-size:14px;padding:5px 5px; display:block;" ><i class="unib-info">&ensp;</i> {{ t('Help links') }}<i style="float: right;" class="help-down unir-rarrow2"></i></a>
                         <ul id="userMenuDropdown" class="dropdown-menu navbar-mobile user-menu dropdown-menu-right" style="border: none;">
                             <a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.terms-of-use')])) }}"><i
                                     class="unir-sheild">&nbsp;</i>{{ t('Terms of Use') }}</a>
@@ -151,9 +152,9 @@
                     </a>
                     @endif
                 </li>
-                <li class="nav-item" style="padding:10px 0px;">
-                        <a id="help-down" class="dropdown-toggle" data-toggle="dropdown" style="font-weight:bold;font-size:14px;padding:5px 5px;"><span><i class="unib-info">&ensp;</i> {{ t('Help links') }}</span><i style="float: right;" class="help-down unir-rarrow2"></i></a>
-                        <ul id="userMenuDropdown" class="dropdown-menu navbar-mobile user-menu dropdown-menu-right" style="border: none;">
+                <li class="nav-item show" style="padding:10px 0px;">
+                        <a id="help-down" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" style="font-weight:bold;font-size:14px;padding:5px 5px;"><span><i class="unib-info">&ensp;</i> {{ t('Help links') }}</span><i style="float: right;" class="help-down unir-rarrow2"></i></a>
+                        <ul id="userMenuDropdown" class="dropdown-menu navbar-mobile user-menu dropdown-menu-right show" style="border: none;">
                             <a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.terms-of-use')])) }}"><i
                                     class="unir-sheild">&nbsp;</i>{{ t('Terms of Use') }}</a>
                             <a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.privacy-policy')])) }}"><i
@@ -192,6 +193,7 @@
                     </a>
                     @endif
                 </li>
+{{--                    <button style='display:none;' class='closeFilter btn go-button'><i style='font-size:14px; ' class='unir-close_l'></i></button>--}}
             </ul>
             <div style="clear:both"></div>
         </div>

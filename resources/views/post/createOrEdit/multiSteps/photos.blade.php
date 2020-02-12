@@ -191,6 +191,7 @@
 				showBrowse: true,
 				showCancel: true,
 				showUpload: false,
+                showZoom: false,
 				showRemove: false,
 				minFileSize: {{ (int)config('settings.upload.min_image_size', 0) }}, {{-- in KB --}}
                 maxFileSize: {{ (int)config('settings.upload.max_image_size', 1000) }}, {{-- in KB --}}
@@ -198,6 +199,12 @@
                 minFileCount: 0,
                 maxFileCount: {{ (int)$picturesLimit }},
                 validateInitialCount: true,
+                fileActionSettings: {
+                    showDrag: true,
+                    showZoom: false,
+                    removeIcon: '<i class="far fa-trash-alt" style="color: red;"></i>',
+                    indicatorNew: '<i class="fas fa-check-circle" style="color: #09c509;font-size: 20px;margin-top: -15px;display: block;"></i>'
+                },
                 @if (isset($post->pictures))
                 /* Retrieve current images */
                 /* Setup initial preview with data keys */

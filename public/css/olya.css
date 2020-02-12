@@ -331,3 +331,11 @@ ul.list.list-error{
     width:95%;
 }
 
+/*for account view*/
+@media (max-width: 768px){
+    .krajee-default .file-actions,
+    .krajee-default .file-footer-buttons,
+    .photo-field-dif>.file-input>.file-preview>.file-drop-zone>.file-preview-thumbnails>.file-preview-frame>.file-thumbnail-footer>.file-actions>.file-footer-buttons>.kv-file-remove{
+        width: 100%;
+    }
+}

@@ -41,13 +41,13 @@
 
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-3 page-sidebar" style="margin-top: 1px;">
+				<div class="col-lg-4 page-sidebar" style="margin-top: 1px;">
 					@include('account.inc.sidebar')
 				</div>
 				<!--/.page-sidebar-->
 				
 
-				<div class="col-lg-9 page-content">
+				<div class="col-lg-8 page-content">
 
 					@if( !isset($user->email)  )
 						@include('layouts.email_warning')

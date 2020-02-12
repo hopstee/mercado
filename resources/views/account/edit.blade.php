@@ -166,7 +166,7 @@
 											<a href="{{ lurl(trans('routes.v-pers-ads-my')) }}">
 												{{ t('Ads') }}
 											</a>
-											{{ \App\Helpers\Number::short($countPosts) }}
+											{{ \App\Helpers\Number::short($countMyPosts) }}
 										</p>
 									</div>
 								</div>

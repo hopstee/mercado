@@ -128,7 +128,7 @@
 													<div class="conversation-info receive-info">
 														<strong class="conversation-main">{{ t('Date') }}:</strong>
 														<p>
-															{{ $conversation->created_at->formatLocalized(config('settings.app.default_datetime_format_mod')) }}
+															{{ $conversation->created_at->formatLocalized(config('settings.app.default_datetime_format')) }}
 															@if (\App\Models\Message::conversationHasNewMessages($conversation))
 																<!-- <span class="badge badge-pill badge-important new-messages badge-dif-imp">{{ $conversation->new_messages }}</span> -->
 																<!-- <div style="width: 18px; height: 18px; line-height: 19px;" class="new-messages" id="badge-nm">{{ $conversation->new_messages }}</div> -->

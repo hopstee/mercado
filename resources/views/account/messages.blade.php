@@ -132,7 +132,7 @@
 											<td class="cel-borderless reply-message" style="width:94%;">
 												<div style="word-break:break-all;">
 													<strong>
-														<i class="unir-arrow_top"></i> {{ $message->from_name . ' (' . $message->created_at->formatLocalized(config('settings.app.default_datetime_format_mod')) . ')' }}:
+														<i class="unir-arrow_top"></i> {{ $message->from_name . ' (' . $message->created_at->formatLocalized(config('settings.app.default_datetime_format')) . ')' }}:
 													</strong><br>
 {{--													{!! nl2br($mes) !!}--}}
 													{{ substr($message->message, 0, stripos($message->message, " |")) }}
@@ -155,7 +155,7 @@
 											<td colspan="3">
 												<div style="word-break:break-all;">
 													<strong>
-														<i class="unir-arrow_top"></i> {{ $message->from_name . ' (' . $message->created_at->formatLocalized(config('settings.app.default_datetime_format_mod')) . ')' }}:
+														<i class="unir-arrow_top"></i> {{ $message->from_name . ' (' . $message->created_at->formatLocalized(config('settings.app.default_datetime_format')) . ')' }}:
 													</strong><br>
 {{--													{!! nl2br($message->message) !!}--}}
 													{{ substr($message->message, 0, stripos($message->message, " |")) }}

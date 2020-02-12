@@ -119,7 +119,9 @@ class UrlGen
 		$next = trans('routes', [],config('app.locale')) ;
 		
 		// Posts edit, ad photo etc.
-		if( (strpos($slug, 'posts') === 0) || (strpos($slug, 'publicados') === 0)){
+		if( (strpos($slug, trans('routes.posts')) === 0) 
+		|| (strpos($slug, trans('routes.unban')) === 0) 
+		|| (strpos($slug, trans('routes.conversations')) === 0) ){
 
 			if(strtolower($localeCode) == 'en'){
 				//  En language

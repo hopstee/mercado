@@ -56,6 +56,21 @@ class BlacklistController extends PanelController
 			'name'  => 'entry',
 			'label' => trans("admin::messages.Phone"),
 		]);
+
+		$this->xPanel->addColumn([
+			'name'  => 'reason',
+			'label' => trans("admin::messages.reason"),
+		]);
+
+		$this->xPanel->addColumn([
+			'name'  => 'requests',
+			'label' => trans("admin::messages.request"),
+		]);
+
+		$this->xPanel->addColumn([
+			'name'  => 'banned_at',
+			'label' => trans("admin::messages.deleted_at"),
+		]);
 		
 		// FIELDS
 		$this->xPanel->addField([

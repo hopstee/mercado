@@ -93,7 +93,9 @@ class BannedUser
 		//Check if the user's phone has been banned 
 		if(Blacklist::where('entry',auth()->user()->phone)->first()){
 			$phone = auth()->user()->phone;
-			$message =  t($this->message)  . "<p>Click <strong><a href='unban/{$phone}/request'> here </a></strong> to send request for unban .</p>";
+			// $message =  t($this->message)  . "<p>Click <strong><a href='unban/{$phone}/request'> here </a></strong> to send request for unban .</p>";
+			$nextUrl = lurl(trans('routes.v-unban-request',['phone'=>$phone]), $phone);
+			$message =  trans($this->message) . "<p>" . t('Click') .' <strong><a href="' . $nextUrl .'"> '.t('here').' </a></strong>' . t('to send request for unban.');
 			auth()->logout();
 			flash($message)->error();
 		}

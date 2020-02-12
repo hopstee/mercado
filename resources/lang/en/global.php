@@ -131,6 +131,10 @@ return [
     'Phone' => 'Phone',
 
     // R.S
+    'You exceeded the limit of sending requests.' => 'You exceeded the limit of sending requests.',
+    'Click' => 'Click',
+    'here' => 'here',
+    'to send request for unban.' => ' to send request for unban.',
     '! Add e-mail for password recovery.' => '! Add e-mail for password recovery.',
     'Enter your phone number' => 'Enter your phone number to be unban',
     'The phone field is required.' => 'The phone field is required.',

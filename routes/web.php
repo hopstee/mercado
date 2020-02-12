@@ -343,12 +343,12 @@ Route::group([
             Route::post('posts/{id}/contact', 'DetailsController@sendMessage');
 
             // Send report abuse
-            Route::get('posts/{id}/report', 'ReportController@showReportForm');
-            Route::post('posts/{id}/report', 'ReportController@sendReport');
+            Route::get(trans('routes.posts-report'), 'ReportController@showReportForm');
+            Route::post(trans('routes.posts-report'), 'ReportController@sendReport');
 
             // // Send unban request R.S
-            Route::get('unban/{phone}/request', 'UnbanController@showRequestForm');
-            Route::post('unban/{phone}/request', 'UnbanController@sendRequest');
+            Route::get(trans('routes.unban-request'), 'UnbanController@showRequestForm');
+            Route::post(trans('routes.unban-request'), 'UnbanController@sendRequest');
 
         });
 

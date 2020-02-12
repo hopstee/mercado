@@ -118,4 +118,12 @@ return [
     'posts-photos' => 'publicados/{id}/fotos',
     'v-posts-photos' => 'publicados/:id/fotos',
 
+    'unban' => 'destravar',
+    'request' => 'solicitação',
+    'unban-request' => 'destravar/{phone}/solicitação',
+    'v-unban-request' => 'destravar/:phone/solicitação',
+    
+    'report' => 'reportar',
+    'posts-report' => 'publicados/{id}/reportar',
+    'v-posts-report' => 'publicados/:id/reportar',
 ];

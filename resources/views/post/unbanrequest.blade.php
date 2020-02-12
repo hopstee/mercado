@@ -35,6 +35,16 @@
 							</ul>
 						</div>
 					</div>
+
+                    @if (Session::has('flash_notification'))
+					<div class="col-xl-12">
+						<div class="row">
+							<div class="col-xl-12">
+								@include('flash::message')
+							</div>
+						</div>
+					</div>
+				@endif
 				@endif
 
 				<div class="col-md-8">
@@ -47,16 +57,19 @@
                                 </h3>
                             </div>
 
-                            <form role="form" method="POST" action="{{ lurl('unban/' . $post . '/request') }}">
+                            <form role="form" method="POST" action="{{ lurl( trans('routes.v-unban-request', ['phone'=>$phone]),$phone) }}">
                                 {!! csrf_field() !!}
                                 <fieldset>
                                     <div class="card-body">
                                         <!-- phone -->
-                                        <?php $phoneError = (isset($errors) and $errors->has('phone')) ? ' is-invalid' : ''; ?>
                                         <div class="form-group required">
-                                            <label for="phone" class="control-label">{{ t('Phone') }} <sup>*</sup></label>
+                                            <span> 
+                                                By tap "Send request" you want to unban account with phone number 
+                                                <label for="phone" class="control-label">{{ $phone }}</label>.
+                                                We will process your request in next 48 hours. For any questions send message in Contact Us page. 
+                                            </span>
                                             <div class="input-group">
-                                                <input id="phone" name="phone" type="text" maxlength="60" class="form-control{{ $phoneError }}" value="{{ $post }}">
+                                                <input id="phone" name="phone" type="hidden" value="{{ $phone }}">
                                             </div>
                                         </div>
 

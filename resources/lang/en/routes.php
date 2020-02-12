@@ -111,4 +111,13 @@ return [
     'posts-photos' => 'posts/{id}/photos',
     'v-posts-photos' => 'posts/:id/photos',
 
+    'unban' => 'unban',
+    'request' => 'request',
+    'unban-request' => 'unban/{phone}/request',
+    'v-unban-request' => 'unban/:phone/request',
+
+    'report' => 'report',
+    'posts-report' => 'posts/{id}/report',
+    'v-posts-report' => 'posts/:id/report',
+
 ];

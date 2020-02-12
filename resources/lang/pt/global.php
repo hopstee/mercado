@@ -361,6 +361,12 @@ return [
     'Visitors' => 'Visitantes',
     'Located In' => 'Localizado em',
     'Edit' => 'Editar',
+    
+    'Click' => 'Haga clic',
+    'here' => 'aquí',
+    'to send request for unban.' => ' enviar solicitud de destravar.',
+    'You exceeded the limit of sending requests.' => 'Você excedeu o limite de envio de solicitações.',
+
     '! Add e-mail for password recovery.'=>'! Adicionar e-mail para recuperação de senha.',
     'Share' => 'Partilhar',
     'Repost' => 'Renovar',
@@ -839,7 +845,7 @@ return [
     'count_promotion_days' => '{0} promotion day|{1} promotion day|[2,*] promotion days',
     'Mobile Phone Number' => 'Mobile Phone Number',
     'The requested ad type does not exist.' => 'The requested ad type does not exist.',
-    'This user has been banned.' => 'This user has been banned.',
+    'This user has been banned.' => 'Este utilizador foi banido.',
     'The ad is already online.' => 'The ad is already online.',
     'Menu' => 'Menu',
     'Account Details' => 'Detalhes da conta',

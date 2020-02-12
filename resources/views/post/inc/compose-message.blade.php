@@ -87,7 +87,17 @@
 							</div>
 						</div>
 					@endif -->
+
 					
+					@if( auth()->check() )
+					<input id="from_name"
+								   name="from_name"
+								   type="hidden"
+								   maxlength="60"
+								   value="{{ old('from_name', (auth()->check()) ? auth()->user()->name : '') }}"
+							>
+					@endif
+
 					<!-- from_phone -->
 					<?php $fromPhoneError = (isset($errors) and $errors->has('from_phone')) ? ' is-invalid' : ''; ?>
 					<div class="form-group required">

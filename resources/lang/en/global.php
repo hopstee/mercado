@@ -762,7 +762,7 @@ return [
 	'The picture #:key size may not be lower than :min.' => 'The picture #:key size may not be lower than :min.',
     'The picture #:key size may not be greater than :max.' => 'The picture #:key size may not be greater than :max.',
     'Uploaded file #index successfully' => "'<li>' + 'Uploaded file # ' + (index + 1) + ' - '  + fname + ' successfully.' + '</li>'",
-    'Uploaded file #key successfully' => "'<li>' + 'Uploaded file # ' + (key + 1) + ' - '  + fname + ' successfully.' + '</li>'",
+    'File uploaded successfully' => "'<li>' + 'File uploaded successfully.' + '</li>'",
     'Do you want add more pictures?' => 'Do you want add more pictures?',
     'Add more pictures?' => 'Add more pictures?',
     'Upload pictures' => 'Upload pictures',

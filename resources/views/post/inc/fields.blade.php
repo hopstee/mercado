@@ -199,7 +199,16 @@ if (!function_exists("createFieldNodeTree")) {
                         $(".custom-upfile").on('change', function () {
                             let e = $(".custom-upfile")[0].value.split('\\');
                             $('#fileName').html(e[e.length - 1]);
+                            $('#fileName').prepend("<button onclick=\"deleteFile()\" type=\"button\" class=\"close delete-file-button\"><span aria-hidden=\"true\"><i class=\"unir-close_l delete-file-icon\"></i></span><span class=\"sr-only\">{{ t('Delete') }}</span></button>");
                         });
+
+                        function deleteFile() {
+                            $(this).value = '';
+                            const myNode = document.getElementById("fileName");
+                            while (myNode.firstChild) {
+                                myNode.removeChild(myNode.firstChild);
+                            }
+                        }
                     </script>
                     <small style="display:block;"  class="text-muted">
                         {!! $field->help !!} {{ t('File types: :file_types', ['file_types' => showValidFileTypes('file')], 'global', $languageCode) }}

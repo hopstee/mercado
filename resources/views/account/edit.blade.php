@@ -325,7 +325,7 @@
 										<label class="col-4 col-form-label">{{ t('New Password') }}</label>
 										<div class="form-group flex-block">
 											<div class="col-12">
-												<input id="password" name="password" type="password" class="form-control{{ $passwordError }}" placeholder="{{ t('Password') }}">
+												<input id="password" name="password" type="password" class="form-control{{ $passwordError }}" placeholder="{{ t('Password') }}" autocomplete="new-password">
 											</div>
 										</div>
 
@@ -335,7 +335,7 @@
 										<div class="form-group flex-block">
 											<div class="col-12">
 												<input id="password_confirmation" name="password_confirmation" type="password"
-													   class="form-control{{ $passwordError }}" placeholder="{{ t('Confirm Password') }}">
+													   class="form-control{{ $passwordError }}" placeholder="{{ t('Confirm Password') }}" autocomplete="new-password">
 											</div>
 										</div>
 

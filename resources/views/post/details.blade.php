@@ -183,7 +183,7 @@ if (isset(auth()->user()->id)) {
                                     @if (isset($user) and !empty($user) and isset($joined))
                                         <div class="grid-col">
                                         <div class="col gray">
-                                            <span>{{ t('On site since ') }} {{ $joined }}</span>
+                                            <span>{{ t('On site since') }} {{ $joined }}</span>
                                         </div>
                                     </div>
                                     @elseif($post->user_id == 1)
@@ -540,7 +540,7 @@ if (isset(auth()->user()->id)) {
                                                     @if (isset($user) and !empty($user) and isset($joined) and $joined)
                                                         <div class="grid-col">
                                                         <div class="col gray">
-                                                            <span>{{ t('On site since ') }} {{ $joined }}</span>
+                                                            <span>{{ t('On site since') }} {{ $joined }}</span>
                                                         </div>
                                                     </div>
                                                     @elseif($post->user_id == 1)
@@ -653,7 +653,7 @@ if (isset(auth()->user()->id)) {
                                             @if (isset($user) and !empty($user) and isset($joined) and $joined)
                                                 <div class="grid-col">
                                                 <div class="col gray">
-                                                    <span>{{ t('On site since ') }} {{ $joined }}</span>
+                                                    <span>{{ t('On site since') }} {{ $joined }}</span>
                                                 </div>
                                             </div>
                                             @elseif($post->user_id == 1)

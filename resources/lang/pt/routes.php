@@ -3,7 +3,7 @@
 return [
     'countries' => 'countries',
     'login' => 'login',
-    'register' => 'register',
+    'register' => 'registre',
     'post' => '{slug}/{id}',
     'v-post' => ':slug/:id',
     'page' => 'página/{slug}',

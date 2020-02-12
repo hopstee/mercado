@@ -319,6 +319,7 @@ hr{
         height: 78px !important;
     }
 }
+/*for flash message*/
 .list-error > li:before {
     position: absolute;
     font-family: fontello;

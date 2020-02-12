@@ -152,9 +152,9 @@
                     </a>
                     @endif
                 </li>
-                <li class="nav-item show" style="padding:10px 0px;">
+                <li class="nav-item dropdown show" style="padding:10px 0px;">
                         <a id="help-down" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" style="font-weight:bold;font-size:14px;padding:5px 5px;"><span><i class="unib-info">&ensp;</i> {{ t('Help links') }}</span><i style="float: right;" class="help-down unir-rarrow2"></i></a>
-                        <ul id="userMenuDropdown" class="dropdown-menu navbar-mobile user-menu dropdown-menu-right show" style="border: none;">
+                        <ul id="userMenuDropdown" class="dropdown-menu navbar-mobile user-menu dropdown-menu-right" style="border: none;">
                             <a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.terms-of-use')])) }}"><i
                                     class="unir-sheild">&nbsp;</i>{{ t('Terms of Use') }}</a>
                             <a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.privacy-policy')])) }}"><i
@@ -199,3 +199,8 @@
         </div>
     </aside>
 </div>
+<script>
+    $(document).ready(function(){
+            $(".dropdown-menu.navbar-mobile.user-menu.dropdown-menu-right").addClass("show");
+        });
+</script>

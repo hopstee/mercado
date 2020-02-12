@@ -54,7 +54,7 @@ if (!function_exists("createFieldNodeTree")) {
 
         @if ($field->type == 'checkbox')
             <!-- checkbox -->
-            <div class="form-group row {{ $requiredClass }}"
+            <div class="cf-l cf-m cf-s form-group row {{ $requiredClass }}"
                  style="margin-top: -10px;">
                 <label class="col-md-2 col-form-label"
                        for="{{ $fieldId }}"></label>
@@ -84,7 +84,7 @@ if (!function_exists("createFieldNodeTree")) {
                 <?php
                 $select2Type = 'sselecter';
                 ?>
-                <div class="ns-form-group {{ $requiredClass }} {{ $errorClass }}">
+                <div class="cf-l cf-m cf-s ns-form-group {{ $requiredClass }} {{ $errorClass }}">
                     <label class="ns-form-label {{ $errorClass }}"
                            for="{{ $fieldId }}">
                         {{ $field->name }}
@@ -184,7 +184,7 @@ if (!function_exists("createFieldNodeTree")) {
         @elseif ($field->type == 'file')
 
             <!-- file -->
-            <div class="ns-form-group {{ $requiredClass }}">
+            <div class="cf-l cf-m cf-s ns-form-group {{ $requiredClass }}">
                 <div>
                     <!-- <div class="mb10">
                         <input id="{{ $fieldId }}" name="{{ $fieldName }}"
@@ -241,7 +241,7 @@ if (!function_exists("createFieldNodeTree")) {
                 <?php
                 $select2Type = 'sselecter';
                 ?>
-                <div class="ns-form-group {{ $requiredClass }} {{ $errorClass }}">
+                <div class="cf-l cf-m cf-s ns-form-group {{ $requiredClass }} {{ $errorClass }}">
                     <label class="ns-form-label {{ $errorClass }} {{ $errorClass }}"
                            for="{{
                     $fieldId }}">
@@ -286,7 +286,7 @@ if (!function_exists("createFieldNodeTree")) {
         @elseif ($field->type == 'select')
 
             <!-- select -->
-            <div class="ns-form-group {{ $requiredClass }} {{ $errorClass }}">
+            <div class="cf-l cf-m cf-s ns-form-group {{ $requiredClass }} {{ $errorClass }}">
                 <label class="ns-form-label {{ $errorClass }} {{ $errorClass }}"
                        for="{{
                     $fieldId }}">
@@ -323,7 +323,7 @@ if (!function_exists("createFieldNodeTree")) {
         @elseif ($field->type == 'textarea')
 
             <!-- textarea -->
-            <div class="ns-form-group {{ $requiredClass }} {{ $errorClass }}">
+            <div class="cf-l cf-m cf-s ns-form-group {{ $requiredClass }} {{ $errorClass }}">
                 <label class="ns-form-label {{ $errorClass }} {{ $errorClass }}"
                        for="{{
                     $fieldId }}">
@@ -346,7 +346,7 @@ if (!function_exists("createFieldNodeTree")) {
         @elseif ($field->type == 'tree')
 
             <!-- tree -->
-            <div class="ns-form-group {{ $requiredClass }} {{ $errorClass }}">
+            <div class="cf-l cf-m cf-s ns-form-group {{ $requiredClass }} {{ $errorClass }}">
                 <label class="ns-form-label {{ $errorClass }} {{ $errorClass }}"
                        for="{{
                     $fieldId }}">
@@ -523,7 +523,7 @@ if (!function_exists("createFieldNodeTree")) {
         @elseif ($field->type == 'number')
 
             <!-- number -->
-            <div class="ns-form-group {{ $requiredClass }} {{ $errorClass }}">
+            <div class="cf-l cf-m cf-s ns-form-group {{ $requiredClass }} {{ $errorClass }}">
                 <label class="ns-form-label {{ $errorClass }} {{ $errorClass }}"
                        for="{{
                     $fieldId }}">
@@ -536,10 +536,11 @@ if (!function_exists("createFieldNodeTree")) {
                     <input id="{{ $fieldId }}"
                            name="{{ $fieldName }}"
                            type="number"
+                           step="any"
                            placeholder="{{ $field->name }}"
                            class="form-control input-md{{ $errorClass }}"
                            value="{{ $defaultValue }}"
-                           onkeydown = "return checkOnlyDigits(this,event)"
+                           onkeypress = "return checkOnlyDigits(this,event)"
                     >
                     <small id=""
                            class="form-text text-muted">{!! $field->help !!}</small>
@@ -549,7 +550,7 @@ if (!function_exists("createFieldNodeTree")) {
         @else
 
             <!-- text -->
-            <div class="ns-form-group {{ $requiredClass }} {{ $errorClass }}">
+            <div class="cf-l cf-m cf-s ns-form-group {{ $requiredClass }} {{ $errorClass }}">
                 <label class="ns-form-label {{ $errorClass }} {{ $errorClass }}"
                        for="{{ $fieldId }}">
                     {{ $field->name }}
@@ -586,9 +587,18 @@ if (!function_exists("createFieldNodeTree")) {
                         }
                     }
                     function checkOnlyDigits(element,event) {
-                        if (event.keyCode == 69 || event.keyCode == 189||event.keyCode == 109) {
+                        if (element.id === 'cf.161') {
+                            element.step = 1;
+                            if(element.value.length === 4) {
+                                return false;
+                            }
+                        }
+                        if (Number.isInteger(element.value)) {
                             return false;
                         }
+                        // if (event.keyCode == 69 || event.keyCode == 189 || event.keyCode == 109) {
+                        //     return false;
+                        // }
                     }
                 </script>
             </div>

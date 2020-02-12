@@ -111,6 +111,7 @@ return [
 	'blacklist_word_rule'                     => 'The :attribute contains a banned words or phrases.',
 	'blacklist_title_rule'                    => 'The :attribute contains a banned words or phrases.',
 	'between_rule'                            => 'The :attribute must be between :min and :max characters.',
+	'value_between_rule'                      => 'The :attribute value must be between :min and :max.',
 	'username_is_valid_rule'                  => 'The :attribute field must be an alphanumeric string.',
 	'username_is_allowed_rule'                => 'The :attribute is not allowed.',
 	'locale_of_language_rule'                 => 'The :attribute field is not valid.',

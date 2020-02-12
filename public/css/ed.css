@@ -1134,12 +1134,37 @@ ul.nav-wizard>li:before {
     display: none;
 }
 
-@media (min-width: 575px){
+#customFields {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.cf-l {
+    flex: 0 0 49%;
+    max-width: 49%;
+}
+
+@media (max-width: 576px){
     .add-page-btn, .all-ads-btn {
         display: none;
     }
+
+    .cf-s {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
 }
-@media (max-width: 767px) {
+@media (max-width: 768px) {
+
+    .cf-m {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    .help-block {
+        display: none;
+    }
 
     #addManageTable tbody tr td.add-img-selector {
         display: none;

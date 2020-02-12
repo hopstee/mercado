@@ -119,14 +119,21 @@ if (!isset($languageCode) or empty($languageCode)) {
                                             </small>
                                         </div>
                                         <script>
-
                                             $('.custom-upfile').on('change', function () {
-
                                                 $('#fileName div').remove();
-
                                                 var l = $('#file')[0].files;
                                                 $('#fileName').text(l[0].name);
+                                                $('#fileName').prepend("<button onclick=\"deleteFile()\" type=\"button\" class=\"close delete-file-button\"><span aria-hidden=\"true\"><i class=\"unir-close_l delete-file-icon\"></i></span><span class=\"sr-only\">{{ t('Delete') }}</span></button>");
+                                                
                                             });
+
+                                            function deleteFile() {
+                                                $('#file').value = '';
+                                                const myNode = document.getElementById("fileName");
+                                                while (myNode.firstChild) {
+                                                    myNode.removeChild(myNode.firstChild);
+                                                }
+                                            }
 
                                             var create_DOM_el = function(id, e) {
                                                 let div = document.createElement('div');

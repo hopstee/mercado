@@ -1168,7 +1168,7 @@ a.sell-your-item-cart{
 }
 
 .block-content.list-filter{
-    padding: 0px 9px 15px 13px;
+    padding: 0px 11px 15px 11px;
 }
 
 .no-padding.price-button .go-button,
@@ -1195,7 +1195,7 @@ a.sell-your-item-cart{
 }
 
 #subCatsList .list-filter ul li a{
-    padding: 3px 15px 3px 0px;
+    padding: 3px 1px 3px 0px;
 }
 
 .detail-line-label.weight400.left.second{

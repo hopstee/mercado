@@ -63,7 +63,7 @@
 							
 								<li class="picturesBloc {{ ($uriPath == trans('routes.photos')) ? 'active' : '' }}">
 									@if (isset($post) and !empty($post))
-										<a href="{{ lurl( trans('routes.v-posts-photos', ['id'=>$post->id]), $post->id ) }}">{{ t('Edit Details') }}</a>
+										<a href="{{ lurl( trans('routes.v-posts-photos', ['id'=>$post->id]), $post->id ) }}">{{ t('Edit Photos') }}</a>
 									@else
 										<a>{{ t('Edit Photos') }}</a>
 									@endif

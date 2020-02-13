@@ -98,12 +98,13 @@ class PostsController extends AccountBaseController
 					if ($post->archived == 1) {
 						$archivedPostsExpiration = config('settings.listing.manually_archived_posts_expiration', 180);
 						
-						$message = t('offline_putting_message', [
-							'postId'  => $postId,
-							'dateDel' => $post->archived_at
-								->addDays($archivedPostsExpiration)
-								->formatLocalized(config('settings.app.default_date_format'))
-						]);
+						$message = t("Archiving completed successfully.");
+						// $message = t('offline_putting_message', [
+						// 	'postId'  => $postId,
+						// 	'dateDel' => $post->archived_at
+						// 		->addDays($archivedPostsExpiration)
+						// 		->formatLocalized(config('settings.app.default_date_format'))
+						// ]);
 						
 						flash($message)->success();
 						

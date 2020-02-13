@@ -95,7 +95,11 @@
 									<!-- Main Conversation -->
 									<tr>
 										<td colspan="3">
-											<strong>{{ t("Sender's Name") }}:</strong> {{ $conversation->from_name ?? 'Unregistered user' }}<br>
+											@if (auth()->user()->id == $conversation->to_user_id)
+												<strong>{{ t("Sender's Name") }}:</strong> {{ $conversation->from_name ?? 'Unregistered user' }}<br>
+											@else
+												<strong>{{ t("Sender's Name") }}:</strong> {{ $conversation->to_name ?? 'Unregistered user' }}<br>
+											@endif
 											<!-- R.S -->
 											<!-- <strong>{{ t("Sender's Email") }}:</strong> {{ $conversation->from_email ?? '--' }}<br> -->
 											<strong>{{ t("Sender's Phone") }}:</strong> {{ $conversation->from_phone ?? '--' }}<br>

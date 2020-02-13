@@ -4,7 +4,11 @@
 		<div class="modal-content">
 			<div class="modal-header modal-header-dif">
 				<h4 class="modal-title" id="replyTo{{ $conversation->id }}Label">
+				@if (auth()->user()->id == $conversation->to_user_id)
 					{{ t('Reply to') . ' "' . $conversation->from_name . '"' }}
+				@else
+					{{ t('Reply to') . ' "' . $conversation->to_name . '"' }}
+				@endif
 				</h4>
 				
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="unir-close"></i></span></button>

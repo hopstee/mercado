@@ -232,8 +232,12 @@ hr{
 
 
 /* for button call and chat */
-@media(max-width:992px){
-
+@media(max-width:991px){
+    .new-button {
+        margin: 0px !important;
+        z-index: 100;
+        height: 7%;
+    }
     .card-content-cart{
         z-index:1000;
         left:0px;
@@ -333,12 +337,22 @@ ul.list.list-error{
 }
 
 /*for account view*/
-@media (max-width: 768px){
+@media (max-width: 767px){
     .krajee-default .file-actions,
     .krajee-default .file-footer-buttons,
     .photo-field-dif>.file-input>.file-preview>.file-drop-zone>.file-preview-thumbnails>.file-preview-frame>.file-thumbnail-footer>.file-actions>.file-footer-buttons>.kv-file-remove{
         width: 100%;
     }
+
+    .main-cel {
+        height: 270px;
+    }
+    .cab-cel {
+        /*display: contents;*/
+        width: 100%;
+        padding: 0;
+        margin-bottom: 20px;
+
     .user-panel-sidebar{
         margin-top: 2px;
     }

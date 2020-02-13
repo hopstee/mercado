@@ -1272,21 +1272,6 @@ ul.nav-wizard>li:before {
         width: 110px !important;
     }
 
-    .cab-cel.cab-cel-tl,
-    .cab-cel.cab-cel-tr,
-    .cab-cel.cab-cel-bl,
-    .cab-cel.cab-cel-br {
-        padding: 0;
-        float: unset;
-    }
-
-    .cab-cel {
-        /*display: contents;*/
-        width: 100%;
-        padding: 0;
-        margin-bottom: 20px;
-    }
-
     .cab-cel.cab-cel-mob {
         display: contents;
     }
@@ -1383,10 +1368,6 @@ ul.nav-wizard>li:before {
     .photo-field-dif>.file-input,
     .photo-field-dif>.file-input>.file-preview>.file-drop-zone>.file-preview-thumbnails>.file-preview-frame {
         height: 190px !important;
-    }
-
-    .main-cel {
-        height: 270px;
     }
 
     .user-modal-content {

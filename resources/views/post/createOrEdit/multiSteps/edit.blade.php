@@ -349,6 +349,7 @@ if ($post->category) {
 														<input id="phone" name="phone"
 															   placeholder="{{ t('Phone Number') }}" class="form-control input-md{{ $phoneError }}"
 															   type="text" value="{{ phoneFormat(old('phone', $post->phone), $post->country_code) }}"
+															   pattern="^\+\d{3}\s?\d{2}\s?\d{3}\s?\d{4}$"
 														>
 
 														<div class="input-group-append">
@@ -534,12 +535,7 @@ if ($post->category) {
 				singleFieldDelimiter: ','
 			});
 		});
-		
-		function checkOnlyDigits(element,event) {
-			if (event.keyCode == 69 || event.keyCode == 189||event.keyCode == 109) {
-				return false;
-			}
-		}
+
 	</script>
 
 	
@@ -583,6 +579,19 @@ if ($post->category) {
 				}
 			});
 		});
+		function checkOnlyDigits(element,event) {
+			if(event.keyCode < 48 || event.keyCode >57){
+				if(event.keyCode!==46){
+					return false;
+				}
+			}
+			if (element.id === 'cf.161') {
+				element.step = 1;
+				if(element.value.length === 4) {
+					return false;
+				}
+			}
+		}
 	</script>
 
 	<script src="{{ url('assets/js/app/d.select.category.js') . vTime() }}"></script>

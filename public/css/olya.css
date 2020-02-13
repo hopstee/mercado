@@ -343,7 +343,6 @@ ul.list.list-error{
     .photo-field-dif>.file-input>.file-preview>.file-drop-zone>.file-preview-thumbnails>.file-preview-frame>.file-thumbnail-footer>.file-actions>.file-footer-buttons>.kv-file-remove{
         width: 100%;
     }
-
     .main-cel {
         height: 270px;
     }
@@ -356,4 +355,11 @@ ul.list.list-error{
     .user-panel-sidebar{
         margin-top: 2px;
     }
+}
+  
+.disabled_scroll{
+    -moz-appearance: textfield;
+}
+.disabled_scroll::-webkit-inner-spin-button {
+    display: none;
 }

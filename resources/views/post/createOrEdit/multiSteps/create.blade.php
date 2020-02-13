@@ -365,6 +365,7 @@
 																class="form-control input-md{{ $phoneError }}" type="text"
 																value="{{ phoneFormat(old('phone', $formPhone), old('country', config('country.code'))) }}"
 																	{{ $editable }}
+																   pattern="^\+\d{3}\s?\d{2}\s?\d{3}\s?\d{4}$"
 															>
 															@if (auth()->check())
 																<div class="input-group-append">
@@ -656,16 +657,24 @@
 				}
 			});
 		});
+
+		function checkOnlyDigits(element,event) {
+			if(event.keyCode < 48 || event.keyCode >57){
+				if(event.keyCode!==46){
+					return false;
+				}
+			}
+			if (element.id === 'cf.161') {
+				element.step = 1;
+				if(element.value.length === 4) {
+					return false;
+				}
+			}
+		}
 	</script>
 
 	<script src="{{ url('assets/js/app/d.select.category.js') . vTime() }}"></script>
 	<script src="{{ url('assets/js/app/d.select.location.js') . vTime() }}"></script>
 	<script src="{{ url('assets/js/bootstrap-treeview.min.js') }}"></script>
-	<script>
-		function checkOnlyDigits(element,event) {
-			if (event.keyCode == 69 || event.keyCode == 189||event.keyCode == 109) {
-				return false;
-			}
-		}
-	</script>
+
 @endsection

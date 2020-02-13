@@ -85,6 +85,9 @@ class CustomFieldRequest extends Request
 					$date = date('Y');
 					$cfRules[] = new valBetweenRule(strtolower($field->name), 1900, $date);
 				}
+                if ($field->type == 'number' && $field->tid != 161) {
+                    $cfRules[] = new valBetweenRule(strtolower($field->name));
+                }
 
 				// R.S control for custom fields error when is not between 
 				if( !is_null($field->max) && isset($field->max)){

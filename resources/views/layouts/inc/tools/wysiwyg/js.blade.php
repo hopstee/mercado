@@ -81,7 +81,8 @@
                     defaultImage: '{{ asset('assets/plugins/simditor/images/image.png') }}',
                     upload: false,
                     allowedTags: allowedTags,
-                    cleanPaste: true
+                    cleanPaste: true,
+                    toolbarFloat:false
                 });
                 $preview = $('#preview');
                 if ($preview.length > 0) {

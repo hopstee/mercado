@@ -538,9 +538,10 @@ if (!function_exists("createFieldNodeTree")) {
                            type="number"
                            step="any"
                            placeholder="{{ $field->name }}"
-                           class="form-control input-md{{ $errorClass }}"
+                           class="form-control input-md{{ $errorClass }} disabled_scroll"
                            value="{{ $defaultValue }}"
                            onkeypress = "return checkOnlyDigits(this,event)"
+                           pattern="^\d*[.,]?\d*$"
                     >
                     <small id=""
                            class="form-text text-muted">{!! $field->help !!}</small>
@@ -587,18 +588,17 @@ if (!function_exists("createFieldNodeTree")) {
                         }
                     }
                     function checkOnlyDigits(element,event) {
+                        if(event.keyCode < 48 || event.keyCode >57){
+                            if(event.keyCode!==46){
+                                return false;
+                            }
+                        }
                         if (element.id === 'cf.161') {
                             element.step = 1;
                             if(element.value.length === 4) {
                                 return false;
                             }
                         }
-                        if (Number.isInteger(element.value)) {
-                            return false;
-                        }
-                        // if (event.keyCode == 69 || event.keyCode == 189 || event.keyCode == 109) {
-                        //     return false;
-                        // }
                     }
                 </script>
             </div>

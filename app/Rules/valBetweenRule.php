@@ -26,7 +26,7 @@ class valBetweenRule implements Rule
 	public $min = 0;
 	public $max = 999999;
 	
-	public function __construct($name, $min, $max)
+	public function __construct($name, $min = 0, $max = 999999)
 	{
 		$this->name = $name;
 		$this->min = $min;

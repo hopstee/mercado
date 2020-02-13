@@ -116,6 +116,7 @@ Route::group([
         CRUD::resource('posts', 'PostController');
         CRUD::resource('p_types', 'PostTypeController');
         CRUD::resource('report_types', 'ReportTypeController');
+        CRUD::resource('ban_types', 'BanTypeController');
         CRUD::resource('roles', 'RoleController');
         CRUD::resource('settings', 'SettingController');
         CRUD::resource('time_zones', 'TimeZoneController');

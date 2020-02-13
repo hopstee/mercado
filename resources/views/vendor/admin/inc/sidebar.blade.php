@@ -210,6 +210,10 @@
                                 <li><a href="{{ admin_url('report_types') }}"><i class="fa fa-language"></i>
                                         <span>{{ trans('admin::messages.report types') }}</span></a></li>
                             @endif
+                            @if (auth()->user()->can('list-report-type') || userHasSuperAdminPermissions())
+                                <li><a href="{{ admin_url('ban_types') }}"><i class="fa fa-language"></i>
+                                        <span>{{ trans('admin::messages.ban types') }}</span></a></li>
+                            @endif
                         </ul>
                     </li>
                 @endif

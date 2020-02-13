@@ -2,7 +2,7 @@
 
 return [
     'countries' => 'countries',
-    'login' => 'login',
+    'login' => 'entrar',
     'register' => 'registre',
     'post' => '{slug}/{id}',
     'v-post' => ':slug/:id',

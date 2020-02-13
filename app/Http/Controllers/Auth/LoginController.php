@@ -68,7 +68,7 @@ class LoginController extends FrontController
 		// Set default URLs
 		$isFromLoginPage = Str::contains(url()->previous(), '/' . trans('routes.login'));
 		$this->loginPath = $isFromLoginPage ? config('app.locale') . '/' . trans('routes.login') : url()->previous();
-		$this->redirectTo = $isFromLoginPage ? config('app.locale') . '/account' : url()->previous();
+		$this->redirectTo = $isFromLoginPage ? lurl(trans('routes.personal-data')) : url()->previous();
 		$this->redirectAfterLogout = config('app.locale');
 		
 		// Get values from Config
@@ -107,6 +107,7 @@ class LoginController extends FrontController
 	 */
 	public function login(LoginRequest $request)
 	{
+
 		// If the class is using the ThrottlesLogins trait, we can automatically throttle
 		// the login attempts for this application. We'll key this by the username and
 		// the IP address of the client making these requests into this application.
@@ -139,6 +140,12 @@ class LoginController extends FrontController
 			// R.S
 			//If userphone is in black list redirect to login page
 			if(Blacklist::where('entry', $request->phone)->count() != 0){
+				return redirect(config('app.locale') . "/");
+			}
+
+						// R.S
+			//If userphone is in black list redirect to login page
+			if(Blacklist::where('entry', $request->login)->count() != 0){
 				return redirect(config('app.locale') . "/");
 			}
 

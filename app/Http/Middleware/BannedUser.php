@@ -99,6 +99,7 @@ class BannedUser
 			auth()->logout();
 			flash($message)->error();
 		}
+
 		// if (!empty($bannedUser)) {
 		// 	$user = User::find(auth()->user()->id);
 		// 	// $user->delete();

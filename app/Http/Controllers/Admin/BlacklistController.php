@@ -69,7 +69,7 @@ class BlacklistController extends PanelController
 
 		$this->xPanel->addColumn([
 			'name'  => 'banned_at',
-			'label' => trans("admin::messages.deleted_at"),
+			'label' => trans("admin::messages.banned_at"),
 		]);
 		
 		// FIELDS
@@ -129,8 +129,7 @@ class BlacklistController extends PanelController
 
 		// Get email address
 		$phone = request()->get('phone');
-	
-
+		$ban_type = request()->get('ban_type_id');
 
 		// Get previous URL
 		$previousUrl = url()->previous();
@@ -193,6 +192,9 @@ class BlacklistController extends PanelController
 				$banned = new Blacklist();
 				$banned->type = 'email';
 				$banned->entry = $phone;
+				if(!is_null($ban_type)){
+					$banned->reason = $ban_type;
+				}
 				$banned->save();
 			}
 			
@@ -247,7 +249,7 @@ class BlacklistController extends PanelController
 			} else {
 				flash($message)->success();
 			}
-			return redirect(admin_url('blacklists/'));
+			return redirect()->back();
 		}
 		else{
 			$message = trans("admin::messages.phone_address_unbanned_error");

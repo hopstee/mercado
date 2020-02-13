@@ -139,11 +139,11 @@
 											</option>
 											<option{{ (request()->get('orderBy')=='priceAsc') ? ' selected="selected"' : '' }}
 													value="{!! qsurl($fullUrlNoParams, array_merge(request()->except('orderBy'), ['orderBy'=>'priceAsc']), null, false) !!}">
-											{{ t('Price : Low to High') }}
+											{{ t('Price: Low to High') }}
 											</option>
 											<option{{ (request()->get('orderBy')=='priceDesc') ? ' selected="selected"' : '' }}
 													value="{!! qsurl($fullUrlNoParams, array_merge(request()->except('orderBy'), ['orderBy'=>'priceDesc']), null, false) !!}">
-											{{ t('Price : High to Low') }}
+											{{ t('Price: High to Low') }}
 											</option>
 {{--											<option{{ (request()->get('orderBy')=='relevance') ? ' selected="selected"' : '' }}--}}
 {{--													value="{!! qsurl($fullUrlNoParams, array_merge(request()->except('orderBy'), ['orderBy'=>'relevance']), null, false) !!}">--}}

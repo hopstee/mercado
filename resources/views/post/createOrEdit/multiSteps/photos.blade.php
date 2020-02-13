@@ -284,7 +284,7 @@
             $.each(data.files, function(key, file) {
                 if (typeof file !== 'undefined') {
                     var fname = file.name;
-                    out = out + "{!! t('Uploaded file #key successfully') !!}";
+                    out = out + "{!! t('File uploaded successfully') !!}";
                 }
             });
             $('#uploadSuccess ul').append(out);

@@ -111,10 +111,12 @@
 													<br><br><a class="btn btn-info" href="{{ fileUrl($conversation->filename) }}">{{ t('Download') }}</a>
 												@endif
 											</p>
-											<hr>
-											<a class="btn btn-primary btn-default btn-default-cab mes-reply btn-green" href="#" data-toggle="modal" data-target="#replyTo{{ $conversation->id }}">
-												{{ t('Reply') }}
-											</a>
+											@if (isset($conversation->from_name))
+												<hr>
+												<a class="btn btn-primary btn-default btn-default-cab mes-reply btn-green" href="#" data-toggle="modal" data-target="#replyTo{{ $conversation->id }}">
+													{{ t('Reply') }}
+												</a>
+											@endif
 										</td>
 									</tr>
 									<!-- All Conversation's Messages -->

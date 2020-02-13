@@ -4,7 +4,7 @@
 		<div class="modal-content">
 			<div class="modal-header modal-header-dif">
 				<h4 class="modal-title" id="replyTo{{ $conversation->id }}Label">
-					{{ t('Reply to') . ' "' . $conversation->to_name . '"' }}
+					{{ t('Reply to') . ' "' . $conversation->from_name . '"' }}
 				</h4>
 				
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="unir-close"></i></span></button>

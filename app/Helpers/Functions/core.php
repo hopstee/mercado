@@ -2919,7 +2919,7 @@ function genEmailContactBtn($post = null, $btnBlock = false, $iconOnly = false)
 		$out .= '<a href="' . $btnLink . '" data-toggle="modal">';
 		$out .= '<i class="icon-mail tooltipHere" data-toggle="tooltip" data-original-title="' . t('MessageLabel') . '"></i>';
 		$out .= '</a>';
-	} else {
+	} else if( (isset(auth()->user()->id) and ($post->user_id != auth()->user()->id)) or (is_null(auth()->user()))){
 		if ($btnBlock) {
 			$btnClass = $btnClass . ' btn-block';
 		}
@@ -2928,7 +2928,6 @@ function genEmailContactBtn($post = null, $btnBlock = false, $iconOnly = false)
 		// $out .= "<img src=" . url('images/menu_light.svg') . " class='sidebar-image'>";
 		$out .= '<i class="unir-mail btn btn-success btn-block"  href="' . $btnLink . '"></i> ';
 		$out .= '<span class="right-from-image" id="chat">  ' . t('MessageLabel') . '</span></a></div>';
-
 	}
 
 	return $out;

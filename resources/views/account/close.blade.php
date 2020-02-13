@@ -29,12 +29,12 @@
 					</div>
 				@endif
 				
-				<div class="col-md-3 page-sidebar">
+				<div class="col-lg-4 page-sidebar">
 					@include('account.inc.sidebar')
 				</div>
 				<!--/.page-sidebar-->
 
-				<div class="col-md-9 page-content">
+				<div class="col-lg-8 page-content">
 					<div class="inner-box inner-box-dif">
 						<h2 class="title-2 title-2-dif"> {{ t('Close account') }} </h2>
 						<p>{{ t('You are sure you want to delete your account?') }}</p>

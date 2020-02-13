@@ -117,6 +117,7 @@
 								   maxlength="60"
 								   class="form-control{{ $fromPhoneError }}"
 								   value="{{ old('from_phone', (auth()->check()) ? auth()->user()->phone : '') }}"
+								   pattern="^\+\d{3}\s?\d{2}\s?\d{3}\s?\d{4}$"
 							>
 						</div>
 					</div>

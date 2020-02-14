@@ -182,11 +182,12 @@
 	@section('info')
 	@show
 	
-	@section('footer')
-		@include('layouts.inc.footer')
-	@show
+
 
 </div>
+@section('footer')
+	@include('layouts.inc.footer')
+@show
 
 @section('modal_location')
 @show

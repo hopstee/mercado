@@ -1146,9 +1146,6 @@ ul.nav-wizard>li:before {
 }
 
 @media (max-width: 576px){
-    .add-page-btn, .all-ads-btn {
-        display: none;
-    }
 
     .cf-s {
         flex: 0 0 100%;

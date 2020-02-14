@@ -1,27 +1,34 @@
 div.form-group.col-sm-4.no-padding > input.form-control {
+ max-height: 35px;
+}
+
+button.delete-file-button {
+    float: left;
+}
+
+i.delete-file-icon {
+    transform: translate(0%, 110%);
+    display: block;
+    line-height: 50%;
+    font-size: 13px;
+    padding-right: 3px;
+    font-weight: bold;
+}
+
+div.detail-line.col-sm-12.col-xs-12.pb-2.pl-1.pr-1 {
+    margin-top: 7px;
+}
+
+@media screen and (min-width: 576px) {
+  div.all-ads-btn,
+  div.add-page-btn{
+    display: none;
+  }
+}
+
+.fixed-footer {
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
   max-height: 35px;
  }
- 
- button.delete-file-button {
-     float: left;
- }
- 
- i.delete-file-icon {
-     transform: translate(0%, 110%);
-     display: block;
-     line-height: 50%;
-     font-size: 13px;
-     padding-right: 3px;
-     font-weight: bold;
- }
- 
- div.detail-line.col-sm-12.col-xs-12.pb-2.pl-1.pr-1 {
-     margin-top: 7px;
- }
- 
- @media screen and (min-width: 576px) {
-   div.all-ads-btn,
-   div.add-page-btn{
-     display: none;
-   }
-}

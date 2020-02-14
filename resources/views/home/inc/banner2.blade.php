@@ -66,7 +66,7 @@
 
 			
 			window.addEventListener('resize', function(event){
-				if($(document).width() >= 575){
+				if($(document).width() > 575){
 					$("#mobileBanner2").attr("style", "display: none;");
 					$("#desktopBanner2").attr("style", "display: block;");
 				}

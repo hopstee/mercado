@@ -64,7 +64,7 @@
 				autoplayHoverPause:true
 			});
 			window.addEventListener('resize', function(event){
-				if($(document).width() >= 575){
+				if($(document).width() > 575){
 					$("#mobileBanner").attr("style", "display: none;");
 					$("#desktopBanner").attr("style", "display: block;");
 				}

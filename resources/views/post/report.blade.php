@@ -80,34 +80,13 @@
 								<!-- email -->
 								@if (auth()->check() and isset(auth()->user()->email))
 									<input type="hidden" name="email" value="{{ auth()->user()->email }}">
-								@else
-								<?php $emailError = (isset($errors) and $errors->has('email')) ? ' is-invalid' : ''; ?>
-									<!-- <div class="form-group required">
-										<label for="email" class="control-label">{{ t('Your E-mail') }} <sup>*</sup></label>
-										<div class="input-group">
-											<div class="input-group-prepend">
-												<span class="input-group-text"><i class="icon-mail"></i></span>
-											</div> -->
-											<input  name="email" type="hidden" maxlength="33" class="form-control{{ $emailError }}" value="report@unifun.com">
-										<!-- </div>
-									</div> -->
 								@endif
-								
+
 								<!-- email -->
-								<!-- @if (auth()->check() and isset(auth()->user()->email))
-									<input type="hidden" name="email" value="{{ auth()->user()->email }}">
-								@else
-								<?php $emailError = (isset($errors) and $errors->has('email')) ? ' is-invalid' : ''; ?>
-									<div class="form-group required">
-										<label for="email" class="control-label">{{ t('Your E-mail') }} <sup>*</sup></label>
-										<div class="input-group">
-											<div class="input-group-prepend">
-												<span class="input-group-text"><i class="icon-mail"></i></span>
-											</div>
-											<input  name="email" type="hidden" maxlength="33" class="form-control{{ $emailError }}" value="mercado@unifun.com">
-										</div>
-									</div>
-								@endif -->
+								@if (auth()->check() and isset(auth()->user()->id))
+									<input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+								@endif
+
 
 								<!-- message -->
 								<?php $messageError = (isset($errors) and $errors->has('message')) ? ' is-invalid' : ''; ?>

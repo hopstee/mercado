@@ -30,10 +30,24 @@ class ReportRequest extends Request
 		$rules = [
 			'report_type_id' => ['required', 'not_in:0'],
 			'phone'          => ['required','max:20'],
-			'email'          => ['required', 'email', new EmailRule(), 'max:100'],
 			'message'        => ['required', new BetweenRule(5, 1000)],
 			'post_id'        => ['required', 'numeric'],
 		];
+
+		if(isEnabledField('email') && !is_null($this->input('email'))){
+			$rules = [
+				'email' => ['email',
+					new EmailRule(), 
+					'max:100'], 
+			];
+		}
+		if ($this->filled('phone')) {
+			$countryCode = $this->input('country_code', config('country.code'));
+			if ($countryCode == 'UK') {
+				$countryCode = 'GB';
+			}
+			$rules['phone'][] = 'phone:' . $countryCode;
+		}
 		
 		// reCAPTCHA
 		$rules = $this->recaptchaRules($rules);

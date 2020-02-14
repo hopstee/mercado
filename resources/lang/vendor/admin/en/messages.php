@@ -250,6 +250,7 @@ return [
     */
 
     'active'                 => 'Active',
+    'reports'                => 'Reports',
     'opened'                 => 'Opened by default',
     'cant_edit_online'       => 'This language file cannot be edited online.',
     'code_iso639-1'          => 'Code (ISO 639-1)',
@@ -370,8 +371,16 @@ return [
     'Pictures' => 'Pictures',
     'Post Type' => 'Post Type',
     'Condition' => 'Condition',
-    'Resume' => 'Resume',
-    'Only if need - Supported file extensions: pdf, doc, docx, jpg or png' => 'Only if need - Supported file extensions: pdf, doc, docx, jpg or png',
+	'Resume' => 'Resume',
+	
+	'Post id' => 'Post id',
+	'User Id' => 'User Id',
+	'From Phone' => 'From Phone',
+	'From Email' => 'From Email',
+	'Report At' => 'Report At',
+	'Report type' => 'Report type',
+	
+	'Only if need - Supported file extensions: pdf, doc, docx, jpg or png' => 'Only if need - Supported file extensions: pdf, doc, docx, jpg or png',
     'User Name' => 'User Name',
     'User Email' => 'User Email',
     'User Phone' => 'User Phone',

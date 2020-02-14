@@ -240,13 +240,26 @@ if (isset(auth()->user()->id)) {
                                     </span>
                                     <span class="detail action center">
                                         <span class="left15">
-                                            <a href="{{ lurl( trans('routes.v-posts-report', ['id'=>$post->id]),$post->id) }}">
-                                                <i class="unir-info gray" style="font-size: 14px;"> </i>
-                                                <!-- <img src="{{ url('images/inform.svg') }}" alt="{{ $post->contact_name }}" class="sidebar-image"> -->
-                                                <span class="actions-text">
-                                                    {{ t('Report abuse')}}
-                                                </span>
-                                            </a>
+                                            @if (auth()->check())
+                                                @if(auth()->user()->id != $post->user_id)
+                                                    <a href="{{ lurl( trans('routes.v-posts-report', ['id'=>$post->id]),$post->id) }}">
+                                                        <i class="unir-info gray" style="font-size: 14px;"> </i>
+                                                        <!-- <img src="{{ url('images/inform.svg') }}" alt="{{ $post->contact_name }}" class="sidebar-image"> -->
+                                                        <span class="actions-text">
+                                                            {{ t('Report abuse')}}
+                                                        </span>
+                                                    </a>
+                                                @endif
+                                            @else
+                                                <a class="make-favorite" id="{{ $post->id }}"
+                                                href="javascript:void(0)">
+                                                    <i class="unir-info gray" style="font-size: 14px;"> </i>
+                                                        <!-- <img src="{{ url('images/inform.svg') }}" alt="{{ $post->contact_name }}" class="sidebar-image"> -->
+                                                        <span class="actions-text">
+                                                            {{ t('Report abuse')}}
+                                                    </span>
+                                                </a>
+                                            @endif
                                         </span>
 
                                         <span>

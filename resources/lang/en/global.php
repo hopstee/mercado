@@ -764,6 +764,7 @@ return [
     'Uploaded file #index successfully' => '\'<li>\' + \'Uploaded file # \' + (index + 1) + \' - \'  + fname + \' successfully.\' + \'</li>\'',
     'File uploaded successfully' => '<li>File uploaded successfully.</li>',
     'Do you want add more pictures?' => 'Do you want add more pictures?',
+    'You arleady send report for this post' =>  'You arleady send report for this post',
     'Add more pictures?' => 'Add more pictures?',
     'Upload pictures' => 'Upload pictures',
     'Upload the picture' => 'Upload the picture',

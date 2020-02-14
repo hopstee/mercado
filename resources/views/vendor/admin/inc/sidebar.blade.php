@@ -77,6 +77,11 @@
                         </ul>
                     </li>
                 @endif
+                @if (auth()->user()->can('list-post') || userHasSuperAdminPermissions())
+                    <li><a href="{{ admin_url('reports') }}"><i class="fa fa-envelope"></i>
+                            <span>{{ trans('admin::messages.reports') }}</span></a></li>
+                @endif
+
 
                 @if (
                     auth()->user()->can('list-user') ||

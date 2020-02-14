@@ -657,6 +657,7 @@ return [
     'The picture #:key must be image.' => 'A Foto #:key tem que ser imagem.',
     'The picture #:key size may not be lower than :min.' => 'O tamanho da foto #:key não pode ser menor que :min.',
     'The picture #:key size may not be greater than :max.' => 'A Foto #:key não pode ser maior que :max.',
+    'You arleady send report for this post' =>  'Você já enviou um reportar para esta postagem',
     'Uploaded file #index successfully' => '\'<li>\' + \'Carregamento do ficheiro # \' + (index + 1) + \' - \'  + fname + \' com sucesso.\' + \'</li>\'',
     'File uploaded successfully' => '<li>Carregamento do ficheiro com sucesso.</li>',
     'Do you want add more pictures?' => 'Deseja adicionar mais fotos?',

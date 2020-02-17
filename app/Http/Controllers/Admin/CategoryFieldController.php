@@ -76,6 +76,7 @@ class CategoryFieldController extends PanelController
 			}
 			$this->xPanel->setParentKeyField('category_id');
 			$this->xPanel->addClause('where', 'category_id', '=', $category->id);
+			$this->xPanel->addClause('orWhere', 'category_id', '=', $category->translation_of);
 			$this->xPanel->setParentRoute(admin_uri('categories'));
 			$this->xPanel->setParentEntityNameStrings(trans('admin::messages.category'), trans('admin::messages.categories'));
 			$this->xPanel->allowAccess(['reorder', 'parent']);
@@ -90,6 +91,7 @@ class CategoryFieldController extends PanelController
 			);
 			$this->xPanel->setParentKeyField('field_id');
 			$this->xPanel->addClause('where', 'field_id', '=', $field->id);
+			// $this->xPanel->addClause('oRwhere', 'field_id', '=', $field->translation_of);
 			$this->xPanel->setParentRoute(admin_uri('custom_fields'));
 			$this->xPanel->setParentEntityNameStrings(trans('admin::messages.custom field'), trans('admin::messages.custom fields'));
 			$this->xPanel->allowAccess(['parent']);

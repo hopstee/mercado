@@ -41,7 +41,8 @@ class SubCategoryController extends PanelController
         |--------------------------------------------------------------------------
         */
         $this->xPanel->setModel('App\Models\Category');
-        $this->xPanel->setRoute(admin_uri('categories/' . $this->parentId . '/subcategories'));
+        // $this->xPanel->setRoute(admin_uri('categories/' . $this->parentId . '/subcategories'));
+        $this->xPanel->setRoute(admin_uri('categories/' . $parent->translation_of . '/subcategories'));
 
         if (!isset($_entry)) {
             $this->xPanel->setEntityNameStrings(
@@ -64,7 +65,8 @@ class SubCategoryController extends PanelController
 
         $this->xPanel->enableParentEntity();
         $this->xPanel->setParentKeyField('parent_id');
-        $this->xPanel->addClause('where', 'parent_id', '=', $this->parentId);
+        // $this->xPanel->addClause('where', 'parent_id', '=', $this->parentId);
+        $this->xPanel->addClause('orWhere', 'parent_id', '=', $parent->translation_of);
 
 
         $temp = $this->xPanel->getEntry($this->parentId);
@@ -81,7 +83,7 @@ class SubCategoryController extends PanelController
 
         $this->xPanel->addButtonFromModelFunction('top', 'bulk_delete_btn', 'bulkDeleteBtn', 'end');
         $this->xPanel->addButtonFromModelFunction('line', 'custom_fields', 'customFieldsBtn', 'beginning');
-        $this->xPanel->addButtonFromModelFunction('line', 'sub_categories', 'subCategoriesBtn', 'beginning');
+        // $this->xPanel->addButtonFromModelFunction('line', 'sub_categories', 'subCategoriesBtn', 'beginning');
 
         /*
         |--------------------------------------------------------------------------

@@ -55,14 +55,14 @@ class PostController extends PanelController
 				$this->xPanel->addClause('where', 'verified_email', '=', 0);
 				$this->xPanel->addClause('orWhere', 'verified_phone', '=', 0);
 				if (config('settings.single.posts_review_activation')) {
-					$this->xPanel->addClause('orWhere', 'reviewed', '=', 0);
+					$this->xPanel->addClause('orWhere', 'reviewed', '=', 1);
 				}
 			}
 			if (request()->get('active') == 1) {
 				$this->xPanel->addClause('where', 'verified_email', '=', 1);
 				$this->xPanel->addClause('where', 'verified_phone', '=', 1);
 				if (config('settings.single.posts_review_activation')) {
-					$this->xPanel->addClause('where', 'reviewed', '>=', 0);	
+					$this->xPanel->addClause('where', 'reviewed', '=', 2);	
 				}
 			}
 		}

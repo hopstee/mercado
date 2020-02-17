@@ -92,7 +92,14 @@
 								<?php $messageError = (isset($errors) and $errors->has('message')) ? ' is-invalid' : ''; ?>
 								<div class="form-group required">
 									<label for="message" class="control-label">{{ t('MessageLabel') }} <sup>*</sup> <span class="text-count"></span></label>
-									<textarea id="message" placeholder="{{ t('Message') }}" name="message" class="form-control{{ $messageError }}" rows="10">{{ old('message') }}</textarea>
+									<textarea 	id="message" 
+												placeholder="{{ t('Message') }}" 
+												name="message" 
+												class="form-control{{ $messageError }}" 
+												rows="10"
+												maxlength="6000"
+									>{{ old('message') }}</textarea>
+									<small id="textarea-feedback" class="form-text text-muted"></small>
 								</div>
 								
 								@include('layouts.inc.tools.recaptcha', ['label' => true])
@@ -116,4 +123,20 @@
 
 @section('after_scripts')
 	<script src="{{ url('assets/js/form-validation.js') }}"></script>
+	<script>
+		$(document).ready(function () {
+			var textarea_max = 6000;
+			$("#textarea-feedback").html(textarea_max + "{{ t('characters left') }}");
+			$('#message').keyup(function() {
+				var textarea_length = $('#message').val().length,
+						textarea_remaining = textarea_max - textarea_length;
+
+				if (textarea_length === 0) {
+					$('#textarea-feedback').html(textarea_max + "{{ t('characters left') }}");
+				} else {
+					$('#textarea-feedback').html(textarea_remaining + "{{ t('characters left') }}");
+				}
+			});
+		});
+	</script>
 @endsection

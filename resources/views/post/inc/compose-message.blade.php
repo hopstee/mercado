@@ -126,14 +126,14 @@
 					<?php $messageError = (isset($errors) and $errors->has('message')) ? ' is-invalid' : ''; ?>
 					<div class="form-group required">
 						<label for="message" class="control-label">
-							{{ t('Message') }} <span class="text-count">(500 max)</span> <sup>*</sup>
+							{{ t('Message') }} <sup>*</sup>
 						</label>
 						<textarea id="message"
 								  name="message"
 								  class="form-control required{{ $messageError }}"
 								  placeholder="{{ t('Your message here...') }}"
 								  rows="5"
-								  maxlength="500"
+								  maxlength="6000"
 						>{{ old('message') }}</textarea>
 						<small id="textarea-feedback" class="form-text text-muted"></small>
 					</div>

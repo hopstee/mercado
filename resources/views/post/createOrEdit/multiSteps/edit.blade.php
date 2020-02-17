@@ -63,8 +63,7 @@ if ($post->category) {
 												<h3>
 													<strong>{{ t('Ads information') }} 
 														<a href="{{ \App\Helpers\UrlGen::post($post) }}" class="tooltipHere" title="" data-placement="top"
-															data-toggle="tooltip"
-															data-original-title="{!! $post->title !!}">
+															data-toggle="tooltip">
 															{!! \Illuminate\Support\Str::limit($post->title, 45) !!}
 														</a>
 													</strong>

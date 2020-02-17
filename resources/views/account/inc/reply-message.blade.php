@@ -32,14 +32,14 @@
 					<?php $messageError = (isset($errors) and $errors->has('message')) ? ' is-invalid' : ''; ?>
 					<div class="form-group required">
 						<label for="message" class="control-label">
-							{{ t('Message') }} <span class="text-count">({{ t(':number max', ['number' => 500]) }})</span> <sup>*</sup>
+							{{ t('Message') }} <sup>*</sup>
 						</label>
 						<textarea id="message"
 								  name="message"
 								  class="form-control required{{ $messageError }}"
 								  placeholder="{{ t('Message...') }}"
 								  rows="5"
-								  maxlength="500"
+								  maxlength="6000"
 						>{{ old('message') }}</textarea>
 						<small id="textarea-feedback" class="form-text text-muted"></small>
 					</div>
@@ -65,7 +65,7 @@
 				$('#replyTo{{ $conversation->id }}').modal();
 			@endif
 		});
-		var textarea_max = 500;
+		var textarea_max = 6000;
 		$("#textarea-feedback").html(textarea_max + "{{ t('characters left') }}");
 		$('#message').keyup(function() {
 			var textarea_length = $('#message').val().length,

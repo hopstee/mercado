@@ -57,7 +57,7 @@ if (!isset($languageCode) or empty($languageCode)) {
             @endif
             <div class="col-md-8 order-md-1 order-2">
                 <div class="contact-form">
-                    <h2 class="py-3" style="padding-top:30px !important;">
+                    <h2 class="py-3" style="padding-top:27px !important;">
                         <span class="title-3">{{ t('Contact Us') }}</span>
                     </h2>
                     <form class="form-horizontal" method="post" enctype="multipart/form-data" action="{{ lurl(trans('routes.contact-us')) }}">
@@ -153,7 +153,7 @@ if (!isset($languageCode) or empty($languageCode)) {
                                                     class="form-control{{ $messageError }}"                                                 
                                                     placeholder="{{ t('Message') }}" 
                                                     rows="7"
-                                                    maxlength="500"
+                                                    maxlength="6000"
                                         >{{ old('message') }}</textarea>
                                         <small id="message-feedback" class="form-text text-muted"></small>
                                     </div>
@@ -193,7 +193,7 @@ if (!isset($languageCode) or empty($languageCode)) {
 
     <script>
         $(document).ready(function() {
-            var textarea_max = 500;
+            var textarea_max = 6000;
             $('#message-feedback').html(textarea_max + "{{ t('characters left') }}");
 
             $('#message').keyup(function() {

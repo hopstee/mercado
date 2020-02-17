@@ -965,7 +965,7 @@ if (isset(auth()->user()->id)) {
             $( ".bx-controls-direction" ).append( "<div class='prev' ><i class='unib-larrow2'></i></div>" );
             $( ".bx-controls-direction" ).append( "<div class='next' ><i class='unib-rarrow2' ></i></div>" );
 
-            var textarea_max = 500;
+            var textarea_max = 6000;
             $("#textarea-feedback").html(textarea_max + "{{ t('characters left') }}");
             $('#message').keyup(function() {
                 var textarea_length = $('#message').val().length,

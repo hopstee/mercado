@@ -1,5 +1,6 @@
 @if ($paginator->hasPages())
     <ul class="pagination justify-content-start" role="navigation">
+
         {{-- Previous Page Link --}}
         @if ($paginator->onFirstPage())
             <li class="page-item disabled" aria-disabled="true" aria-label="@lang('pagination.previous')">
@@ -33,11 +34,13 @@
                 @endif
             @endif
         @endforeach
-        @if($paginator->currentPage() < $paginator->lastPage() - 3)
-            <li class="page-item disabled"><span class="page-link">...</span></li>
-        @endif
-        @if($paginator->currentPage() < $paginator->lastPage() - 2)
-            <li class="page-item"><a class="page-link" href="{{ $paginator->url($paginator->lastPage()) }}">{{ $paginator->lastPage() }}</a></li>
+        @if($paginator->lastPage() > 10)
+            @if($paginator->currentPage() < $paginator->lastPage() - 3)
+                <li class="page-item disabled"><span class="page-link">...</span></li>
+            @endif
+            @if($paginator->currentPage() < $paginator->lastPage() - 2)
+                <li class="page-item"><a class="page-link" href="{{ $paginator->url($paginator->lastPage()) }}">{{ $paginator->lastPage() }}</a></li>
+            @endif
         @endif
 
         <!-- {{-- Pagination Elements --}}

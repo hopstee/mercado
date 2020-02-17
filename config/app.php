@@ -30,9 +30,9 @@ return [
     | services your application utilizes. Set this in your ".env" file.
     |
     */
-    
+
     'env' => (function_exists('env')) ? env('APP_ENV', 'local') : 'local',
-    
+
     /*
     |--------------------------------------------------------------------------
     | Application Debug Mode
@@ -43,9 +43,9 @@ return [
     | application. If disabled, a simple generic error page is shown.
     |
     */
-    
+
     'debug' => (function_exists('env')) ? env('APP_DEBUG', true) : true,
-    
+
     /*
     |--------------------------------------------------------------------------
     | Application URL
@@ -85,7 +85,7 @@ return [
     |
     */
 
-    'locale' => (function_exists('env')) ? env('APP_LOCALE', 'en') : 'en',
+    'locale' => (function_exists('env')) ? env('APP_LOCALE', 'pt') : 'pt',
 
     /*
     |--------------------------------------------------------------------------
@@ -114,7 +114,7 @@ return [
     'key' => (function_exists('env')) ? env('APP_KEY', 'SomeRandomStringWith32Characters') : 'SomeRandomStringWith32Characters',
 
     'cipher' => 'AES-256-CBC',
-    
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
@@ -125,9 +125,9 @@ return [
     | this array to grant expanded functionality to your applications.
     |
     */
-    
+
     'providers' => [
-        
+
         /*
          * Laravel Framework Service Providers...
          */
@@ -153,7 +153,7 @@ return [
 		LarapenIlluminate\Translation\TranslationServiceProvider::class,
 		Illuminate\Validation\ValidationServiceProvider::class,
 		Illuminate\View\ViewServiceProvider::class,
-        
+
         /*
          * Application Service Providers...
          */
@@ -161,7 +161,7 @@ return [
 		App\Providers\DropboxServiceProvider::class,
 		App\Providers\BackblazeServiceProvider::class,
 		App\Providers\DigitalOceanServiceProvider::class,
-		
+
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
 		// App\Providers\BroadcastServiceProvider::class,
@@ -182,10 +182,10 @@ return [
 		Larapen\Impersonate\ImpersonateServiceProvider::class,
 		Jackiedo\DotenvEditor\DotenvEditorServiceProvider::class,
 		Unicodeveloper\Paystack\PaystackServiceProvider::class,
-    
-    
+
+
     ],
-    
+
     /*
     |--------------------------------------------------------------------------
     | Class Aliases
@@ -196,9 +196,9 @@ return [
     | the aliases are "lazy" loaded so they don't hinder performance.
     |
     */
-    
+
     'aliases' => [
-	
+
 		'App' => Illuminate\Support\Facades\App::class,
 		'Arr' => Illuminate\Support\Arr::class,
 		'Artisan' => Illuminate\Support\Facades\Artisan::class,
@@ -234,7 +234,7 @@ return [
 		'URL' => Illuminate\Support\Facades\URL::class,
 		'Validator' => Illuminate\Support\Facades\Validator::class,
 		'View' => Illuminate\Support\Facades\View::class,
-		
+
         'Flash' => Laracasts\Flash\Flash::class,
         'Gravatar' => Creativeorange\Gravatar\Facades\Gravatar::class,
         'MetaTag' => Torann\LaravelMetaTags\Facades\MetaTag::class,
@@ -243,10 +243,10 @@ return [
 		'DotenvEditor' => Jackiedo\DotenvEditor\Facades\DotenvEditor::class,
         'Alert' => 'Prologue\Alerts\Facades\Alert',
 		'Paystack' => Unicodeveloper\Paystack\Facades\Paystack::class,
-    
-    
+
+
     ],
-    
+
     'version' => '6.9.3',
 
 ];

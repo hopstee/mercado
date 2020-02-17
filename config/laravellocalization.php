@@ -4,7 +4,7 @@ return [
 
     // Negotiate for the user locale using the Accept-Language header if it's not defined in the URL?
     // If false, system will take app.php locale attribute
-    'useAcceptLanguageHeader' => true,
+    'useAcceptLanguageHeader' => false,
 
     // If LaravelLocalizationRedirectFilter is active and hideDefaultLocaleInURL
     // is true, the url would not have the default application language
@@ -16,7 +16,7 @@ return [
     // If you want to display the locales in particular order in the language selector you should write the order here.
     //CAUTION: Please consider using the appropriate locale code otherwise it will not work
     //Example: 'localesOrder' => ['es','en'],
-    'localesOrder' => ['en', 'pt'],
+    'localesOrder' => ['pt', 'en'],
 
 	//  If you want to use custom lang url segments like 'at' instead of 'de-AT',
 	// you can use the mapping to tallow the LanguageNegotiator to assign the descired locales based on HTTP Accept Language Header.

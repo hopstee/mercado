@@ -95,7 +95,7 @@ class CategoryController extends BaseController
         // Get Custom Fields
         $customFields = CategoryField::newGetFields($this->categoryTree);
         view()->share('customFields', $customFields);
-
+ 
         // Search
         $search = new $this->searchClass();
         $searchedCats = $this->makeRootTree($this->categoryTree->last()->translation_of);

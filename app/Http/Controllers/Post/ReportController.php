@@ -95,7 +95,7 @@ class ReportController extends FrontController
         $message['post_id'] = $post->id;
         $message = ArrayHelper::toObject($message);
 
-        if(ReportSend::where('post_id', $request->input('post_id'))->where('user_id',$request->input('user_id'))->count() > 1){
+        if(ReportSend::where('post_id', $request->input('post_id'))->where('user_id',$request->input('user_id'))->count() >= 1){
             flash(t('You arleady send report for this post'))->error();
             return redirect(UrlGen::postUri($post));
         }

@@ -243,7 +243,7 @@ class CreateController extends FrontController
         $user = $this->register($post);
 
         // The Post's creation message
-        if (getSegment(2) == 'create') {
+        if (getSegment(2) == trans('routes.create',[], config('app.locale'))) {
             session()->flash('message', t('Your ad has been created.'));
         }
 
@@ -414,10 +414,10 @@ class CreateController extends FrontController
     public function finish($tmpToken)
     {
         // Keep Success Message for the page refreshing
-        // session()->keep(['message']);
-        // if (!session()->has('message')) {
-        // 	return redirect(config('app.locale') . '/');
-        // }
+        session()->keep(['message']);
+        if (!session()->has('message')) {
+        	return redirect(config('app.locale') . '/');
+        }
 
         // Clear the steps wizard
         if (session()->has('tmpPostId')) {
@@ -439,6 +439,7 @@ class CreateController extends FrontController
         if (auth()->check() || (config('settings.mail.email_verification') != 1 && config('settings.sms.phone_verification') != 1)) {
             if (!empty($post)) {
                 flash(session('message'))->success();
+
                 return redirect(UrlGen::postUri($post));
             }
         }

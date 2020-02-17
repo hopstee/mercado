@@ -366,7 +366,7 @@ return [
     'here' => 'aquí',
     'to send request for unban.' => ' enviar solicitud de destravar.',
     'You exceeded the limit of sending requests.' => 'Você excedeu o limite de envio de solicitações.',
-
+    'Select subcategory'=>'Selecionar subcategoria',
     '! Add e-mail for password recovery.'=>'! Adicionar e-mail para recuperação de senha.',
     'Share' => 'Partilhar',
     'Repost' => 'Renovar',

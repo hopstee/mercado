@@ -536,6 +536,7 @@ if (!function_exists("createFieldNodeTree")) {
                     <input id="{{ $fieldId }}"
                            name="{{ $fieldName }}"
                            type="number"
+                           min="0"
                            step="any"
                            placeholder="{{ $field->name }}"
                            class="form-control input-md{{ $errorClass }} disabled_scroll"
@@ -566,7 +567,7 @@ if (!function_exists("createFieldNodeTree")) {
                            placeholder="{{ $field->name }}"
                            class="form-control input-md{{ $errorClass }}"
                            value="{{ $defaultValue }}"
-                           data-special="{{ $field->max }}"
+                           maxlength="{{ $field->max }}"
                            onkeyup="leftCharacters(this);">  
                            <!-- {{ $field->max }} -->
                     <!-- <small id="" class="form-text text-muted">{!! $field->help !!}</small> -->
@@ -575,14 +576,12 @@ if (!function_exists("createFieldNodeTree")) {
                 <script>
                     function leftCharacters(e){
                         var smallTag = $(e).parent().children('small').prevObject[0].lastElementChild,
-                            text_max = e.getAttribute("data-special"),
+                            text_max = e.getAttribute("maxlength"),
                             text_length = $(smallTag)[0].previousElementSibling.selectionEnd,
                             text_remaining = text_max - text_length;
 
                         if (text_length === 0) {
                             $(smallTag).html(text_max + "{{ t('characters left') }}");
-                        } else if (text_length > text_max) {
-                            $(smallTag).html('Too many characters');
                         } else {
                             $(smallTag).html(text_remaining + "{{ t('characters left') }}");
                         }

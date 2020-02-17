@@ -174,7 +174,7 @@ if ($post->category) {
 													<label class="col-md-2 col-form-label" for="title">{{ t('Title') }} <sup>*</sup></label>
 													<div class="col-md-9">
 														<input id="title" name="title" placeholder="{{ t('Ad title') }}" class="form-control input-md{{ $titleError }}"
-															   type="text" value="{{ old('title', $post->title) }}">
+															   type="text" value="{{ old('title', $post->title) }}" maxlength="55">
 														<small id="input-feedback" class="form-text text-muted"></small>
 													</div>
 												</div>
@@ -551,8 +551,6 @@ if ($post->category) {
 
 				if (text_length === 0) {
 					$('#input-feedback').html(text_max + "{{ t('characters left') }}");
-				} else if (text_length > text_max) {
-					$('#input-feedback').html('Too many characters');
 				} else {
 					$('#input-feedback').html(text_remaining + "{{ t('characters left') }}");
 				}
@@ -562,12 +560,12 @@ if ($post->category) {
 
 	<script>
 		$(document).ready(function() {
-			var textarea_max = 6000,
-			text_remaining = $('.simditor-body').children('p').text().length;
-			$('#textarea-feedback').html(textarea_max - text_remaining + "{{ t('characters left') }}");
+			var textarea_max = 6001,
+			textarea_remaining = $('.simditor-body').children('p').text().length + $('.simditor-body').find('p').length - 1;
+			$('#textarea-feedback').html(textarea_max - 1 - textarea_remaining + "{{ t('characters left') }}");
 
 			$('.simditor-body').keyup(function() {
-				var textarea_length = $(this).children('p').text().length,
+				var textarea_length = $(this).children('p').text().length + $(this).find('p').length,
 					textarea_remaining = textarea_max - textarea_length;
 
 				if (textarea_length === 0) {
@@ -579,6 +577,7 @@ if ($post->category) {
 				}
 			});
 		});
+
 		function checkOnlyDigits(element,event) {
 			if(event.keyCode < 48 || event.keyCode >57){
 				if(event.keyCode!==46){

@@ -973,8 +973,6 @@ if (isset(auth()->user()->id)) {
 
                 if (textarea_length === 0) {
                     $('#textarea-feedback').html(textarea_max + "{{ t('characters left') }}");
-                } else if (textarea_length > textarea_max) {
-                    $('#textarea-feedback').html('Too many characters');
                 } else {
                     $('#textarea-feedback').html(textarea_remaining + "{{ t('characters left') }}");
                 }

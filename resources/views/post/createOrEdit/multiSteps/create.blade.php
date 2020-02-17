@@ -132,7 +132,7 @@
 															class="ns-form-label" for="title">{{ t('Title') }} <sup>*</sup></label>
 													<div>
 														<input id="title" name="title" placeholder="{{ t('Ad title') }}" class="form-control input-md{{ $titleError }}"
-															   type="text" value="{{ old('title') }}">
+															   type="text" value="{{ old('title') }}" maxlength="55">
 														<small id="input-feedback" class="form-text text-muted"></small>
 													</div>
 												
@@ -645,12 +645,12 @@
 	
 	<script>
 		$(document).ready(function() {
-			var textarea_max = 6000,
-			text_remaining = $('.simditor-body').children('p').text().length;
-			$('#textarea-feedback').html(textarea_max - text_remaining + "{{ t('characters left') }}");
+			var textarea_max = 6001,
+			textarea_remaining = $('.simditor-body').children('p').text().length + $('.simditor-body').find('p').length - 1;
+			$('#textarea-feedback').html(textarea_max - 1 - textarea_remaining + "{{ t('characters left') }}");
 
 			$('.simditor-body').keyup(function() {
-				var textarea_length = $(this).children('p').text().length,
+				var textarea_length = $(this).children('p').text().length + $(this).find('p').length,
 					textarea_remaining = textarea_max - textarea_length;
 
 				if (textarea_length === 0) {

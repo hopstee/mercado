@@ -133,6 +133,7 @@
 								  class="form-control required{{ $messageError }}"
 								  placeholder="{{ t('Your message here...') }}"
 								  rows="5"
+								  maxlength="500"
 						>{{ old('message') }}</textarea>
 						<small id="textarea-feedback" class="form-text text-muted"></small>
 					</div>

@@ -39,6 +39,7 @@
 								  class="form-control required{{ $messageError }}"
 								  placeholder="{{ t('Message...') }}"
 								  rows="5"
+								  maxlength="500"
 						>{{ old('message') }}</textarea>
 						<small id="textarea-feedback" class="form-text text-muted"></small>
 					</div>
@@ -72,8 +73,6 @@
 
 			if (textarea_length === 0) {
 				$('#textarea-feedback').html(textarea_max + "{{ t('characters left') }}");
-			} else if (textarea_length > textarea_max) {
-				$('#textarea-feedback').html('Too many characters');
 			} else {
 				$('#textarea-feedback').html(textarea_remaining + "{{ t('characters left') }}");
 			}

@@ -975,7 +975,7 @@ a.sell-your-item-cart{
 }
 
 .block-cell.user{
-    padding-left: 0px;
+    padding: 15px 0px;
 }
 
 .new-button.phoneBtn{
@@ -1215,7 +1215,7 @@ a.sell-your-item-cart{
 }
 
 .post-resume .detail-line-value{
-    margin: 0 0 15px 0 !important;
+    margin: 0 !important;
 }
 
 .post-resume .detail-line-label h4{

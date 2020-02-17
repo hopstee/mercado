@@ -171,7 +171,7 @@ return [
     'Archive' => 'Arquivar',
     'Spam' => 'Spam',
     'Your account has been deleted.' => 'A sua conta foi apagada.',
-    'Re-register successfully.'=>'Re-register successfully.',
+    'Re-register successfully.'=>'Re-registrar com êxito.',
     'To favorites.' => 'Aos favoritos',
     'Ads information' => 'Ads information',
     'Similar Ads'=>'Anúncios Semelhantes',

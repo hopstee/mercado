@@ -75,7 +75,7 @@
             uploadExtra: 'form data upload'
         },
         dropZoneTitle: 'Arrastar e largar ficheiros aqui &hellip;',
-        dropZoneClickTitle: '<br>(or click to select {files})',
+        dropZoneClickTitle: '<br>(ou clique para selecionar {files})',
         fileActionSettings: {
             removeTitle: 'Remover arquivo',
             uploadTitle: 'Carregar arquivo',

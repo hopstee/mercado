@@ -268,7 +268,7 @@ return [
     'Post title' => 'Titulo do Anúncio',
     'A great title from 10 to 55 characters.' => 'Um ótimo título de 10 a 55 caracteres.',
     'Describe ad' => 'Descrever anúncio',
-    'Describe what makes your ad unique from 5 to 3000 characters.' => 'Descreva o que torna seu anúncio exclusivo de 5 a 3000 caracteres.',
+    'Describe what makes your ad unique' => 'Descreva o que torna seu anúncio exclusivo',
     'Price' => 'Preço',
     'Reviewed'=>'Revisado',
     'Declined'=>'Recusado',
@@ -361,7 +361,7 @@ return [
     'Visitors' => 'Visitantes',
     'Located In' => 'Localizado em',
     'Edit' => 'Editar',
-    
+    'Show negotiable ads' => 'Mostrar anúncios negociáveis',
     'Click' => 'Haga clic',
     'here' => 'aquí',
     'to send request for unban.' => ' enviar solicitud de destravar.',

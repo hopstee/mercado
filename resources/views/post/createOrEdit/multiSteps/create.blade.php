@@ -568,7 +568,7 @@
 
 		/* Custom Fields */
 		var errors = '{!! addslashes($errors->toJson()) !!}';
-		var oldInput = '{!! addslashes(collect(session()->getOldInput('cf'))->toJson()) !!}';
+		var oldInput = '{!! addslashes(collect(session()->getOldInput('cf'))->toJson(JSON_UNESCAPED_UNICODE)) !!}';
 		var postId = '';
 
 		/* Locations */

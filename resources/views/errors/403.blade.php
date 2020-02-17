@@ -31,8 +31,8 @@
 
                         <div class="error-page" style="margin: 100px 0;">
                             <h2 class="headline text-center" style="font-size: 180px; float: none;"> 403</h2>
-                            <div class="text-center m-l-0" style="margin-top: 60px;">
-                                <h3 class="m-t-0"><i class="fa fa-warning"></i> Forbidden.</h3>
+                            <div class="text-center m-l-0" style="margin-top:  5%;">
+                                <h3 class="m-t-0"> Forbidden.</h3>
                                 <p>
                                     <?php
 									$defaultErrorMessage = "Meanwhile, you may <a href='".url('admin')."'>return to homepage</a>";

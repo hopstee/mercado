@@ -202,11 +202,19 @@ hr{
 
 
 /* for errorpage */
+.error-page{
+    text-align:center;
+}
+
+.headline.text-center{
+    padding-bottom: 0px;
+}
+
 #errorImage{
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 50%;
+    width: 70%;
 }
 .headline.text-center{
     font-size: 90px; 
@@ -351,7 +359,7 @@ ul.list.list-error{
         width: 100%;
         padding: 0;
         margin-bottom: 20px;
-
+    }
     .user-panel-sidebar{
         margin-top: 2px;
     }
@@ -362,4 +370,24 @@ ul.list.list-error{
 }
 .disabled_scroll::-webkit-inner-spin-button {
     display: none;
+}
+
+/*for buttons on edit cv*/
+#customFields .btn.btn-default {
+    color: #fff;
+    margin-top: unset !important;
+    background-color: #47BD99;
+    border: none !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#customFields .btn.btn-default:hover{
+    background-color: #36a986 !important;
+}
+
+#customFields .button-wrap,
+#customFields .button-download {
+    display: inline-block;
 }

@@ -199,8 +199,13 @@
         </div>
     </aside>
 </div>
-<script>
-    $(document).ready(function(){
-            $(".dropdown-menu.navbar-mobile.user-menu.dropdown-menu-right").addClass("show");
+@section('after_scripts')
+
+    <script>
+        $(document).ready(function () {
+            $('.nav-item.dropdown').addClass('show');
+
+            $("#userMenuDropdown").addClass("show");
         });
-</script>
+    </script>
+@endsection

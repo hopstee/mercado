@@ -1398,9 +1398,9 @@ div.filter-content .form-check .cntr,
     cursor: pointer;
     border-radius: 4px;
     background-color: #0288d1;
-    font-size: 12px;
+    font-size: 14px;
     color: #fff;
-    padding: 10px 18px;
+    /*padding: 10px 18px;*/
 }
 .custom-button-upfile:hover{
     background-color: #007cc0;

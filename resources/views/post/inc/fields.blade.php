@@ -191,10 +191,20 @@ if (!function_exists("createFieldNodeTree")) {
                                type="file" class="file{{ $errorClass }}">
                     </div> -->
                     <div class="button-wrap">
-                        <label class ="custom-button-upfile" for="{{ $fieldId }}"> Upload CV </label>
+                        <label class ="custom-button-upfile" for="{{ $fieldId }}"> {{ t('Upload CV') }} </label>
                         <input class="custom-upfile" id="{{ $fieldId }}" name="{{ $fieldName }}" type="file" class="file{{ $errorClass }}">
                         <div id="fileName"></div>
                     </div>
+                    @if (!empty($field->default) and $disk->exists($field->default))
+                        <div class="button-download">
+{{--                            <label class ="custom-button-upfile" for="{{ $fieldId }}"> {{ t('Download CV') }} </label>--}}
+
+                            <a class="btn btn-default"
+                               href="{{ fileUrl($field->default) }}"
+                               target="_blank">{{ t('Download CV') }}
+                            </a>
+                        </div>
+                    @endif
                     <script>
                         $(".custom-upfile").on('change', function () {
                             let e = $(".custom-upfile")[0].value.split('\\');
@@ -213,15 +223,7 @@ if (!function_exists("createFieldNodeTree")) {
                     <small style="display:block;"  class="text-muted">
                         {!! $field->help !!} {{ t('File types: :file_types', ['file_types' => showValidFileTypes('file')], 'global', $languageCode) }}
                     </small>
-                    @if (!empty($field->default) and $disk->exists($field->default))
-                        <div>
-                            <a class="btn btn-default"
-                               href="{{ fileUrl($field->default) }}"
-                               target="_blank">
-                                <i class="icon-attach-2"></i> {{ t('Download') }}
-                            </a>
-                        </div>
-                    @endif
+
                 </div>
             </div>
 

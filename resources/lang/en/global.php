@@ -1026,7 +1026,8 @@ return [
 	'Login with LinkedIn' => 'Login with <strong>LinkedIn</strong>',
 
     '/'=>"/en",
-
+    'Download CV'=>'Download CV',
+    'Upload CV'=>'Upload CV',
 
 
 

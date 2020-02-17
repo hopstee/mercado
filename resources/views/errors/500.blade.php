@@ -31,8 +31,8 @@
 						<img id="errorImage" src="{{ url('images/errors/500.svg') }}">
 						
 							<h2 class="headline text-center" > 500</h2>
-							<div class="text-center m-l-0" style="margin-top: 60px;">
-								<h3 class="m-t-0"><i class="fa fa-warning"></i> {{t('Internal Server Error')}}</h3>
+							<div class="text-center m-l-0" style="margin-top:  5%;">
+								<h3 class="m-t-0"> {{t('Internal Server Error')}}</h3>
 								<p>
 									<?php
 									$defaultErrorMessage = t('Please try again later.</br>We\'re working hard to fix the problem as soon as possible.');

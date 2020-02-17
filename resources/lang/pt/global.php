@@ -920,4 +920,6 @@ return [
     'Login with LinkedIn' => 'Entrar com o <strong>LinkedIn</strong>',
     'Today' => 'Agora',
     '/'=>"/pt",
+    'Upload CV'=>'Carregar CV',
+    'Download CV'=>'Baixar CV',
 ];

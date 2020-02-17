@@ -1564,7 +1564,8 @@ function getUploadFileTypes($uploadType = 'file', $jsFormat = false)
 	if ($uploadType == 'image') {
 		$types = config('settings.upload.image_types', 'jpg,jpeg,gif,png');
 	} else {
-		$types = config('settings.upload.file_types', 'pdf,doc,docx,word,rtf,rtx,ppt,pptx,odt,odp,wps,jpeg,jpg,bmp,png');
+        config(array('settings.upload.file_types'=>'pdf,doc,odt,jpeg,png'));
+        $types = config('settings.upload.file_types');
 	}
 
 	$separators = ['|', '-', ';', '.', '/', '_', ' '];

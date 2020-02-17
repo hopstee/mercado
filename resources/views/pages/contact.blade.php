@@ -148,8 +148,14 @@ if (!isset($languageCode) or empty($languageCode)) {
                                 <div class="col-md-12">
                                     <?php $messageError = (isset($errors) and $errors->has('message')) ? ' is-invalid' : ''; ?>
                                     <div class="form-group required">
-                                        <textarea class="form-control{{ $messageError }}" id="message" name="message"
-                                            placeholder="{{ t('Message') }}" rows="7">{{ old('message') }}</textarea>
+                                        <textarea   id="message" 
+                                                    name="message" 
+                                                    class="form-control{{ $messageError }}"                                                 
+                                                    placeholder="{{ t('Message') }}" 
+                                                    rows="7"
+                                                    maxlength="500"
+                                        >{{ old('message') }}</textarea>
+                                        <small id="message-feedback" class="form-text text-muted"></small>
                                     </div>
 
                                     @include('layouts.inc.tools.recaptcha')
@@ -183,5 +189,23 @@ if (!isset($languageCode) or empty($languageCode)) {
 @endsection
 
 @section('after_scripts')
-<script src="{{ url('assets/js/form-validation.js') }}"></script>
+    <script src="{{ url('assets/js/form-validation.js') }}"></script>
+
+    <script>
+        $(document).ready(function() {
+            var textarea_max = 500;
+            $('#message-feedback').html(textarea_max + "{{ t('characters left') }}");
+
+            $('#message').keyup(function() {
+			var textarea_length = $('#message').val().length,
+                textarea_remaining = textarea_max - textarea_length;
+
+			if (textarea_length === 0) {
+				$('#message-feedback').html(textarea_max + "{{ t('characters left') }}");
+			} else {
+				$('#message-feedback').html(textarea_remaining + "{{ t('characters left') }}");
+			}
+		});
+        });
+    </script>
 @endsection

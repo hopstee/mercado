@@ -5,6 +5,10 @@
                 <ul>
                     <?php 
                         $urlWithLang= $_SERVER['REQUEST_URI'];
+                        if(strpos($urlWithLang,'?')!==false){
+                            $urlWithLang=substr($urlWithLang,0,strpos($urlWithLang,'?'));
+                        }
+
                     ?>
                     @foreach ($catChildren as $iSubCat)
                         <li>

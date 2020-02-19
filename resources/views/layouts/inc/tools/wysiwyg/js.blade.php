@@ -72,7 +72,7 @@
                 if (mobilecheck()) {
                     toolbar = mobileToolbar;
                 }
-                allowedTags = ['br','span','a','img','b','strong','i','strike','u','font','p','ul','ol','li','blockquote','pre','h1','h2','h3','h4','hr','table'];
+                allowedTags = ['br','span','a','img','b','strong','i','strike','u','font','p','ul','ol','li','blockquote','pre','hr','table'];
                 editor = new Simditor({
                     textarea: $('#description'),
                     placeholder: '{{ t('Describe what makes your ad unique') }}...',
@@ -81,8 +81,8 @@
                     defaultImage: '{{ asset('assets/plugins/simditor/images/image.png') }}',
                     upload: false,
                     allowedTags: allowedTags,
-                    cleanPaste: true,
-                    toolbarFloat:false
+                    toolbarFloat:false,
+                    cleanPaste: false
                 });
                 $preview = $('#preview');
                 if ($preview.length > 0) {

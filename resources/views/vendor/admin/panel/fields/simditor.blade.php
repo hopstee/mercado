@@ -62,6 +62,7 @@
                 upload: false,
                 allowedTags: allowedTags,
                 allowedAttributes: allowedAttributes,
+                cleanPaste: true
             });
             $preview = $('#preview');
             if ($preview.length > 0) {

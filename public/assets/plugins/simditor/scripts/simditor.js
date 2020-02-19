@@ -2212,7 +2212,7 @@ Clipboard = (function(superClass) {
 
   Clipboard.prototype.opts = {
     pasteImage: false,
-    cleanPaste: false
+    cleanPaste: true,
   };
 
   Clipboard.prototype._init = function() {
@@ -2309,6 +2309,9 @@ Clipboard = (function(superClass) {
         } else {
           pasteContent = $('<div/>').append(_this._pasteBin.contents());
           pasteContent.find('table colgroup').remove();
+          pasteContent.find('h1, h2, h3, h4').replaceWith(function(){
+            return $("<p/>", {html: $(this).html()});
+          });
           _this.editor.formatter.format(pasteContent);
           _this.editor.formatter.decorate(pasteContent);
           _this.editor.formatter.beautify(pasteContent.children());

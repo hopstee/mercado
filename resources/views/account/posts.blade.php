@@ -200,7 +200,7 @@
 													</p>
 													<p class="add-info">
 														<strong><i class="unir-clock" title="{{ t('Posted On') }}"></i></strong>&nbsp;
-														{{ $post->created_at->formatLocalized(config('settings.app.default_datetime_format')) }}
+														{{ \App\Helpers\DateTime::setData($post->created_at, true) }}
 													</p>
 													<p class="add-info">
 														<strong><i class="unir-eye" title="{{ t('Visitors') }}"></i></strong> {{ $post->visits ?? 0 }}
@@ -259,7 +259,7 @@
 													<span class="info-row">
 														<p class="info-row-home">
 															<strong><i class="unir-clock" title="{{ t('Posted On') }}"></i></strong>&nbsp;
-															{{ $post->created_at->formatLocalized(config('settings.app.default_datetime_format')) }}
+															{{ \App\Helpers\DateTime::setData($post->created_at, true) }}
 														</p>
 														<p class="info-row-home">
 															<strong><i class="unir-eye" title="{{ t('Visitors') }}"></i></strong>&nbsp; {{ $post->visits ?? 0 }} &nbsp;

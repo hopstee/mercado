@@ -88,7 +88,7 @@
 								<div class="head-message cabinet">
 									<h1 class="page-sub-header2 clearfix no-padding">{{ $user->name }} </h1>
 									<!-- <span class="page-sub-header-sub">
-                                        {{ t('Previous Log In') }}: {{ $user->last_login_at->formatLocalized(config('settings.app.default_datetime_format')) }}
+                                        {{ t('Previous Log In') }}: {{ \App\Helpers\DateTime::setData($user->last_login_at, 's') }}
                                     </span> -->
 								</div>
 
@@ -105,11 +105,11 @@
 									</div>
 									<div class="user-info">
 										<span class="page-sub-header-sub">
-											{{ t('Previous Log In') }}: </br> {{ $user->last_login_at->formatLocalized(config('settings.app.default_date_format_mod')) }}
+											{{ t('Previous Log In') }}: </br> {{ \App\Helpers\DateTime::setData($user->last_login_at, null, 's') }}
 										</span>
 										</br>
 										<span class="on-site-date">
-											{{ t('On site since') }}: </br> {{ $user->created_at->formatLocalized(config('settings.app.default_date_format_mod')) }}
+											{{ t('On site since') }}: </br> {{ \App\Helpers\DateTime::setData($user->created_at, null, 's') }}
 										</span>
 									</div>
 								</div>

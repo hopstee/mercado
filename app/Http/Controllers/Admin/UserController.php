@@ -340,7 +340,7 @@ class UserController extends PanelController
 					$btnLink = "<select id='ban_type_id' class='btn btn-danger' name='ban_type_id'
 							onchange='window.location = $(this).val();'
 						type='submit' value='" . trans('admin::messages.ban_the_user') .
-					"'><option>" .trans('admin::messages.ban_the_user') . "</option>" . $values . "</select>";
+					"'><option disabled selected>" .trans('admin::messages.ban_the_user') . "</option>" . $values . "</select>";
 
 					$this->xPanel->addField([
 						'name'              => 'ban_type',

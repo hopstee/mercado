@@ -144,7 +144,7 @@ h3.cat-title,
     margin:2.5px 5px;
 }
 
-div.collapse{
+div.cat-list > div.collapse{
     margin-left: 15px;
 }
 

@@ -44,7 +44,8 @@
 						<hr class="mt-1">
 						<h4>{{ t('There\'s something wrong with this ads?') }}</h4>
 		
-						<form role="form" method="POST" action="{{ lurl('posts/' . $post->id . '/report') }}">
+						<!-- <form role="form" method="POST" action="{{ lurl('posts/' . $post->id . '/report') }}"> -->
+						<form role="form" method="POST" action="{{ lurl(trans('routes.v-posts-report', ['id'=>$post->id] ), $post->id) }}">
 							{!! csrf_field() !!}
 							<fieldset>
 								<!-- report_type_id -->

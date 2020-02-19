@@ -1632,4 +1632,7 @@ ul.equip-list{
         height: 0px;
         margin-top: 0px;
     }
+    .postFooter{
+        height:40px;
+    }
 }

@@ -186,7 +186,7 @@
 
 </div>
 @section('footer')
-	@include('layouts.inc.footer')
+	@include('layouts.inc.footer') 
 @show
 
 @section('modal_location')

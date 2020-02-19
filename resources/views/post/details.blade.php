@@ -758,6 +758,7 @@ if (isset(auth()->user()->id)) {
 
         @if (config('settings.single.similar_posts') == '1' || config('settings.single.similar_posts') == '2')
             @include('home.inc.featured', ['firstSection' => false])
+            <div class="postFooter"></div>
         @endif
 
         @include('layouts.inc.advertising.bottom', ['firstSection' => false])
@@ -1003,10 +1004,10 @@ if (isset(auth()->user()->id)) {
         function dependentSize(){
             if ($(window).width() <= 992) {
                 
-                $(".footer-content .row").attr("style", "padding-bottom: 40px;");
-                
                 $(".new-button.phoneBtn").attr("data-toggle","");
                 $(".new-button.phoneBtn").attr("data-target","");
+                
+                $(".main-footer").hide();
 
                 $("#desktopView").hide();
                 $("#mobileView").show();
@@ -1024,6 +1025,8 @@ if (isset(auth()->user()->id)) {
 
                 $(".new-button.phoneBtn").attr("data-toggle","modal");
                 $(".new-button.phoneBtn").attr("data-target","#phoneModal");
+
+                $(".main-footer").show();
 
                 $("#mobileView").hide();
                 $("#desktopView").show();

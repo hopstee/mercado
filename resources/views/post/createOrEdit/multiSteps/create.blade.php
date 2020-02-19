@@ -178,7 +178,7 @@
 															   class="form-control{{ $priceError }}"
 															   placeholder="{{ t('e.i. 15000') }}"
 															   type="number" value="{{ old('price') }}"
-															   onkeydown="return checkOnlyDigits(this,event)"
+															   onkeydown="return checkOnlyDigitsForPrice(this,event)"
 														>
 
 														<div class="input-group-append">
@@ -657,6 +657,14 @@
 				}
 			});
 		});
+
+		function checkOnlyDigitsForPrice(element,event) {
+			if(event.keyCode < 48 || event.keyCode >57){
+				if(event.keyCode===46){
+					return false;
+				}
+			}
+		}
 
 		function checkOnlyDigits(element,event) {
 			if(event.keyCode < 48 || event.keyCode >57){

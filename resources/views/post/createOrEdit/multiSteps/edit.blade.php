@@ -223,7 +223,7 @@ if ($post->category) {
 															   placeholder="{{ t('e.i. 15000') }}"
 															   type="number"
 															   value="{{ \App\Helpers\Number::toFloat(old('price', $post->price)) }}"
-															   onkeydown="return checkOnlyDigits(this,event)"
+															   onkeydown="return checkOnlyDigitsForPrice(this,event)"
 														>
 
 														<div class="input-group-append">
@@ -576,6 +576,14 @@ if ($post->category) {
 				}
 			});
 		});
+
+		function checkOnlyDigitsForPrice(element,event) {
+			if(event.keyCode < 48 || event.keyCode >57){
+				if(event.keyCode===46){
+					return false;
+				}
+			}
+		}
 
 		function checkOnlyDigits(element,event) {
 			if(event.keyCode < 48 || event.keyCode >57){

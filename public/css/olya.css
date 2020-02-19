@@ -2,7 +2,21 @@
     padding: 25px 15px 5px 15px;
 }
 .detail-line-value{
-    margin-right: 10px !important;
+    margin-right: 0px !important;
+}
+.row > .detail-line.pb-2, .row > .pr-1 {
+    padding-bottom: 0px !important;
+    padding-left: 0px !important;
+}
+.row > .detail-line.pb-2{
+    padding-right: 1.5rem !important;
+
+}
+.row > .pr-1{
+    padding-right: 15px !important;
+}
+.row#customFields .row.pl-2.pr-2{
+    padding-right: 0px !important;
 }
 
 /* for images in post */
@@ -97,6 +111,12 @@ div#pic {
 }
 .fancybox-progress{
     background: #0288d1 !important;
+}
+
+@media(max-width:575px) {
+    .row > .detail-line.pb-2 {
+        padding-right: 15px !important;
+    }
 }
 
 /* for sitemap */

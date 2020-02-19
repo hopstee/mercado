@@ -69,7 +69,9 @@ if (!isset($languageCode) or empty($languageCode)) {
                                     <div class="form-group required">
                                         <input id="first_name" name="first_name" type="text"
                                             placeholder="{{ t('Name') }}"
-                                            class="form-control{{ $firstNameError }}" value="{{ old('first_name') }}">
+                                            class="form-control{{ $firstNameError }}" value="{{ old('first_name') }}"
+                                            required
+                                        >
                                     </div>
                                 </div>
                                 <!-- N.M. -->
@@ -77,7 +79,10 @@ if (!isset($languageCode) or empty($languageCode)) {
                                     <?php $phoneError = (isset($errors) and $errors->has('phone')) ? ' is-invalid' : ''; ?>
                                     <div class="form-group required">
                                         <input id="phone" name="phone" type="text" placeholder="{{ t('Phone') }}"
-                                            class="form-control{{ $phoneError }}" value="{{ old('phone') }}">
+                                            class="form-control{{ $phoneError }}" value="{{ old('phone') }}"
+                                               pattern="^\+\d{3}\s?\d{2}\s?\d{3}\s?\d{4}$"
+                                               required
+                                        >
                                     </div>
                                 </div>
                                 <!-- END N.M. -->
@@ -101,9 +106,11 @@ if (!isset($languageCode) or empty($languageCode)) {
                                 <div class="col-md-12">
                                     <?php $emailError = (isset($errors) and $errors->has('email')) ? ' is-invalid' : ''; ?>
                                     <div class="form-group required">
-                                        <input id="email" name="email" type="text"
+                                        <input id="email" name="email" type="email"
                                             placeholder="{{ t('E-mail') }}" class="form-control{{ $emailError }}"
-                                            value="{{ old('email') }}">
+                                            value="{{ old('email') }}"
+                                            required
+                                        >
                                     </div>
                                 </div>
                                 <div class="col-md-12">

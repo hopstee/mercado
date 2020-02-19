@@ -130,7 +130,7 @@ class RegisterController extends FrontController
 
 		// R.S
 		// Delete users who has delete prifile one year later
-		$querry = "SELECT * FROM ". DBTool::rawTable('users') . " WHERE deleted_at < NOW() - INTERVAL '1' YEAR";
+		$querry = "SELECT * FROM ". DBTool::rawTable('users') . " WHERE deleted_at < NOW() - INTERVAL '2' MONTH";
 		$deletedUser = DB::select(DB::raw($querry));
 		$deletedUser = ArrayHelper::fromObject($deletedUser);
 		if(is_array($deletedUser) && isset($deletedUser[0]['id'])){

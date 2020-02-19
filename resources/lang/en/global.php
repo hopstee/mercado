@@ -484,7 +484,8 @@ return [
     'Cancel' => 'Cancel', 
     'Send Report' => 'Send',
     'Send request' => 'Send request',
-    
+    'By tap "Send request" you want to unban account with phone number ' => 'By tap "Send request" you want to unban account with phone number ',
+    'We will process your request in next 48 hours. For any questions send message in Contact Us page.' => 'We will process your request in next 48 hours. For any questions send message in Contact Us page.',
     'Warning! This ad has expired. The product or service is not more available (may be)' => '<strong>Warning !</strong> This ad has expired. The product or service is not more available (may be)',
     'Back to Results' => 'Back to Results',
     ':type ad' => ':type ad',

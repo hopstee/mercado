@@ -64,9 +64,9 @@
                                         <!-- phone -->
                                         <div class="form-group required">
                                             <span> 
-                                                By tap "Send request" you want to unban account with phone number 
-                                                <label for="phone" class="control-label">{{ $phone }}</label>.
-                                                We will process your request in next 48 hours. For any questions send message in Contact Us page. 
+                                                {!! t('By tap "Send request" you want to unban account with phone number ') !!}
+                                                <label for="phone" class="control-label" style="margin-bottom: 0px;">{{ $phone }}</label>.
+                                                {!! t('We will process your request in next 48 hours. For any questions send message in Contact Us page.') !!}
                                             </span>
                                             <div class="input-group">
                                                 <input id="phone" name="phone" type="hidden" value="{{ $phone }}">
@@ -85,7 +85,7 @@
                                         <input type="hidden" name="abuseForm" value="1">
 
                                         <div class="form-group form-group-dif">
-                                            <button type="submit" class="btn btn-green btn-lg btn-dif btn-rep">{{ t('Send request') }}</button>
+                                            <button type="submit" class="btn btn-green btn-lg btn-dif btn-rep"  style="padding: 0px;">{{ t('Send request') }}</button>
                                             <a href="{{ rawurldecode(URL::previous()) }}" class="btn btn-default btn-default-dif btn-lg btn-rep btn-grey">{{ t('Back') }}</a>
                                         </div>
                                     </div>

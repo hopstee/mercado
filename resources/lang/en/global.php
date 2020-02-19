@@ -261,6 +261,7 @@ return [
     '2.  Click “Send” button' => '2.  Click “Send” button',
 
     'Data updated successfully.' =>'Data updated successfully.',
+    'This name cannot be used.' => 'This name cannot be used.',
     '! Add e-mail for password recovery.'=>'! Add e-mail for password recovery.',
     '3.  We will send your new password on your email address' => '3.  We will send your new password on your e-mail',
     'Please note – password recovery option is available only for users that previously indicated email address in Mercado.gratice account settings' => 'Please note: password recovery option is available only for users that previously indicated email in Mercado.gratice account settings',

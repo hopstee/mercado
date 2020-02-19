@@ -105,7 +105,7 @@
 											<strong>{{ t("Sender's Phone") }}:</strong> {{ $conversation->from_phone ?? '--' }}<br>
 											<hr>
 											<p style="word-break: break-all;">
-												@if($conversation->from_user_id == 1)
+												@if($conversation->from_name == 'Admin')
 												
 													{!! nl2br($conversation->message) !!}
 												@endif

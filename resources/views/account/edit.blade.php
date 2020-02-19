@@ -237,7 +237,15 @@
 										<label class="col-4 col-form-label required">{{ t('Name') }} <sup>*</sup></label>
 										<div class="form-group flex-block required">
 											<div class="col-12">
-												<input name="name" type="text" class="form-control name-form{{ $nameError }}" placeholder="" value="{{ old('name', $user->name) }}">
+												<input 	name="name" 
+														type="text" 
+														class="form-control name-form{{ $nameError }}" 
+														placeholder="" 
+														value="{{ old('name', $user->name) }}" 
+														oninvalid="this.setCustomValidity('{{ t('This name cannot be used.') }}')"
+														onchange="try{setCustomValidity('')}catch(e){}"
+														oninput="setCustomValidity(' ')"
+														pattern="\b(?:(?![Aa]dmin|ADMIN)\w)+.+\b">
 											</div>
 										</div>
 

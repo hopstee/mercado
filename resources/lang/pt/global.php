@@ -127,7 +127,7 @@ return [
     // NEW HELP
     "Terms of Use" => "Termos de Uso",
     "Privacy Policy" => "Política de Privacidade",
-    "Posting Rules" => "Regras de Publicação",
+    "Posting Rules" => "Regras de Postagem",
     "Tips for Users" => "Dicas para os Utilizadores",
     "FAQ" => "Perguntas Frequentes",
     "Contact Us" => "Contate-nos",

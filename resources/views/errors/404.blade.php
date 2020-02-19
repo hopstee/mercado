@@ -34,7 +34,7 @@
 							<img id="errorImage" src="{{ url('images/errors/404.svg') }}">
 							<h2 class="headline text-center" > 404</h2>
 							<div class="text-center m-l-0" style="margin-top:  5%;">
-								<h3 class="m-t-0">{{ t('Page not found') }} !</h3>
+								<h3 class="m-t-0">{{ t('Page not found') }}!</h3>
 								<p>
 									<?php
 									$defaultErrorMessage = t('Return to <a href="/">homepage</a>');

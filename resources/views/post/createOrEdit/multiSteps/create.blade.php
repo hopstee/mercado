@@ -558,14 +558,14 @@
 		};
 
 		/* Categories */
-		var category = {{ old('parent_id', 0) }};
-		var categoryType = '{{ old('parent_type') }}';
+		var category = "{{ old('parent_id', 0) }}";
+		var categoryType = "{{ old('parent_type') }}";
+		
 		if (categoryType=='') {
 			var selectedCat = $('select[name=parent_id]').find('option:selected');
 			categoryType = selectedCat.data('type');
 		}
-		var subCategory = {{ old('category_id', 0) }};
-
+		var subCategory = "{{ old('category_id', 0) }}";
 		/* Custom Fields */
 		var errors = '{!! addslashes($errors->toJson()) !!}';
 		var oldInput = '{!! addslashes(collect(session()->getOldInput('cf'))->toJson(JSON_UNESCAPED_UNICODE)) !!}';
@@ -580,8 +580,8 @@
 		/* Packages */
 		var packageIsEnabled = false;
         @if (isset($packages) and isset($paymentMethods) and $packages->count() > 0 and $paymentMethods->count() > 0)
-            packageIsEnabled = true;
-        @endif
+			packageIsEnabled = true;
+		@endif
 
 	</script>
 	<script>

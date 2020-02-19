@@ -65,7 +65,7 @@ class CategoryFieldController extends PanelController
 		
 		// Category => CategoryField
 		if ($this->parentEntity == 'categories') {
-			$this->xPanel->setRoute(admin_uri('categories/' . $category->id . '/custom_fields'));
+			$this->xPanel->setRoute(admin_uri('categories/' . $category->translation_of . '/custom_fields'));
 			$this->xPanel->setEntityNameStrings(
 				trans('admin::messages.custom field') . ' &rarr; ' . '<strong>' . $category->name . '</strong>',
 				trans('admin::messages.custom fields') . ' &rarr; ' . '<strong>' . $category->name . '</strong>'
@@ -75,8 +75,8 @@ class CategoryFieldController extends PanelController
 				$this->xPanel->orderBy('lft', 'ASC');
 			}
 			$this->xPanel->setParentKeyField('category_id');
-			$this->xPanel->addClause('where', 'category_id', '=', $category->id);
-			$this->xPanel->addClause('orWhere', 'category_id', '=', $category->translation_of);
+			// $this->xPanel->addClause('where', 'category_id', '=', $category->id);
+			$this->xPanel->addClause('where', 'category_id', '=', $category->translation_of);
 			$this->xPanel->setParentRoute(admin_uri('categories'));
 			$this->xPanel->setParentEntityNameStrings(trans('admin::messages.category'), trans('admin::messages.categories'));
 			$this->xPanel->allowAccess(['reorder', 'parent']);
@@ -84,7 +84,7 @@ class CategoryFieldController extends PanelController
 		
 		// Field => CategoryField
 		if ($this->parentEntity == 'custom_fields') {
-			$this->xPanel->setRoute(admin_uri('custom_fields/' . $field->id . '/categories'));
+			$this->xPanel->setRoute(admin_uri('custom_fields/' . $field->translation_of . '/categories'));
 			$this->xPanel->setEntityNameStrings(
 				'<strong>' . $field->name . '</strong> ' . trans('admin::messages.custom field') . ' &rarr; ' . trans('admin::messages.category'),
 				'<strong>' . $field->name . '</strong> ' . trans('admin::messages.custom fields') . ' &rarr; ' . trans('admin::messages.categories')
@@ -163,7 +163,6 @@ class CategoryFieldController extends PanelController
 		if ($this->parentEntity == 'custom_fields') {
 			$this->xPanel->addField([
 				'name'  => 'field_id',
-				'type'  => 'hidden',
 				'value' => $this->fieldId,
 			], 'create');
 			$this->xPanel->addField([

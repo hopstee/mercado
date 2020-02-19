@@ -1004,6 +1004,8 @@ if (isset(auth()->user()->id)) {
         function dependentSize(){
             if ($(window).width() <= 992) {
                 
+                // $(".footer-content .row").attr("style", "padding-bottom: 40px;");
+                
                 $(".new-button.phoneBtn").attr("data-toggle","");
                 $(".new-button.phoneBtn").attr("data-target","");
                 

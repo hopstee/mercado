@@ -307,5 +307,8 @@
 @if (config('settings.footer.tracking_code'))
 	{!! printJs(config('settings.footer.tracking_code')) . "\n" !!}
 @endif
+<script>
+	$("#userMenuDropdown").addClass("show");
+</script>
 </body>
 </html>

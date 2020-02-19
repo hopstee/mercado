@@ -89,7 +89,7 @@ $(document).ready(function ()
 				return false;
 			}
 		}
-	})
+	});
 
 	$('#showNegotiable').click(function () {
 		var fieldQueryString = $('#negotiableQueryString').val();

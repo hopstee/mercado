@@ -26,8 +26,15 @@
     margin-left: auto;
     display:block !important;
 }
-.owl-carousel .owl-stage-outer,
-.owl-carousel .owl-stage-outer *{
+.fancybox-bg {
+    background-color: #000 !important;
+}
+
+
+#desktopView .owl-carousel .owl-stage-outer,
+#mobileView .owl-carousel .owl-stage-outer,
+#desktopView .owl-carousel .owl-stage-outer *,
+#mobileView .owl-carousel .owl-stage-outer *{
     max-height: 240px !important;
     width: 100%;
     height: 100%;

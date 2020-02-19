@@ -447,7 +447,11 @@
 															@else
 																<input id="terms" name="terms" type="checkbox" class="invisible" value="1" checked="checked">
 															@endif
-															{!! t('I have read and agree to the <a :attributes>Terms of Use</a>', ['attributes' => getUrlPageByType('terms')]) !!}
+															{!! t('I have read and agree to the <a :terms>Terms of Use</a>, <a :priv-pol>Privacy Policy</a> and <a :post-rul>Posting Rules</a>',
+ 																	['terms' => "href='" . lurl(trans('routes.v-page',['slug'=>trans('routes.terms-of-use')]))."'",
+ 																	'priv-pol'=>"href='" . lurl(trans('routes.v-page',['slug'=>trans('routes.privacy-policy')]))."'",
+ 																	'post-rul'=>"href='" . lurl(trans('routes.v-page',['slug'=>trans('routes.posting-rules')]))."'"
+ 																	])!!}
 														</label>
 													</div>
 												</div>

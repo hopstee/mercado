@@ -228,6 +228,9 @@ hr{
     float: none; 
     color: rgb(217, 83, 79);
 }
+.postadd i{
+    display: inline-block;
+}
 
 @media(max-width:1023px){
     .headline.text-center{
@@ -397,4 +400,32 @@ ul.list.list-error{
 #customFields .button-wrap,
 #customFields .button-download {
     display: inline-block;
+}
+
+/*for custom style anywhere*/
+::-webkit-input-placeholder { /* Edge */
+    color: #a2abaf !important;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #a2abaf !important;
+}
+
+::placeholder {
+    color: #a2abaf !important;
+}
+
+.btn-lg{
+    border-radius: .2rem;
+}
+#postForm .col-xl-12.col-xl-12-dif > .ads-header{
+    background: #fff !important;
+}
+
+/*for conversations*/
+strong.conversation-main{
+    margin-right: 10px;
+}
+.page-content p{
+    padding: 1px 0px;
 }

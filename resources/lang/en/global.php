@@ -293,7 +293,9 @@ return [
     'Email' => 'Email',
     'Please repeat your password' => 'Please repeat your password',
     'At least :num characters' => 'At least :num characters',
-    'I have read and agree to the <a :attributes>Terms of Use</a>' => 'I have read and agree to the <a :attributes>Terms of Use, Privacy Policy and Posting Rules',
+    'I have read and agree to the <a :attributes>Terms of Use</a>' => 'I have read and agree to the <a :attributes>Terms of Use, Privacy Policy and Posting Rules</a>',
+    'I have read and agree to the <a :terms>Terms of Use</a>, <a :priv-pol>Privacy Policy</a> and <a :post-rul>Posting Rules</a>' => 'I have read and agree to the <a :terms>Terms of Use</a>, <a :priv-pol>Privacy Policy</a> and <a :post-rul>Posting Rules</a>',
+
     'I have read and agree to the' => 'By clicking Registration, you agree to our ',
     'By continuing on this website, you accept our <a :attributes>Terms of Use</a>' => 'By continuing on this website, you accept our <a :attributes>Terms of Use</a>',
     'By continuing on this website, you accept our <a :attributes>Terms of Use</a> and Posting Rules' => 'By continuing on this website, you accept our <a :attributes>Terms of Use</a> and Posting Rules',

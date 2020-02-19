@@ -1103,7 +1103,7 @@ ul.navbar-mobile > a{
   .label-cbx .checkbox {
     position: relative;
     overflow: hidden;
-    top: 1px;
+    top: 2px;
     float: left;
     margin-right: 8px;
     width: 15px;

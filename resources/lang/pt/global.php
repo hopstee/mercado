@@ -267,6 +267,7 @@ return [
     'Please repeat your password' => 'Por favor, repita sua Palavra Passe',
     'At least :num characters' => 'Pelo menos :num caracteres',
     'I have read and agree to the <a :attributes>Terms of Use</a>' => 'Li e concordo com os <a :attributes>Termos de Uso, Política de Privacidade e Regras de Publicação',
+    'I have read and agree to the <a :terms>Terms of Use</a>, <a :priv-pol>Privacy Policy</a> and <a :post-rul>Posting Rules</a>'=>'Li e concordo com os <a :terms>Termos de Uso</a>, <a :priv-pol>Política de Privacidade</a> e <a :post-rul>Regras de Publicação</a>',
     'I have read and agree to the' => 'Ao clicares em Registrar, aceitas os nossos ',
     'By continuing on this website, you accept our <a :attributes>Terms of Use</a>' => 'By continuing on this website, you accept our <a :attributes>Termos de Uso</a>',
     'By continuing on this website, you accept our <a :attributes>Terms of Use</a> and Posting Rules' => 'Ao continuar neste site, você aceita nossos <a :attributes> Termos de Uso </a> e regras de publicação ',

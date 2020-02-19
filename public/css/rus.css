@@ -620,7 +620,7 @@ a.nav-link{
     font-size: 18px;
     vertical-align: middle;
     margin: auto 0 auto 8%;
-    display: table;
+    /*display: table;*/
 }
 
 .cell-content > .name{

@@ -219,7 +219,7 @@ return [
     'Chat' => 'Chat',
     'Call' => 'Call',
     'Complete' => 'Complete',
-    'Not registered user' => 'Not registered user',
+    'Not registered user.' => 'Not registered user.',
     'Messages' => 'Messages',
     'Describe what makes your ad unique from 5 to 3000 characters.'=>'Describe what makes your ad unique from 5 to 3000 characters.',
     'From' => 'From',

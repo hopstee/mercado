@@ -79,8 +79,13 @@ class ForgotPasswordController extends FrontController
     {
         $user = !is_null(User::where("phone", $request->input("phone"))->first())  ? User::where("phone", $request->input("phone"))->first() : null;
 
-        if( is_null($user['deleted_at'])){
-            flash(t('User is deleted.'),'error');
+        if( isset($user['deleted_at']) ){
+            flash(t('User is deleted.'))->error();
+            return redirect()->back();
+        }
+
+        if( is_null($user) ){
+            flash(t('Not registered user.'))->error();
             return redirect()->back();
         }
 
@@ -158,7 +163,7 @@ class ForgotPasswordController extends FrontController
             return false;
         }
 
-        if( is_null($user['deleted_at'])){
+        if( isset($user['deleted_at'])){
             flash(t('User is deleted.'),'error');
             return false;
         }

@@ -342,7 +342,7 @@ if ($post->category) {
 												<!-- phone -->
 												<?php $phoneError = (isset($errors) and $errors->has('phone')) ? ' is-invalid' : ''; ?>
 												<div class="form-group row required">
-													<label class="col-md-2 col-form-label" for="phone">{{ t('Phone Number') }}</label>
+													<label class="col-md-2 col-form-label" for="phone">{{ t('Phone Number') }} <sup>*</sup></label>
 													<div class="input-group col-md-9 edit-post-phone">
 
 														<input id="phone" name="phone"

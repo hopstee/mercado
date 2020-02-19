@@ -95,7 +95,7 @@ class User extends BaseUser
 		'verified_email',
 		'verified_phone',
         'blocked',
-        'closed',
+        'closed'
     ];
     
     /**
@@ -371,15 +371,15 @@ class User extends BaseUser
         return $value;
     }
     
-    public function getDeletedAtAttribute($value)
-    {
-        $value = Date::parse($value);
-        if (config('timezone.id')) {
-            $value->timezone(config('timezone.id'));
-        }
+    // public function getDeletedAtAttribute($value)
+    // {
+    //     $value = Date::parse($value);
+    //     if (config('timezone.id')) {
+    //         $value->timezone(config('timezone.id'));
+    //     }
 
-        return $value;
-    }
+    //     return $value;
+    // }
     
     public function getCreatedAtTaAttribute($value)
     {

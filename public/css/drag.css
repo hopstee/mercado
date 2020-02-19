@@ -32,3 +32,8 @@ div.detail-line.col-sm-12.col-xs-12.pb-2.pl-1.pr-1 {
   right: 0px;
   max-height: 35px;
  }
+
+/*for * in create post*/
+[for="phone"] sup{
+  color:#dc3545;
+}

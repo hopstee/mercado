@@ -349,7 +349,7 @@
 												?>
 												<!-- <div class="form-group row required owner-phone"> -->
 													<div class="col-md-2 col-sm-3 phone">
-														<label class="col-form-label name" for="phone">{{ t('Phone Number') }}</label>
+														<label class="col-form-label name" for="phone">{{ t('Phone Number') }} <sup>*</sup></label>
 													</div>
 													<div class="form-group row required owner-phone">
 														<div class="col-md-9 col-sm-9">

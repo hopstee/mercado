@@ -265,7 +265,7 @@ class BaseController extends FrontController
         if ($collection->count() > 0) {
             $result[] = [
                 'name' => $current->name,
-                'url' => $baseURL . "/" . $current->slug,
+                'url' => lurl($baseURL . "/" . $current->slug),
                 'bold' => true,
                 'children' => $this->getSubsTree($collection, $baseURL . "/" . $current->slug),
                 'count' => $this->countPostsInCategoryWithChildren($current->tid)
@@ -279,7 +279,7 @@ class BaseController extends FrontController
                     foreach ($subchildren as $subchild) {
                         $maybeChildren[] = [
                             'name' => $subchild->name,
-                            'url' => $baseURL . "/" . $child->slug . "/" . $subchild->slug,
+                            'url' => lurl($baseURL . "/" . $child->slug . "/" . $subchild->slug),
                             'bold' => false,
                             'count' => $this->countPostsInCategoryWithChildren($subchild->tid),
                             'children' => []
@@ -288,7 +288,7 @@ class BaseController extends FrontController
                 }
                 $result[] = [
                     'name' => $child->name,
-                    'url' => $baseURL . "/" . $child->slug,
+                    'url' => lurl($baseURL . "/" . $child->slug),
                     'bold' => $current->slug == $child->slug,
                     'count' => $this->countPostsInCategoryWithChildren($child->tid),
                     'children' => $maybeChildren

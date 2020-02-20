@@ -56,8 +56,8 @@ class FieldOptionController extends PanelController
 		$this->xPanel->enableParentEntity();
 
 		$this->xPanel->setParentKeyField('field_id');
-		$this->xPanel->addClause('where', 'field_id', '=', $field->id);
-		$this->xPanel->addClause('orWhere', 'field_id', '=', $field->translation_of);
+		// $this->xPanel->addClause('where', 'field_id', '=', $field->id);
+		$this->xPanel->addClause('where', 'field_id', '=', $field->translation_of);
 		$this->xPanel->setParentRoute(admin_uri('custom_fields'));
 		$this->xPanel->setParentEntityNameStrings(trans('admin::messages.custom field'), trans('admin::messages.custom fields'));
 		$this->xPanel->allowAccess(['reorder', 'details_row', 'parent']);

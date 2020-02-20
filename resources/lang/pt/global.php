@@ -153,6 +153,7 @@ return [
     'Data updated successfully' => 'Dados foram atualizados com sucesso',
     'This name cannot be used.' => 'Este nome não pode ser usado.',
     'Enter your phone number' => 'Digite seu número de telefone para não ser banido',
+    'Enter phone number' => 'Digite o seu número de telefone',
     'The phone field is required.' => 'O campo "Telefone" é obrigatório.',
     'Within a few minutes you will receive sms with' => 'Dentro de alguns minutos você receberá SMS com',
     'verification code on phone number' => 'código de verificação no número de telefone',

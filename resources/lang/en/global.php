@@ -137,6 +137,7 @@ return [
     'to send request for unban.' => ' to send request for unban.',
     '! Add e-mail for password recovery.' => '! Add e-mail for password recovery.',
     'Enter your phone number' => 'Enter your phone number to be unban',
+    'Enter phone number' => 'Enter your phone number',
     'The phone field is required.' => 'The phone field is required.',
     'Within a few minutes you will receive sms with' => 'Within a few minutes you will receive SMS with',
     'verification code on phone number' => 'verification code on phone number',

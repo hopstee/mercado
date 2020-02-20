@@ -160,13 +160,13 @@ class PostRequest extends Request
 //		}
 
 
-		if (isEnabledField('phone')) {
-			if (isEnabledField('phone') && isEnabledField('email')) {
-				$rules['phone'][] = 'required_without:email';
-			} else {
-				$rules['phone'][] = 'required';
-			}
-		}
+		// if (isEnabledField('phone')) {
+		// 	if (isEnabledField('phone') && isEnabledField('email')) {
+		// 		$rules['phone'][] = 'required_without:email';
+		// 	} else {
+		// 		$rules['phone'][] = 'required';
+		// 	}
+		// }
 
 		// Custom Fields
 		if (!isFromApi()) {

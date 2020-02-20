@@ -364,8 +364,11 @@
 																placeholder="{{ t('Phone Number') }}"
 																class="form-control input-md{{ $phoneError }}" type="text"
 																value="{{ phoneFormat(old('phone', $formPhone), old('country', config('country.code'))) }}"
-																	{{ $editable }}
-																   pattern="^\+\d{3}\s?\d{2}\s?\d{3}\s?\d{4}$"
+																{{ $editable }}
+																pattern="^\+\d{3}\s?\d{2}\s?\d{3}\s?\d{4}$"
+																oninvalid="this.setCustomValidity('{{ t('Enter phone number') }}')"
+																oninput="setCustomValidity('')"
+																required
 															>
 															@if (auth()->check())
 																<div class="input-group-append">

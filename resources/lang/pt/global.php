@@ -217,7 +217,7 @@ return [
     'Jun' => 'Jun',
     'Jul' => 'Jul',
     'Aug' => 'Ago',
-    'Sep' => 'Set',
+    'Sept' => 'Set',
     'Oct' => 'Out',
     'Nov' => 'Nov',
     'Dec' => 'Dez',

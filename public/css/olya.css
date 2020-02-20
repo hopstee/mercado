@@ -119,6 +119,11 @@ div#pic {
     }
 }
 
+.cell-media.cart-user-photo{
+    display: flex;
+    align-items: center
+}
+
 /* for sitemap */
 .no-transition {
     transition: none !important;
@@ -442,7 +447,16 @@ ul.list.list-error{
     background: #fff !important;
 }
 
-/*for conversations*/
+/*for PD*/
+.cab-cel.cel-last.cal-acc .col-4{
+    padding: 7px 15px;
+    max-width: 100%;
+}
+.photo-field.photo-field-dif .file-preview-image{
+    padding-bottom: inherit;
+    padding-top: inherit;
+}
+
 strong.conversation-main{
     margin-right: 10px;
 }

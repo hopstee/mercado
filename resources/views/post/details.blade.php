@@ -533,7 +533,7 @@ if (isset(auth()->user()->id)) {
                                         <div class="block-cell user">
                                             <div class="cell-media cart-user-photo">
                                                 @if (!empty($userPhoto))
-                                                    <img src="{{ $userPhoto }}" alt="{{ $post->contact_name }}" style="height: 100%;">
+                                                    <img src="{{ $userPhoto }}" alt="{{ $post->contact_name }}" >
                                                 @else
                                                     <img src="{{ url('images/avatar_defaul_image.svg') }}"
                                                          alt="{{ $post->contact_name }}">
@@ -658,7 +658,7 @@ if (isset(auth()->user()->id)) {
                                 <div class="block-cell user">
                                     <div class="cell-media cart-user-photo">
                                         @if (!empty($userPhoto))
-                                            <img src="{{ $userPhoto }}" alt="{{ $post->contact_name }}" style="height: 100%;">
+                                            <img src="{{ $userPhoto }}" alt="{{ $post->contact_name }}" >
                                         @else
                                             <img src="{{ url('images/avatar_defaul_image.svg') }}" alt="{{ $post->contact_name }}">
                                         @endif

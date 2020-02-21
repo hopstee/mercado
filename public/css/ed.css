@@ -934,6 +934,9 @@ ul.nav-wizard>li:before {
     .pad-right {
         padding: 0 8px 15px 15px !important;
     }
+    .pad-right {
+        padding: 0 15px 15px 8px !important;
+    }
     .normal-view {
         padding: 0 15px 15px 15px !important;
 

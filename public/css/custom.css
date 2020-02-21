@@ -1168,8 +1168,8 @@ ul.navbar-mobile > a{
   .invisible {
     position: absolute;
     z-index: -1;
-    width: 0;
-    height: 0;
+    width: 0 !important;
+    height: 0 !important;
     opacity: 0;
   }
 /* END CUSTOM CHECK BOX TEXT */

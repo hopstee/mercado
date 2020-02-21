@@ -19,7 +19,7 @@
 												
 								<li class="picturesBloc {{ ($uriPath == trans('routes.photos')) ? 'active' : ((in_array($uriPath, ['photos', 'packages', 'finish']) or (isset($post) and !empty($post))) ? '' : 'disabled') }}">
 									@if (isset($post) and !empty($post))
-										<a href="{{ lurl(trans('routes.v-posts-create-photo',['tmpToken'=>$post->tmp_token]), $post->tmp_token) }}">{{ t('Ad Photos') }}</a>
+										<a href="{{ lurl(trans('routes.v-posts-create-photo',['tmpToken'=>$post->tmp_token]), $post->tmp_token) }}">{{ t('Photos') }}</a>
 									@else
 										<a>{{ t('Photos') }}</a>
 									@endif

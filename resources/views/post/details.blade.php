@@ -180,25 +180,19 @@ if (isset(auth()->user()->id)) {
                                     @else
                                         {{ $post->contact_name }}
                                     @endif
-                                    @if (isset($user) and !empty($user) and isset($joined))
-                                        <div class="grid-col">
+                                    <div class="grid-col">
                                         <div class="col gray">
-                                            <span>{{ t('On site since') }} {{ $joined }}</span>
+                                            @if (isset($user) and !empty($user) and isset($joined) and $joined)
+                                                @if($post->user_id != 1)
+                                                    <span>{{ t('On site since') }} {{ $joined }}</span>
+                                                @else
+                                                    <span>{{ t('Admin') }}</span>
+                                                @endif
+                                            @else
+                                                <span>{{ t('Not registered user') }} </span>
+                                            @endif
                                         </div>
                                     </div>
-                                    @elseif($post->user_id == 1)
-                                        <div class="grid-col">
-                                        <div class="col gray">
-                                            <span>{{ t('Admin') }}</span>
-                                        </div>
-                                    </div>
-                                    @else
-                                        <div class="grid-col">
-                                        <div class="col gray">
-                                            <span>{{ t('Not registered user') }} </span>
-                                        </div>
-                                    </div>
-                                    @endif
 
                                     @if (config('plugins.reviews.installed'))
                                         @if (view()->exists('reviews::ratings-user'))
@@ -307,8 +301,11 @@ if (isset(auth()->user()->id)) {
                             @endforeach
                             </div>
                             @else
-                                <img src="{{ imgUrl(config('larapen.core.picture.default'), 'big') }}"
-                                        alt="img">
+                                <div id="noPic">
+                                    <img src="{{ imgUrl(config('larapen.core.picture.default'), 'big') }}"
+                                         alt="img">
+                                </div>
+
                             @endif
 
                         <!-- end post images -->
@@ -529,27 +526,19 @@ if (isset(auth()->user()->id)) {
                                                     @else
                                                         {{ $post->contact_name }}
                                                     @endif
-
-                                                    @if (isset($user) and !empty($user) and isset($joined) and $joined)
-                                                        <div class="grid-col">
+                                                    <div class="grid-col">
                                                         <div class="col gray">
-                                                            <span>{{ t('On site since') }} {{ $joined }}</span>
+                                                            @if (isset($user) and !empty($user) and isset($joined) and $joined)
+                                                                @if($post->user_id != 1)
+                                                                    <span>{{ t('On site since') }} {{ $joined }}</span>
+                                                                @else
+                                                                    <span>{{ t('Admin') }}</span>
+                                                                @endif
+                                                            @else
+                                                                <span>{{ t('Not registered user') }} </span>
+                                                            @endif
                                                         </div>
                                                     </div>
-                                                    @elseif($post->user_id == 1)
-                                                        <div class="grid-col">
-                                                        <div class="col gray">
-                                                            <span>{{ t('Admin') }}</span>
-                                                        </div>
-                                                    </div>
-                                                    @else
-                                                        <div class="grid-col">
-                                                        <div class="col gray">
-                                                            <span>{{ t('Not registered user') }} </span>
-                                                        </div>
-                                                    </div>
-                                                @endif
-
                                                 @if (config('plugins.reviews.installed'))
                                                     @if (view()->exists('reviews::ratings-user'))
                                                         @include('reviews::ratings-user')
@@ -618,25 +607,19 @@ if (isset(auth()->user()->id)) {
                                                 {{ $post->contact_name }}
                                             @endif
 
-                                            @if (isset($user) and !empty($user) and isset($joined) and $joined)
-                                                <div class="grid-col">
+                                            <div class="grid-col">
                                                 <div class="col gray">
-                                                    <span>{{ t('On site since') }} {{ $joined }}</span>
+                                                    @if (isset($user) and !empty($user) and isset($joined) and $joined)
+                                                        @if($post->user_id != 1)
+                                                            <span>{{ t('On site since') }} {{ $joined }}</span>
+                                                        @else
+                                                            <span>{{ t('Admin') }}</span>
+                                                        @endif
+                                                    @else
+                                                        <span>{{ t('Not registered user') }} </span>
+                                                    @endif
                                                 </div>
                                             </div>
-                                            @elseif($post->user_id == 1)
-                                                <div class="grid-col">
-                                                <div class="col gray">
-                                                    <span>{{ t('Admin') }}</span>
-                                                </div>
-                                            </div>
-                                            @else
-                                                <div class="grid-col">
-                                                <div class="col gray">
-                                                    <span>{{ t('Not registered user') }} </span>
-                                                </div>
-                                            </div>
-                                        @endif
 
                                         @if (config('plugins.reviews.installed'))
                                             @if (view()->exists('reviews::ratings-user'))

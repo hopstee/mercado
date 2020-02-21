@@ -1154,6 +1154,7 @@ ul.nav-wizard>li:before {
 }
 @media (max-width: 768px) {
 
+
     .pad-right {
         padding: 0 8px 15px 15px !important;
     }

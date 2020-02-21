@@ -194,6 +194,7 @@ return [
     'Jun' => 'Jun',
     'Jul' => 'Jul',
     'Aug' => 'Aug',
+    'Sep' => 'Sept',
     'Sept' => 'Sept',
     'Oct' => 'Oct',
     'Nov' => 'Nov',

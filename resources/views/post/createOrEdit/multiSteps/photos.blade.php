@@ -296,14 +296,15 @@
             // location.reload();
 
             /* Check redirect */
-            var maxFiles = {{ (isset($picturesLimit)) ? (int)$picturesLimit : 1 }};
-            var oldFiles = {{ (isset($post) and isset($post->pictures)) ? $post->pictures->count() : 0 }};
-            var newFiles = Object.keys(data.files).length;
-            var countFiles = oldFiles + newFiles;
-            if (countFiles >= maxFiles) {
-                var nextStepUrl = '{{ url($nextStepUrl) }}';
-                redirect(nextStepUrl);
-            }
+
+            {{--var maxFiles = {{ (isset($picturesLimit)) ? (int)$picturesLimit : 1 }};--}}
+            {{--var oldFiles = {{ (isset($post) and isset($post->pictures)) ? $post->pictures->count() : 0 }};--}}
+            {{--var newFiles = Object.keys(data.files).length;--}}
+            {{--var countFiles = oldFiles + newFiles;--}}
+            {{--if (countFiles >= maxFiles) {--}}
+            {{--    var nextStepUrl = '{{ url($nextStepUrl) }}';--}}
+            {{--    redirect(nextStepUrl);--}}
+            {{--}--}}
         });
 
         var paramsR ;

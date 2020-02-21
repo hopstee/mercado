@@ -187,9 +187,11 @@ $(document).ready(function ()
 
 	/* List view, Grid view  and compact view */
 
+	var list_item = $('.item-list.item-inline');
 	$('.list-view,#ajaxTabs li a').click(function (e) { /* use a class, since your ID gets mangled */
 		e.preventDefault();
 		listView('.list-view');
+		list_item.addClass('normal-padding');
 		createCookie('listing_display_mode', '.list-view', 7);
 		console.log('list');
 	});
@@ -197,6 +199,7 @@ $(document).ready(function ()
 	$('.grid-view').click(function (e) { /* use a class, since your ID gets mangled */
 		e.preventDefault();
 		gridView(this);
+		list_item.removeClass('normal-padding');
 		createCookie('listing_display_mode', '.grid-view', 7);
 	});
 

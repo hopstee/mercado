@@ -9,7 +9,9 @@ if (!isset($cacheExpiration)) {
         $cats = collect([]);
     }
 
+    $incr = false;
     foreach($paginator->getCollection() as $key => $post):
+    $incr = !$incr;
     if (empty($countries) or !$countries->has($post->country_code)) continue;
     // if ($post->category_id != '801' and $post->category_id != '799') continue;
 
@@ -73,7 +75,7 @@ if (!isset($cacheExpiration)) {
         $liveCatName = $liveCat->name;
     }
     ?>
-    <div class="item-list item-inline">
+    <div class="item-list item-inline {{ $incr == true ? 'pad-right' : 'pad-left' }}">
         @if (isset($package) and !empty($package))
             @if ($package->ribbon != '')
                 <div class="cornerRibbons {{ $package->ribbon }}">

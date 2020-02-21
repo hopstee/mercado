@@ -1022,20 +1022,35 @@ ul.navbar-mobile > a{
     z-index: 9;
     border-radius: 3px;
     width: 150px;
-    height: 40px; 
+    height: 40px;
     line-height: 35px;
     background-color: #ff8f00;
     position: fixed!important;
-    right: calc(50% - 75px);
-    bottom: 10px;
-    text-align:center;
-    cursor:pointer;
-    display: none;
+    left: calc(50% - 75px);
+    bottom: 20px;
+    margin: auto;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align:center;
+    -ms-flex-align:center;
+    align-items:center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
+    cursor:pointer;
     color:white;
     font-size:16px;
+    -webkit-transition: .5s;
+    -o-transition: .5s;
+    transition: .5s;
+    -webkit-box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0,0,0,.12);
     box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0,0,0,.12);
-
+}
+.animated-hide {
+    -webkit-transform: translateY(100px) !important;
+    -ms-transform: translateY(100px) !important;
+    transform: translateY(100px) !important;
 }
 #newaddfade a{
     color: white;

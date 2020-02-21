@@ -183,12 +183,14 @@ if (!isset($cacheExpiration)) {
     @parent
     <script>
         $(document).ready(function () {
-
+            var item_list = $('.item-list.item-inline');
             var display = window.localStorage.getItem('display');
             if (display === "list") {
                 listView('.list-view');
+                item_list.addClass('normal-view');
             } else {
                 gridView('.grid-view');
+                item_list.removeClass('normal-view');
             }
 
         });

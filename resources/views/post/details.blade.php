@@ -585,48 +585,6 @@ if (isset(auth()->user()->id)) {
                                                     {!! genEmailContactBtn($post, true) !!}
                                                 @endif
                                         @endif
-                                        <?php
-                                        try {
-                                            if (auth()->user()->can(\App\Models\Permission::getStaffPermissions())) {
-                                                $btnUrl = admin_url('blacklists/add') . '?phone=' . $post->phone;
-
-                                                // Get ban abuse types
-                                                $banTypes = App\Models\BanType::trans()->get();
-
-                                                $values = "";
-                                                $phoneInput = "<input id='name' type='hidden' name='phone' value=" . $post->phone . "></input>";
-
-                                                foreach($banTypes as $banType){
-                                                    $values .= "<option value='" . $banType->translation_of ."'> ". $banType->name ."</option>";
-                                                }
-
-                                                $select = "<select id='ban_type_id' name='ban_type_id' class='btn btn-danger btn-block' onchange='submit();' value=" 
-                                                        . trans('admin::messages.ban_the_user') ."><option selected disable>" .trans('admin::messages.ban_the_user') . $values . "</select>";
-                                                $btnBan = "<form role='form' method='GET' action=" . $btnUrl . ">" . $phoneInput . $select . " </form>";
-                                                echo $btnBan;
-                                                // if (!isDemo($btnUrl)) {
-                                                //     $cMsg = trans('admin::messages.confirm_this_action');
-                                                //     $cLink = "window.location.replace('" . $btnUrl . "'); window.location.href = '" . $btnUrl . "';";
-                                                //     $cHref = "javascript: if (confirm('" . addcslashes($cMsg, "'") . "')) { " . $cLink . " } else { void('') }; void('')";
-
-                                                //     $btnText = trans("admin::messages.ban_the_user");
-                                                //     // $btnHint = trans("admin::messages.ban_the_user_phone", ['phone' => $post->phone]);
-                                                //     // $tooltip = ' data-toggle="tooltip" title="' . $btnHint . '"';
-                                                //     $tooltip = ' data-toggle="tooltip"';
-
-                                                //     $btnOut = '';
-                                                //     $btnOut .= '<a href="' . $cHref . '" class="btn btn-danger btn-block"' . $tooltip . '>';
-                                                //     $btnOut .= $btnText;
-                                                //     $btnOut .= '</a>';
-
-                                                //     // echo $btnOut;
-
-                                                    
-                                                // }
-                                            }
-                                        } catch (\Exception $e) {
-                                        }
-                                        ?>
 
                                     @else
                                         {!! genPhoneNumberBtn($post, true) !!}

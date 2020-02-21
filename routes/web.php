@@ -289,8 +289,8 @@ Route::group([
                 // Route::post(trans('routes.posts') . '/' . trans('routes.create') . '/' . '{tmpToken}' . '/' . trans('routes.photos'), 'PhotoController@postForm');
 
                 Route::put(trans('routes.posts') . '/' . trans('routes.create') .'/{tmpToken}', 'CreateController@postForm');
-                Route::get(trans('routes.posts-create-photo',[],config('app.local')), 'PhotoController@getForm');
-                Route::post(trans('routes.posts-create-photo',[],config('app.local')), 'PhotoController@postForm');
+                Route::get(trans('routes.posts-create-photo'), 'PhotoController@getForm');
+                Route::post(trans('routes.posts-create-photo'), 'PhotoController@postForm');
 
                 Route::post('posts/create/{tmpToken}/photos/{id}/delete', 'PhotoController@delete');
                 Route::get('posts/create/{tmpToken}/payment', 'PaymentController@getForm');

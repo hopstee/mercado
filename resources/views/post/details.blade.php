@@ -631,7 +631,7 @@ if (isset(auth()->user()->id)) {
                                 </div>
                                 <?php
                                         try { 
-                                            if (auth()->user()->can(\App\Models\Permission::getStaffPermissions())) {
+                                            if (auth()->check() && auth()->user()->can(\App\Models\Permission::getStaffPermissions())) {
                                                 $btnUrl = admin_url('blacklists/add') . '?phone=' . $post->phone;
 
                                                 // Get ban abuse types

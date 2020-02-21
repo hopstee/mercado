@@ -56,11 +56,15 @@
 						$attr['slug'] = isset($postArgs['slug']) ? $postArgs['slug'] : getSegment(1);
 						$attr['id'] = isset($postArgs['id']) ? $postArgs['id'] : getSegment(2);
 					}
-					// $attr['debug'] = '1';
-					
+                    // $attr['debug'] = '1';
+                    
+                    $link = lurl(null, $attr, $localeCode);
+					if( is_numeric(strpos($link, $localeCode)) && (strlen($link) > 28) && !isset($attr['catSlug']) && !isset($attr['slug'])){
+                        $link = \App\Helpers\UrlGen::slugTrans($link, $localeCode);
+					}
+
 					// Default
 					// $link = LaravelLocalization::getLocalizedURL($localeCode, null, $attr);
-					$link = lurl(null, $attr, $localeCode);
                     $localeCode = strtolower($localeCode);
 					?>
                         <li class="">

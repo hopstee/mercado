@@ -40,7 +40,10 @@ $(document).ready(function ()
 	});
 
 	// change all close icons on ours
-	$('.alert>button').html('').html('<i class="unir-close"></i>');
+	// $('.alert>button').html('').html('<i class="unir-close"></i>');
+	
+	// delete all close icons
+	$('.alert>button').html('');
 
 	var navbarSite = $('.navbar-site');
 

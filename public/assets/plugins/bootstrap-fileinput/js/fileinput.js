@@ -436,7 +436,7 @@
         closeButton: function (css) {
             css = css ? 'close ' + css : 'close';
             return '<button type="button" class="' + css + '" aria-label="Close">\n' +
-                '  <span aria-hidden="true">&times;</span>\n' +
+                // '  <span aria-hidden="true">&times;</span>\n' +
                 '</button>';
         },
         getRotation: function (value) {
@@ -822,7 +822,7 @@
                     flash: {width: "213px", height: "160px"},
                     object: {width: "213px", height: "160px"},
                     pdf: {width: "100%", height: "160px"},
-                    other: {width: "213px", height: "160px"}
+                    other: {/*width: "213px", */height: "160px"}
                 },
                 previewSettingsSmall: {
                     image: {width: "auto", height: "auto", 'max-width': "100%", 'max-height': "100%"},

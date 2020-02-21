@@ -1105,8 +1105,11 @@ a.sell-your-item-cart{
 }
 
 #mobileCurrent{
-    width: 140px;
+    width: 130px;
     position: absolute;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .file-input .btn.btn-primary.btn-file:hover{

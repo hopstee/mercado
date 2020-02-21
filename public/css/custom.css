@@ -1657,3 +1657,6 @@ ul.equip-list{
         height:40px;
     }
 }
+select#ban_type_id{
+    background: #dc3545;
+}

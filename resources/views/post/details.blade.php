@@ -238,58 +238,38 @@ if (isset(auth()->user()->id)) {
                                         <!-- <img src="{{ url('images/view.svg') }}" alt="{{ $post->contact_name }}" class="sidebar-image">     -->
                                         {{ \App\Helpers\Number::short($post->visits) }} {{ trans_choice('global.count_views', getPlural($post->visits)) }}
                                     </span>
-                                    <span class="detail action center">
-                                        <span class="left15">
-                                            @if (auth()->check())
-                                                @if(auth()->user()->id != $post->user_id)
-                                                    <a href="{{ lurl( trans('routes.v-posts-report', ['id'=>$post->id]),$post->id) }}">
-                                                        <i class="unir-info gray" style="font-size: 14px;"> </i>
-                                                        <!-- <img src="{{ url('images/inform.svg') }}" alt="{{ $post->contact_name }}" class="sidebar-image"> -->
-                                                        <span class="actions-text">
-                                                            {{ t('Report abuse')}}
-                                                        </span>
-                                                    </a>
-                                                @endif
-                                            @else
-                                                <a class="make-favorite" id="{{ $post->id }}"
-                                                href="javascript:void(0)">
+
+                                    @if(auth()->check() && auth()->user()->id != $post->user_id)
+                                        <span class="detail action center">
+                                            <span class="left15">
+                                                <a href="{{ lurl( trans('routes.v-posts-report', ['id'=>$post->id]),$post->id) }}">
                                                     <i class="unir-info gray" style="font-size: 14px;"> </i>
-                                                        <!-- <img src="{{ url('images/inform.svg') }}" alt="{{ $post->contact_name }}" class="sidebar-image"> -->
-                                                        <span class="actions-text">
-                                                            {{ t('Report abuse')}}
+                                                    <span class="actions-text">
+                                                        {{ t('Report abuse')}}
                                                     </span>
                                                 </a>
-                                            @endif
-                                        </span>
-
-                                        <span>
-                                            <a class="make-favorite" id="{{ $post->id }}"
-                                               href="javascript:void(0)">
-                                                @if (auth()->check())
+                                            </span>
+                                            <span>
+                                                <a class="make-favorite" id="{{ $post->id }}"
+                                                href="javascript:void(0)">
                                                     @if (\App\Models\SavedPost::where('user_id', auth()->user()->id)->where('post_id', $post->id)->count() > 0)
                                                         <i class="unir-bheart gray"> </i>
-                                                    <!-- <img src="{{ url('images/heart_blue.svg') }}" alt="{{ $post->contact_name }}" class="sidebar-image"> -->
                                                         <span class="actions-text">
                                                             {{ t('Remove favorite') }}
                                                         </span>
                                                     @else
                                                         <i class="unir-heart gray"> </i>
-                                                    <!-- <img src="{{ url('images/heart.svg') }}" alt="{{ $post->contact_name }}" class="sidebar-image"> -->
                                                         <span class="actions-text">
                                                             {{ t('To favorites.') }}
                                                         </span>
                                                     @endif
-                                                @else
-                                                    <i class="unir-heart gray"> </i>
-                                                <!-- <img src="{{ url('images/heart.svg') }}" alt="{{ $post->contact_name }}" class="sidebar-image"> -->
-                                                    <span class="actions-text">
-                                                    {{ t('To favorites.') }}
-                                                </span>
-                                                @endif
-                                            </a>
-                                        </span>
+                                                </a>
+                                            </span>
 
-                                    </span>
+                                        </span>
+                                        @else
+                                            <div style='height:15px;width:100%;'></div>
+                                    @endif
                                 </span>
                             </div>
                         </div>
@@ -605,7 +585,48 @@ if (isset(auth()->user()->id)) {
                                                     {!! genEmailContactBtn($post, true) !!}
                                                 @endif
                                         @endif
-                                        
+                                        <?php
+                                        try {
+                                            if (auth()->user()->can(\App\Models\Permission::getStaffPermissions())) {
+                                                $btnUrl = admin_url('blacklists/add') . '?phone=' . $post->phone;
+
+                                                // Get ban abuse types
+                                                $banTypes = App\Models\BanType::trans()->get();
+
+                                                $values = "";
+                                                $phoneInput = "<input id='name' type='hidden' name='phone' value=" . $post->phone . "></input>";
+
+                                                foreach($banTypes as $banType){
+                                                    $values .= "<option value='" . $banType->translation_of ."'> ". $banType->name ."</option>";
+                                                }
+
+                                                $select = "<select id='ban_type_id' name='ban_type_id' class='btn btn-danger btn-block' onchange='submit();' value=" 
+                                                        . trans('admin::messages.ban_the_user') ."><option selected disable>" .trans('admin::messages.ban_the_user') . $values . "</select>";
+                                                $btnBan = "<form role='form' method='GET' action=" . $btnUrl . ">" . $phoneInput . $select . " </form>";
+                                                echo $btnBan;
+                                                // if (!isDemo($btnUrl)) {
+                                                //     $cMsg = trans('admin::messages.confirm_this_action');
+                                                //     $cLink = "window.location.replace('" . $btnUrl . "'); window.location.href = '" . $btnUrl . "';";
+                                                //     $cHref = "javascript: if (confirm('" . addcslashes($cMsg, "'") . "')) { " . $cLink . " } else { void('') }; void('')";
+
+                                                //     $btnText = trans("admin::messages.ban_the_user");
+                                                //     // $btnHint = trans("admin::messages.ban_the_user_phone", ['phone' => $post->phone]);
+                                                //     // $tooltip = ' data-toggle="tooltip" title="' . $btnHint . '"';
+                                                //     $tooltip = ' data-toggle="tooltip"';
+
+                                                //     $btnOut = '';
+                                                //     $btnOut .= '<a href="' . $cHref . '" class="btn btn-danger btn-block"' . $tooltip . '>';
+                                                //     $btnOut .= $btnText;
+                                                //     $btnOut .= '</a>';
+
+                                                //     // echo $btnOut;
+
+                                                    
+                                                // }
+                                            }
+                                        } catch (\Exception $e) {
+                                        }
+                                        ?>
 
                                     @else
                                         {!! genPhoneNumberBtn($post, true) !!}

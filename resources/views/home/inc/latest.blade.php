@@ -124,7 +124,28 @@ if (config('settings.listing.display_mode') == '.compact-view') {
 							</div>
 
 							<div class="{{ $colDescBox }} add-desc-box">
-								<div class="items-details">
+								@if($post->category_id == 883)
+									<div class="items-details-no-price">
+										<h5 id="h5-col" class="add-title ellipsis-text">
+											<a href="{{ \App\Helpers\UrlGen::post($post) }}">{{ \Illuminate\Support\Str::limit($post->title, 150) }} </a>
+										</h5>
+										<!-- N.M. Hide Additional Infomation -->
+										<span class="info-row ellipsis-text">
+											@if (isset($liveCatParentId) and isset($liveCatName))
+												<span class="category">
+													<i class="unir-folder">&ensp;</i>
+													<a href="{!! qsurl(config('app.locale').'/'.trans('routes.v-search', ['countryCode' => config('country.icode')]), array_merge(request()->except('c'), ['c'=>$liveCatId]), null, false) !!}" class="info-link">{{$liveCatName}}</a>
+												</span><br>
+											@endif
+											<span class="item-location">
+												<i class="unir-location">&ensp;</i>
+												<a href="{!! qsurl(config('app.locale').'/'.trans('routes.v-search', ['countryCode' => config('country.icode')]), array_merge(request()->except(['l', 'location']), ['l'=>$post->city_id]), null, false) !!}" class="info-link">{{$city->name}}</a> {{ (isset($post->distance)) ? '- ' . round($post->distance, 2) . getDistanceUnit() : '' }}
+											</span>&nbsp;
+											<span class="date"><i class="unir-clock">&ensp;</i>{{$post->created_at}}</span>
+										</span>
+									</div>
+								@else
+									<div class="items-details">
 									<h4 class="item-price ellipsis-text">
 										@if (isset($liveCat->type))
 											@if (!in_array($liveCat->type, ['not-salable']))
@@ -155,8 +176,8 @@ if (config('settings.listing.display_mode') == '.compact-view') {
 										</span>&nbsp;
 										<span class="date"><i class="unir-clock">&ensp;</i>{{$post->created_at}}</span>
 									</span>
-								</div>
-
+									</div>
+								@endif
 								@if (config('plugins.reviews.installed'))
 									@if (view()->exists('reviews::ratings-list'))
 										@include('reviews::ratings-list')

@@ -536,6 +536,7 @@ class HomeController extends FrontController
 			'tPost.title',
 			'tPost.price',
 			'tPost.city_id',
+			'tPost.negotiable',
 			'tPost.featured',
 			'tPost.created_at',
 			'tPost.reviewed',
@@ -587,7 +588,7 @@ class HomeController extends FrontController
                 ' . $paymentJoin . '
                 WHERE tPost.country_code = :countryCode
 					AND (tPost.verified_email=1 AND tPost.verified_phone=1)
-					AND tPost.category_id=799
+					AND tPost.category_id IN(799,801)
 					AND tPost.archived!=1 ' . $reviewedCondition . $sponsoredCondition . $notInBlackList .'
                 GROUP BY ' . implode(',', $groupBy) . '
                 ORDER BY ' . $sponsoredOrder . 'tPost.created_at DESC
@@ -599,7 +600,7 @@ class HomeController extends FrontController
                 ' . $paymentJoin . '
                 WHERE tPost.country_code = :countryCode
 					AND (tPost.verified_email=1 AND tPost.verified_phone=1)
-					AND tPost.category_id !=799
+					AND tPost.category_id NOT IN(799,801)
 					AND tPost.archived!=1 ' . $reviewedCondition . $sponsoredCondition . $notInBlackList .'
                 GROUP BY ' . implode(',', $groupBy) . '
                 ORDER BY ' . $sponsoredOrder . 'tPost.created_at DESC

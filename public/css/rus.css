@@ -744,13 +744,17 @@ a.sell-your-item-cart{
 @media (max-width: 525px) {
     .detail.action.center{
         float: left !important;
-        padding-left: 15px !important;
         padding-bottom: 10px !important;
     }
-}
 
-.block-cell.cell-media > img{
-    max-height: 55px;
+    .item-location.left15.gray{
+        margin: 0px !important;
+    }
+
+    .row.info-row-cart{
+        padding: 0 15px;
+    }
+    
 }
 
 .unir-check::before,
@@ -1675,4 +1679,16 @@ h5.collapse-title.no-border{
 
 .cab-cel.cel-dif.cal-acc .form-group.flex-block.gender{
     height: 40px;
+}
+
+.add-desc-box-no-price{
+    height: 126px;
+}
+
+.items-details-no-price .add-title.ellipsis-text{
+    padding: 3px 0;
+}
+
+.items-details-no-price  .info-row.ellipsis-text{
+    padding: 4px 0 34px;
 }

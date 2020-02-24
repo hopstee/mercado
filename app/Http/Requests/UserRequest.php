@@ -96,10 +96,10 @@ class UserRequest extends Request
 				'required',
 				'min:' . config('larapen.core.passwordLength.min', 4),
 				'max:' . config('larapen.core.passwordLength.max', 60),
-				'dumbpwd',
+				// 'dumbpwd',
 				'confirmed'
 			],
-			'term'         => ['accepted'],
+			// 'term'         => ['accepted'],
 		];
 		
 		// Email
@@ -118,20 +118,20 @@ class UserRequest extends Request
 		
 		// Phone
 		// if (config('settings.sms.phone_verification') == 1) {
-		// 	if ($this->filled('phone')) {
+			if ($this->filled('phone')) {
 				$countryCode = $this->input('country_code', config('country.code'));
 				if ($countryCode == 'UK') {
 					$countryCode = 'GB';
 				}
 				$rules['phone'][] = 'phone:' . $countryCode;
-		// 	}
+			}
 		// }
 		if (isEnabledField('phone')) {
-			if (isEnabledField('phone') and isEnabledField('email')) {
-				$rules['phone'][] = 'required_without:email';
-			} else {
+			// if (isEnabledField('phone') and isEnabledField('email')) {
+			// 	$rules['phone'][] = 'required_without:email';
+			// } else {
 				$rules['phone'][] = 'required';
-			}
+			// }
 		}
 		// if ($this->filled('phone')) {
 		// 	$rules['phone'][] = 'unique:users,phone';
@@ -164,14 +164,33 @@ class UserRequest extends Request
 	private function updateRules($router, $files, $config)
 	{
 		if (Str::contains(Route::currentRouteAction(), 'Account\EditController@updateSettings')) {
-			$rules = [
-				'password' => [
-					'min:' . config('larapen.core.passwordLength.min', 4),
-					'max:' . config('larapen.core.passwordLength.max', 60),
-					'dumbpwd',
-					'confirmed'
-				]
-			];
+			// $rules = [
+			// 	'password' => [
+			// 		'min:' . config('larapen.core.passwordLength.min', 4),
+			// 		'max:' . config('larapen.core.passwordLength.max', 60),
+			// 		// 'dumbpwd',
+			// 		'confirmed'
+			// 	],
+			// 	'email'     => ['email', new EmailRule(), new BlacklistEmailRule(), new BlacklistDomainRule()],
+			// ];
+			if(isEnabledField('password') && !is_null($this->input('password'))){
+				$rules = [
+					'password' => [
+						'min:' . config('larapen.core.passwordLength.min', 4),
+						'max:' . config('larapen.core.passwordLength.max', 60),
+						// 'dumbpwd',
+						'confirmed'
+					],
+				];
+			}
+			elseif(isEnabledField('email') && !is_null($this->input('email'))){
+				$rules = [
+					'email' => ['email',
+						new EmailRule(), 
+						new BlacklistEmailRule(), 
+						new BlacklistDomainRule()],
+				];
+			}
 		} else {
 			// Check if these fields has changed
 			$emailChanged = ($this->input('email') != auth()->user()->email);
@@ -188,15 +207,15 @@ class UserRequest extends Request
 			];
 			
 			// Phone
-			if (config('settings.sms.phone_verification') == 1) {
-				if ($this->filled('phone')) {
+			// if (config('settings.sms.phone_verification') == 1) {
+			// 	if ($this->filled('phone')) {
 					$countryCode = $this->input('country_code', config('country.code'));
 					if ($countryCode == 'UK') {
 						$countryCode = 'GB';
 					}
 					$rules['phone'][] = 'phone:' . $countryCode;
-				}
-			}
+				// }
+			// }
 			if (isEnabledField('phone')) {
 				// if (isEnabledField('phone') && isEnabledField('email')) {
 				// 	$rules['phone'][] = 'required_without:email';

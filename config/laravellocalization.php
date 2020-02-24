@@ -11,12 +11,12 @@ return [
     //
     // IMPORTANT - When hideDefaultLocaleInURL is set to true, the unlocalized root is treated as the applications default locale "app.locale".
     // Because of this language negotiation using the Accept-Language header will NEVER occur when hideDefaultLocaleInURL is true.
-    'hideDefaultLocaleInURL' => env('HIDE_DEFAULT_LOCALE_IN_URL', true),
+    'hideDefaultLocaleInURL' => env('HIDE_DEFAULT_LOCALE_IN_URL', false),
 
     // If you want to display the locales in particular order in the language selector you should write the order here.
     //CAUTION: Please consider using the appropriate locale code otherwise it will not work
     //Example: 'localesOrder' => ['es','en'],
-    'localesOrder' => [],
+    'localesOrder' => ['pt', 'en'],
 
 	//  If you want to use custom lang url segments like 'at' instead of 'de-AT',
 	// you can use the mapping to tallow the LanguageNegotiator to assign the descired locales based on HTTP Accept Language Header.

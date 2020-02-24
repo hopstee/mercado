@@ -25,7 +25,7 @@
 					@if (isset($errors) and $errors->any() and old('messageForm')=='1')
 						<div class="alert alert-danger">
 							<button type="button" class="close" data-dismiss="alert" aria-hidden="true"><i class="unir-close"></i></button>
-							<ul class="list list-check">
+							<ul class="list list-error">
 								@foreach($errors->all() as $error)
 									<li>{{ $error }}</li>
 								@endforeach
@@ -87,7 +87,17 @@
 							</div>
 						</div>
 					@endif -->
+
 					
+					@if( auth()->check() )
+					<input id="from_name"
+								   name="from_name"
+								   type="hidden"
+								   maxlength="60"
+								   value="{{ old('from_name', (auth()->check()) ? auth()->user()->name : '') }}"
+							>
+					@endif
+
 					<!-- from_phone -->
 					<?php $fromPhoneError = (isset($errors) and $errors->has('from_phone')) ? ' is-invalid' : ''; ?>
 					<div class="form-group required">
@@ -107,6 +117,7 @@
 								   maxlength="60"
 								   class="form-control{{ $fromPhoneError }}"
 								   value="{{ old('from_phone', (auth()->check()) ? auth()->user()->phone : '') }}"
+								   pattern="^\+\d{3}\s?\d{2}\s?\d{3}\s?\d{4}$"
 							>
 						</div>
 					</div>
@@ -115,14 +126,16 @@
 					<?php $messageError = (isset($errors) and $errors->has('message')) ? ' is-invalid' : ''; ?>
 					<div class="form-group required">
 						<label for="message" class="control-label">
-							{{ t('Message') }} <span class="text-count">(500 max)</span> <sup>*</sup>
+							{{ t('Message') }} <sup>*</sup>
 						</label>
 						<textarea id="message"
 								  name="message"
 								  class="form-control required{{ $messageError }}"
 								  placeholder="{{ t('Your message here...') }}"
 								  rows="5"
+								  maxlength="6000"
 						>{{ old('message') }}</textarea>
+						<small id="textarea-feedback" class="form-text text-muted"></small>
 					</div>
 
 					@if (isset($parentCat) and isset($parentCat->type) and in_array($parentCat->type, ['job-offer']))

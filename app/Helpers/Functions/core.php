@@ -1564,7 +1564,8 @@ function getUploadFileTypes($uploadType = 'file', $jsFormat = false)
 	if ($uploadType == 'image') {
 		$types = config('settings.upload.image_types', 'jpg,jpeg,gif,png');
 	} else {
-		$types = config('settings.upload.file_types', 'pdf,doc,docx,word,rtf,rtx,ppt,pptx,odt,odp,wps,jpeg,jpg,bmp,png');
+        config(array('settings.upload.file_types'=>'pdf,doc,odt,jpeg,png'));
+        $types = config('settings.upload.file_types');
 	}
 
 	$separators = ['|', '-', ';', '.', '/', '_', ' '];
@@ -2917,19 +2918,17 @@ function genEmailContactBtn($post = null, $btnBlock = false, $iconOnly = false)
 
 	if ($iconOnly) {
 		$out .= '<a href="' . $btnLink . '" data-toggle="modal">';
-		$out .= '<i class="icon-mail tooltipHere" data-toggle="tooltip" data-original-title="' . t('Send a message') . '"></i>';
+		$out .= '<i class="icon-mail tooltipHere" data-toggle="tooltip" data-original-title="' . t('MessageLabel') . '"></i>';
 		$out .= '</a>';
-	} else {
+	} else if( (isset(auth()->user()->id) and ($post->user_id != auth()->user()->id)) or (is_null(auth()->user()))){
 		if ($btnBlock) {
 			$btnClass = $btnClass . ' btn-block';
 		}
 
-		$out .= '<div class="new-button messageBtn"><a href="' . $btnLink . '" class="btn-user-card" data-toggle="modal">';
+		$out .= '<div class="new-button messageBtn" data-target="#contactUser" data-toggle="modal"><a  class="btn-user-card" >';
 		// $out .= "<img src=" . url('images/menu_light.svg') . " class='sidebar-image'>";
 		$out .= '<i class="unir-mail btn btn-success btn-block"  href="' . $btnLink . '"></i> ';
-		$out .= '';
-		$out .= '<span class="right-from-image" id="chat">  ' . t('Send a message') . '</span></a></div>';
-
+		$out .= '<span class="right-from-image" id="chat">  ' . t('MessageLabel') . '</span></a></div>';
 	}
 
 	return $out;
@@ -2951,13 +2950,11 @@ function genPhoneNumberBtn($post, $btnBlock = false)
 	}
 
 	$btnLink = 'tel:' . spacedNumber($post->phone);
-	// $btnLink = 'tel:' . $post->phone;
 
 	$btnAttr = '';
 	$btnClass = ' phoneBlock'; // for the JS showPhone() function
 	$btnHint = t('Click to see');
 	$phone = spacedNumber($post->phone);
-	// $phone = $post->phone;
 	if (config('settings.single.hide_phone_number')) {
 		if (config('settings.single.hide_phone_number') == '1') {
 			$phone = maskPhoneNumber($phone, 3, true);
@@ -2995,11 +2992,10 @@ function genPhoneNumberBtn($post, $btnBlock = false)
 	}
 
 	// Generate the Phone Number button
-	$out .= '<div class="new-button phoneBtn"><a class="btn-user-card" href="' . $btnLink . '" >';
+	$out .= '<div class="new-button phoneBtn" data-toggle="modal" data-target="#phoneModal"><a class="btn-user-card new-button phoneBtn" href="' . $btnLink . '" >';
 	$out .= '<i class="unir-phone btn btn-success' . $btnClass . $btnAttr . '"> </i>';
-	// $out .= '<span class="right-from-image">' . $phone . '</span>';
 
-	$out .= '<span class="right-from-image" id="call">'. spacedNumber($phone) . '</span></a></div>';
+	$out .= '<span class="right-from-image" id="call">'. shortNumber($phone) . '</span></a></div>';
 
 
 	return $out;
@@ -3013,10 +3009,23 @@ function genPhoneNumberBtn($post, $btnBlock = false)
  */
 function spacedNumber($phone){
 
-
 	if(  preg_match( '/^\+(\d{3})(\d{2})(\d{3})(\d{4})$/', $phone,  $matches ) && ( strlen($phone) == 13))
 	{
 		$phone = "+" . $matches[1] . ' ' . $matches[2] . ' ' . $matches[3] ;
+		
+		if(isset($matches[4])){
+			$phone .= ' ' .$matches[4];
+		}
+	}
+	// TODO IF NUMBER IF 
+		return $phone;
+}
+
+function shortNumber($phone){
+
+	if( preg_match( '/^\+(\d{3})\s(\d{2})\s(\d{3})\s(\d{4})$/', $phone,  $matches ))
+	{
+		$phone = $matches[2] . ' ' . $matches[3] ;
 		
 		if(isset($matches[4])){
 			$phone .= ' ' .$matches[4];

@@ -25,10 +25,16 @@ class FormSent extends Notification implements ShouldQueue
 	use Queueable;
 	
 	protected $msg;
+	protected $file;
 	
 	public function __construct($request)
 	{
 		$this->msg = $request;
+		if(isset($this->msg->file)) {
+			$this->file = ' <a href="' . $this->msg->file . '" download>Download</a>';
+		} else {
+			$this->file = 'None';
+		}
 	}
 	
 	public function via($notifiable)
@@ -45,7 +51,7 @@ class FormSent extends Notification implements ShouldQueue
 			->line(t('Name') . ': ' . $this->msg->first_name)
 			->line(t('Phone') . ': ' . $this->msg->phone)
 			->line(t('Email Address') . ': ' . $this->msg->email)
-			->line(t('File') . ': ' . ' <a href="' . $this->msg->file . '" download>Download</a>');
+		    ->line(t('File') . ': ' . $this->file);
 		
 		if (isset($this->msg->company_name) && $this->msg->company_name!='') {
 			$mailMessage->line(t('Company Name') . ': ' . $this->msg->company_name);

@@ -132,7 +132,6 @@ abstract class Request extends FormRequest
 		if ($this->ajax() || $this->wantsJson() || $this->segment(1) == 'api') {
 			// Get Errors
 			$errors = (new ValidationException($validator))->errors();
-
 			// Get Json
 			$json = [
 				'success' => false,

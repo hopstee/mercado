@@ -4,21 +4,22 @@
             <section>
                 <div class="wizard wizard-dif">
                     <ul class="nav nav-wizard nav-wizard-dif">
-                        @if (getSegment(2) == 'create')
+                        @if (getSegment(2) == trans('routes.create'))
                             <?php $uriPath = getSegment(4); ?>
 							@if (!in_array($uriPath, ['finish']))
 								<li class="{{ ($uriPath == '') ? 'active' : (in_array($uriPath, ['photos', 'packages', 'finish']) or (isset($post) and !empty($post)) ? '' : 'disabled') }}">
 									@if (isset($post) and !empty($post))
-										<a href="{{ lurl('posts/create/' . $post->tmp_token) }}">{{ t('Edit Details') }}</a>
+										<!-- <a href="{{ lurl('posts/create/' . $post->tmp_token) }}">{{ t('Edit Details') }}</a> -->
+										<a href="{{ lurl(trans('routes.v-posts-create-back',['tmpToken'=>$post->tmp_token]), $post->tmp_token) }}">{{ t('Edit Details') }}</a>
 									@else
 										<a href="{{ lurl('posts/create') }}">{{ t('Ad Details') }}</a>
 									@endif
 								</li>
 								<div class="block-arr"></div>
 												
-								<li class="picturesBloc {{ ($uriPath == 'photos') ? 'active' : ((in_array($uriPath, ['photos', 'packages', 'finish']) or (isset($post) and !empty($post))) ? '' : 'disabled') }}">
+								<li class="picturesBloc {{ ($uriPath == trans('routes.photos')) ? 'active' : ((in_array($uriPath, ['photos', 'packages', 'finish']) or (isset($post) and !empty($post))) ? '' : 'disabled') }}">
 									@if (isset($post) and !empty($post))
-										<a href="{{ lurl('posts/create/' . $post->tmp_token . '/photos') }}">{{ t('Photos') }}</a>
+										<a href="{{ lurl(trans('routes.v-posts-create-photo',['tmpToken'=>$post->tmp_token]), $post->tmp_token) }}">{{ t('Photos') }}</a>
 									@else
 										<a>{{ t('Photos') }}</a>
 									@endif
@@ -51,18 +52,18 @@
                         @else
                             <?php $uriPath = getSegment(3); ?>
 							@if (!in_array($uriPath, ['finish']))
-								<li class="{{ (in_array($uriPath, [null, 'edit'])) ? 'active' : '' }}">
+								<li class="{{ (in_array($uriPath, [null, trans('routes.edit')])) ? 'active' : '' }}">
 									@if (isset($post) and !empty($post))
-										<a href="{{ lurl('posts/' . $post->id . '/edit') }}">{{ t('Edit Details') }}</a>
+										<a href="{{ lurl( trans('routes.v-posts-edit', ['id'=>$post->id]), $post->id ) }}">{{ t('Edit Details') }}</a>
 									@else
 										<a href="{{ lurl('posts/create') }}">{{ t('Edit Details') }}</a>
 									@endif
 								</li>
 								<div class="block-arr"></div>
 							
-								<li class="picturesBloc {{ ($uriPath == 'photos') ? 'active' : '' }}">
+								<li class="picturesBloc {{ ($uriPath == trans('routes.photos')) ? 'active' : '' }}">
 									@if (isset($post) and !empty($post))
-										<a href="{{ lurl('posts/' . $post->id . '/photos') }}">{{ t('Edit Photos') }}</a>
+										<a href="{{ lurl( trans('routes.v-posts-photos', ['id'=>$post->id]), $post->id ) }}">{{ t('Edit Photos') }}</a>
 									@else
 										<a>{{ t('Edit Photos') }}</a>
 									@endif

@@ -15,6 +15,8 @@
 
 namespace App\Helpers;
 
+use App\Models\Category;
+
 
 class UrlGen
 {
@@ -71,7 +73,7 @@ class UrlGen
             return '#';
 		}
 
-		$uri = "/user" . "/" . $userId . "/posts" ;
+		$uri = lurl( trans('routes.v-search-user', ['id'=>$userId]), $userId);
 
 		return $uri;
 	}
@@ -104,6 +106,76 @@ class UrlGen
 	}
 
 	/**
+	 * R.S 
+	 * Translate for url where is tmpToken or postId
+	 * @param $link
+	 * @param $localeCode
+	 * @return bool|\Illuminate\Contracts\Routing\UrlGenerator|mixed|string|null
+	 */
+	public static function slugTrans($link, $localeCode)
+	{
+
+		$slug = substr($link , strpos($link, $localeCode) + 3, strlen($link));
+		$next = trans('routes', [],config('app.locale')) ;
+		
+		// Posts edit, ad photo etc.
+		if( (strpos($slug, trans('routes.posts')) === 0) 
+		|| (strpos($slug, trans('routes.unban')) === 0) 
+		|| (strpos($slug, trans('routes.conversations')) === 0) ){
+
+			if(strtolower($localeCode) == 'en'){
+				//  En language
+				$slugs = explode('/', $slug);
+				$nextURL = '';
+
+				foreach($slugs as $kk => $vv){
+					if(!in_array($vv, $next)){
+						$nextURL .= $vv . '/';
+						continue;
+					}
+					foreach($next as $key => $value){
+						if($value == $vv){
+							$nextURL .= $key . '/';
+						}
+					}
+				}
+				$link = lurl($nextURL ,[], $localeCode);
+			}
+			else{
+				// Other language than EN
+				$slugs = explode('/', $slug);
+				$nextURL = '';
+
+				foreach($slugs as $kk => $vv){
+
+					if(!in_array($vv, $next)){
+						$nextURL .= $vv . '/';
+						continue;
+					}
+					foreach($next as $key => $value){
+						if($value == $vv){
+							$nextURL .= trans('routes.'.$value,[],$localeCode) . '/';
+						}
+					}
+				}
+				$link = lurl($nextURL ,[], $localeCode);
+			}
+		}
+		else{
+			foreach($next as $key => $value){
+				if($value == $slug){
+					$nextURL = $key;
+				}
+			}
+			if(isset($nextURL) && (strlen($nextURL) > 0) ){
+				// var_dump(trans('routes.'.$nextURL , [], $localeCode));
+				$link = lurl( trans('routes.'.$nextURL , [], $localeCode), [] , $localeCode);
+			}
+		}
+		return $link;
+	}
+
+	/**
 	 * @param bool $httpError
 	 * @return bool|\Illuminate\Contracts\Routing\UrlGenerator|mixed|string|null
 	 */
@@ -111,12 +183,12 @@ class UrlGen
 	{
 		if (!$httpError) {
 			$url = (config('settings.single.publication_form_type') == '2')
-				? lurl('create')
-				: lurl('posts/create');
+				? lurl('/' . trans('routes.create'))
+				: lurl('/' . trans('routes.posts') . '/' . trans('routes.create'));
 		} else {
 			$url = (config('settings.single.publication_form_type') == '2')
-				? url(config('app.locale') . '/create')
-				: url(config('app.locale') . '/posts/create');
+				? lurl('/' . trans('routes.create'))
+				: lurl('/' . trans('routes.posts') . '/' . trans('routes.create'));
 		}
 
 		return $url;
@@ -140,7 +212,7 @@ class UrlGen
 		if (isset($entry->id)) {
 			$url = (config('settings.single.publication_form_type') == '2')
 				? lurl('edit/' . $entry->id, [], $locale)
-				: lurl('posts/' . $entry->id . '/edit', [], $locale);
+				: lurl(trans('routes.v-posts-edit',['id'=>$entry->id]),$entry->id );
 		} else {
 			$url = '#';
 		}
@@ -182,6 +254,7 @@ class UrlGen
 				$url = '#';
 			}
 		} else {
+			// var_dump(  Category::trans()->where( 'slug', $entry->slug)->firstOrFail()->slug  );
 			if (isset($entry->slug)) {
 				$attr = [
 					'countryCode' => $countryCode,

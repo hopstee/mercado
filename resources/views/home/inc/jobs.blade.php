@@ -29,7 +29,7 @@ if (config('settings.listing.display_mode') == '.compact-view') {
                 </div>
             </div>
 
-            <div id="jobsList" class="adds-wrapper noSideBar category-list">
+            <div id="jobsList" class="adds-wrapper noSideBar category-list make-grid">
                 <?php
 					foreach($jobs as $key => $post):
 					if (empty($countries) or !$countries->has($post->country_code)) continue;

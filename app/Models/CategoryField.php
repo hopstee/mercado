@@ -18,6 +18,7 @@ namespace App\Models;
 
 use Illuminate\Support\Collection;
 use Larapen\Admin\app\Models\Crud;
+use App\Models\Category;
 
 class CategoryField extends BaseModel
 {
@@ -193,7 +194,9 @@ class CategoryField extends BaseModel
 
         $i = 1;
         foreach ($catTree as $cat) {
-            $tempFields = self::where('category_id', $cat->id)->
+            $cat = Category::where('id', '=', $cat->id)->firstOrFail();
+            // $tempFields = self::where('category_id', $cat->id)->
+            $tempFields = self::where('category_id', $cat->translation_of)->
                 whereIn('disabled_in_subcategories', ($i<$catTree->count()) ? [0] : [0,1])
                 ->orderBy('lft', 'ASC')
                 ->get();

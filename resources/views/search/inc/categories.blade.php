@@ -3,9 +3,16 @@
         <div class="container">
             <div class="category-links">
                 <ul>
+                    <?php 
+                        $urlWithLang= $_SERVER['REQUEST_URI'];
+                        if(strpos($urlWithLang,'?')!==false){
+                            $urlWithLang=substr($urlWithLang,0,strpos($urlWithLang,'?'));
+                        }
+
+                    ?>
                     @foreach ($catChildren as $iSubCat)
                         <li>
-                            <a href="{{ $baseCatURL }}/{{ $iSubCat->slug }}">
+                            <a href="{{ $urlWithLang }}/{{ $iSubCat->slug }}">
                                 {{ $iSubCat->name }}
                             </a>
                         </li>

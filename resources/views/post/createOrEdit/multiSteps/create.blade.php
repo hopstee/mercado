@@ -39,16 +39,16 @@
 						<div class="row">
 							<div class="col-xl-12">
 
-								<form class="form-horizontal" id="postForm" method="POST" action="/posts/create" enctype="multipart/form-data">
+								<form class="form-horizontal" id="postForm" method="POST" action="{{ lurl(trans('routes.posts-create'))}}" enctype="multipart/form-data">
 									{!! csrf_field() !!}
 									<fieldset>
 
 										<div class="col-xl-12 col-xl-12-dif">
-											<div class="ads-header">
+											<!-- <div class="ads-header">
 												<h3>
 													<strong>{{ t('Ads information') }}</strong>
 												</h3>
-											</div>
+											</div> -->
 
 											<div class="inner-ads-box">
 												<!-- parent_id -->
@@ -127,9 +127,10 @@
 															class="ns-form-label" for="title">{{ t('Title') }} <sup>*</sup></label>
 													<div>
 														<input id="title" name="title" placeholder="{{ t('Ad title') }}" class="form-control input-md{{ $titleError }}"
-															   type="text" value="{{ old('title') }}">
-														<small id="" class="form-text text-muted">{{ t('A great title from 2 to 55 characters.') }}</small>
+															   type="text" value="{{ old('title') }}" maxlength="55">
+														<small id="input-feedback" class="form-text text-muted"></small>
 													</div>
+												
 												</div>
 
 												<!-- description -->
@@ -154,7 +155,7 @@
 																  name="description"
 																  rows="5"
 														>{{ old('description') }}</textarea>
-														<small id="" class="form-text text-muted">{{ t('Describe what makes your ad unique from 5 to 6000 characters.') }}</small>
+														<small id="textarea-feedback" class="form-text text-muted">{{ t('Describe what makes your ad unique from 5 to 6000 characters.') }}</small>
 													</div>
 												</div>
 
@@ -177,6 +178,7 @@
 															   class="form-control{{ $priceError }}"
 															   placeholder="{{ t('e.i. 15000') }}"
 															   type="number" value="{{ old('price') }}"
+															   onkeydown="return checkOnlyDigitsForPrice(this,event)"
 														>
 
 														<div class="input-group-append">
@@ -320,10 +322,10 @@
 												@if (auth()->check())
 													<input id="contact_name" name="contact_name" type="hidden" value="{{ auth()->user()->name }}">
 												@else
+													<div class="col-md-2 col-sm-3 name">
+																<label for="contact_name">{{ t('Your name') }} <sup>*</sup></label>
+													</div>
 													<div class="form-group row required owner-contact-name">
-														<div class="col-md-2 col-sm-3">
-															<label for="contact_name">{{ t('Your name') }} <sup>*</sup></label>
-														</div>
 														<div class="col-md-9 col-sm-9">
 															<input id="contact_name" name="contact_name" placeholder="{{ t('Your name') }}"
 																   class="form-control input-md{{ $contactNameError }}" type="text" value="{{ old('contact_name') }}">
@@ -345,41 +347,50 @@
 												$phoneError = (isset($errors) and $errors->has('phone')) ? ' is-invalid' : '';
 												$editable = auth()->check() ? 'readonly' : '';
 												?>
-												<div class="form-group row required owner-phone">
-													<label class="col-md-2 col-form-label" for="phone">{{ t('Phone Number') }}</label>
-													<div class="input-group col-md-9">
-														<!-- start test -->
-													<!-- <div class="input-group-prepend">
-																<span id="phoneCountry" class="input-group-text">{!! getPhoneIcon(config('country.code')) !!}</span>
-															</div> -->
-														<!-- end test -->
+												<!-- <div class="form-group row required owner-phone"> -->
+													<div class="col-md-2 col-sm-3 phone">
+														<label class="col-form-label name" for="phone">{{ t('Phone Number') }} <sup>*</sup></label>
+													</div>
+													<div class="form-group row required owner-phone">
+														<div class="col-md-9 col-sm-9">
 
-														<input id="phone" name="phone"
-															   placeholder="{{ t('Phone Number') }}"
-															   class="form-control input-md{{ $phoneError }}" type="text"
-															   value="{{ phoneFormat(old('phone', $formPhone), old('country', config('country.code'))) }}"
+															<!-- start test -->
+														<!-- <div class="input-group-prepend">
+																	<span id="phoneCountry" class="input-group-text">{!! getPhoneIcon(config('country.code')) !!}</span>
+																</div> -->
+															<!-- end test -->
+
+															<input id="phone" name="phone"
+																placeholder="{{ t('Phone Number') }}"
+																class="form-control input-md{{ $phoneError }}" type="text"
+																value="{{ phoneFormat(old('phone', $formPhone), old('country', config('country.code'))) }}"
 																{{ $editable }}
-														>
-														@if (auth()->check())
-															<div class="input-group-append">
-																<div class="input-group-check check-phone flex-align">
-																	<div class="cntr">
-																		<label for="phoneHidden" class="label-cbx">
-																		<input id="phoneHidden" name="phone_hidden" type="checkbox" class="invisible" value="1" {{ (old('phone_hidden')=='1') ? 'checked="checked"' : '' }}>
-																		<div class="checkbox">
-																			<svg width="14px" height="14px" viewBox="0 0 14 14">
-																			<path d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
-																			<polyline points="4 8 6 10 11 5"></polyline>
-																			</svg>
+																pattern="^\+\d{3}\s?\d{2}\s?\d{3}\s?\d{4}$"
+																oninvalid="this.setCustomValidity('{{ t('Enter phone number') }}')"
+																oninput="setCustomValidity('')"
+																required
+															>
+															@if (auth()->check())
+																<div class="input-group-append">
+																	<div class="input-group-check check-phone flex-align">
+																		<div class="cntr">
+																			<label for="phoneHidden" class="label-cbx">
+																			<input id="phoneHidden" name="phone_hidden" type="checkbox" class="invisible" value="1" {{ (old('phone_hidden')=='1') ? 'checked="checked"' : '' }}>
+																			<div class="checkbox">
+																				<svg width="14px" height="14px" viewBox="0 0 14 14">
+																				<path d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+																				<polyline points="4 8 6 10 11 5"></polyline>
+																				</svg>
+																			</div>
+																			{{ t('Hide') }}
+																			</label>
 																		</div>
-																		{{ t('Hide') }}
-																		</label>
 																	</div>
 																</div>
-															</div>
-														@endif
+															@endif
+														</div>
 													</div>
-												</div>
+												<!-- </div> -->
 
 												@if (!auth()->check())
 													@if (in_array(config('settings.single.auto_registration'), [1, 2]))
@@ -417,9 +428,33 @@
 												<?php $termError = (isset($errors) and $errors->has('term')) ? ' is-invalid' : ''; ?>
 												<div class="form-group row required terms-conditions">
 													<label class="col-md-2 col-form-label{{ $termError }}"></label>
-													<div class="col-md-9">
-														<label class="checkbox mb-0" for="term-0">
-															{!! t('I have read and agree to the <a :attributes>Terms of Use</a>', ['attributes' => getUrlPageByType('terms')]) !!}
+													<div class="col-md-9 cntr">
+														<label class="checkbox mb-0 label-cbx" id="term" for="terms">
+															@if (!auth()->check())
+																<input id="terms" name="terms" type="checkbox" class="invisible" value="0">
+																<div class="checkbox">
+																	<svg width="14px" height="14px" viewBox="0 0 14 14">
+																		<path d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+																		<polyline points="4 8 6 10 11 5"></polyline>
+																	</svg>
+																</div>
+																<script>
+																	$('#terms').click(function () {
+																		if ($(this).is(':checked') == false) {
+																			$('#nextStepBtn').attr('disabled', 'disabled');
+																		} else {
+																			$('#nextStepBtn').removeAttr('disabled');
+																		}
+																	});
+																</script>
+															@else
+																<input id="terms" name="terms" type="checkbox" class="invisible" value="1" checked="checked">
+															@endif
+															{!! t('I have read and agree to the <a :terms>Terms of Use</a>, <a :priv-pol>Privacy Policy</a> and <a :post-rul>Posting Rules</a>',
+ 																	['terms' => "href='" . lurl(trans('routes.v-page',['slug'=>trans('routes.terms-of-use')]))."'",
+ 																	'priv-pol'=>"href='" . lurl(trans('routes.v-page',['slug'=>trans('routes.privacy-policy')]))."'",
+ 																	'post-rul'=>"href='" . lurl(trans('routes.v-page',['slug'=>trans('routes.posting-rules')]))."'"
+ 																	])!!}
 														</label>
 													</div>
 												</div>
@@ -427,7 +462,11 @@
 												<!-- Button  -->
 												<div class="form-group row pt-3 post-submit" >
 													<div class="col-md-9 text-center">
-														<button id="nextStepBtn" class="btn btn-primary btn-lg btn-dif btn-green"> {{ t('Submit') }} </button>
+													@if (auth()->check())
+														<button id="nextStepBtn" class="btn btn-primary btn-lg btn-dif btn-green" > {{ t('Submit') }} </button>
+													@else
+														<button id="nextStepBtn" class="btn btn-primary btn-lg btn-dif btn-green" disabled="disabled"> {{ t('Submit') }} </button>
+													@endif
 													</div>
 												</div>
 											</div>
@@ -445,14 +484,13 @@
 					<div class="help-block sticky-top">
 						<h3 class="title-3 py-3">{{ t('Help links') }}</h3>
 						<div class="text-content text-left from-wysiwyg">
-							<h4><a href="{{ lurl('page/terms-conditions')}}">{{ t('Terms and Conditions') }}</a></h4>
-							<h4><a href="{{ lurl('page/about')}}">{{ t('About Mercado.gratis') }}</a></h4>
-							<h4><a href="{{ lurl('page/account')}}">{{ t('Managing Account & Ads') }}</a></h4>
-							<h4><a href="{{ lurl('page/safety')}}">{{ t('Safety Tips') }}</a></h4>
-							<h4><a href="{{ lurl('page/fastsell')}}">{{ t('How to sell fast') }}</a></h4>
-							<h4><a href="{{ lurl('page/report')}}">{{ t('Report a suspicious user or add') }}</a></h4>
-							<h4><a href="{{ lurl('page/fraudvictim')}}">{{ t('If you become a victim of fraud') }}</a></h4>
-							<h4><a href="{{ lurl('contact')}}">{{ t('Contact Us') }}</a></h4>
+							<h4><a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.terms-of-use')])) }}">{{ t('Terms of Use') }}</a></h4>
+							<h4><a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.privacy-policy')])) }}">{{ t('Privacy Policy') }}</a></h4>
+							<h4><a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.posting-rules')])) }}">{{ t('Posting Rules') }}</a></h4>
+							<h4><a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.tips')])) }}">{{ t('Tips for Users') }}</a></h4>
+							<h4><a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.faq')])) }}">{{ t('FAQ') }}</a></h4>
+							<h4><a href="{{ lurl(trans('routes.sitemap')) }}">{{ t('Sitemap') }}</a></h4> 
+							<h4><a href="{{ lurl(trans('routes.contact-us'))}}">{{ t('Contact Us') }}</a></h4> 
 						</div>
 					</div>
                 </div>
@@ -522,17 +560,17 @@
 		};
 
 		/* Categories */
-		var category = {{ old('parent_id', 0) }};
-		var categoryType = '{{ old('parent_type') }}';
+		var category = "{{ old('parent_id', 0) }}";
+		var categoryType = "{{ old('parent_type') }}";
+		
 		if (categoryType=='') {
 			var selectedCat = $('select[name=parent_id]').find('option:selected');
 			categoryType = selectedCat.data('type');
 		}
-		var subCategory = {{ old('category_id', 0) }};
-
+		var subCategory = "{{ old('category_id', 0) }}";
 		/* Custom Fields */
 		var errors = '{!! addslashes($errors->toJson()) !!}';
-		var oldInput = '{!! addslashes(collect(session()->getOldInput('cf'))->toJson()) !!}';
+		var oldInput = '{!! addslashes(collect(session()->getOldInput('cf'))->toJson(JSON_UNESCAPED_UNICODE)) !!}';
 		var postId = '';
 
 		/* Locations */
@@ -544,8 +582,8 @@
 		/* Packages */
 		var packageIsEnabled = false;
         @if (isset($packages) and isset($paymentMethods) and $packages->count() > 0 and $paymentMethods->count() > 0)
-            packageIsEnabled = true;
-        @endif
+			packageIsEnabled = true;
+		@endif
 
 	</script>
 	<script>
@@ -585,7 +623,73 @@
 		// 	})
 		// })
 	</script>
+
+	<script>
+		$(document).ready(function() {
+			var text_max = 55,
+			text_remaining = $('#title').val().length;
+			$('#input-feedback').html(text_max - text_remaining + "{{ t('characters left') }}");
+
+			$('#title').keyup(function() {
+				var text_length = $(this).val().length,
+					text_remaining = text_max - text_length;
+
+				if (text_length === 0) {
+					$('#input-feedback').html(text_max + "{{ t('characters left') }}");
+				} else if (text_length > text_max) {
+					$('#input-feedback').html('Too many characters');
+				} else {
+					$('#input-feedback').html(text_remaining + "{{ t('characters left') }}");
+				}
+			});
+		});
+	</script>
+	
+	<script>
+		$(document).ready(function() {
+			var textarea_max = 6001,
+			textarea_remaining = $('.simditor-body').children('p').text().length + $('.simditor-body').find('p').length - 1;
+			$('#textarea-feedback').html(textarea_max - 1 - textarea_remaining + "{{ t('characters left') }}");
+
+			$('.simditor-body').keyup(function() {
+				var textarea_length = $(this).children('p').text().length + $(this).find('p').length,
+					textarea_remaining = textarea_max - textarea_length;
+
+				if (textarea_length === 0) {
+					$('#textarea-feedback').html(textarea_max + "{{ t('characters left') }}");
+				} else if (textarea_length > textarea_max) {
+					$('#textarea-feedback').html('Too many characters');
+				} else {
+					$('#textarea-feedback').html(textarea_remaining + "{{ t('characters left') }}");
+				}
+			});
+		});
+
+		function checkOnlyDigitsForPrice(element,event) {
+			if(event.keyCode < 48 || event.keyCode >57){
+				if(event.keyCode===46){
+					return false;
+				}
+			}
+		}
+
+		function checkOnlyDigits(element,event) {
+			if(event.keyCode < 48 || event.keyCode >57){
+				if(event.keyCode!==46){
+					return false;
+				}
+			}
+			if (element.id === 'cf.161') {
+				element.step = 1;
+				if(element.value.length === 4) {
+					return false;
+				}
+			}
+		}
+	</script>
+
 	<script src="{{ url('assets/js/app/d.select.category.js') . vTime() }}"></script>
 	<script src="{{ url('assets/js/app/d.select.location.js') . vTime() }}"></script>
 	<script src="{{ url('assets/js/bootstrap-treeview.min.js') }}"></script>
+
 @endsection

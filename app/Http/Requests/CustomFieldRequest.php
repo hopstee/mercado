@@ -19,6 +19,7 @@ use App\Helpers\Files\Storage\StorageDisk;
 use App\Models\CategoryField;
 use App\Models\PostValue;
 use App\Rules\cfBetweenRule;
+use App\Rules\valBetweenRule;
 
 class CustomFieldRequest extends Request
 {
@@ -78,6 +79,20 @@ class CustomFieldRequest extends Request
 					$cfRules[] = 'mimes:' . getUploadFileTypes('file');
 					$cfRules[] = 'min:' . (int)config('settings.upload.min_file_size', 0);
 					$cfRules[] = 'max:' . (int)config('settings.upload.max_file_size', 1000);
+				}
+
+				if ($field->type == 'number' && $field->tid == 161) {
+					$date = date('Y');
+					$cfRules[] = new valBetweenRule(strtolower($field->name), 1900, $date);
+				}
+                if ($field->type == 'number' && $field->tid != 161) {
+                    $cfRules[] = new valBetweenRule(strtolower($field->name));
+				}
+				if ($field->type == 'number' && $field->tid == 199) {
+					$cfRules = new valBetweenRule(strtolower($field->name), 2, 9999999);
+				}
+				if ($field->type == 'number' && $field->tid == 215) {
+					$cfRules = new valBetweenRule(strtolower($field->name), 2, 9999);
 				}
 
 				// R.S control for custom fields error when is not between 

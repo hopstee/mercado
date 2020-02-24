@@ -9,8 +9,11 @@ if (!isset($cacheExpiration)) {
         $cats = collect([]);
     }
 
+
     $paddings = false;
+
     foreach($paginator->getCollection() as $key => $post):
+    $incr = !$incr;
     if (empty($countries) or !$countries->has($post->country_code)) continue;
     // if ($post->category_id != '801' and $post->category_id != '799') continue;
     $paddings = !$paddings;
@@ -74,7 +77,9 @@ if (!isset($cacheExpiration)) {
         $liveCatName = $liveCat->name;
     }
     ?>
+
     <div class="item-list item-inline {{ $paddings == true ? 'pad-right' : 'pad-left' }}">
+
         @if (isset($package) and !empty($package))
             @if ($package->ribbon != '')
                 <div class="cornerRibbons {{ $package->ribbon }}">
@@ -109,7 +114,7 @@ if (!isset($cacheExpiration)) {
                 </div>
             </div>
 
-            <div class="col-md-7 add-desc-box">
+            <div class="col-md-10 add-desc-box">
                 <div class="items-details">
                     <h4 class="item-price ellipsis-text">
                         @if (isset($liveCat->type))

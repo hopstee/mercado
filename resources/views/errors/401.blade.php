@@ -30,8 +30,8 @@
                     <div class="col-md-12 page-content">
                         <div class="error-page" style="margin: 100px 0;">
                             <h2 class="headline text-center" style="font-size: 180px; float: none;"> 401</h2>
-                            <div class="text-center m-l-0" style="margin-top: 60px;">
-                                <h3 class="m-t-0"><i class="fa fa-warning"></i> Unauthorized action.</h3>
+                            <div class="text-center m-l-0" style="margin-top:  5%;">
+                                <h3 class="m-t-0"> Unauthorized action.</h3>
                                 <p>
                                     <?php
 									$defaultErrorMessage = "Meanwhile, you may <a href='".url('admin')."'>return to homepage</a>";

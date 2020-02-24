@@ -61,7 +61,8 @@
 		?>
 		@include('common.spacer')
 		<div class="container">
-			<div class="row" style="margin-top:16px;">
+			<!-- <div class="row" style="margin-top:16px;"> -->
+			<div class="row">
 
 				<!-- Sidebar -->
                 @if (config('settings.listing.left_sidebar'))
@@ -73,7 +74,7 @@
 
 				<!-- Content -->
 				<div class="{{ $contentColSm }} page-content col-thin-left no-padding">
-					<div class="category-list{{ ($contentColSm == 'col-md-12') ? ' noSideBar' : '' }}">
+					<div id="serpPosts" class="category-list{{ ($contentColSm == 'col-md-12') ? ' noSideBar' : '' }}">
 						<div class="tab-box">
 
 							<!-- Nav tabs -->
@@ -138,11 +139,11 @@
 											</option>
 											<option{{ (request()->get('orderBy')=='priceAsc') ? ' selected="selected"' : '' }}
 													value="{!! qsurl($fullUrlNoParams, array_merge(request()->except('orderBy'), ['orderBy'=>'priceAsc']), null, false) !!}">
-											{{ t('Price : Low to High') }}
+											{{ t('Price: Low to High') }}
 											</option>
 											<option{{ (request()->get('orderBy')=='priceDesc') ? ' selected="selected"' : '' }}
 													value="{!! qsurl($fullUrlNoParams, array_merge(request()->except('orderBy'), ['orderBy'=>'priceDesc']), null, false) !!}">
-											{{ t('Price : High to Low') }}
+											{{ t('Price: High to Low') }}
 											</option>
 {{--											<option{{ (request()->get('orderBy')=='relevance') ? ' selected="selected"' : '' }}--}}
 {{--													value="{!! qsurl($fullUrlNoParams, array_merge(request()->except('orderBy'), ['orderBy'=>'relevance']), null, false) !!}">--}}
@@ -211,13 +212,13 @@
 											<li>
 												<a href="{!! qsurl($fullUrlNoParams, array_merge(request()->except('orderBy'), ['orderBy'=>'priceAsc']), null, false) !!}" rel="nofollow"
                                                 class="{{ (request()->get('orderBy')=='priceAsc') ? "link-bold" : "" }}">
-													{{ t('Price : Low to High') }}
+													{{ t('Price: Low to High') }}
 												</a>
 											</li>
 											<li>
 												<a href="{!! qsurl($fullUrlNoParams, array_merge(request()->except('orderBy'), ['orderBy'=>'priceDesc']), null, false) !!}" rel="nofollow"
                                                     class="{{ (request()->get('orderBy')=='priceDesc') ? "link-bold" : "" }}">
-                                                    {{ t('Price : High to Low') }}
+                                                    {{ t('Price: High to Low') }}
 												</a>
 											</li>
 {{--											<li>--}}
@@ -278,8 +279,30 @@
 
 						<!-- <div id="postsList" class="adds-wrapper row no-margin d-flex justify-content-between"> -->
 						<div id="postsList" class="adds-wrapper row no-margin">
-
 							@include('search.inc.posts')
+							<div class="toTop">
+                                <div id="newaddfade" class="animated-hide">
+									<a href="{{ \App\Helpers\UrlGen::addPost() }}">
+										<i style="font-size: 24px; margin-right: 10px;" class="unir-add"></i><span>{{t("Place an Ad")}}</span>
+									</a>
+								</div>
+                            </div>
+							<script type="text/javascript">
+								var lastScrollTop = 0;
+								$(function() {
+									$(window).scroll(function() {
+										if ($('body').width() <= 765) {
+											var st = $(this).scrollTop();
+											if(st < lastScrollTop && st>80) {
+												$('#newaddfade').removeClass('animated-hide');
+											} else {
+												$('#newaddfade').addClass('animated-hide');
+											}
+											lastScrollTop = st;
+										}
+									});
+								});
+							</script>
 						</div>
 
 						<!-- <div class="tab-box save-search-bar text-center">
@@ -294,7 +317,10 @@
 						</div> -->
 					</div>
 
-					<nav class="pagination-bar mb-5 pagination-sm" aria-label="">
+					<nav class="d-md-none pagination-bar mb-5 pagination-sm" aria-label="">
+						{{ $paginator->links('vendor.pagination.simple-bootstrap-4') }}
+					</nav>
+					<nav class="d-none d-md-block pagination-bar mb-5 pagination-sm" aria-label="">
 						{!! $paginator->appends(request()->query())->render() !!}
 					</nav>
 
@@ -366,32 +392,32 @@
 			// }
 		});
 
-		$(".unir-rarrow2.icon").on("click",function(){
-			if($('.mobile-dropdown .unir-rarrow2').attr("style") !='transform: rotate(90deg);' ){
-				console.log('xxx');
-				$('.mobile-dropdown .unir-rarrow2').attr("style", "transform: rotate(90deg);");
-			}
-			else {
-				console.log('aaa');
-				$('.mobile-dropdown .unir-rarrow2').attr("style", "transform: rotate(0deg);");
-			}
-		});
+		// $(".unir-rarrow2.icon").on("click",function(){
+		// 	if($('.mobile-dropdown .unir-rarrow2').attr("style") !='transform: rotate(90deg);' ){
+		// 		console.log('xxx');
+		// 		$('.mobile-dropdown .unir-rarrow2').attr("style", "transform: rotate(90deg);");
+		// 	}
+		// 	else {
+		// 		console.log('aaa');
+		// 		$('.mobile-dropdown .unir-rarrow2').attr("style", "transform: rotate(0deg);");
+		// 	}
+		// });
 		
-		$("#mobileCurrent").on("click",function(){
-			if($('.mobile-dropdown .unir-rarrow2').attr("style") !='transform: rotate(90deg);' ){
-				console.log('xxx');
-				$('.mobile-dropdown .unir-rarrow2').attr("style", "transform: rotate(90deg);");
-			}
-			else {
-				console.log('aaa');
-				$('.mobile-dropdown .unir-rarrow2').attr("style", "transform: rotate(0deg);");
-			}
-		});
+		// $("#mobileCurrent").on("click",function(){
+		// 	if($('.mobile-dropdown .unir-rarrow2').attr("style") !='transform: rotate(90deg);' ){
+		// 		console.log('xxx');
+		// 		$('.mobile-dropdown .unir-rarrow2').attr("style", "transform: rotate(90deg);");
+		// 	}
+		// 	else {
+		// 		console.log('aaa');
+		// 		$('.mobile-dropdown .unir-rarrow2').attr("style", "transform: rotate(0deg);");
+		// 	}
+		// });
 
-		$('.dropdown-menu').on("click", function(){
-			console.log('list');
-			$('.mobile-dropdown .unir-rarrow2').attr("style", "transform: rotate(0deg);");
-		});
+		// $('.dropdown-menu').on("click", function(){
+		// 	console.log('list');
+		// 	$('.mobile-dropdown .unir-rarrow2').attr("style", "transform: rotate(0deg);");
+		// });
 
 		@if (config('settings.optimization.lazy_loading_activation') == 1)
 		$(document).ready(function () {

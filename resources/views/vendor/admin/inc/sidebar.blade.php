@@ -77,6 +77,11 @@
                         </ul>
                     </li>
                 @endif
+                @if (auth()->user()->can('list-post') || userHasSuperAdminPermissions())
+                    <li><a href="{{ admin_url('reports') }}"><i class="fa fa-envelope"></i>
+                            <span>{{ trans('admin::messages.reports') }}</span></a></li>
+                @endif
+
 
                 @if (
                     auth()->user()->can('list-user') ||
@@ -209,6 +214,10 @@
                             @if (auth()->user()->can('list-report-type') || userHasSuperAdminPermissions())
                                 <li><a href="{{ admin_url('report_types') }}"><i class="fa fa-language"></i>
                                         <span>{{ trans('admin::messages.report types') }}</span></a></li>
+                            @endif
+                            @if (auth()->user()->can('list-report-type') || userHasSuperAdminPermissions())
+                                <li><a href="{{ admin_url('ban_types') }}"><i class="fa fa-language"></i>
+                                        <span>{{ trans('admin::messages.ban types') }}</span></a></li>
                             @endif
                         </ul>
                     </li>

@@ -7,7 +7,6 @@ if (!isset($cacheExpiration)) {
 @if (isset($featured) and !empty($featured) and !empty($featured->posts))
 
 <div class="container">
-    <hr>
     <div class="col-xl-12 content-box layout-section">
         <div class="row row-featured row-featured-category">
             <div class="col-xl-12 box-title">
@@ -23,7 +22,7 @@ if (!isset($cacheExpiration)) {
 
             <div class="relative content featured-list-row clearfix cart">
                 <div class="large-12 columns">
-                    <div class="no-margin featured-list-slider owl-carousel owl-theme">
+                    <div class="no-margin featured-list-slider owl-carousel owl-theme" id="similarAds">
                         <?php
 							foreach($featured->posts as $key => $post):
 								if (empty($countries) or !$countries->has($post->country_code)) continue;

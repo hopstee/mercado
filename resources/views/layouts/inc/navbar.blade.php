@@ -56,11 +56,15 @@
 						$attr['slug'] = isset($postArgs['slug']) ? $postArgs['slug'] : getSegment(1);
 						$attr['id'] = isset($postArgs['id']) ? $postArgs['id'] : getSegment(2);
 					}
-					// $attr['debug'] = '1';
-					
+                    // $attr['debug'] = '1';
+                    
+                    $link = lurl(null, $attr, $localeCode);
+					if( is_numeric(strpos($link, $localeCode)) && (strlen($link) > 28) && !isset($attr['catSlug']) && !isset($attr['slug'])){
+                        $link = \App\Helpers\UrlGen::slugTrans($link, $localeCode);
+					}
+
 					// Default
 					// $link = LaravelLocalization::getLocalizedURL($localeCode, null, $attr);
-					$link = lurl(null, $attr, $localeCode);
                     $localeCode = strtolower($localeCode);
 					?>
                         <li class="">
@@ -68,6 +72,7 @@
                                 <span style="font-weight:bold;">{{ t('Change Language') }}</span><span
                                     class="lang-name"> {!! $properties['native'] !!}</span>
                             </a>
+                            <div class="closeFilter" style="right: 0px"><i class="unir-close_l"></i></div>
                         </li>
                         @endif
                         @endforeach
@@ -84,30 +89,31 @@
                         {{ t('Log In') }}</a>
                     @endif
                 </li>
-                <li class="nav-item">
+                <li class="nav-item flex">
                     <a href="{{ lurl(trans('routes.register')) }}" class="nav-link"><i class="unib-lock"></i> {{ t('Register') }}</a>
                 </li>
-                <li class="nav-item" style="padding:10px 0px;">
-                        <a id="help-down" class="dropdown-toggle" data-toggle="dropdown" style="font-weight:bold;font-size:14px;padding:5px 5px; display:block;"><i class="unib-info"></i> {{ t('Help links') }}<i style="float: right;" class="help-down unir-rarrow2"></i></a>
+                <li class="nav-item dropdown show" style="padding:10px 0px;">
+                        <a id="help-down" class="dropdown-toggle" aria-expanded="true" data-toggle="dropdown" style="font-weight:bold;font-size:14px;padding:5px 5px; display:block;" ><i class="unib-info">&ensp;</i> {{ t('Help links') }}<i style="float: right;" class="help-down unir-rarrow2"></i></a>
                         <ul id="userMenuDropdown" class="dropdown-menu navbar-mobile user-menu dropdown-menu-right" style="border: none;">
-                            <a href="{{ lurl('page/terms-of-use')}}"><i
+                            <a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.terms-of-use')])) }}"><i
                                     class="unir-sheild">&nbsp;</i>{{ t('Terms of Use') }}</a>
-                            <a href="{{ lurl('page/privacy-policy')}}"><i
+                            <a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.privacy-policy')])) }}"><i
                                     class="unir-note">&nbsp;</i>{{ t('Privacy Policy') }}</a>
-                            <a href="{{ lurl('page/posting-rules')}}"><i
+                            <a href="{{lurl(trans('routes.v-page',['slug'=>trans('routes.posting-rules')])) }}"><i
                                     class="unir-pencil">&nbsp;</i>{{ t('Posting Rules') }}</a>
-                            <a href="{{ lurl('page/tips')}}"><i class="unir-safe">&nbsp;</i>{{ t('Tips for Users') }}</a>
-                            <a href="{{ lurl('page/faq')}}"><i
+                            <a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.tips')])) }}"><i class="unir-safe">&nbsp;</i>{{ t('Tips for Users') }}</a>
+                            <a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.faq')])) }}"><i
                                     class="unir-cards">&nbsp;</i>{{ t('FAQ') }}</a>
-                            <a href="{{ lurl('contact')}}"><i class="unir-mail">&nbsp;</i>{{ t('Contact Us') }}</a>
+                            <a href="{{ lurl(trans('routes.sitemap')) }}"><i style="font-size: 13.6px;"
+                                    class="unir-list">&nbsp;</i>{{ t('Sitemap') }}</a>
+                            <a href="{{ lurl(trans('routes.contact-us'))}}"><i class="unir-mail">&nbsp;</i>{{ t('Contact Us') }}</a>
                         </ul>
                 </li>
                 @else
-                <li class="nav-item dropdown no-arrow">
+                <li class="nav-item flex dropdown no-arrow"> 
                     <!-- <a href="{{ url('/') }}/account" class="dropdown-toggle nav-link" data-toggle="dropdown"> -->
-                    <a href="{{ url('/') }}/account" class="nav-link">
-                        <i class="unib-user fa"></i>
-                        <span>{{ auth()->user()->name }}</span>
+                    <a href="{{ lurl('/' . trans('routes.personal-data'))  }}" class="nav-link" style="display: flex;align-items: center;"> 
+                        <i class="unib-user fa">&nbsp;</i>{{ auth()->user()->name }}
                         <!-- <span class="badge badge-pill badge-important count-conversations-with-new-messages">0</span> -->
                         <!-- <div class="count-conversations-with-new-messages" id="badge-nm">0</div> -->
                         <img class="count-conversations-with-new-messages" id="badge-notif-nm" src="/images/notifications.svg" alt="">
@@ -139,30 +145,32 @@
                                         class="unir-cards"></i> {{ t('Transactions') }}</a></li>
                         </ul> -->
                 </li>
-                <li class="nav-item">
+                <li class="nav-item flex">
                     @if (app('impersonate')->isImpersonating())
                     <a href="{{ route('impersonate.leave') }}" class="nav-link">
-                        <i class="unib-exit">&nbsp;</i>{{ t('Leave') }}
+                        <span><i class="unib-exit">&nbsp;</i>{{ t('Leave') }}</span>
                     </a>
                     @else
                     <a href="{{ lurl(trans('routes.logout')) }}" class="nav-link">
-                        <i class="unib-exit">&nbsp;</i>{{ t('Log Out') }}
+                        <span><i class="unib-exit">&nbsp;</i>{{ t('Log Out') }}</span>
                     </a>
                     @endif
                 </li>
-                <li class="nav-item" style="padding:10px 0px;">
-                        <a id="help-down" class="dropdown-toggle" data-toggle="dropdown" style="font-weight:bold;font-size:14px;padding:5px 5px; display:block;"><i class="unib-info"></i> {{ t('Help links') }}<i style="float: right;" class="help-down unir-rarrow2"></i></a>
-                        <ul id="userMenuDropdown" class="dropdown-menu navbar-mobile user-menu dropdown-menu-right" style="border: none;">
-                            <a href="{{ lurl('page/terms-of-use')}}"><i
-                                    class="unir-note">&nbsp;</i>{{ t('Terms of Use') }}</a>
-                            <a href="{{ lurl('page/privacy-policy')}}"><i
-                                    class="unir-sheild">&nbsp;</i>{{ t('Privacy Policy') }}</a>
-                            <a href="{{ lurl('page/posting-rules')}}"><i
+                <li class="nav-item dropdown show" style="padding:10px 0px;">
+                        <a id="help-down" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" style="font-weight:bold;font-size:14px;padding:5px 5px;"><span><i class="unib-info">&ensp;</i> {{ t('Help links') }}</span><i style="float: right;" class="help-down unir-rarrow2"></i></a>
+                        <ul id="userMenuDropdown" class="dropdown-menu navbar-mobile user-menu dropdown-menu-right show" style="border: none;">
+                            <a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.terms-of-use')])) }}"><i
+                                    class="unir-sheild">&nbsp;</i>{{ t('Terms of Use') }}</a>
+                            <a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.privacy-policy')])) }}"><i
+                                    class="unir-note">&nbsp;</i>{{ t('Privacy Policy') }}</a>
+                            <a href="{{lurl(trans('routes.v-page',['slug'=>trans('routes.posting-rules')])) }}"><i
                                     class="unir-pencil">&nbsp;</i>{{ t('Posting Rules') }}</a>
-                            <a href="{{ lurl('page/tips')}}"><i class="unir-info">&nbsp;</i>{{ t('Tips for Users') }}</a>
-                            <a href="{{ lurl('page/faq')}}"><i
-                                    class="unir-search">&nbsp;</i>{{ t('FAQ') }}</a>
-                            <a href="{{ lurl('contact')}}"><i class="unir-mail">&nbsp;</i>{{ t('Contact Us') }}</a>
+                            <a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.tips')])) }}"><i class="unir-safe">&nbsp;</i>{{ t('Tips for Users') }}</a>
+                            <a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.faq')])) }}"><i
+                                    class="unir-cards">&nbsp;</i>{{ t('FAQ') }}</a>
+                            <a href="{{ lurl(trans('routes.sitemap')) }}"><i style="font-size: 13.6px;"
+                                    class="unir-list">&nbsp;</i>{{ t('Sitemap') }}</a>
+                            <a href="{{ lurl(trans('routes.contact-us'))}}"><i class="unir-mail">&nbsp;</i>{{ t('Contact Us') }}</a>
                         </ul>
                 </li>
                 @endif
@@ -189,8 +197,19 @@
                     </a>
                     @endif
                 </li>
+{{--                    <button style='display:none;' class='closeFilter btn go-button'><i style='font-size:14px; ' class='unir-close_l'></i></button>--}}
             </ul>
             <div style="clear:both"></div>
         </div>
     </aside>
 </div>
+{{--@section('after_scripts')--}}
+{{--@parent--}}
+{{--    <script>--}}
+{{--        $(document).ready(function () {--}}
+{{--            $('.nav-item.dropdown').addClass('show');--}}
+{{--            $("#userMenuDropdown").addClass("show");--}}
+
+{{--        });--}}
+{{--    </script>--}}
+{{--@endsection--}}

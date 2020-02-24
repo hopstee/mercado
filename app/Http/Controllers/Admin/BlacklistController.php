@@ -51,13 +51,25 @@ class BlacklistController extends PanelController
 			'type'  => 'checkbox',
 			'orderable' => false,
 		]);
-		$this->xPanel->addColumn([
-			'name'  => 'type',
-			'label' => trans("admin::messages.Type"),
-		]);
+
 		$this->xPanel->addColumn([
 			'name'  => 'entry',
-			'label' => trans("admin::messages.Entry"),
+			'label' => trans("admin::messages.Phone"),
+		]);
+
+		$this->xPanel->addColumn([
+			'name'  => 'reason',
+			'label' => trans("admin::messages.reason"),
+		]);
+
+		$this->xPanel->addColumn([
+			'name'  => 'requests',
+			'label' => trans("admin::messages.request"),
+		]);
+
+		$this->xPanel->addColumn([
+			'name'  => 'banned_at',
+			'label' => trans("admin::messages.banned_at"),
 		]);
 		
 		// FIELDS
@@ -74,6 +86,26 @@ class BlacklistController extends PanelController
 				'placeholder' => trans('admin::messages.Entry'),
 			],
 		]);
+		$entity = $this->xPanel->getModel()->find(request()->segment(3));
+		if (!empty($entity)) {
+
+			if (!empty($entity->entry)) {
+				$btnUrl = admin_url('blacklists/') . "/" . $entity->id . "/unban";
+				
+				$btnText = trans("admin::messages.unban_the_user");
+				$tooltip = 'data-button-type="delete"';
+				
+				$btnLink = '<a id="deleteBtn" href="' . $btnUrl . '" class="btn btn-danger"' . $tooltip . '>' . $btnText . '</a>';
+				$this->xPanel->addField([
+					'name'              => 'unban_button',
+					'type'              => 'custom_html',
+					'value'             => $btnLink,
+					'wrapperAttributes' => [
+						'style' => 'text-align:center;',
+					],
+				], 'update');
+			}
+		}
 	}
 	
 	public function store(StoreRequest $request)
@@ -97,6 +129,7 @@ class BlacklistController extends PanelController
 
 		// Get email address
 		$phone = request()->get('phone');
+		$ban_type = request()->get('ban_type_id');
 
 		// Get previous URL
 		$previousUrl = url()->previous();
@@ -135,6 +168,7 @@ class BlacklistController extends PanelController
 			if (!empty($banned) ) {
 				// Delete the banned user related to the phone address
 				$user = User::where('phone', $banned->entry)->get();
+				
 
 				// Add the phone address to the blacklist
 
@@ -153,10 +187,14 @@ class BlacklistController extends PanelController
 				}
 			} 
 			else {
+
 				// Add the phone address to the blacklist
 				$banned = new Blacklist();
 				$banned->type = 'email';
 				$banned->entry = $phone;
+				if(!is_null($ban_type)){
+					$banned->reason = $ban_type;
+				}
 				$banned->save();
 			}
 			
@@ -184,5 +222,43 @@ class BlacklistController extends PanelController
 			flash("You can't ban Admin.")->error();
 		}
 		return redirect()->back();
+	}
+
+		/**
+	 * Ban user by email address (from link)
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function delBannedPhone($id)
+	{
+
+		$banned = Blacklist::where('type', 'email')->where('id', $id)->first();
+
+		// Get previous URL
+		$previousUrl = url()->previous();
+
+		if(	!empty($banned)){
+			$phone = $banned->entry;
+
+			Blacklist::where('type', 'email')->where('id', $id)->delete();
+
+			$message = trans("admin::messages.phone_address_unbanned_successfully", ['phone' => $phone]);
+			
+			if (isFromAdminPanel($previousUrl)) {
+				Alert::success($message)->flash();
+			} else {
+				flash($message)->success();
+			}
+			return redirect()->back();
+		}
+		else{
+			$message = trans("admin::messages.phone_address_unbanned_error");
+			if (isFromAdminPanel($previousUrl)) {
+				Alert::success($message)->flash();
+			} else {
+				flash($message)->success();
+			}
+			return redirect(admin_url('blacklists/'));
+		}
 	}
 }

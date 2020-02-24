@@ -125,12 +125,10 @@ class NotifyController
 		// $message->to_phone = $toPhone;
 		$message->subject = "$item->title : " . $text;
 		
-		$message->message = $text
-			. '<br><br>'
-			. t('Related to the ad')
-			. ': <a href="' . UrlGen::post($item) . '">' . t('Click here to see') . '</a>';
+		$message->message = $text;
 		// Save
 		try{
+
 			$message->save();
 			Alert::success(t("Your message has sent successfully to :contact_name.", ['contact_name' => $message->to_name ]))->flash();
 		}catch(\Exception $e){

@@ -16,7 +16,7 @@
 					@if (isset($errors) and $errors->any() and old('maintenanceForm')=='1')
 						<div class="alert alert-danger">
 							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-							<ul class="list list-check">
+							<ul class="list list-error">
 								@foreach($errors->all() as $error)
 									<li>{{ $error }}</li>
 								@endforeach

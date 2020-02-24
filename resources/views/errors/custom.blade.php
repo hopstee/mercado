@@ -31,8 +31,8 @@
 
 						<div class="error-page" style="margin: 100px 0;">
 							<h2 class="headline text-center" style="font-size: 180px; float: none;">@lang('global.Whoops !', [])</h2>
-							<div class="text-center m-l-0" style="margin-top: 60px;">
-								<h3 class="m-t-0"><i class="fa fa-warning"></i> Bad request.</h3>
+							<div class="text-center m-l-0" style="margin-top:  5%;">
+								<h3 class="m-t-0"> Bad request.</h3>
 								<p>
 									@lang('global.We regret that we can not process your request at this time. Our engineers have been notified of this problem and will try to resolve it as soon as possible.', [])</p>
 							</div>

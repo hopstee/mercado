@@ -22,9 +22,11 @@
 				@if (isset($errors) and $errors->any())
 					<div class="col-md-12">
 						<div class="alert alert-danger">
-							<button type="button" class="close" data-dismiss="alert" aria-hidden="true"><i class="unir-close"></i></button>
-							<h5><strong>{{ t('Oops ! An error has occurred. Please correct the red fields in the form') }}</strong></h5>
-							<ul class="list list-check">
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+
+							<!-- <button type="button" class="close" data-dismiss="alert" aria-hidden="true"><i class="unir-close"></i></button> -->
+							<!-- <h5><strong>{{ t('Oops ! An error has occurred. Please correct the red fields in the form') }}</strong></h5> -->
+							<ul class="list list-error">
 								@foreach ($errors->all() as $error)
 									<li>{{ $error }}</li>
 								@endforeach
@@ -42,7 +44,8 @@
 						<hr class="mt-1">
 						<h4>{{ t('There\'s something wrong with this ads?') }}</h4>
 		
-						<form role="form" method="POST" action="{{ lurl('posts/' . $post->id . '/report') }}">
+						<!-- <form role="form" method="POST" action="{{ lurl('posts/' . $post->id . '/report') }}"> -->
+						<form role="form" method="POST" action="{{ lurl(trans('routes.v-posts-report', ['id'=>$post->id] ), $post->id) }}">
 							{!! csrf_field() !!}
 							<fieldset>
 								<!-- report_type_id -->
@@ -78,40 +81,26 @@
 								<!-- email -->
 								@if (auth()->check() and isset(auth()->user()->email))
 									<input type="hidden" name="email" value="{{ auth()->user()->email }}">
-								@else
-								<?php $emailError = (isset($errors) and $errors->has('email')) ? ' is-invalid' : ''; ?>
-									<!-- <div class="form-group required">
-										<label for="email" class="control-label">{{ t('Your E-mail') }} <sup>*</sup></label>
-										<div class="input-group">
-											<div class="input-group-prepend">
-												<span class="input-group-text"><i class="icon-mail"></i></span>
-											</div> -->
-											<input  name="email" type="hidden" maxlength="33" class="form-control{{ $emailError }}" value="report@unifun.com">
-										<!-- </div>
-									</div> -->
 								@endif
-								
+
 								<!-- email -->
-								<!-- @if (auth()->check() and isset(auth()->user()->email))
-									<input type="hidden" name="email" value="{{ auth()->user()->email }}">
-								@else
-								<?php $emailError = (isset($errors) and $errors->has('email')) ? ' is-invalid' : ''; ?>
-									<div class="form-group required">
-										<label for="email" class="control-label">{{ t('Your E-mail') }} <sup>*</sup></label>
-										<div class="input-group">
-											<div class="input-group-prepend">
-												<span class="input-group-text"><i class="icon-mail"></i></span>
-											</div>
-											<input  name="email" type="hidden" maxlength="33" class="form-control{{ $emailError }}" value="mercado@unifun.com">
-										</div>
-									</div>
-								@endif -->
+								@if (auth()->check() and isset(auth()->user()->id))
+									<input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+								@endif
+
 
 								<!-- message -->
 								<?php $messageError = (isset($errors) and $errors->has('message')) ? ' is-invalid' : ''; ?>
 								<div class="form-group required">
-									<label for="message" class="control-label">{{ t('Message') }} <sup>*</sup> <span class="text-count"></span></label>
-									<textarea id="message" name="message" class="form-control{{ $messageError }}" rows="10">{{ old('message') }}</textarea>
+									<label for="message" class="control-label">{{ t('MessageLabel') }} <sup>*</sup> <span class="text-count"></span></label>
+									<textarea 	id="message" 
+												placeholder="{{ t('Message') }}" 
+												name="message" 
+												class="form-control{{ $messageError }}" 
+												rows="10"
+												maxlength="6000"
+									>{{ old('message') }}</textarea>
+									<small id="textarea-feedback" class="form-text text-muted"></small>
 								</div>
 								
 								@include('layouts.inc.tools.recaptcha', ['label' => true])
@@ -121,7 +110,7 @@
 								
 								<div class="form-group form-group-dif">
 									<button type="submit" class="btn btn-primary btn-lg btn-dif btn-rep btn-green">{{ t('Send Report') }}</button>
-									<a href="{{ rawurldecode(URL::previous()) }}" class="btn btn-default btn-lg btn-default-dif btn-rep btn-grey">{{ t('Back') }}</a>
+									<a href="{{ rawurldecode(URL::previous()) }}" class="btn btn-default btn-lg btn-default-dif btn-rep btn-grey">{{ t('Cancel') }}</a>
 								</div>
 							</fieldset>
 						</form>
@@ -135,4 +124,20 @@
 
 @section('after_scripts')
 	<script src="{{ url('assets/js/form-validation.js') }}"></script>
+	<script>
+		$(document).ready(function () {
+			var textarea_max = 6000;
+			$("#textarea-feedback").html(textarea_max + "{{ t('characters left') }}");
+			$('#message').keyup(function() {
+				var textarea_length = $('#message').val().length,
+						textarea_remaining = textarea_max - textarea_length;
+
+				if (textarea_length === 0) {
+					$('#textarea-feedback').html(textarea_max + "{{ t('characters left') }}");
+				} else {
+					$('#textarea-feedback').html(textarea_remaining + "{{ t('characters left') }}");
+				}
+			});
+		});
+	</script>
 @endsection

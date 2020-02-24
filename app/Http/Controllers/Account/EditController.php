@@ -59,12 +59,14 @@ class EditController extends AccountBaseController
 			->first();
 		$data['countPosts'] = Post::currentCountry()
 			->where('user_id', auth()->user()->id)
+			->reviewed()
 			->count();
 		$data['countFavoritePosts'] = SavedPost::whereHas('post', function ($query) {
 			$query->currentCountry();
 		})->where('user_id', auth()->user()->id)
 			->count();
 		
+			 
 		// Meta Tags
 		MetaTag::set('title', t('My account'));
 		MetaTag::set('description', t('My account on :app_name', ['app_name' => config('settings.app.app_name')]));
@@ -122,8 +124,8 @@ class EditController extends AccountBaseController
 		$user->save();
 		
 		// Message Notification & Redirection
-		flash(t("Your details account has updated successfully."))->success();
-		$nextUrl = config('app.locale') . '/account';
+		flash(t("Data updated successfully."))->success();
+		$nextUrl = config('app.locale') . '/' . trans('routes.personal-data');
 		
 		// Send Email Verification message
 		if ($emailVerificationRequired) {
@@ -194,7 +196,7 @@ class EditController extends AccountBaseController
 			
 			if (!empty($user->photo)) {
 				// Get Deletion Url
-				$initialPreviewConfigUrl = lurl('account/' . $user->id . '/photo/delete');
+				$initialPreviewConfigUrl = lurl(trans('routes.pers-photo-delete',['id'=>$user->id]),$user->id );
 				
 				// Build Bootstrap-Input plugin's parameters
 				$data['initialPreview'][] = imgUrl($user->photo);
@@ -262,7 +264,7 @@ class EditController extends AccountBaseController
 			return response()->json([]);
 		}
 		
-		flash(t("Your photo or avatar has been deleted."))->success();
+		flash(t("Picture has been deleted successfully."))->success();
 		
 		return back();
 	}
@@ -282,13 +284,13 @@ class EditController extends AccountBaseController
 			$user->password = Hash::make($request->input('password'));
 		}
 		if ($request->filled('email')) {
-		    $user->email = $request->input('email');
+			$user->email = $request->input('email');
 		}
 		$user->save();
-		
+
 		flash(t("Your settings account has updated successfully."))->success();
 		
-		return redirect(config('app.locale') . '/account');
+		return redirect(config('app.locale') . '/' . trans('routes.personal-data'));
 	}
 	
 	/**

@@ -119,7 +119,7 @@ class DetailsController extends FrontController
 			$post = Cache::remember($cacheId, $this->cacheExpiration, function () use ($postId) {
 				$post = Post::withoutGlobalScopes([VerifiedScope::class, ReviewedScope::class])
 					->withCountryFix()
-					->unarchived()
+					// ->unarchived()
 					->where('id', $postId)
 					->with([
 						'category' => function ($builder) { $builder->with(['parent']); },
@@ -282,8 +282,6 @@ class DetailsController extends FrontController
 			$data['joined'] = $this->getJoinedTime($post);
 		}
 
-
-
 		// Reviews Plugin Data
 		if (config('plugins.reviews.installed')) {
 			try {
@@ -374,7 +372,7 @@ class DetailsController extends FrontController
 		// 	flash($e->getMessage())->error();
 		// }
 
-		return redirect(UrlGen::postUri($post));
+		return redirect(UrlGen::postUri($post, config('app.locale') ));
 	}
 
 	/**
@@ -395,11 +393,27 @@ class DetailsController extends FrontController
 			if ($cat->tid == $cat->parent_id) {
 				$similarCatIds[] = $cat->tid;
 			} else {
-				if (!empty($cat->parent_id)) {
-					$similarCatIds = Category::trans()->where('parent_id', $cat->parent_id)->get()->keyBy('tid')->keys()->toArray();
-					$similarCatIds[] = (int)$cat->parent_id;
+				// if (!empty($cat->parent_id)) {
+				// 	$similarCatIds = Category::trans()->where('parent_id', $cat->parent_id)->get()->keyBy('tid')->keys()->toArray();
+				// 	$similarCatIds[] = (int)$cat->parent_id;
+				// } else {
+				// 	$similarCatIds[] = (int)$cat->tid;
+				// }
+				if (!empty($cat->tid)) {
+					// trans()->
+					$similarCatIds = Category::where('id', $cat->tid)->get()->keyBy('tid')->keys()->toArray();
+					// $similarCatIds[] = (int)$cat->tid;
+					$lim = DB::select("SELECT COUNT(id) as ids FROM posts WHERE category_id = $similarCatIds[0]");
+					if ($lim[0]->ids < $limit) {
+						$sql = "SELECT id from categories WHERE parent_id = $cat->parent_id";
+						$sqlResult = DB::select($sql);
+						foreach ($sqlResult as $key => $value) {
+							$similarCatsByParentId[] = (int)$value->id;
+						}
+						$similarCatIds = array_unique(array_merge($similarCatIds, $similarCatsByParentId));
+					}
 				} else {
-					$similarCatIds[] = (int)$cat->tid;
+					$similarCatIds[] = (int)$cat->parent_id;
 				}
 			}
 		}
@@ -415,8 +429,9 @@ class DetailsController extends FrontController
 			$reviewedCondition = '';
 			if (config('settings.single.posts_review_activation')) {
 //				$reviewedCondition = ' AND tPost.reviewed = 1';
-                                $reviewedCondition = ' AND tPost.reviewed > 0';
+                                $reviewedCondition = ' AND tPost.reviewed IN (1, 2)';
 			}
+				// ORDER BY tPost.id DESC
 			$sql = 'SELECT tPost.* ' . '
 				FROM ' . DBTool::table('posts') . ' AS tPost
 				WHERE tPost.country_code = :countryCode ' . $similarPostSql . '
@@ -424,7 +439,6 @@ class DetailsController extends FrontController
 					AND tPost.archived!=1
 					AND tPost.deleted_at IS NULL ' . $reviewedCondition . '
 					AND tPost.id != :currentPostId
-				ORDER BY tPost.id DESC
 				LIMIT 0,' . (int)$limit;
 			$bindings = [
 				'countryCode'   => config('country.code'),
@@ -432,12 +446,22 @@ class DetailsController extends FrontController
 			];
 
 			$cacheId = 'posts.similar.category.' . $cat->tid . '.post.' . $currentPostId;
-			$posts = Cache::remember($cacheId, $this->cacheExpiration, function () use ($sql, $bindings) {
+			$posts = Cache::remember($cacheId, $this->cacheExpiration, function () use ($sql, $bindings, $cat) {
 				try {
 					$posts = DB::select(DB::raw($sql), $bindings);
 				} catch (\Exception $e) {
 					return [];
 				}
+
+				foreach ($posts as $key => $value) {
+					if ($value->category_id == $cat->tid) {
+						$mainCat[] = $value;
+					} else {
+						$addCat[] = $value;
+					}
+				}
+				
+				if (!empty($mainCat) && !empty($addCat)) $posts = array_merge($mainCat, $addCat);
 
 				return $posts;
 			});
@@ -452,7 +476,7 @@ class DetailsController extends FrontController
 			})->toArray();
 
 			// Randomize the Posts
-			$posts = collect($posts)->shuffle()->toArray();
+			// $posts = collect($posts)->shuffle()->toArray();
 
 			// Featured Area Data
 			$featured = [
@@ -488,7 +512,7 @@ class DetailsController extends FrontController
 		$reviewedCondition = '';
 		if (config('settings.single.posts_review_activation')) {
 //			$reviewedCondition = ' AND tPost.reviewed = 1';
-                        $reviewedCondition = ' AND tPost.reviewed > 0';
+                        $reviewedCondition = ' AND tPost.reviewed IN (1, 2)';
 		}
 
 		// Init. Distance SQL vars
@@ -617,49 +641,91 @@ class DetailsController extends FrontController
 			$owner = $owner->getDate($owner);
 
 			if(isset($owner['created_at']) && !is_null($owner['created_at']) && is_null($owner['deleted_at'])){
-				// var_dump("Deleted :'" . $owner['deleted_at'] . "'");
 				// var_dump("Closed :'" .$owner['closed']  . "'");
+				
+				$joined =  explode("-",substr( $owner['created_at'], 0 , strpos(date('Y-m-d H:i:s'), " ") )) ;
 
-				$today=  explode("-",substr( date('Y-m-d H:i:s'), 0 , strpos(date('Y-m-d H:i:s'), " ") )) ;
-				$joined = explode("-", substr( $owner['created_at'] , 0 , strpos($owner['created_at']," ") ));
+				switch($joined[1]){
+					case "01":
+						$month = t("Jan");
+					break;
+					case "02":
+						$month = t("Feb");
+					break;
+					case "03":
+					 	$month = t("Mar");
+					break;
+					case "04":
+						$month = t("Apr");
+					break;
+					case "05":
+						$month = t("May");
+					break;
+					case "06":
+						$month = t("Jun");
+					break;
+					case "07":
+					 	$month = t("Jul");
+					break;
+					case "08":
+						$month = t("Aug");
+					break;
+					case "09":
+						$month = t("Sept");
+					break;
+					case "10":
+						$month = t("Oct");
+					break;
+					case "11":
+						$month = t("Nov");
+					break;
+					case "12":
+						$month = t("Dec");
+					break;
+				}
 
-				if($today[0] > $joined[0]){
-					// for years
-					$years = $today[0] - $joined[0];
-					$joined_time = ( $years > 1) ? ( $years . t(" years ago")) : ( $years . t(" year ago"));
-					// var_dump($joined_time);
-					return $joined_time;
-				}
-				elseif($today[1] > $joined[1]){
-					// for months
-					$months = $today[1] - $joined[1];
-					$joined_time = ( $months > 1) ? ( $months . t(" months ago")) : ( $months . t(" month ago"));
-					// var_dump($joined_time);
-					return $joined_time;
-				}
-				elseif($today[2] > $joined[2]){
-					// for days
-					$days = $today[2] - $joined[2];
-					// var_dump($days);
+				return $month . " " .  $joined[0];
+				
+				// $today=  explode("-",substr( date('Y-m-d H:i:s'), 0 , strpos(date('Y-m-d H:i:s'), " ") )) ;
+				// $joined = explode("-", substr( $owner['created_at'] , 0 , strpos($owner['created_at']," ") ));
 
-					if($days > 7){
-						//	for weeks
-						$weeks = $days / 7;
-						$weeks = substr ($weeks, 0, strpos($weeks, "."));
-						$joined_time = ($weeks > 1) ? ( $weeks . t(" weeks ago")) : ( $weeks . t(" week ago"));
-						// var_dump($joined_time);
-						return $joined_time;
-					}
-					elseif($days >= 1){
-						// for days
-						$joined_time = ($days > 1) ? ( $days . t(" days ago")) : ( $days . t(" day ago"));
-						// var_dump($joined_time);
-						return $joined_time;
-					}
-				}
-				else{
-					return t(' today');
-				}
+				// if($today[0] > $joined[0]){
+				// 	// for years
+				// 	$years = $today[0] - $joined[0];
+				// 	$joined_time = ( $years > 1) ? ( $years . t(" years ago")) : ( $years . t(" year ago"));
+				// 	// var_dump($joined_time);
+				// 	return $joined_time;
+				// }
+				// elseif($today[1] > $joined[1]){
+				// 	// for months
+				// 	$months = $today[1] - $joined[1];
+				// 	$joined_time = ( $months > 1) ? ( $months . t(" months ago")) : ( $months . t(" month ago"));
+				// 	// var_dump($joined_time);
+				// 	return $joined_time;
+				// }
+				// elseif($today[2] > $joined[2]){
+				// 	// for days
+				// 	$days = $today[2] - $joined[2];
+				// 	// var_dump($days);
+
+				// 	if($days > 7){
+				// 		//	for weeks
+				// 		$weeks = $days / 7;
+				// 		$weeks = substr ($weeks, 0, strpos($weeks, "."));
+				// 		$joined_time = ($weeks > 1) ? ( $weeks . t(" weeks ago")) : ( $weeks . t(" week ago"));
+				// 		// var_dump($joined_time);
+				// 		return $joined_time;
+				// 	}
+				// 	elseif($days >= 1){
+				// 		// for days
+				// 		$joined_time = ($days > 1) ? ( $days . t(" days ago")) : ( $days . t(" day ago"));
+				// 		// var_dump($joined_time);
+				// 		return $joined_time;
+				// 	}
+				// }
+				// else{
+				// 	return t(' today');
+				// }
 			}
 		}
 		else{

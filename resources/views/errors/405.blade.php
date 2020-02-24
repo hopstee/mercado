@@ -31,8 +31,8 @@
 
 						<div class="error-page" style="margin: 100px 0;">
 							<h2 class="headline text-center" style="font-size: 180px; float: none;"> 405</h2>
-							<div class="text-center m-l-0" style="margin-top: 60px;">
-								<h3 class="m-t-0"><i class="fa fa-warning"></i> Method not allowed.</h3>
+							<div class="text-center m-l-0" style="margin-top:  5%;">
+								<h3 class="m-t-0"> Method not allowed.</h3>
 								<p>
 									<?php
 									$defaultErrorMessage = "Meanwhile, you may <a href='" . url('/') . "'>return to homepage</a>";

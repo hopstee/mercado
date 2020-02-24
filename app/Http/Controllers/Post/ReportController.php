@@ -20,6 +20,7 @@ use App\Helpers\UrlGen;
 use App\Http\Requests\ReportRequest;
 use App\Models\Permission;
 use App\Models\Post;
+use App\Models\ReportSend;
 use App\Models\ReportType;
 use App\Http\Controllers\FrontController;
 use App\Models\User;
@@ -52,8 +53,8 @@ class ReportController extends FrontController
     public function commonQueries()
     {
         // Get Report abuse types
-        $reportTypes = ReportType::trans()->get();
-        view()->share('reportTypes', $reportTypes);
+        $messageTypes = ReportType::trans()->get();
+        view()->share('reportTypes', $messageTypes);
     }
     
     public function showReportForm($postId)
@@ -88,24 +89,42 @@ class ReportController extends FrontController
         // Get Post
         $post = Post::findOrFail($postId);
 
-        // Store Report
-        $report = $request->all();
-        $report['post_id'] = $post->id;
-        $report = ArrayHelper::toObject($report);
+        // Store ReportP
+        $message = $request->all();
+
+        $message['post_id'] = $post->id;
+        $message = ArrayHelper::toObject($message);
+
+        if(ReportSend::where('post_id', $request->input('post_id'))->where('user_id',$request->input('user_id'))->count() >= 1){
+            flash(t('You arleady send report for this post'))->error();
+            return redirect(UrlGen::postUri($post));
+        }
+        
+        $report = new ReportSend();
+        $report['post_id'] =  $request->input('post_id');
+        $report['report_type_id'] =  $request->input('report_type_id');
+        $report['from_phone'] =  $request->input('phone');
+        if(!is_null($request->input('email'))){
+            $report['from_email'] =  $request->input('email');
+        }
+        if(!is_null($request->input('user_id'))){
+            $report['user_id'] =  $request->input('user_id');
+        }
+        $report->save();
 
         
         // Send Abuse Report to admin
         try {
             // if (config('settings.app.email')) {
-            //     Notification::route('mail', config('settings.app.email'))->notify(new ReportSent($post, $report));
-            //     // Notification::route('mail', 'solihodjaev.work@gmail.com')->notify(new ReportSent($post, $report));
+            //     Notification::route('mail', config('settings.app.email'))->notify(new ReportSent($post, $message));
+            //     // Notification::route('mail', 'solihodjaev.work@gmail.com')->notify(new ReportSent($post, $message));
 
             // } else {
                 $admins = User::permission(Permission::getStaffPermissions())->get();
                 if ($admins->count() > 0) {
-					// Notification::send($admins, new ReportSent($post, $report));
+					// Notification::send($admins, new ReportSent($post, $message));
                     foreach ($admins as $admin) {
-						Notification::route('mail', $admin->email)->notify(new ReportSent($post, $report));
+						Notification::route('mail', $admin->email)->notify(new ReportSent($post, $message));
                     }
                 }
             // }

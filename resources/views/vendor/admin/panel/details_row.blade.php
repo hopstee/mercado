@@ -66,9 +66,14 @@
                             @if ($xPanel->hasAccess('update') or $xPanel->hasAccess('delete'))
                                 <td>
                                     @if ($xPanel->hasAccess('update'))
-                                        <a href="{{ str_replace('/'.$original_entry->id, '/'.$entry->id, str_replace('details', 'edit', Request::url())) }}" class="btn btn-xs btn-default">
-                                            <i class="fa fa-edit"></i> {{ trans('admin::messages.edit') }}
-                                        </a>
+                                        @if(request()->segment(2) == 'custom_fields' && request()->segment(4) == 'options')
+                                            <a href="{{ admin_url('custom_fields/' . $entry->field_id . '/options/' .$entry->id .'/edit') }}" class="btn btn-xs btn-default">
+                                                <i class="fa fa-edit"></i> {{ trans('admin::messages.edit') }} 
+                                                @else
+                                                    <a href="{{ str_replace('/'.$original_entry->id, '/'.$entry->id, str_replace('details', 'edit', Request::url())) }}" class="btn btn-xs btn-default">
+                                                    <i class="fa fa-edit"></i> {{ trans('admin::messages.edit')}} 
+                                        @endif
+          
                                     @endif
                                     @if ($xPanel->hasAccess('delete'))
                                         <a href="{{ str_replace('/'.$original_entry->id, '/'.$entry->id, str_replace('details', '', Request::url())) }}" class="btn btn-xs btn-default" data-button-type="delete">

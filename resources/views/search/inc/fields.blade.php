@@ -136,7 +136,7 @@ if (!function_exists("createFieldNodeTree")) {
                                    max="{{ $maxv}}"
                             >
                         </div>
-                        <div class="form-group col-sm-3 no-padding">
+                        <div class="form-group col-sm-3 auto-width no-padding">
                             <button class="btn btn-default pull-right btn-block-xs go-button"
                                     type="submit"><span>{{ t('GO') }}</span></button>
                         </div>
@@ -189,8 +189,8 @@ if (!function_exists("createFieldNodeTree")) {
                 <div style="clear:both"></div>
 
             @endif
-            @if ($field->type == 'checkbox_multiple' || $field->type == 'checkbox_multiple_or')
-
+            @if ($field->type == 'checkbox_multiple' || $field->type == 'checkbox_multiple_or' || $field->type == 'checkbox_like_checkbox')
+                        
                 @if ($field->options->count() > 0)
                 <!-- checkbox_multiple -->
                     <div class="block-title sidebar-header" id="cf-header-{{ $field->tid }}">

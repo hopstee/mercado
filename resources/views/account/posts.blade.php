@@ -29,40 +29,44 @@
 					</div>
 				@endif
 
-				<div class="col-md-3 page-sidebar">
+				<div class="col-lg-4 page-sidebar">
 					@include('account.inc.sidebar')
 				</div>
 				<!--/.page-sidebar-->
 
-				<div class="col-md-9 page-content">
+				<div class="col-lg-8 page-content">
 					<div class="inner-box inner-box-dif">
-						@if ($pagePath=='my-posts')
+						@if ($pagePath== trans('routes.my-ads'))
 {{--							<h2 class="title-2"><i class="icon-docs"></i> {{ t('My Ads') }} </h2>--}}
 							<h2 class="title-2 title-2-mob"> {{ t('My Ads') }} </h2>
-						@elseif ($pagePath=='archived')
+						@elseif ($pagePath==trans('routes.archived-ads'))
 {{--							<h2 class="title-2"><i class="icon-folder-close"></i> {{ t('Archived ads') }} </h2>--}}
 							<h2 class="title-2 title-2-mob"> {{ t('Archived ads') }} </h2>
-						@elseif ($pagePath=='favourite')
+						@elseif ($pagePath==trans('routes.favourite-ads'))
 {{--							<h2 class="title-2"><i class="icon-heart-1"></i> {{ t('Favourite ads') }} </h2>--}}
 							<h2 class="title-2 title-2-mob"> {{ t('Favourite ads') }} </h2>
-						@elseif ($pagePath=='pending-approval')
+						@elseif ($pagePath==trans('routes.rejected-ads'))
 {{--							<h2 class="title-2"><i class="icon-hourglass"></i> {{ t('Pending approval') }} </h2>--}}
-							<h2 class="title-2 title-2-mob"> {{ t('Pending approval') }} </h2>
+							<h2 class="title-2 title-2-mob"> {{ t('Rejected ads') }} </h2>
 						@else
 {{--							<h2 class="title-2"><i class="icon-docs"></i> {{ t('Posts') }} </h2>--}}
 							<h2 class="title-2 title-2-mob"> {{ t('Posts') }} </h2>
 						@endif
 
 						<div class="table-responsive">
-							<form name="listForm" method="POST" action="{{ lurl('account/'.$pagePath.'/delete') }}">
+							<form name="listForm" method="POST" action="{{ lurl(trans('routes.v-pers-ads-delete',['pagePath'=>$pagePath]),$pagePath) }}">
 								{!! csrf_field() !!}
 								<div class="table-action table-action-dif">
 									<label for="checkAll" class="btn-archive">
 {{--										<input type="checkbox" id="checkAll">--}}
 {{--										{{ t('Select') }}: {{ t('All') }} |--}}
-										@if($pagePath=='archived' or $pagePath=='favourite')
+										@if($pagePath== trans('routes.favourite-ads'))
 											<button type="submit" class="btn btn-sm btn-default delete-action btn-default-cab btn-grey">
 												{{ t('Remove') }}
+											</button>
+										@elseif($pagePath== trans('routes.archived-ads'))
+											<button type="submit" class="btn btn-sm btn-default delete-action btn-default-cab btn-grey">
+												{{ t('Delete') }}
 											</button>
 										@else
 											<button type="submit" class="btn btn-sm btn-default delete-action btn-default-cab btn-grey">
@@ -110,9 +114,9 @@
 										</div>
 										</th>
 										<th class="cel-borderless"><span>{{ t('Photo') }}</span></th>
-										<th data-sort-ignore="true" class="cel-borderless cel-mob"><span>{{ t('Ads Details') }}</span></th>
+										<th data-sort-ignore="true" class="cel-borderless cel-mob"><span>{{ t('Details') }}</span></th>
 										<th data-type="numeric" class="cel-borderless cel-mob"><span>{{ t('Price') }}</span></th>
-										@if($pagePath!='favourite')
+										@if($pagePath!=trans('routes.favourite-ads'))
 											<th class="cel-borderless border-right" style="text-align: center;border-top-right-radius: .3rem"><span>{{ t('Edit') }}</span></th>
 										@endif
 									</tr>
@@ -122,8 +126,9 @@
 										<?php
 										if (isset($posts) && $posts->count() > 0):
 										foreach($posts as $key => $post):
+											
 											// Fixed 1
-											if ($pagePath == 'favourite') {
+											if ($pagePath == trans('routes.favourite-ads')) {
 												if (isset($post->post)) {
 													if (!empty($post->post)) {
 														$post = $post->post;
@@ -152,7 +157,7 @@
 											$countryFlagPath = 'images/flags/16/' . strtolower($post->country_code) . '.png';
 										?>
 										<tr>
-											<td style="width:2%" class="add-img-selector cel-borderless col-2">
+											<td style="width:2%" class="add-img-selector cel-borderless col-2 cel-mob">
 												<!-- <div class="checkbox">
 													<label><input type="checkbox" name="entries[]" value="{{ $post->id }}"></label>
 												</div> -->
@@ -171,11 +176,11 @@
 											<td style="width:14%" class="add-img-td cel-borderless mobile-cab-cel col-4">
 												<a href="{{ $postUrl }}"><img class="img-thumbnail img-fluid" src="{{ $postImg }}" alt="img"></a>
 												<div class="mobile-view">
-													<p>
+													<p class="title">
 														<strong>
 															<a href="{{ $postUrl }}" title="{{ $post->title }}">{{ \Illuminate\Support\Str::limit($post->title, 40) }}</a>
 														</strong>
-														@if (in_array($pagePath, ['my-posts', 'archived', 'pending-approval']))
+														@if (in_array($pagePath, [trans('routes.my-ads'),trans('routes.archived-ads'),trans('routes.rejected-ads')] ))
 															@if (isset($post->latestPayment) and !empty($post->latestPayment))
 																@if (isset($post->latestPayment->package) and !empty($post->latestPayment->package))
 																	<?php
@@ -193,11 +198,11 @@
 															@endif
 														@endif
 													</p>
-													<p>
+													<p class="add-info">
 														<strong><i class="unir-clock" title="{{ t('Posted On') }}"></i></strong>&nbsp;
-														{{ $post->created_at->formatLocalized(config('settings.app.default_datetime_format')) }}
+														{{ \App\Helpers\DateTime::setData($post->created_at, true) }}
 													</p>
-													<p>
+													<p class="add-info">
 														<strong><i class="unir-eye" title="{{ t('Visitors') }}"></i></strong> {{ $post->visits ?? 0 }}
 														<strong><i class="unir-location" title="{{ t('Located In') }}"></i></strong> {{ !empty($post->city) ? $post->city->name : '-' }}
 													<!-- start test -->
@@ -208,7 +213,7 @@
 													</p>
 												</div>
 
-												<div class="mobile-view">
+												<div class="mobile-view price">
 													<strong>
 														@if ($post->price > 0)
 															{!! \App\Helpers\Number::money($post->price) !!}
@@ -219,7 +224,7 @@
 												</div>
 
 											</td>
-											@if($pagePath!='favourite')
+											@if($pagePath!= trans('routes.favourite-ads'))
 												<td style="width:43%" class="items-details-td cel-borderless cel-mob">
 											@else
 												<td style="width:60%" class="items-details-td cel-borderless cel-mob">
@@ -233,7 +238,7 @@
 															<a href="{{ $postUrl }}" title="{{ $post->title }}">{{ \Illuminate\Support\Str::limit($post->title, 60) }}</a>
 														@endif
 														</strong>
-														@if (in_array($pagePath, ['my-posts', 'archived', 'pending-approval']))
+														@if (in_array($pagePath, [trans('routes.my-ads'),trans('routes.archived-ads'),trans('routes.rejected-ads')]))
 															@if (isset($post->latestPayment) and !empty($post->latestPayment))
 																@if (isset($post->latestPayment->package) and !empty($post->latestPayment->package))
 																	<?php
@@ -254,7 +259,7 @@
 													<span class="info-row">
 														<p class="info-row-home">
 															<strong><i class="unir-clock" title="{{ t('Posted On') }}"></i></strong>&nbsp;
-															{{ $post->created_at->formatLocalized(config('settings.app.default_datetime_format')) }}
+															{{ \App\Helpers\DateTime::setData($post->created_at, true) }}
 														</p>
 														<p class="info-row-home">
 															<strong><i class="unir-eye" title="{{ t('Visitors') }}"></i></strong>&nbsp; {{ $post->visits ?? 0 }} &nbsp;
@@ -279,36 +284,65 @@
 													</strong>
 												</div>
 											</td>
-											@if($pagePath!='favourite')
-												<td style="width:17%" class="action-td cel-borderless border-right">
+											<td style="width:17%" class="action-td cel-borderless border-right mobile-table-view">
+												<div>
+													<p>
+														@if ($pagePath==trans('routes.my-ads') || $pagePath==trans('routes.archived-ads') || $pagePath==trans('routes.rejected-ads'))
+															<a class="btn btn-primary btn-sm navbar-list-item navbar-list-btn btn-edit" href="{{ \App\Helpers\UrlGen::editPost($post) }}">
+																<i class="unir-edit edit-icon"></i>
+															</a>
+															<a class="btn btn-primary btn-sm navbar-list-item navbar-list-btn additional-action-btn">
+																<i class="unir-settings edit-icon"></i>
+															</a>	
+															<a class="btn btn-primary btn-mob-edit btn-add-action" href="{{ \App\Helpers\UrlGen::editPost($post) }}">
+																{{ t('Edit') }}
+															</a>
+															@if ($pagePath==trans('routes.archived-ads'))
+																<a class="btn btn-primary btn-mob-archive btn-add-action btn-grey" href="{{ lurl(trans('routes.personal-data') . '/' . $pagePath . '/' . $post->id . '/delete') }}">
+																	{{ t('Delete') }}
+																</a>
+															@else
+																<a class="btn btn-primary btn-mob-archive btn-add-action btn-grey" href="{{ lurl(trans('routes.personal-data').'/'.$pagePath.'/'.$post->id.'/offline') }}">
+																	{{ t('Archive') }}
+																</a>
+															@endif
+														@elseif ($pagePath==trans('routes.favourite-ads'))
+															<a class="btn btn-primary btn-sm navbar-list-item navbar-list-btn additional-delete-btn btn-grey" href="{{ lurl(trans('routes.personal-data') . '/' . $pagePath . '/' . $post->id . '/delete') }}">
+																<i class="far fa-trash-alt"></i>
+															</a>
+														@endif
+													</p>
+												</div>
+											</td>
+											@if($pagePath!=trans('routes.favourite-ads'))
+												<td style="width:17%" class="action-td cel-borderless border-right desctop-table-view">
 													<div>
-		{{--												@if (in_array($pagePath, ['my-posts']) and $post->user_id==$user->id and $post->archived==0)--}}
-															<p>
-																<a class="btn btn-primary btn-sm btn-edit navbar-list-item navbar-list-btn" href="{{ \App\Helpers\UrlGen::editPost($post) }}">
+														<p>
+															@if ($pagePath==trans('routes.my-ads') || $pagePath==trans('routes.archived-ads') || $pagePath==trans('routes.rejected-ads'))
+																<a class="btn btn-primary btn-sm navbar-list-item navbar-list-btn btn-edit" href="{{ \App\Helpers\UrlGen::editPost($post) }}">
 																	<i class="unir-edit edit-icon"></i>
 																</a>
-															</p>
-		{{--												@endif--}}
-		{{--												@if (in_array($pagePath, ['my-posts']) and isVerifiedPost($post) and $post->archived==0)--}}
-		{{--													<p>--}}
-		{{--														<a class="btn btn-warning btn-sm confirm-action" href="{{ lurl('account/'.$pagePath.'/'.$post->id.'/offline') }}">--}}
-		{{--															 <i class="icon-eye-off"></i> {{ t('Offline') }}--}}
-		{{--															<i class="icon-eye-off"></i> {{ t('Archive') }}--}}
-		{{--														</a>--}}
-		{{--													</p>--}}
-		{{--												@endif--}}
-		{{--												@if (in_array($pagePath, ['archived']) and $post->user_id==$user->id and $post->archived==1)--}}
-		{{--													<p>--}}
-		{{--                                                        <a class="btn btn-info btn-sm confirm-action" href="{{ lurl('account/'.$pagePath.'/'.$post->id.'/repost') }}">--}}
-		{{--                                                            <i class="fa fa-recycle"></i> {{ t('Repost') }}--}}
-		{{--                                                        </a>--}}
-		{{--                                                    </p>--}}
-		{{--												@endif--}}
-		{{--												<p>--}}
-		{{--                                                    <a class="btn btn-danger btn-sm delete-action" href="{{ lurl('account/'.$pagePath.'/'.$post->id.'/delete') }}">--}}
-		{{--                                                        <i class="fa fa-trash"></i> {{ t('Delete') }}--}}
-		{{--                                                    </a>--}}
-		{{--                                                </p>--}}
+																<a class="btn btn-primary btn-sm navbar-list-item navbar-list-btn additional-action-btn">
+																	<i class="unir-settings edit-icon"></i>
+																</a>	
+																<a class="btn btn-primary btn-mob-edit btn-add-action" href="{{ \App\Helpers\UrlGen::editPost($post) }}">
+																	{{ t('Edit') }}
+																</a>
+																@if ($pagePath==trans('routes.archived-ads'))
+																	<a class="btn btn-primary btn-mob-archive btn-add-action btn-grey" href="{{ lurl(trans('routes.personal-data') . '/' . $pagePath . '/' . $post->id . '/delete') }}">
+																		{{ t('Delete') }}
+																	</a>
+																@else
+																	<a class="btn btn-primary btn-mob-archive btn-add-action btn-grey" href="{{ lurl(trans('routes.personal-data').'/'.$pagePath.'/'.$post->id.'/offline') }}">
+																		{{ t('Archive') }}
+																	</a>
+																@endif
+															@elseif ($pagePath==trans('routes.favourite-ads'))
+																<a class="btn btn-primary btn-sm navbar-list-item navbar-list-btn additional-delete-btn btn-grey" href="{{ lurl(trans('routes.personal-data') . '/' . $pagePath . '/' . $post->id . '/delete') }}">
+																	<i class="far fa-trash-alt"></i>
+																</a>
+															@endif
+														</p>
 													</div>
 												</td>
 											@endif

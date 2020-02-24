@@ -25,6 +25,7 @@
 	@include('common.meta-robots')
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="apple-mobile-web-app-title" content="{{ config('settings.app.app_name') }}">
+	<meta name="format-detection" content="telephone=no" />
 	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ $publicDisk->url('app/default/ico/apple-touch-icon-144-precomposed.png') . getPictureVersion()
 	}}">
 	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ $publicDisk->url('app/default/ico/apple-touch-icon-114-precomposed.png') . getPictureVersion() }}">
@@ -92,6 +93,9 @@
 	<link href="{{ url('css/style.css') . getPictureVersion() }}" rel="stylesheet">
 	<link href="{{ url('css/rus.css') . getPictureVersion() }}" rel="stylesheet">
 	<link href="{{ url('css/ed.css') . getPictureVersion() }}" rel="stylesheet">
+	<link href="{{ url('css/drag.css') . getPictureVersion() }}" rel="stylesheet">
+	<link href="{{ url('css/olya.css') . getPictureVersion() }}" rel="stylesheet">
+
     
     @yield('after_styles')
 	
@@ -122,6 +126,8 @@
 	<script src="{{ url('assets/js/pace.min.js') }}"></script>
 	<script src="{{ url('js/custom.js') }}"></script>
 	<script src="{{ url('js/rus.js') }}"></script>
+{{--	<script src="{{ url('js/olya.js') }}"></script>--}}
+
 	<script src="{{ url('assets/plugins/modernizr/modernizr-custom.js') }}"></script>
 	
 	@section('recaptcha_scripts')
@@ -176,11 +182,12 @@
 	@section('info')
 	@show
 	
-	@section('footer')
-		@include('layouts.inc.footer')
-	@show
+
 
 </div>
+@section('footer')
+	@include('layouts.inc.footer') 
+@show
 
 @section('modal_location')
 @show
@@ -300,5 +307,8 @@
 @if (config('settings.footer.tracking_code'))
 	{!! printJs(config('settings.footer.tracking_code')) . "\n" !!}
 @endif
+<script>
+	$("#userMenuDropdown").addClass("show");
+</script>
 </body>
 </html>

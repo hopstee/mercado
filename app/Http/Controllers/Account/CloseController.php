@@ -42,7 +42,7 @@ class CloseController extends AccountBaseController
             // Don't delete admin users
             if ($user->can(Permission::getStaffPermissions())) {
                 flash("Admin users can't be deleted by this way.")->error();
-                return redirect(config('app.locale') . '/account');
+                return redirect(config('app.locale') . '/' . trans('routes.personal-data'));
             }
             
             // Delete User
@@ -59,10 +59,10 @@ class CloseController extends AccountBaseController
             auth()->logout();
              
             // $message = t("Your account has been deleted. We regret you. <a href=\":url\">Re-register</a> if that is a mistake.", [
-            $message = t("Your account is closed. You can restore it within 1 year then it will be removed.");
+            $message = t("Your account has been deleted.");
             flash($message)->success();
         }
         
-        return redirect(config('app.locale') . '/account');
+        return redirect(config('app.locale') . '/');
     }
 }

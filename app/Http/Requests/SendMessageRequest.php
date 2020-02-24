@@ -53,13 +53,13 @@ class SendMessageRequest extends Request
 			$rules['from_email'][] = 'email';
 			$rules['from_email'][] = new EmailRule();
 		}
-		if (isEnabledField('email')) {
-			if (isEnabledField('phone') && isEnabledField('email')) {
-				$rules['from_email'][] = 'required_without:from_phone';
-			} else {
-				$rules['from_email'][] = 'required';
-			}
-		}
+//		if (isEnabledField('email')) {
+//			if (isEnabledField('phone') && isEnabledField('email')) {
+//				$rules['from_email'][] = 'required_without:from_phone';
+//			} else {
+//				$rules['from_email'][] = 'required';
+//			}
+//		}
 		
 		// Phone
 		if (config('settings.sms.phone_verification') == 1) {
@@ -72,11 +72,11 @@ class SendMessageRequest extends Request
 			}
 		}
 		if (isEnabledField('phone')) {
-			if (isEnabledField('phone') && isEnabledField('email')) {
-				$rules['from_phone'][] = 'required_without:from_email';
-			} else {
+//			if (isEnabledField('phone') && isEnabledField('email')) {
+//				$rules['from_phone'][] = 'required_without:from_email';
+//			} else {
 				$rules['from_phone'][] = 'required';
-			}
+//			}
 		}
 		return $rules;
 	}

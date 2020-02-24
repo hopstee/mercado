@@ -24,6 +24,7 @@ use App\Models\User;
 use App\Notifications\UnbanSent;
 use Illuminate\Support\Facades\Notification;
 use App\Models\Blacklist;
+use App\Helpers\ArrayHelper;
 
 // R.S.
 class UnbanController extends FrontController
@@ -64,7 +65,7 @@ class UnbanController extends FrontController
             return redirect(config('app.locale') . "/");
         }
         // Get Post
-        $data['post'] = ($phone);
+        $data['phone'] = ($phone);
         return view('post.unbanrequest', $data);
          
    }
@@ -76,35 +77,45 @@ class UnbanController extends FrontController
     */
    public function sendRequest($phone, UnbanRequest $request)
    {
+
+
     // R.S
     $notification = "User with phone number $phone want to be deleted from banned users.";
 
+    $contactForm['message'] =   $notification;
+    $contactForm['email'] = 'mercado@unifun.com';
+    $contactForm = ArrayHelper::toObject($contactForm);
+
+    $banned = Blacklist::where('type', 'email')->where('entry', $phone)->first();
+
        // Send Unban Request to admin
        try {
-           if (config('settings.app.email')) {
+            // $admins = User::permission(Permission::getStaffPermissions())->get();
+            
+            // if ($admins->count() > 0) {
+            //     foreach ($admins as $admin) {
+            //         Notification::route('mail', $admin->email)->notify(new UnbanSent($contactForm));
+            //     }
+            // }
+            if (!empty($banned) ) {
 
-            Notification::route('mail', config('settings.app.email'))->notify(new UnbanSent(config('settings.app.email') , $notification));
-            //    Notification::route('mail', 'solihodjaev.work@gmail.com')->notify(new UnbanSent(config('settings.app.email') , $notification));
-           } else {
-               $admins = User::permission(Permission::getStaffPermissions())->get();
-               if ($admins->count() > 0) {
-                   Notification::send($admins, new UnbanSent(config('settings.app.email') , $notification));
-                   /*
-                   foreach ($admins as $admin) {
-                       Notification::route('mail', $admin->email)->notify(new ReportSent($request, $report));
-                   }
-                   */
-               }
-           }
+                if($banned->requests < 3){
+                    $banned->requests++;
+                    $banned->save();
+                    flash(t('Your unban request has sent successfully to us. Thank you!'))->success();
+
+                }
+                else{
+                    flash(t('You exceeded the limit of sending requests.'))->error();
+                }
+            }
            
-           flash(t('Your unban request has sent successfully to us. Thank you!'))->success();
        } catch (\Exception $e) {
            flash($e->getMessage())->error();
                   
            return back()->withInput();
        }
-       
-       return redirect(UrlGen::postUri($request));
+       return redirect(config('app.locale') . "/");
    }
    
 }

@@ -46,8 +46,10 @@ class InlineRequestController extends Controller
 	 */
 	public function make($table, $field, Request $request)
 	{
+		
 		$primaryKey = $request->input('primaryKey');
 		$reviewedValue = $request->input('value');
+
 		$status = 0;
 		$result = [
 			'table'      => $table,
@@ -185,21 +187,48 @@ class InlineRequestController extends Controller
 		}
 		// E.K.
 		else if ($table == "posts" && $field == 'reviewed'){
-                        $item->{$field} = $reviewedValue;
-                        $item->save();
-                }
-		else if($table == "posts"){
-			// R.S
-			$item->{$field} = ($item->{$field} != 1) ? 1 : 0;
-//			$verdict = ($item->{$field} == 1) ? t("Reviewed") : t("Declined");
-                        $verdict = ($item->{$field} > 0) ? t("Reviewed") : t("Declined");
-
+			$item->{$field} = $reviewedValue;
 			$item->save();
+			
+			// if($item->{$field} > 1){
+			// 	$verdict = t("Reviewed");
+			// }
+			// else if($item->{$field} < 1){
+			// 	$verdict = t("Declined");
+			// }
+			// else{
+			// 	$verdict = null;
+			// }
 
-			if( isset($item->user_id) && ($item->user_id) != 0 && !is_null(User::where('id', $item->user_id)->first()) ){
+			if($item->{$field} == 2){
+				$verdict = t("Your ad was approved.");
+			}
+			else if($item->{$field} == 0){
+				$verdict = t("Your ad was rejected.The ad does not correspond Posting Rules.");
+			}
+			else if($item->{$field} == 3){
+				$verdict = t("Your ad was rejected.The ad does not correspond selected Category or Sub-Category.");
+			}
+			else{
+				$verdict = null;
+			}
+
+			if( isset($item->user_id) && ($item->user_id) != 0 && !is_null(User::where('id', $item->user_id)->first()) && !is_null($verdict)){
 				NotifyController::sendMesageFromAdmin($item, $verdict);
 			}
 		}
+// 		else if($table == "posts"){
+// 			// R.S
+// 			$item->{$field} = ($item->{$field} != 1) ? 1 : 0;
+// //			$verdict = ($item->{$field} == 1) ? t("Reviewed") : t("Declined");
+//                         $verdict = ($item->{$field} > 0) ? t("Reviewed") : t("Declined");
+
+// 			$item->save();
+
+// 			if( isset($item->user_id) && ($item->user_id) != 0 && !is_null(User::where('id', $item->user_id)->first()) ){
+// 				NotifyController::sendMesageFromAdmin($item, $verdict);
+// 			}
+// 		}
 		else {
 			
 			// Save data

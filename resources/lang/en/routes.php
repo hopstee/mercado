@@ -10,7 +10,7 @@ return [
     'page' => 'page/{slug}',
     't-page' => 'page',
     'v-page' => 'page/:slug',
-    'contact' => 'contact',
+    'contact-us' => 'contact-us',
     'sitemap' => 'sitemap',
     'v-sitemap' => 'sitemap',
     'search' => 'search',
@@ -35,4 +35,89 @@ return [
     'search-tag' => 'tag/{tag}',
     't-search-tag' => 'tag',
     'v-search-tag' => 'tag/:tag',
+
+    'category' => 'category',
+
+    'user' => 'user',
+    'personal-data' => 'personal-data',
+
+    'pers-photo' => 'personal-data/{id}/photo',
+    'v-pers-photo' => 'personal-data/:id/photo',
+    'pers-photo-delete' => 'personal-data/{id}/photo-delete',
+    'v-pers-photo-delete' => 'personal-data/:id/photo-delete',
+
+    'conversations' => 'conversations',
+    'pers-conversations-delete' => 'conversations/delete',
+    'v-pers-conversations-delete' => 'conversations/delete',
+    'pers-conversations-delete-id' => 'conversations/{id}/delete',
+    'v-pers-conversations-delete-id' => 'account/conversations/:id/messages/delete',
+
+    'conversations-reply' => 'conversations/{id}/reply',
+    'v-conversations-reply' => 'conversations/:id/reply',
+
+    'conversations-messages' => 'conversations/{id}/messages',
+    'v-conversations-messages' => 'conversations/:id/messages',
+
+    'pers-ads' => 'personal-data/{pagePath}',
+    'v-pers-ads-my' => 'personal-data/my-ads',   
+    'v-pers-ads-archived' => 'personal-data/archived-ads',
+    'v-pers-ads-favourite' => 'personal-data/favourite-ads',
+    'v-pers-ads-rejected' => 'personal-data/rejected-ads',
+
+    'pers-ads-delete' => 'personal-data/{pagePath}/delete',
+    'v-pers-ads-delete' => 'personal-data/:pagePath/delete',
+
+    'pers-ads-delete-id' => 'personal-data/{pagePath}/{id}/delete',
+    'v-pers-ads-delete-id' => 'personal-data/:pagePath/:id/delete',
+
+    'my-ads'=>'my-ads',
+    'favourite-ads' => 'favourite-ads',
+    'rejected-ads' => 'rejected-ads',
+    'archived-ads' => 'archived-ads',
+
+    'logout' => 'logout',
+    'pers-settings' => 'settings',
+    'pers-delete-account' => 'personal-data/delete-account',
+    'pers-delete-account-accept' => 'personal-data/delete-account/delete',
+    'delete'=>'delete',
+    'reply'=>'reply',
+    'messages'=>'messages',
+
+    'create' => 'create',
+    'posts' => 'posts',
+    'photos' => 'photos',
+
+    'posts-create' => 'posts/create',
+
+    'posts-create-back' => 'posts/create/{tmpToken}',
+    'v-posts-create-back' => 'posts/create/:tmpToken',
+
+    'posts-create-photo' => 'posts/create/{tmpToken}/photos',
+    'v-posts-create-photo' => 'posts/create/:tmpToken/photos',
+
+    'posts-create-finish' => 'posts/create/{tmpToken}/finish',
+    'v-posts-create-finish' => 'posts/create/:tmpToken/finish',
+
+    'terms-of-use' => 'terms-of-use',
+    'privacy-policy' => 'privacy-policy',
+    'posting-rules' => 'posting-rules',
+    'tips' => 'tips',
+    'faq' => 'faq',
+
+    'edit' => 'edit',
+    'posts-edit' => 'posts/{id}/edit',
+    'v-posts-edit' => 'posts/:id/edit',
+
+    'posts-photos' => 'posts/{id}/photos',
+    'v-posts-photos' => 'posts/:id/photos',
+
+    'unban' => 'unban',
+    'request' => 'request',
+    'unban-request' => 'unban/{phone}/request',
+    'v-unban-request' => 'unban/:phone/request',
+
+    'report' => 'report',
+    'posts-report' => 'posts/{id}/report',
+    'v-posts-report' => 'posts/:id/report',
+
 ];

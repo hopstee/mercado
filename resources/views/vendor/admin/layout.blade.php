@@ -21,7 +21,73 @@ if (isset($title)) {
     </title>
 
     @yield('before_styles')
+    <style>
+        .user-info-modal, .reject-info-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000000;
+            padding-top: 100px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+        }
+        .user-modal-content {
+            padding: 0 0 20px 0 !important;
+            border-radius: .3rem;
+        }
+        .user-modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            width: 30%;
+        }
+        .modal-header.modal-header-dif {
+            display: flex;
+            align-items: center;
+            background: #f7f9f9;
+            border: none;
+            padding: 8px 30px 8px 30px;
+            height: 80px;
+        }
+        .modal-header.modal-header-dif > h2{
+            font-weight: bold;
+        }
+        .modal-header .close {
+            margin-top: -2px;
+        }
+        .reject-info-modal .close {
+            margin-left: 50% !important;
+        }
+        button.close {
+            -webkit-appearance: none;
+            padding: 0;
+            cursor: pointer;
+            background: 0 0;
+            border: 0;
+        }
+        .close {
+            float: right;
+            font-size: 21px;
+            font-weight: 700;
+            line-height: 1;
+            color: #000;
+            text-shadow: 0 1px 0 #fff;
+            filter: alpha(opacity=20);
+            opacity: .2;
+        }
+        .modal-body.modal-body-user {
+            padding-bottom: 16px;
+        }
+        .modal-body.modal-body-dif {
+            padding: 16px 30px 0 30px;
+        }
+    </style>
 
+    <link href="https://market.unifun.com/css/style.css" rel="stylesheet">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/') }}/bootstrap/css/bootstrap.min.css">
@@ -88,7 +154,60 @@ if (isset($title)) {
          @yield('header')
 
         <!-- Main content -->
-        <section class="content" style="display: flex">
+        <!-- <section class="content" style="display: flex"> -->
+        <section class="content">
+
+        <!-- R.S -->
+        <div class="reject-info-modal " style="display:none">
+            <div class="user-modal-content">
+                <div class="modal-header modal-header-dif">
+                    <h2 class="modal-title">
+                        Rejection reason
+                    </h2>
+                    <button type="button" class="close" data-dismiss="modal">                             
+                        <span aria-hidden="true"><i class="unir-close"></i></span>
+                        <span class="sr-only">{{ t('Close') }}</span>
+                    </button>
+                </div>
+
+                <div class="modal-body modal-body-dif modal-body-user">
+                    <div class="block-cell user">
+                        <div class="cell-media">
+                        </div>
+
+                        <div class="cell-content">
+                            
+                            <form  id="rejectReason" role="form" method="POST">
+                                 <input  name='_token' id='tokenForm' type="hidden" value="{{ csrf_token() }}">
+                                 <input  name='tableInfo' id='tableInfo' type="hidden">
+                                <div class="form-group required">
+                                    <div class="form-check">
+                                        <label for="reason-0"  class="radio">
+                                            <input type="radio" name='reason' checked id='reason-0' value="0" class="hidden">
+                                            <span class="label"></span>
+                                            {{ t('The ad does not correspond Posting Rules') }}
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label for="reason-1" class="radio">
+                                            <input type="radio" name='reason' id='reason-1' value="3" class="hidden">
+                                            <span class="label"></span>
+                                            {{ t('The ad does not correspond selected Category or Sub-Category.') }}
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- Submit -->
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-danger btn-block btn-dif "> {{ t('Reject') }} </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
 
           @yield('content')
 
@@ -141,6 +260,7 @@ if (isset($title)) {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+
         /* Set active state on menu element */
         var current_url = "{{ url(Route::current()->uri()) }}";
         $("ul.sidebar-menu li a").each(function() {
@@ -151,6 +271,9 @@ if (isset($title)) {
         });
     </script>
     <script>
+        // R.S
+        var modal_reason = false;
+
         $(document).ready(function()
         {
             /* Send an ajax update request */
@@ -165,16 +288,71 @@ if (isset($title)) {
                 }
             });
 
+
+
+            $( "#rejectReason" ).submit( function( data ) {
+                var value = $(this);
+
+                var $inputs = $('#rejectReason :input');
+
+                var values = {};
+                $inputs.each(function() {
+                    values[this.name] = $(this).val();
+                });
+
+                // var data = {};
+                data.table = values.table;
+                data.field = values.field;
+                data.id = values.id;
+                data.lineId = values.lineId;
+
+                // var value = values.reason;
+
+                var value =  $("input[name='reason']:checked").val();
+
+                saveReviewedAjaxRequest(siteUrl, data, value);
+            });
+
             //E.K.
             $(document).on('click', '.reviewed-request', function(e)
             {
-                e.preventDefault(); /* prevents the submit or reload */
-                var confirmation = confirm("<?php echo trans('admin::messages.confirm_this_action'); ?>");
 
-                if (confirmation) {
-                    let value = $(this).data().value;
-                    console.log($(this).parent().prev().data());
-                    saveReviewedAjaxRequest(siteUrl, $(this).parent().prev(), value);
+                
+                e.preventDefault(); /* prevents the submit or reload */
+                
+                // R.S
+                if($(this).data().value == 0){
+                    //click to open btn
+                    
+                    if(modal_reason == false){
+                        $(".reject-info-modal").attr("style","display:block;");
+                        modal_reason = true;
+
+                        var $self = $(this); /* magic here! */
+                        let value = $(this).data().value;
+
+                        /* Get database info */
+                        var tableInfo = $($(this).parent().prev()).data();
+                        
+                        $.each(tableInfo, function(key , value){
+                            
+
+                            $("#tableInfo").after(
+                                "<input type='hidden' name='" + key + "' value='" + value + "' >"
+                            );
+                        });
+                    }
+
+                }
+                else{
+                    var confirmation = confirm("<?php echo trans('admin::messages.confirm_this_action'); ?>");
+                    if (confirmation) {
+                        let value = $(this).data().value;
+                        console.log(value) ;
+                        console.log($(this).parent().prev().data()) ;
+
+                        saveReviewedAjaxRequest(siteUrl, $(this).parent().prev().data(), value);
+                    }
                 }
             });
         });
@@ -290,18 +468,58 @@ if (isset($title)) {
                 return false;
             }
 
+            // alert( JSON.stringify(el));
+            // alert(value);
+
+            // R.S
+            // table
+            if( typeof($(el).data('table')) === undefined ){
+                // alert(el.table);
+                var dataTable = $(el).data('table');
+            }
+            else{
+                var dataTable = el.table;
+            }
+
+            // field
+            if( typeof($(el).data('field')) === undefined ){
+                var dataField = $(el).data('field');
+            }
+            else{
+                // alert(el.table);
+                var dataField = el.field;
+            }
+            // id
+            if( typeof($(el).data('id')) === undefined ){
+                var dataId = $(el).data('id');
+            }
+            else{
+                // alert(el.id);
+                var dataId = el.id;
+            }
+
+            // lineId
+            if( typeof($(el).data('lineId')) === undefined ){
+                var dataLineId = $(el).data('lineId');
+            }
+            else{
+                // alert(el.lineId);
+                var dataLineId = el.lineId;
+            }
+
             var $self = $(this); /* magic here! */
 
             /* Get database info */
             var _token = $('input[name=_token]').val();
-            var dataTable = $(el).data('table');
-            var dataField = $(el).data('field');
-            var dataId = $(el).data('id');
-            var dataLineId = $(el).data('line-id');
+            // var dataTable = $(el).data('table');
+            // var dataField = $(el).data('field');
+            // var dataId = $(el).data('id');
+            // var dataLineId = $(el).data('line-id');
             var dataValue = value;
 
             /* Remove dot (.) from var (referring to the PHP var) */
-            dataLineId = dataLineId.split('.').join("");
+
+            // dataLineId = dataLineId.split('.').join("");
 
 
             $.ajax({
@@ -314,6 +532,8 @@ if (isset($title)) {
                     '_token': _token
                 }
             }).done(function(data) {
+
+                console.log(data);
                 /* Check 'status' */
                 if (data.status != 1) {
                     return false;
@@ -321,15 +541,20 @@ if (isset($title)) {
 
                 /* All others cases */
                 if (data.fieldValue == 0) {
-                    $('#' + dataLineId).text('Rejected');
+                    $('#' + dataLineId).text('Rejected Rules 0');
                     $('#' + dataLineId).css('background-color', '#B00020');
                 } else if (data.fieldValue == 1) {
-                    $('#' + dataLineId).text('In process');
+                    $('#' + dataLineId).text('In process 1');
                     $('#' + dataLineId).css('background-color', '#FFAB00');
                 } else if (data.fieldValue == 2) {
-                    $('#' + dataLineId).text('Confirmed');
+                    $('#' + dataLineId).text('Confirmed 2');
                     $('#' + dataLineId).css('background-color', '#2E7D32');
                 }
+                else if (data.fieldValue == 3) {
+                    $('#' + dataLineId).text('Rejected Wrong Category 3');
+                    $('#' + dataLineId).css('background-color', '#2E7D32');
+                }
+
 
                 return false;
             }).fail(function(xhr, textStatus, errorThrown) {
@@ -362,6 +587,29 @@ if (isset($title)) {
 
             return false;
         }
+
+        $(".modal-header.modal-header-dif .close").click( function(){
+            console.log(modal_reason);
+
+            if( modal_reason === true){
+                console.log("close");
+                 $(".reject-info-modal").attr("style", "display:none;");
+                modal_reason = false;
+            }
+        });
+
+        $('.reject-info-modal').click( function(){
+
+            if(!$(event.target).is('.modal-header.modal-header-dif')
+                && !$(event.target).closest('.modal-header.modal-header-dif').length
+                && !$(event.target).is('.modal-body.modal-body-dif.modal-body-user')
+                && ! $(event.target).closest('.modal-body.modal-body-dif.modal-body-user').length)
+            {
+                console.log("close screen");
+                 $(".reject-info-modal").attr("style", "display:none;");
+                modal_reason = false;
+            }
+        });
 
 		function isDemo()
 		{

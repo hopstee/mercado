@@ -75,6 +75,7 @@ class ConversationsController extends AccountBaseController
 				->count();
 			}
 		}
+
 		// Meta Tags
 		MetaTag::set('title', t('Conversations Received'));
 		MetaTag::set('description', t('Conversations Received on :app_name', ['app_name' => config('settings.app.app_name')]));
@@ -258,7 +259,7 @@ class ConversationsController extends AccountBaseController
 				$ids[] = $conversationId;
 			}
 		}
-		
+
 		// Delete
 		$nb = 0;
 		foreach ($ids as $item) {
@@ -318,7 +319,6 @@ class ConversationsController extends AccountBaseController
 				$ids[] = $messageId;
 			}
 		}
-		
 		// Delete
 		$nb = 0;
 		foreach ($ids as $item) {

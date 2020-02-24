@@ -3,7 +3,7 @@
   <component name="WebServers">
     <option name="servers">
       <webServer id="f9254734-2d15-4c91-b51f-66b84f20faac" name="Lara" url="http://172.16.100.146">
-        <fileTransfer host="172.16.100.146" port="22" privateKey="C:\Program Files\OpenVPN\config\emp\unfn-evpn-00543\key\unfn-evpn-00543.pem" accessType="SFTP" keyPair="true">
+        <fileTransfer host="172.16.100.146" port="22" accessType="SFTP">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>

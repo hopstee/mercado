@@ -29,12 +29,12 @@
 					</div>
 				@endif
 				
-				<div class="col-md-3 page-sidebar">
+				<div class="col-lg-4 page-sidebar">
 					@include('account.inc.sidebar')
 				</div>
 				<!--/.page-sidebar-->
 				
-				<div class="col-md-9 page-content">
+				<div class="col-lg-8 page-content">
 					<div class="inner-box inner-box-dif">
 						<h2 class="title-2 title-2-mob">
 							{{ t('Conversations') }}
@@ -49,14 +49,14 @@
 						<div style="clear:both"></div>
 						
 						<div class="table-responsive">
-							<form name="listForm" method="POST" action="{{ lurl('account/'.$pagePath.'/delete') }}">
+							<form name="listForm" method="POST" action="{{ lurl(trans('routes.v-pers-conversations-delete', [])) }}">
 								{!! csrf_field() !!}
 								<div class="table-action table-action-dif">
 									<label for="checkAll" class="btn-archive">
 {{--										<input type="checkbox" id="checkAll">--}}
 {{--										{{ t('Select') }}: {{ t('All') }} |--}}
 										<button type="submit" class="btn btn-sm btn-default delete-action btn-default-cab btn-grey">
-											{{ t('Ignore') }}
+											{{ t('Delete') }}
 										</button>
 									</label>
 									<div class="table-search pull-right col-sm-7 table-search-cab">
@@ -127,24 +127,33 @@
 												<div style="word-break:break-all;">
 													<div class="conversation-info receive-info">
 														<strong class="conversation-main">{{ t('Date') }}:</strong>
-														&nbsp{{ $conversation->created_at->formatLocalized(config('settings.app.default_datetime_format_mod')) }}
-														@if (\App\Models\Message::conversationHasNewMessages($conversation))
-															<!-- <span class="badge badge-pill badge-important new-messages badge-dif-imp">{{ $conversation->new_messages }}</span> -->
-															<!-- <div style="width: 18px; height: 18px; line-height: 19px;" class="new-messages" id="badge-nm">{{ $conversation->new_messages }}</div> -->
-															<img class="new-messages" id="badge-notif-nm" src="/images/notifications.svg" alt="">
-														@endif
+														<p>
+															{{ \App\Helpers\DateTime::setData($conversation->created_at, null, 's') }}
+															@if (\App\Models\Message::conversationHasNewMessages($conversation))
+																<!-- <span class="badge badge-pill badge-important new-messages badge-dif-imp">{{ $conversation->new_messages }}</span> -->
+																<!-- <div style="width: 18px; height: 18px; line-height: 19px;" class="new-messages" id="badge-nm">{{ $conversation->new_messages }}</div> -->
+																<img class="new-messages" id="badge-notif-nm" src="/images/notifications.svg" alt="">
+															@endif
+														</p>
 													</div>
 {{--													<br>--}}
-													<div class="conversation-info">
-														<strong class="conversation-main">{{ t('Ad') }}:</strong>&nbsp{{ $conversation->subject }}
+													<div class="conversation-info message-title">
+														<strong class="conversation-main">{{ t('Ad') }}:</strong>
+														<p>
+															{{ $conversation->subject }}
+														</p>
 													</div>
 													<div class="conversation-info">
-														<strong class="conversation-main">{{ t('From') }}:</strong>&nbsp{{ \Illuminate\Support\Str::limit($conversation->from_name, 50) ?? "Unregistered user" }}
-														{!! (!empty($conversation->filename) and $disk->exists($conversation->filename)) ? ' <i class="icon-attach-2"></i> ' : '' !!}&nbsp;
-														|&nbsp;
-														<a href="{{ lurl('account/conversations/' . $conversation->id . '/messages') }}">
-															{{  t('Message') }}
-														</a>
+														<strong class="conversation-main">{{ t('Sender') }}:</strong>
+														<p>
+															{{ \Illuminate\Support\Str::limit($conversation->from_name, 50) ?? "Unregistered user" }}
+															{!! (!empty($conversation->filename) and $disk->exists($conversation->filename)) ? ' <i class="icon-attach-2"></i> ' : '' !!}&nbsp;
+															|&nbsp;
+															<!-- <a href="{{ lurl('account/conversations/' . $conversation->id . '/messages') }}"> -->
+															<a href="{{ lurl(trans('routes.v-conversations-messages',['id'=>$conversation->id]),$conversation->id) }}">
+																{{  t('Message') }}
+															</a>
+														</p>
 													</div>
 												</div>
 											</td>
@@ -156,7 +165,7 @@
 	{{--													</a>--}}
 	{{--												</p>--}}
 	{{--												<p>--}}
-	{{--													<a class="btn btn-danger btn-sm delete-action" href="{{ lurl('account/conversations/' . $conversation->id . '/delete') }}">--}}
+	{{--													<a class="btn btn-danger btn-sm delete-action" href="{{ lurl( trans('routes.v-pers-conversations-delete-id',['conversatin'=>$conversation->id])) }}">--}}
 	{{--														<i class="fa fa-trash"></i> {{ t('Spam') }}--}}
 	{{--													</a>--}}
 	{{--												</p>--}}

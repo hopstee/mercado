@@ -26,7 +26,7 @@
 
 					@if (Session::has('message'))
 						<div class="alert alert-danger">
-							<button type="button" class="close" data-dismiss="alert" aria-hidden="true"><i class="unir-close"></i></button>
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 							{{ session('message') }}
 						</div>
 					@endif
@@ -48,45 +48,39 @@
 					<div class="col-xl-12">
 						<div class="content-box">
 							<div class="row-featured-category">
-								<!-- <h2>
-									<span class="title-2 title-2-dif" style="font-weight: bold;">{{ t('Sitemap') }}</span>
-								</h2> -->
 								<h2 style="padding-left:15px; padding: 15px 0;">
-									<span style="font-size:24px" class="title-3">{{ t('Sitemap') }}</span>
+									<span style="font-size:20px" class="title-3">{{ t('Sitemap') }}</span>
 								</h2>
 								<div class="col-xl-12" style="padding-left: 0; padding-right: 0;">
 									<div class="list-categories-children styled">
 										<div class="row">
 											@foreach ($cats as $key => $col)
-<!--												--><?php //var_dump($col); ?>
 												<div class="col-md-4 col-sm-4 {{ (count($cats) == $key+1) ? 'last-column' : '' }}">
 													@foreach ($col as $iCat)
 														
 														<?php
 															$randomId = '-' . substr(uniqid(rand(), true), 5, 5);
 														?>
-														
 														<div class="cat-list">
-															<h3 class="cat-title rounded cat-title-dif" >
-																<a href="{{ \App\Helpers\UrlGen::category($iCat) }}" style="display:flex;align-items:center;margin-top:5px;margin-bottom:5px;color: #212121">
-																	{{--																	<i class="{{ $iCat->icon_class ?? 'icon-ok' }}"></i>--}}
-{{--																	<i><img style="height: 30px; display:inline-block; padding-right: 5px" src="storage/{{ $iCat->picture }}"></i>--}}
-																	<i><img style="height: 30px; display:inline-block; padding-right: 15px" src="{{ url('storage').'/'.$iCat->picture }}"></i>
+															<h3 class="cat-title f-category cat-title-dif" style="border-left-width: 0px; border-right-width: 0px;">
+																<a href="{{ \App\Helpers\UrlGen::category($iCat) }}" style="display:inline-flex;align-items:center;margin-top:5px;margin-bottom:5px;color: #212121">
+																	{{--	i class="{{ $iCat->icon_class ?? 'icon-ok' }}"></i>--}}
+																	<i><img style="height: 25px; display:inline-block; padding-right: 15px" src="{{ url('storage').'/'.$iCat->picture }}"></i>
 																	<p style="display:inline-block;">{{ $iCat->name }}</p>
 																	<span class="count"></span>
 																</a>
 																@if (isset($subCats) and $subCats->has($iCat->tid))
-																	<span class="btn-cat-collapsed collapsed"
+																	<span class="notrans-collapse collapsed"
 																		  data-toggle="collapse"
 																		  data-target=".cat-id-{{ $iCat->id . $randomId }}"
 																		  aria-expanded="false"
-																		  style="margin-top: 1.3vh;"
+																		  href=".cat-id-{{ $iCat->id . $randomId }}"
 																	>
-																		<span class="icon-down-open-big"></span>
+																		<span class="unir-rarrow2"></span>
 																	</span>
 																@endif
 															</h3>
-															<ul class="cat-collapse collapse show cat-id-{{ $iCat->id . $randomId }} long-list-home">
+															<div class="cat-id-{{ $iCat->id . $randomId }} no-transition collapse">
 																@if (isset($subCats) and $subCats->has($iCat->tid))
 																	@foreach ($subCats->get($iCat->tid) as $iSubCat)
 																		<li>
@@ -96,7 +90,7 @@
 																		</li>
 																	@endforeach
 																@endif
-															</ul>
+															</div>
 														</div>
 													@endforeach
 												</div>
@@ -158,5 +152,30 @@
 	@parent
 	<script>
 		var maxSubCats = 15;
+		var collapse = $('.no-transition.collapse');
+
+		function dependentSize(){
+			if ($(window).width() <= 575) {
+				$(".notrans-collapse *").attr("style", "display:block;");
+
+			}else{
+				$(".notrans-collapse *").attr("style", "display:none;");
+			}
+
+			if ($(this).width() >= 767) {
+				collapse.addClass('show');
+			}
+		}
+		dependentSize();
+		window.addEventListener('resize', function(event){
+            dependentSize();
+        });
+
+		$('.notrans-collapse').on('click',function(){
+			$($(this).data('target')).collapse('toggle');
+		});
+
+		
 	</script>
+	
 @endsection

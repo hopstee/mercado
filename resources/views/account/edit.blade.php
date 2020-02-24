@@ -15,12 +15,12 @@
 
 @section('content')
 	@include('common.spacer')
-	<div class="main-container">
+	<div class="main-container pers-home">
 
 		<div class="user-info-modal">
 			<div class="user-modal-content">
 				<div class="modal-header modal-header-dif">
-					<h4 class="modal-title"> {{ t('Are you sure you want to delete this picture?') }}</h4>
+					<h4 class="modal-title"> {{ t('Delete this picture?') }}</h4>
 					<button type="button" class="close" data-dismiss="modal">
 						<span aria-hidden="true"><i class="unir-close"></i></span>
 						<span class="sr-only">{{ t('Close') }}</span>
@@ -28,12 +28,12 @@
 				</div>
 				<div class="modal-footer modal-footer-dif modal-footer-user">
 					<div class="modal-chose">
-						<form role="form" method="POST" action="{{ lurl('account/' . auth()->user()->id . '/photo/delete') }}" enctype="multipart/form-data">
-							<button type="submit" class="kv-file-remove btn btn-success btn-dif btn-green">{{ ('Delete') }}</button>
+						<form role="form" method="POST" action="{{ lurl( trans('routes.v-pers-photo-delete',['id'=>$user->id]),$user->id ) }}" enctype="multipart/form-data">
+							<button type="submit" class="btn btn-dif btn-grey">{{ t('Delete') }}</button>
 						</form>
 					</div>
 					<div class="modal-cancel">
-						<button class="kv-file-remove btn btn-default btn-default-dif btn-modal btn-kv btn-outline-secondary" id="cancelDelPhoto">{{ t('Cancel') }}</button>
+						<button class="kv-file-remove btn btn-default btn-default-dif btn-modal btn-kv btn-outline-secondary btn-grey" id="cancelDelPhoto">{{ t('Cancel') }}</button>
 					</div>
 				</div>
 			</div>
@@ -41,20 +41,27 @@
 
 		<div class="container">
 			<div class="row">
-				<div class="col-md-3 page-sidebar">
+				<div class="col-lg-4 page-sidebar" style="margin-top: 1px;">
 					@include('account.inc.sidebar')
 				</div>
 				<!--/.page-sidebar-->
+				
 
-				<div class="col-md-9 page-content">
+				<div class="col-lg-8 page-content">
+
+					@if( !isset($user->email)  )
+						@include('layouts.email_warning')
+					@endif
 
 					@include('flash::message')
 
 					@if (isset($errors) and $errors->any())
 						<div class="alert alert-danger">
-							<!-- <button type="button" class="close" data-dismiss="alert" aria-hidden="true"><i class="unir-close"></i></button>
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+
+						<!-- <button type="button" class="close" data-dismiss="alert" aria-hidden="true"><i class="unir-close"></i></button>
 							<h5><strong>{{ t('Oops ! An error has occurred. Please correct the red fields in the form') }}</strong></h5> -->
-							<ul class="list list-check">
+							<ul class="list list-error">
 								@foreach ($errors->all() as $error)
 									<li>{{ $error }}</li>
 								@endforeach
@@ -78,16 +85,16 @@
 
 						<div class="col-md-6 col-xs-12 col-xxs-12 cab-cel cab-cel-tl main-cel">
 							<div class="cab-cel-main">
-								<div class="head-message">
-									<h1 class="page-sub-header2 clearfix no-padding">{{ t('Hello') }} {{ $user->name }} </h1>
-									<span class="page-sub-header-sub">
-                                        {{ t('You last logged in at') }}: {{ $user->last_login_at->formatLocalized(config('settings.app.default_datetime_format')) }}
-                                    </span>
+								<div class="head-message cabinet">
+									<h1 class="page-sub-header2 clearfix no-padding">{{ $user->name }} </h1>
+									<!-- <span class="page-sub-header-sub">
+                                        {{ t('Previous Log In') }}: {{ \App\Helpers\DateTime::setData($user->last_login_at, 's') }}
+                                    </span> -->
 								</div>
 
 								<div class="card card-default card-dif">
-									<div class="panel-collapse collapse {{ (old('panel')=='' or old('panel')=='photoPanel') ? 'show' : '' }}" id="photoPanel">
-										<form name="details" class="form-horizontal" role="form" method="POST" action="{{ lurl('account/' . $user->id . '/photo') }}">
+									<div class="panel-collapse panel-collapse-dif collapse {{ (old('panel')=='' or old('panel')=='photoPanel') ? 'show' : '' }}" id="photoPanel">
+										<form name="details" class="form-horizontal" role="form" method="POST" action="{{ lurl(trans('routes.v-pers-photo',['id' => $user->id]),$user->id) }}">
 											<?php $photoError = (isset($errors) and $errors->has('photo')) ? ' is-invalid' : ''; ?>
 											<div class="photo-field photo-field-dif">
 												<div class="file-loading">
@@ -95,6 +102,15 @@
 												</div>
 											</div>
 										</form>
+									</div>
+									<div class="user-info">
+										<span class="page-sub-header-sub">
+											{{ t('Previous Log In') }}: </br> {{ \App\Helpers\DateTime::setData($user->last_login_at, null, 's') }}
+										</span>
+										</br>
+										<span class="on-site-date">
+											{{ t('On site since') }}: </br> {{ \App\Helpers\DateTime::setData($user->created_at, null, 's') }}
+										</span>
 									</div>
 								</div>
 							</div>
@@ -110,7 +126,7 @@
 									<div>
 										<!-- Number of messages -->
 										<p>
-											<a href="{{ lurl('account/conversations') }}">
+											<a href="{{ lurl(trans('routes.conversations')) }}">
 												{{ t('Conversations') }}
 											</a>
 											{{ isset($countConversations) ? \App\Helpers\Number::short($countConversations) : 0 }}
@@ -128,8 +144,8 @@
 									<div>
 										<!-- Number of visitors -->
 										<p>
-											<a href="{{ lurl('account/my-posts') }}">
-												{{ t('Visits') }}
+											<a href="{{ lurl(trans('routes.v-pers-ads-my')) }}">
+												{{ t('Views') }}
 											</a>
 											<?php $totalPostsVisits = (isset($countPostsVisits) and $countPostsVisits->total_visits) ? $countPostsVisits->total_visits : 0 ?>
 											{{ \App\Helpers\Number::short($totalPostsVisits) }}
@@ -147,10 +163,10 @@
 									<div>
 										<!-- Number of ads -->
 										<p>
-											<a href="{{ lurl('account/my-posts') }}">
+											<a href="{{ lurl(trans('routes.v-pers-ads-my')) }}">
 												{{ t('Ads') }}
 											</a>
-											{{ \App\Helpers\Number::short($countPosts) }}
+											{{ \App\Helpers\Number::short($countMyPosts) }}
 										</p>
 									</div>
 								</div>
@@ -165,8 +181,8 @@
 									<div>
 										<!-- Number of favorites -->
 										<p>
-											<a href="{{ lurl('account/favourite') }}">
-												{{ t('Favorite') }}
+											<a href="{{lurl(trans('routes.v-pers-ads-favourite')) }}">
+												{{ t('Favorites') }}
 											</a>
 											{{ \App\Helpers\Number::short($countFavoritePosts) }}
 										</p>
@@ -175,11 +191,11 @@
 							</div>
 						</div>
 
-						<div class="col-md-6 col-xs-12 col-xxs-12 cab-cel cel-dif cab-cel-bl">
+						<div class="col-md-6 col-xs-12 col-xxs-12 cab-cel cel-dif cab-cel-bl cal-acc">
 							<div class="card card-default col-xl-12-dif">
 								<div class="ads-header">
 									<h3>
-										<a>{{ t('Account Details') }}</a>
+										<a>{{ t('My Profile') }}</a>
 									</h3>
 								</div>
 								<div class="panel-collapse collapse {{ (old('panel')=='' or old('panel')=='userPanel') ? 'show' : '' }} inner-ads-box" id="userPanel">
@@ -191,8 +207,8 @@
 
 										<!-- gender_id -->
 										<?php $genderIdError = (isset($errors) and $errors->has('gender_id')) ? ' is-invalid' : ''; ?>
-										<div class="form-group flex-block required">
-											<label class="col-4 col-form-label">{{ t('Gender') }}</label>
+										<label class="col-4 col-form-label required">{{ t('Gender') }}</label>
+										<div class="form-group flex-block gender required">
 											<div style="display: flex; align-items: center;" class="col-8">
 												@if ($genders->count() > 0)
 													@foreach ($genders as $gender)
@@ -218,20 +234,29 @@
 
 										<!-- name -->
 										<?php $nameError = (isset($errors) and $errors->has('name')) ? ' is-invalid' : ''; ?>
+										<label class="col-4 col-form-label required">{{ t('Name') }} <sup>*</sup></label>
 										<div class="form-group flex-block required">
-											<label class="col-4 col-form-label">{{ t('Name') }} <sup>*</sup></label>
-											<div class="col-8">
-												<input name="name" type="text" class="form-control{{ $nameError }}" placeholder="" value="{{ old('name', $user->name) }}">
+											<div class="col-12">
+												<input 	name="name" 
+														type="text" 
+														class="form-control name-form{{ $nameError }}" 
+														placeholder="" 
+														value="{{ old('name', $user->name) }}" 
+														oninvalid="this.setCustomValidity('{{ t('This name cannot be used.') }}')"
+														onchange="try{setCustomValidity('')}catch(e){}"
+														oninput="setCustomValidity(' ')"
+														pattern="\b(?:(?![Aa]dmin|ADMIN)\w)+.+\b">
 											</div>
 										</div>
 
 										<!-- phone -->
 										<?php $phoneError = (isset($errors) and $errors->has('phone')) ? ' is-invalid' : ''; ?>
+										<label for="phone" class="col-4 col-form-label required">{{ t('Phone') }} <sup>*</sup></label>
 										<div class="form-group flex-block required">
-											<label for="phone" class="col-4 col-form-label">{{ t('Phone') }} <sup>*</sup></label>
-											<div class="input-group col-8">
+
+											<div class="input-group col-12">
 												<input id="phone" name="phone" type="text" class="form-control{{ $phoneError }}"
-													   placeholder="{{ (!isEnabledField('email')) ? t('Mobile Phone Number') : t('Phone Number') }}"
+													   placeholder="{{ (!isEnabledField('phone')) ? t('Mobile Phone Number') : t('Phone Number') }}"
 													   value="{{ phoneFormat(old('phone', $user->phone), old('country_code', $user->country_code)) }}">
 
 												{{--                                                    <div class="input-group-append">--}}
@@ -256,15 +281,15 @@
 							</div>
 						</div>
 
-						<div class="col-md-6 col-xs-12 col-xxs-12 cab-cel cel-last cab-cel-br">
+						<div class="col-md-6 col-xs-12 col-xxs-12 cab-cel cel-last cab-cel-br cal-acc">
 							<div class="card card-default col-xl-12-dif">
 								<div class="ads-header">
 									<h3>
-										<a>{{ t('Change password') }}</a>
+										<a>{{ t('Privacy') }}</a>
 									</h3>
 								</div>
 								<div class="panel-collapse {{ (old('panel')=='settingsPanel') ? 'show' : '' }} inner-ads-box" id="settingsPanel">
-									<form name="settings" class="form-horizontal" role="form" method="POST" action="{{ lurl('account/settings') }}">
+									<form name="settings" class="form-horizontal" role="form" method="POST" action="{{ lurl( trans('routes.pers-settings')) }}">
 										{!! csrf_field() !!}
 										<input name="_method" type="hidden" value="PUT">
 										<input name="panel" type="hidden" value="settingsPanel">
@@ -288,24 +313,37 @@
 											</div>
 										@endif
 
-										<div class="supp"></div>
+										<!-- <div class="supp"></div> -->
+										<!-- email -->
+										<?php $emailError = (isset($errors) and $errors->has('email')) ? ' is-invalid' : ''; ?>
+										<label class="col-4 col-form-label">
+											{{ t('E-mail for password recovery') }}
+											
+										</label>
+										<div class="form-group flex-block">
+											<div class="col-12">
+													<input id="email" name="email" type="email" autocomplete="off"
+														class="form-control{{ $emailError }}" placeholder="{{ t('Your E-mail') }}" 
+														value="{{ old('email', $user->email) }}">
+											</div>
+										</div>
 
 										<!-- password -->
 										<?php $passwordError = (isset($errors) and $errors->has('password')) ? ' is-invalid' : ''; ?>
+										<label class="col-4 col-form-label">{{ t('New Password') }}</label>
 										<div class="form-group flex-block">
-											<label class="col-4 col-form-label">{{ t('New Password') }}</label>
-											<div class="col-8">
-												<input id="password" name="password" type="password" class="form-control{{ $passwordError }}" placeholder="{{ t('Password') }}">
+											<div class="col-12">
+												<input id="password" name="password" type="password" class="form-control{{ $passwordError }}" placeholder="{{ t('Password') }}" autocomplete="new-password">
 											</div>
 										</div>
 
 										<!-- password_confirmation -->
 										<?php $passwordError = (isset($errors) and $errors->has('password')) ? ' is-invalid' : ''; ?>
+										<label class="col-4 col-form-label">{{ t('Confirm New Password') }}</label>
 										<div class="form-group flex-block">
-											<label class="col-4 col-form-label">{{ t('Confirm Password') }}</label>
-											<div class="col-8">
+											<div class="col-12">
 												<input id="password_confirmation" name="password_confirmation" type="password"
-													   class="form-control{{ $passwordError }}" placeholder="{{ t('Confirm Password') }}">
+													   class="form-control{{ $passwordError }}" placeholder="{{ t('Confirm Password') }}" autocomplete="new-password">
 											</div>
 										</div>
 
@@ -318,10 +356,9 @@
 									</form>
 								</div>
 							</div>
-
 						</div>
 
-						<div class="col-md-12 col-xs-12 col-xxs-12 cab-cel-email cab-cel-bl">
+						<!-- <div class="col-md-12 col-xs-12 col-xxs-12 cab-cel-email cab-cel-bl cal-acc">
 							<div class="card card-default col-xl-12-dif">
 								<div class="panel-collapse {{ (old('panel')=='settingsPanel') ? 'show' : '' }} inner-ads-box" id="settingsPanel">
 									<form name="settings" class="form-horizontal" role="form" method="POST" action="{{ lurl('account/settings') }}">
@@ -348,8 +385,29 @@
 									</form>
 								</div>
 							</div>
-						</div>
+						</div> -->
+						<div class="modal fade" id="checkEmailModal" tabindex="-1" role="dialog" aria-labeledby="#titleCheckEmailModal" aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+										<div class="modal-header modal-header-dif">
+											<h2 class="modal-title" id="titleCheckEmailModal">
+												{{t('Add email')}}
+											</h2>
+											<button type="button" class="close" data-dismiss="modal">
+												{{--					<span aria-hidden="true">&times;</span>--}}
+												<span aria-hidden="true"><i class="unir-close"></i></span>
+												<span class="sr-only">{{ t('Close') }}</span>
+											</button>
+										</div>
 
+									<div class="modal-body modal-body-dif modal-body-user">
+										<div class="modal-text">
+											{{t('if you forget password we send it on email')}}
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 
 					{{--					<div class="inner-box default-inner-box">--}}
 					{{--						<div class="row">--}}
@@ -451,7 +509,7 @@
 					{{--								</div>--}}
 					{{--								<div class="panel-collapse collapse {{ (old('panel')=='' or old('panel')=='photoPanel') ? 'show' : '' }}" id="photoPanel">--}}
 					{{--									<div class="card-body">--}}
-					{{--										<form name="details" class="form-horizontal" role="form" method="POST" action="{{ lurl('account/' . $user->id . '/photo') }}">--}}
+					{{--										<form name="details" class="form-horizontal" role="form" method="POST" action="{{ lurl(trans('routes.personal-data') . '/' . $user->id . '/photo') }}">--}}
 					{{--											<div class="row">--}}
 					{{--												<div class="col-xl-12 text-center">--}}
 					{{--													--}}
@@ -690,7 +748,8 @@
 			<!--/.container-->
 		</div>
 		<!-- /.main-container -->
-		@endsection
+	</div>
+@endsection
 
 		@section('after_styles')
 			<link href="{{ url('assets/plugins/bootstrap-fileinput/css/fileinput.min.css') }}" rel="stylesheet">
@@ -762,27 +821,77 @@
 			$startDate = new DateTime($date);
 			$currentDate = new DateTime();
 
-			$time = $startDate->diff($currentDate);
-			if ($time->format("%y") == 0 && $time->format("%m") == 0 && $time->format("%d") == 0 && $time->format("%H") == 0) {
-				$ans = 'Some minutes on the site';
-			}
-			else if ($time->format("%y") == 0 && $time->format("%m") == 0 && $time->format("%d") == 0) {
-				if ($time->format("%H") == 1 || $time->format("%H") < 2) $ans = '1 hour on the site';
-				else $ans = $time->format("%H") . ' hours on the site';
-			}
-			else if ($time->format("%y") == 0 && $time->format("%m") == 0) {
-				if ($time->format("%d") == 1 || $time->format("%d") < 2) $ans = '1 day ' . $time->format("%H") . ' hours on the site';
-				else $ans = $time->format("%d") . ' days on the site';
-			}
-			else if ($time->format("%y") == 0) {
-				if ($time->format("%m") == 1 || $time->format("%m") < 2) $ans = '1 month ' . $time->format("%d") . ' days on the site';
-				else $ans = $time->format("%m") . ' months on the site';
-			}
-			else {
-				if ($time->format("%y") == 1 || $time->format("%y") < 2) $ans = '1 year ' . $time->format("%m") . ' months on the site';
-				else $ans = $time->format("%y") . ' years on the site';
-			}
+			// $time = $startDate->diff($currentDate);
+			// if ($time->format("%y") == 0 && $time->format("%m") == 0 && $time->format("%d") == 0 && $time->format("%H") == 0) {
+			// 	$ans = 'Some minutes on the site';
+			// }
+			// else if ($time->format("%y") == 0 && $time->format("%m") == 0 && $time->format("%d") == 0) {
+			// 	if ($time->format("%H") == 1 || $time->format("%H") < 2) $ans = '1 hour on the site';
+			// 	else $ans = $time->format("%H") . ' hours on the site';
+			// }
+			// else if ($time->format("%y") == 0 && $time->format("%m") == 0) {
+			// 	if ($time->format("%d") == 1 || $time->format("%d") < 2) $ans = '1 day ' . $time->format("%H") . ' hours on the site';
+			// 	else $ans = $time->format("%d") . ' days on the site';
+			// }
+			// else if ($time->format("%y") == 0) {
+			// 	if ($time->format("%m") == 1 || $time->format("%m") < 2) $ans = '1 month ' . $time->format("%d") . ' days on the site';
+			// 	else $ans = $time->format("%m") . ' months on the site';
+			// }
+			// else {
+			// 	if ($time->format("%y") == 1 || $time->format("%y") < 2) $ans = '1 year ' . $time->format("%m") . ' months on the site';
+			// 	else $ans = $time->format("%y") . ' years on the site';
+			// }
+			// R.S 
+				$joined =  explode("-",substr( $user->created_at, 0 , strpos(date('Y-m-d H:i:s'), " ") )) ;
+
+				switch($joined[1]){
+					case "01":
+						$month = t("Jan");
+					break;
+					case "02":
+						$month = t("Feb");
+					break;
+					case "03":
+						$month = t("Mar");
+					break;
+					case "04":
+						$month = t("Apr");
+					break;
+					case "05":
+						$month = t("May");
+					break;
+					case "06":
+						$month = t("Jun");
+					break;
+					case "07":
+						$month = t("Jul");
+					break;
+					case "08":
+						$month = t("Aug");
+					break;
+					case "09":
+						$month = t("Sept");
+					break;
+					case "10":
+						$month = t("Oct");
+					break;
+					case "11":
+						$month = t("Nov");
+					break;
+					case "12":
+						$month = t("Dec");
+					break;
+				}
+
+				$ans =  t('On site since ') . $month . " " .  $joined[0];
 			?>
+
+			<script>
+				$(document).ready(function() {
+					// $('.on-site-date').text('{{ $ans }}');
+					// $('.file-default-preview img').attr('src', '/images/userCard.png');
+				})
+			</script>
 
 			<script>
 				var photoInfo = '<h6 class="text-muted pb-0">{{ t('Click to select') }}</h6>';
@@ -803,7 +912,7 @@
 							showCaption: false,
 							showPreview: true,
 							allowedFileExtensions: {!! getUploadFileTypes('image', true) !!},
-							uploadUrl: '{{ lurl('account/' . $user->id . '/photo') }}',
+							uploadUrl: '{{ lurl(trans('routes.v-pers-photo',['id'=>$user->id]),$user->id ) }}',
 							uploadAsync: false,
 							showBrowse: false,
 							showCancel: true,
@@ -816,7 +925,8 @@
 							maxFileCount: 1,
 							validateInitialCount: true,
 							uploadClass: 'btn btn-primary',
-							defaultPreviewContent: '<img src="{{ !empty($gravatar) ? $gravatar : url('images/user.png') }}" alt="{{ t('Your Photo or Avatar') }}">' + photoInfo,
+							// defaultPreviewContent: '<img src="{{ !empty($gravatar) ? $gravatar : url('images/user.png') }}" alt="{{ t('Your Photo or Avatar') }}">' + photoInfo,
+							defaultPreviewContent: '<img src="{{ url('images/avatar_defaul_image.svg') }}" alt="{{ t('Your Photo or Avatar') }}">' + photoInfo,
 							/* Retrieve current images */
 							/* Setup initial preview with data keys */
 							initialPreview: [
@@ -840,7 +950,7 @@
 											@if (isset($user->photo) and !empty($user->photo))
 									caption: '{{ last(explode('/', $user->photo)) }}',
 									size: {{ $fileSize }},
-									url: '{{ lurl('account/' . $user->id . '/photo/delete') }}',
+									url: '{{ lurl(trans('routes.personal-data') .'/' . $user->id . '/photo/delete') }}',
 									key: {{ (int)$user->id }}
 									@endif
 								}
@@ -849,7 +959,7 @@
 							showClose: false,
 							fileActionSettings: {
 								// removeIcon: '<i class="far fa-trash-alt"></i>',
-								removeIcon: '<a class="change-text">Change</a>',
+								removeIcon: '<a class="change-text"><i class="far fa-trash-alt"></i></a>',
 								// removeClass: 'btn btn-sm btn-danger',
 								removeTitle: '{{ t('Remove file') }}'
 							},
@@ -889,7 +999,7 @@
 					$.each(data.files, function(key, file) {
 						if (typeof file !== 'undefined') {
 							var fname = file.name;
-							out = out + {!! t('Uploaded file #key successfully') !!};
+							out = out + "{!! t('File uploaded successfully') !!}";
 						}
 					});
 					$('#avatarUploadSuccess ul').append(out);
@@ -913,7 +1023,7 @@
 				$('#photoField').on('filedeleted', function() {
 					$('#userImg').attr({'src':"{!! !empty($gravatar) ? $gravatar : url('/images/user.jpg') !!}"});
 
-					var out = "{{ t('Your photo or avatar has been deleted.') }}";
+					var out = "{{ t('Picture has been deleted successfully.') }}";
 					$('#avatarUploadSuccess').html('<ul><li></li></ul>').hide();
 					$('#avatarUploadSuccess ul li').append(out);
 					$('#avatarUploadSuccess').fadeIn('slow');
@@ -957,6 +1067,11 @@
 					$('.menu-overly-mask').removeClass('is-visible');
 					modal_userInfo = false;
 				});
+				
+				// $(".btn.btn-dif.btn-grey").hover(function(value){
+				// 	console.log(value);
+				// 	// value. = ("bgcolr","#6b8096 !important");
+				// });
 
 			</script>
 @endsection

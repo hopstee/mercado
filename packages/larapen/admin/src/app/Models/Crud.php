@@ -148,7 +148,9 @@ trait Crud
 		$model = '\\' . get_class($this);
 
 		if (isset($this->translatable)) {
-			return $model::where('translation_of', $this->id)->where('translation_lang', '!=', config('appLang.abbr'))->get();
+            // return $model::where('id', $this->translation_of)->where('translation_lang', '!=', config('appLang.abbr'))->get();
+			return $model::where('id', $this->translation_of)->get();
+            
 		}
 
 		return collect();
@@ -178,7 +180,7 @@ trait Crud
 	{
 		if ($translation_lang == false) {
 			$translation_lang = Lang::locale();
-		}
+        }
 
 		$model = '\\' . get_class($this);
 		if (isset($this->translatable)) {
@@ -193,7 +195,7 @@ trait Crud
 		$model = '\\' . get_class($this);
 		$translations = $this->translations();
 
-		$translated_in = [];
+        $translated_in = [];
 
 		if ($translations->count()) {
 			foreach ($translations as $key => $translation) {

@@ -33,10 +33,11 @@ if (!isset($languageCode) or empty($languageCode)) {
             @if (isset($errors) and $errors->any())
             <div class="col-xl-12">
                 <div class="alert alert-danger">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                     <!-- <button type="button" class="close" data-dismiss="alert" aria-hidden="true"><i class="unir-close"></i></button>
                     <h5><strong>{{ t('Oops ! An error has occurred. Please correct the red fields in the form') }}</strong> -->
-                    </h5>
-                    <ul class="list list-check">
+{{--                    </h5>--}}
+                    <ul class="list list-error">
                         @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
                         @endforeach
@@ -56,10 +57,10 @@ if (!isset($languageCode) or empty($languageCode)) {
             @endif
             <div class="col-md-8 order-md-1 order-2">
                 <div class="contact-form">
-                    <h2 class="py-3" style="padding-top:30px !important;">
+                    <h2 class="py-3" style="padding-top:27px !important;">
                         <span class="title-3">{{ t('Contact Us') }}</span>
                     </h2>
-                    <form class="form-horizontal" method="post" enctype="multipart/form-data" action="{{ lurl(trans('routes.contact')) }}">
+                    <form class="form-horizontal" method="post" enctype="multipart/form-data" action="{{ lurl(trans('routes.contact-us')) }}">
                         {!! csrf_field() !!}
                         <fieldset>
                             <div class="row">
@@ -67,16 +68,21 @@ if (!isset($languageCode) or empty($languageCode)) {
                                     <?php $firstNameError = (isset($errors) and $errors->has('first_name')) ? ' is-invalid' : ''; ?>
                                     <div class="form-group required">
                                         <input id="first_name" name="first_name" type="text"
-                                            placeholder="{{ t('First Name') }}"
-                                            class="form-control{{ $firstNameError }}" value="{{ old('first_name') }}">
+                                            placeholder="{{ t('Name') }}"
+                                            class="form-control{{ $firstNameError }}" value="{{ old('first_name') }}"
+                                            required
+                                        >
                                     </div>
                                 </div>
                                 <!-- N.M. -->
                                 <div class="col-md-12">
                                     <?php $phoneError = (isset($errors) and $errors->has('phone')) ? ' is-invalid' : ''; ?>
                                     <div class="form-group required">
-                                        <input id="phone" name="phone" type="text" placeholder="{{ t('Phone Number') }}"
-                                            class="form-control{{ $phoneError }}" value="{{ old('phone') }}">
+                                        <input id="phone" name="phone" type="text" placeholder="{{ t('Phone') }}"
+                                            class="form-control{{ $phoneError }}" value="{{ old('phone') }}"
+                                               pattern="^\+\d{3}\s?\d{2}\s?\d{3}\s?\d{4}$"
+                                               required
+                                        >
                                     </div>
                                 </div>
                                 <!-- END N.M. -->
@@ -100,9 +106,11 @@ if (!isset($languageCode) or empty($languageCode)) {
                                 <div class="col-md-12">
                                     <?php $emailError = (isset($errors) and $errors->has('email')) ? ' is-invalid' : ''; ?>
                                     <div class="form-group required">
-                                        <input id="email" name="email" type="text"
-                                            placeholder="{{ t('Email Address') }}" class="form-control{{ $emailError }}"
-                                            value="{{ old('email') }}">
+                                        <input id="email" name="email" type="email"
+                                            placeholder="{{ t('E-mail') }}" class="form-control{{ $emailError }}"
+                                            value="{{ old('email') }}"
+                                            required
+                                        >
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -110,7 +118,7 @@ if (!isset($languageCode) or empty($languageCode)) {
                                     <div class="mb10">
                                         <!-- <input name="file" id="file" type="file"  class="form-control{{ $failError }}"> -->
                                         <div class="button-wrap">
-                                            <label class ="custom-button-upfile" for="file"> Attach file </label>
+                                            <label class ="custom-button-upfile btn-grey" for="file">{{ t('Attach files') }}</label>
                                             <input class="custom-upfile" id="file" name="file" type="file" class="form-control{{ $failError }}">
                                             <div id="fileName"></div>
                                             <small style="display:block;" class="text-muted">
@@ -118,18 +126,43 @@ if (!isset($languageCode) or empty($languageCode)) {
                                             </small>
                                         </div>
                                         <script>
-                                            $(".custom-upfile").on('change', function () {
-                                                let e = $(".custom-upfile")[0].value.split('\\');
-                                                $('#fileName').html(e[e.length - 1]);
+                                            $('.custom-upfile').on('change', function () {
+                                                $('#fileName div').remove();
+                                                var l = $('#file')[0].files;
+                                                $('#fileName').text(l[0].name);
+                                                $('#fileName').prepend("<button onclick=\"deleteFile()\" type=\"button\" class=\"close delete-file-button\"><span aria-hidden=\"true\"><i class=\"unir-close_l delete-file-icon\"></i></span><span class=\"sr-only\">{{ t('Delete') }}</span></button>");
+                                                
                                             });
+
+                                            function deleteFile() {
+                                                $('#file').value = '';
+                                                const myNode = document.getElementById("fileName");
+                                                while (myNode.firstChild) {
+                                                    myNode.removeChild(myNode.firstChild);
+                                                }
+                                            }
+
+                                            var create_DOM_el = function(id, e) {
+                                                let div = document.createElement('div');
+                                                div.setAttribute('id', id);
+                                                let inner_data = e.name;
+                                                div.innerHTML = inner_data;
+                                                $('#fileName').append(div);
+                                            }
                                         </script>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <?php $messageError = (isset($errors) and $errors->has('message')) ? ' is-invalid' : ''; ?>
                                     <div class="form-group required">
-                                        <textarea class="form-control{{ $messageError }}" id="message" name="message"
-                                            placeholder="{{ t('Message') }}" rows="7">{{ old('message') }}</textarea>
+                                        <textarea   id="message" 
+                                                    name="message" 
+                                                    class="form-control{{ $messageError }}"                                                 
+                                                    placeholder="{{ t('Message') }}" 
+                                                    rows="7"
+                                                    maxlength="6000"
+                                        >{{ old('message') }}</textarea>
+                                        <small id="message-feedback" class="form-text text-muted"></small>
                                     </div>
 
                                     @include('layouts.inc.tools.recaptcha')
@@ -147,12 +180,13 @@ if (!isset($languageCode) or empty($languageCode)) {
                 <div class="help-block sticky-top">
                     <h3 class="title-3 py-3">{{ t('Help links') }}</h3>
                     <div class="text-content text-left from-wysiwyg">
-                        <h4><a href="{{ lurl('page/terms-of-use')}}">{{ t('Terms of Use') }}</a></h4>
-                        <h4><a href="{{ lurl('page/privacy-policy')}}">{{ t('Privacy Policy') }}</a></h4>
-                        <h4><a href="{{ lurl('page/posting-rules')}}">{{ t('Posting Rules') }}</a></h4>
-                        <h4><a href="{{ lurl('page/tips')}}">{{ t('Tips for Users') }}</a></h4>
-                        <h4><a href="{{ lurl('page/faq')}}">{{ t('FAQ') }}</a></h4>
-                        <h4><a href="{{ lurl('contact')}}">{{ t('Contact Us') }}</a></h4>
+                        <h4><a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.terms-of-use')])) }}">{{ t('Terms of Use') }}</a></h4>
+                        <h4><a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.privacy-policy')])) }}">{{ t('Privacy Policy') }}</a></h4>
+                        <h4><a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.posting-rules')])) }}">{{ t('Posting Rules') }}</a></h4>
+                        <h4><a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.tips')])) }}">{{ t('Tips for Users') }}</a></h4>
+                        <h4><a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.faq')])) }}">{{ t('FAQ') }}</a></h4>
+                        <h4><a href="{{ lurl(trans('routes.sitemap')) }}">{{ t('Sitemap') }}</a></h4> 
+                        <h4><a href="{{ lurl(trans('routes.contact-us'))}}">{{ t('Contact Us') }}</a></h4> 
                     </div>
                 </div>
             </div>
@@ -162,5 +196,23 @@ if (!isset($languageCode) or empty($languageCode)) {
 @endsection
 
 @section('after_scripts')
-<script src="{{ url('assets/js/form-validation.js') }}"></script>
+    <script src="{{ url('assets/js/form-validation.js') }}"></script>
+
+    <script>
+        $(document).ready(function() {
+            var textarea_max = 6000;
+            $('#message-feedback').html(textarea_max + "{{ t('characters left') }}");
+
+            $('#message').keyup(function() {
+			var textarea_length = $('#message').val().length,
+                textarea_remaining = textarea_max - textarea_length;
+
+			if (textarea_length === 0) {
+				$('#message-feedback').html(textarea_max + "{{ t('characters left') }}");
+			} else {
+				$('#message-feedback').html(textarea_remaining + "{{ t('characters left') }}");
+			}
+		});
+        });
+    </script>
 @endsection

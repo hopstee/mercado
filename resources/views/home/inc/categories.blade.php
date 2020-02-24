@@ -17,24 +17,40 @@
 				@if ($categoriesOptions['type_of_display'] == 'c_picture_icon')
 
 					@if (isset($categories) and $categories->count() > 0)
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 add-page-btn">
+							<a href="{{ \App\Helpers\UrlGen::addPost() }}">
+								<p class="main-text">{{ t('Publish a free ad now') }}</p>
+								<p class="secondary-text">{{ t('and start receiving calls from buyers!') }}</p>
+							</a>
+						</div>
+						
 						@foreach($categories as $key => $cat)
 							<div class="col-lg-2 col-md-3 col-sm-3 col-xs-4 f-category">
-								<a href="{{ \App\Helpers\UrlGen::category($cat) }}">
+								<!-- <a href="{{ \App\Helpers\UrlGen::category($cat) }}"> -->
+								<a href="{{ lurl( trans('routes.v-search-cat', ['catSlug'=> strtolower($cat->slug)]) ) }}">
 									<img src="{{ imgUrl($cat->picture, 'cat') }}" class="lazyload img-fluid" alt="{{ $cat->name }}">
 									<h6>
 										<span>{{ $cat->name }}</span>
-										@if (isset($categoriesOptions['count_categories_posts']) and $categoriesOptions['count_categories_posts'])
+										<!-- @if (isset($categoriesOptions['count_categories_posts']) and $categoriesOptions['count_categories_posts'])
 											@if ($cat->children->count() > 0)
 												&nbsp;{{ $cat->posts->count() + $cat->childrenPosts->count() }}
 											@else
 												&nbsp;{{ $cat->childrenPosts->count() }}
 											@endif
-										@endif
+										@endif -->
 									</h6>
 									<i class="unir-rarrow2 d-sm-none"></i>
 								</a>
 							</div>
 						@endforeach
+						<div class="col-lg-2 col-md-3 col-sm-3 col-xs-4 all-ads-btn">
+							<?php $attr = ['countryCode' => config('country.icode')]; ?>
+							<a href="{{ lurl(trans('routes.v-search', $attr), $attr) }}" id="all-ads">
+								<h3 class="all-ads">
+									{{ t('All Ads') }}
+								</h3>
+							</a>
+						</div>
 					@endif
 
 				@elseif (in_array($categoriesOptions['type_of_display'], ['cc_normal_list', 'cc_normal_list_s']))

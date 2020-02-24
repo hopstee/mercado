@@ -55,15 +55,14 @@ class PostController extends PanelController
 				$this->xPanel->addClause('where', 'verified_email', '=', 0);
 				$this->xPanel->addClause('orWhere', 'verified_phone', '=', 0);
 				if (config('settings.single.posts_review_activation')) {
-					$this->xPanel->addClause('orWhere', 'reviewed', '=', 0);
+					$this->xPanel->addClause('orWhere', 'reviewed', '=', 1);
 				}
 			}
 			if (request()->get('active') == 1) {
 				$this->xPanel->addClause('where', 'verified_email', '=', 1);
 				$this->xPanel->addClause('where', 'verified_phone', '=', 1);
 				if (config('settings.single.posts_review_activation')) {
-//					$this->xPanel->addClause('where', 'reviewed', '=', 1);
-                                        $this->xPanel->addClause('where', 'reviewed', '>', 0);
+					$this->xPanel->addClause('where', 'reviewed', '=', 2);	
 				}
 			}
 		}
@@ -129,8 +128,10 @@ class PostController extends PanelController
 			'type'  => 'dropdown',
 			'label' => trans('admin::messages.Status'),
 		], [
-			1 => trans('admin::messages.Unactivated'),
+			1 => trans('admin::messages.Wrong Posting Rules'),
 			2 => trans('admin::messages.Activated'),
+			3 => trans('admin::messages.Wrong Category'),
+			4 => trans('admin::messages.In process'),
 		], function ($value) {
 			if ($value == 1) {
 				$this->xPanel->addClause('where', 'verified_email', '=', 0);
@@ -144,7 +145,21 @@ class PostController extends PanelController
 				$this->xPanel->addClause('where', 'verified_phone', '=', 1);
 				if (config('settings.single.posts_review_activation')) {
 //					$this->xPanel->addClause('where', 'reviewed', '=', 1);
-                                        $this->xPanel->addClause('where', 'reviewed', '>', 0);
+					$this->xPanel->addClause('where', 'reviewed', '=', 2);
+				}
+			}
+			if ($value == 3) {
+				$this->xPanel->addClause('where', 'verified_email', '=', 0);
+				$this->xPanel->addClause('orWhere', 'verified_phone', '=', 0);
+				if (config('settings.single.posts_review_activation')) {
+					$this->xPanel->addClause('orWhere', 'reviewed', '=', 3);
+				}
+			}
+			if ($value == 4) {
+				$this->xPanel->addClause('where', 'verified_email', '=', 0);
+				$this->xPanel->addClause('orWhere', 'verified_phone', '=', 0);
+				if (config('settings.single.posts_review_activation')) {
+					$this->xPanel->addClause('orWhere', 'reviewed', '=', 1);
 				}
 			}
 		});
@@ -217,7 +232,7 @@ class PostController extends PanelController
 				'label'         => trans("admin::messages.Reviewed"),
 				'type'          => 'model_function',
 //				'function_name' => 'getReviewedHtml',
-                                'function_name' => 'getReviewedPosts',
+				'function_name' => 'getReviewedPosts',
 			]);
 		}
 

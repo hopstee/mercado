@@ -52,7 +52,7 @@ class RegisterController extends FrontController
 	 *
 	 * @var string
 	 */
-	protected $redirectTo = '/account';
+	protected $redirectTo = "'/' . trans('routes.personal-data')";
 	
 	/**
 	 * @var array
@@ -85,7 +85,7 @@ class RegisterController extends FrontController
 	 */
 	public function commonQueries()
 	{
-		$this->redirectTo = config('app.locale') . '/account';
+		$this->redirectTo = config('app.locale') . '/' . trans('routes.personal-data');
 	}
 	
 	/**
@@ -129,8 +129,8 @@ class RegisterController extends FrontController
 		}
 
 		// R.S
-		// Delete users who has delete prifile one year later each 
-		$querry = "SELECT * FROM ". DBTool::rawTable('users') . " WHERE deleted_at < NOW() - INTERVAL '1' YEAR";
+		// Delete users who has delete prifile one year later
+		$querry = "SELECT * FROM ". DBTool::rawTable('users') . " WHERE deleted_at < NOW() - INTERVAL '2' MONTH";
 		$deletedUser = DB::select(DB::raw($querry));
 		$deletedUser = ArrayHelper::fromObject($deletedUser);
 		if(is_array($deletedUser) && isset($deletedUser[0]['id'])){
@@ -160,7 +160,7 @@ class RegisterController extends FrontController
 				if (Auth::loginUsingId($user->id)) {
 					$message = t("Re-register successfully.");
 					flash($message)->success();
-					return redirect()->intended(config('app.locale') . '/account');
+					return redirect()->intended(config('app.locale') . '/' . trans('routes.personal-data'));
 				}
 			}
 		}
@@ -235,6 +235,13 @@ class RegisterController extends FrontController
 
 		// Save
 		$user->save();
+
+		$updatePosts = 	"UPDATE ". DBTool::rawTable('posts') .
+		" SET user_id = '" . $user->id .
+		"', contact_name = '" . $user->name .
+		"' WHERE phone = '" . $user->phone . "'";
+
+		DB::update(DB::raw($updatePosts));
 
 		// R.S
 		// if(!((NotifyController::SendNotification(
@@ -319,7 +326,7 @@ class RegisterController extends FrontController
 
 				// Redirect to the user area If Email or Phone verification is not required
 			if (Auth::loginUsingId($user->id)) {
-				return redirect()->intended(config('app.locale') . '/account');
+				return redirect()->intended(config('app.locale') . '/' .trans('routes.personal-data'));
 			}
 		}
 		return redirect( $nextUrl);

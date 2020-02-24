@@ -436,7 +436,7 @@
         closeButton: function (css) {
             css = css ? 'close ' + css : 'close';
             return '<button type="button" class="' + css + '" aria-label="Close">\n' +
-                '  <span aria-hidden="true">&times;</span>\n' +
+                // '  <span aria-hidden="true">&times;</span>\n' +
                 '</button>';
         },
         getRotation: function (value) {
@@ -822,7 +822,7 @@
                     flash: {width: "213px", height: "160px"},
                     object: {width: "213px", height: "160px"},
                     pdf: {width: "100%", height: "160px"},
-                    other: {width: "213px", height: "160px"}
+                    other: {/*width: "213px", */height: "160px"}
                 },
                 previewSettingsSmall: {
                     image: {width: "auto", height: "auto", 'max-width': "100%", 'max-height': "100%"},
@@ -4436,7 +4436,7 @@
         msgZoomModalHeading: 'Detailed Preview',
         msgFileRequired: 'You must select a file to upload.',
         msgSizeTooSmall: 'File "{name}" (<b>{size} KB</b>) is too small and must be larger than <b>{minSize} KB</b>.',
-        msgSizeTooLarge: 'File "{name}" (<b>{size} KB</b>) exceeds maximum allowed upload size of <b>{maxSize} KB</b>.',
+        msgSizeTooLarge: 'File exceeds maximum allowed upload size of<b>{maxSize} KB</b>.',
         msgFilesTooLess: 'You must select at least <b>{n}</b> {files} to upload.',
         msgFilesTooMany: 'Number of files selected for upload <b>({n})</b> exceeds maximum allowed limit of <b>{m}</b>.',
         msgFileNotFound: 'File "{name}" not found!',

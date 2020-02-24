@@ -37,7 +37,7 @@ if ($post->category) {
 
 				@include('post.inc.notification')
 
-				<div class="col-md-8 page-content ">
+				<div class="col-md-8 page-content "> 
 					<div class="inner-box category-content category-content-dif">
 						<!-- <h2 class="title-2 title-2-dif">
 {{--							<strong> <i class="icon-docs"></i> {{ t('Update My Ad') }}</strong> -&nbsp;--}}
@@ -51,7 +51,7 @@ if ($post->category) {
 
 						<div class="row">
 							<div class="col-xl-12">
-
+							<?php   ?>
 								<form class="form-horizontal" id="postForm" method="POST" action="{{ url()->current() }}" enctype="multipart/form-data">
 									{!! csrf_field() !!}
 									<input name="_method" type="hidden" value="PUT">
@@ -63,8 +63,7 @@ if ($post->category) {
 												<h3>
 													<strong>{{ t('Ads information') }} 
 														<a href="{{ \App\Helpers\UrlGen::post($post) }}" class="tooltipHere" title="" data-placement="top"
-															data-toggle="tooltip"
-															data-original-title="{!! $post->title !!}">
+															data-toggle="tooltip">
 															{!! \Illuminate\Support\Str::limit($post->title, 45) !!}
 														</a>
 													</strong>
@@ -174,8 +173,8 @@ if ($post->category) {
 													<label class="col-md-2 col-form-label" for="title">{{ t('Title') }} <sup>*</sup></label>
 													<div class="col-md-9">
 														<input id="title" name="title" placeholder="{{ t('Ad title') }}" class="form-control input-md{{ $titleError }}"
-															   type="text" value="{{ old('title', $post->title) }}">
-														<small id="" class="form-text text-muted">{{ t('A great title from 2 to 55 characters.') }}</small>
+															   type="text" value="{{ old('title', $post->title) }}" maxlength="55">
+														<small id="input-feedback" class="form-text text-muted"></small>
 													</div>
 												</div>
 
@@ -202,7 +201,7 @@ if ($post->category) {
 																name="description"
 																rows="10"
 														>{{ old('description', $post->description) }}</textarea>
-														<small id="" class="form-text text-muted">{{ t('Describe what makes your ad unique from 5 to 3000 characters.') }}</small>
+														<small id="textarea-feedback" class="form-text text-muted">{{ t('Describe what makes your ad unique from 5 to 3000 characters.') }}</small>
 													</div>
 												</div>
 
@@ -224,6 +223,7 @@ if ($post->category) {
 															   placeholder="{{ t('e.i. 15000') }}"
 															   type="number"
 															   value="{{ \App\Helpers\Number::toFloat(old('price', $post->price)) }}"
+															   onkeydown="return checkOnlyDigitsForPrice(this,event)"
 														>
 
 														<div class="input-group-append">
@@ -342,12 +342,13 @@ if ($post->category) {
 												<!-- phone -->
 												<?php $phoneError = (isset($errors) and $errors->has('phone')) ? ' is-invalid' : ''; ?>
 												<div class="form-group row required">
-													<label class="col-md-2 col-form-label" for="phone">{{ t('Phone Number') }}</label>
+													<label class="col-md-2 col-form-label" for="phone">{{ t('Phone Number') }} <sup>*</sup></label>
 													<div class="input-group col-md-9 edit-post-phone">
 
 														<input id="phone" name="phone"
 															   placeholder="{{ t('Phone Number') }}" class="form-control input-md{{ $phoneError }}"
 															   type="text" value="{{ phoneFormat(old('phone', $post->phone), $post->country_code) }}"
+															   pattern="^\+\d{3}\s?\d{2}\s?\d{3}\s?\d{4}$"
 														>
 
 														<div class="input-group-append">
@@ -373,6 +374,9 @@ if ($post->category) {
 														</div>
 													</div>
 												</div>
+
+												<!-- terms -->
+												<input id="terms" name="terms" type="checkbox" class="invisible" value="1" checked='checked'>
 
 												<!-- Button  -->
 												<div class="form-group row pt-3 post-submit">
@@ -424,14 +428,13 @@ if ($post->category) {
 							<div class="help-block sticky-top">
 								<h3 class="title-3 py-3">{{ t('Help links') }}</h3>
 								<div class="text-content text-left from-wysiwyg">
-									<h4><a href="{{ lurl('page/about')}}">{{ t('About Mercado.gratis') }}</a></h4>
-									<h4><a href="{{ lurl('page/account')}}">{{ t('Managing Account & Ads') }}</a></h4>
-									<h4><a href="{{ lurl('page/safety')}}">{{ t('Safety Tips') }}</a></h4>
-									<h4><a href="{{ lurl('page/fastsell')}}">{{ t('How to sell fast') }}</a></h4>
-									<h4><a href="{{ lurl('page/report')}}">{{ t('Report a suspicious user or add') }}</a></h4>
-									<h4><a href="{{ lurl('page/fraudvictim')}}">{{ t('If you become a victim of fraud') }}</a></h4>
-									<h4><a href="{{ lurl('page/terms-conditions')}}">{{ t('Terms and Conditions') }}</a></h4>
-									<h4><a href="{{ lurl('contact')}}">{{ t('Contact Us') }}</a></h4>
+									<h4><a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.terms-of-use')])) }}">{{ t('Terms of Use') }}</a></h4>
+									<h4><a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.privacy-policy')])) }}">{{ t('Privacy Policy') }}</a></h4>
+									<h4><a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.posting-rules')])) }}">{{ t('Posting Rules') }}</a></h4>
+									<h4><a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.tips')])) }}">{{ t('Tips for Users') }}</a></h4>
+									<h4><a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.faq')])) }}">{{ t('FAQ') }}</a></h4>
+									<h4><a href="{{ lurl(trans('routes.sitemap')) }}">{{ t('Sitemap') }}</a></h4> 
+									<h4><a href="{{ lurl(trans('routes.contact-us'))}}">{{ t('Contact Us') }}</a></h4> 
 								</div>
 							</div>
                 		<!-- </div> -->
@@ -531,6 +534,70 @@ if ($post->category) {
 				singleFieldDelimiter: ','
 			});
 		});
+
+	</script>
+
+	
+	<script>
+		$(document).ready(function() {
+			var text_max = 55,
+			text_remaining = $('#title').val().length;
+			$('#input-feedback').html(text_max - text_remaining + "{{ t('characters left') }}");
+
+			$('#title').keyup(function() {
+				var text_length = $(this).val().length,
+					text_remaining = text_max - text_length;
+
+				if (text_length === 0) {
+					$('#input-feedback').html(text_max + "{{ t('characters left') }}");
+				} else {
+					$('#input-feedback').html(text_remaining + "{{ t('characters left') }}");
+				}
+			});
+		});
+	</script>
+
+	<script>
+		$(document).ready(function() {
+			var textarea_max = 6001,
+			textarea_remaining = $('.simditor-body').children('p').text().length + $('.simditor-body').find('p').length - 1;
+			$('#textarea-feedback').html(textarea_max - 1 - textarea_remaining + "{{ t('characters left') }}");
+
+			$('.simditor-body').keyup(function() {
+				var textarea_length = $(this).children('p').text().length + $(this).find('p').length,
+					textarea_remaining = textarea_max - textarea_length;
+
+				if (textarea_length === 0) {
+					$('#textarea-feedback').html(textarea_max + "{{ t('characters left') }}");
+				} else if (textarea_length > textarea_max) {
+					$('#textarea-feedback').html('Too many characters');
+				} else {
+					$('#textarea-feedback').html(textarea_remaining + "{{ t('characters left') }}");
+				}
+			});
+		});
+
+		function checkOnlyDigitsForPrice(element,event) {
+			if(event.keyCode < 48 || event.keyCode >57){
+				if(event.keyCode===46){
+					return false;
+				}
+			}
+		}
+
+		function checkOnlyDigits(element,event) {
+			if(event.keyCode < 48 || event.keyCode >57){
+				if(event.keyCode!==46){
+					return false;
+				}
+			}
+			if (element.id === 'cf.161') {
+				element.step = 1;
+				if(element.value.length === 4) {
+					return false;
+				}
+			}
+		}
 	</script>
 
 	<script src="{{ url('assets/js/app/d.select.category.js') . vTime() }}"></script>

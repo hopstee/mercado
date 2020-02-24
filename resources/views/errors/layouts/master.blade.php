@@ -35,6 +35,9 @@
 	<link href="{{ url('css/style.css') . getPictureVersion() }}" rel="stylesheet">
 	<link href="{{ url('css/ed.css') . getPictureVersion() }}" rel="stylesheet">
 	<link href="{{ url('css/rus.css') . getPictureVersion() }}" rel="stylesheet">
+	<link href="{{ url('css/drag.css') . getPictureVersion() }}" rel="stylesheet">
+	<link href="{{ url('css/olya.css') . getPictureVersion() }}" rel="stylesheet">
+
 	
 	@yield('after_styles')
 	
@@ -99,9 +102,14 @@
 <script src="{{ url(mix('js/app.js')) }}"></script>
 
 @yield('after_scripts')
-
-@if (config('settings.footer.tracking_code'))
-	{!! printJs(config('settings.footer.tracking_code')) . "\n" !!}
-@endif
+	<script src="https://market.unifun.com/js/custom.js" type="text/javascript"></script>
+	<script src="https://market.unifun.com/js/rus.js" type="text/javascript"></script>
+	<script src="https://market.unifun.com/assets/plugins/modernizr/modernizr-custom.js" type="text/javascript"></script>
+	@if (config('settings.footer.tracking_code'))
+		{!! printJs(config('settings.footer.tracking_code')) . "\n" !!}
+	@endif
+	<script>
+		$("#userMenuDropdown").addClass("show");
+	</script>
 </body>
 </html>

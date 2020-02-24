@@ -108,8 +108,6 @@ class BaseController extends FrontController
         view()->share('cats', $cats);
         $this->cats = $cats;
 
-
-
         // LEFT MENU VARS
         if (config('settings.listing.left_sidebar')) {
             // Count Categories Posts
@@ -117,26 +115,27 @@ class BaseController extends FrontController
 				FROM ' . DBTool::table('posts') . ' as a
 				INNER JOIN ' . DBTool::table('categories') . ' as sc ON sc.id=a.category_id AND sc.active=1
 				INNER JOIN ' . DBTool::table('categories') . ' as c ON c.id=sc.parent_id AND c.active=1
-				WHERE a.country_code = :countryCode AND (a.verified_email=1 AND a.verified_phone=1) AND a.archived!=1 AND a.deleted_at IS NULL
+				WHERE a.country_code = :countryCode AND (a.verified_email=1 AND a.verified_phone=1) AND (a.reviewed IN(1,2)) AND  a.archived!=1 AND a.deleted_at IS NULL
 				GROUP BY sc.id';
             $bindings = [
                 'countryCode' => config('country.code')
             ];
             $countSubCatPosts = DB::select(DB::raw($sql), $bindings);
             $countSubCatPosts = collect($countSubCatPosts)->keyBy('id');
+            // var_dump($countSubCatPosts);
             view()->share('countSubCatPosts', $countSubCatPosts);
 
             // Count Parent Categories Posts
             $sql1 = 'SELECT c.id as id, count(*) as total' . '
                 FROM ' . DBTool::table('posts') . ' as a
                 INNER JOIN ' . DBTool::table('categories') . ' as c ON c.id=a.category_id AND c.active=1
-                WHERE a.country_code = :countryCode AND (a.verified_email=1 AND a.verified_phone=1) AND a.archived!=1 AND a.deleted_at IS NULL
+                WHERE a.country_code = :countryCode AND (a.verified_email=1 AND a.verified_phone=1) AND (a.reviewed IN(1,2)) AND a.archived!=1 AND a.deleted_at IS NULL
                 GROUP BY c.id';
             $sql2 = 'SELECT c.id as id, count(*) as total' . '
                 FROM ' . DBTool::table('posts') . ' as a
                 INNER JOIN ' . DBTool::table('categories') . ' as sc ON sc.id=a.category_id AND sc.active=1
                 INNER JOIN ' . DBTool::table('categories') . ' as c ON c.id=sc.parent_id AND c.active=1
-                WHERE a.country_code = :countryCode AND (a.verified_email=1 AND a.verified_phone=1) AND a.archived!=1 AND a.deleted_at IS NULL
+                WHERE a.country_code = :countryCode AND (a.verified_email=1 AND a.verified_phone=1) AND (a.reviewed IN(1,2)) AND a.archived!=1 AND a.deleted_at IS NULL
                 GROUP BY c.id';
             $sql = 'SELECT cat.id, SUM(total) as total' . '
                 FROM ((' . $sql1 . ') UNION ALL (' . $sql2 . ')) cat
@@ -157,6 +156,7 @@ class BaseController extends FrontController
                 $cities = City::currentCountry()->take($limit)->orderBy('population', 'DESC')->orderBy('name')->get();
                 return $cities;
             });
+            // var_dump($cities);
             view()->share('cities', $cities);
 
             //E.K.
@@ -172,8 +172,10 @@ class BaseController extends FrontController
                                         INNER JOIN cities ON posts.city_id = cities.id
                                         WHERE
                                             cities.`name` = "' . $city->name . '"
-                                        AND verified_phone = 1
-                                        AND reviewed > 0');
+                                        AND posts.verified_phone = 1
+                                        AND posts.archived != 1 
+                                        AND posts.deleted_at IS NULL
+                                        AND (posts.reviewed IN(1,2))');
                 });
             }
             view()->share('ads', $ads);
@@ -237,14 +239,14 @@ class BaseController extends FrontController
     {
         $chCatId = $root;
         $cacheId = 'childCats.' . $root;
-        $childCats = Cache::remember($cacheId, new \DateInterval('PT2H'), function () use ($chCatId) {
+        $childCats = Cache::remember($cacheId, new \DateInterval('PT1S'), function () use ($chCatId) {
             $childCats = $this->makeRootTree($chCatId);
             return $childCats;
         });
 
         $cacheId = 'postsOfchildCats.' . $chCatId;
-        $posts = Cache::remember($cacheId, new \DateInterval('PT2H'), function () use ($childCats) {
-            $posts = Post::whereIn('category_id', $childCats)->get()->count();
+        $posts = Cache::remember($cacheId, new \DateInterval('PT1M'), function () use ($childCats) {
+            $posts = Post::whereIn('category_id', $childCats)->where('archived', 0)->get()->count();
             return $posts;
         });
 
@@ -263,7 +265,7 @@ class BaseController extends FrontController
         if ($collection->count() > 0) {
             $result[] = [
                 'name' => $current->name,
-                'url' => $baseURL . "/" . $current->slug,
+                'url' => lurl($baseURL . "/" . $current->slug),
                 'bold' => true,
                 'children' => $this->getSubsTree($collection, $baseURL . "/" . $current->slug),
                 'count' => $this->countPostsInCategoryWithChildren($current->tid)
@@ -277,7 +279,7 @@ class BaseController extends FrontController
                     foreach ($subchildren as $subchild) {
                         $maybeChildren[] = [
                             'name' => $subchild->name,
-                            'url' => $baseURL . "/" . $child->slug . "/" . $subchild->slug,
+                            'url' => lurl($baseURL . "/" . $child->slug . "/" . $subchild->slug),
                             'bold' => false,
                             'count' => $this->countPostsInCategoryWithChildren($subchild->tid),
                             'children' => []
@@ -286,7 +288,7 @@ class BaseController extends FrontController
                 }
                 $result[] = [
                     'name' => $child->name,
-                    'url' => $baseURL . "/" . $child->slug,
+                    'url' => lurl($baseURL . "/" . $child->slug),
                     'bold' => $current->slug == $child->slug,
                     'count' => $this->countPostsInCategoryWithChildren($child->tid),
                     'children' => $maybeChildren
@@ -365,7 +367,7 @@ class BaseController extends FrontController
         $slugs = explode('/', $fullPath);
         $tree = collect([]);
         foreach ($slugs as $s) {
-            $cat = Category::trans()->where('slug', '=', $s)->firstOrFail();
+            $cat = Category::where('slug', '=', $s)->firstOrFail();
             $tree->push($cat);
         }
         return $tree;

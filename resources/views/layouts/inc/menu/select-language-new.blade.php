@@ -43,15 +43,23 @@
 					// $attr['debug'] = '1';
 					
 					// Default
+					// var_dump(isset($attr['catSlug']));
 					// $link = LaravelLocalization::getLocalizedURL($localeCode, null, $attr);
 					$link = lurl(null, $attr, $localeCode);
+
+					if( is_numeric(strpos($link, $localeCode)) && (strlen($link) > 28) && !isset($attr['catSlug']) && !isset($attr['slug'])){
+						$link = \App\Helpers\UrlGen::slugTrans($link, $localeCode);
+					}
+
 					$localeCode = strtolower($localeCode);
 					?>
     @endif
 	@endforeach
 {{--        <button type="button" class="btn btn-secondary">--}}
 {{--            <span class="lang-title">{{ strtoupper(config('app.locale')) }}</span>--}}
-            <a class="btn btn-secondary lang_switcher" href="{{ $link }}" tabindex="-1" rel="alternate" hreflang="{{ $localeCode }}" style="display: flex;align-items: center;justify-content: center;text-decoration: none;color: #212121 !important;">{{ strtoupper(config('app.locale')) }}</a>
+			<a class="btn btn-secondary lang_switcher" href="{{ $link }}" tabindex="-1" rel="alternate" hreflang="{{ $localeCode }}" style="display: flex;align-items: center;justify-content: center;text-decoration: none;color: #212121 !important;">
+					<?= strtoupper((config('app.locale') === 'en')? 'pt':'en'); ?> 
+			</a>
 {{--		</button>--}}
 </li>
 @endif

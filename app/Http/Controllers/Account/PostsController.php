@@ -53,18 +53,18 @@ class PostsController extends AccountBaseController
 	public function getPage($pagePath)
 	{
 		view()->share('pagePath', $pagePath);
-		
+
 		switch ($pagePath) {
-			case 'my-posts':
+			case trans('routes.my-ads'):
 				return $this->getMyPosts();
 				break;
-			case 'archived':
+			case trans('routes.archived-ads'):
 				return $this->getArchivedPosts($pagePath);
 				break;
-			case 'favourite':
+			case trans('routes.favourite-ads'):
 				return $this->getFavouritePosts();
 				break;
-			case 'pending-approval':
+			case trans('routes.rejected-ads'):
 				return $this->getPendingApprovalPosts();
 				break;
 			default:
@@ -78,7 +78,7 @@ class PostsController extends AccountBaseController
 	 */
 	public function getMyPosts($postId = null)
 	{
-		$pagePath = 'my-posts';
+		$pagePath = trans('routes.my-ads');
 		
 		// If "offline" button is clicked
 		if (Str::contains(url()->current(), $pagePath . '/' . $postId . '/offline')) {
@@ -98,12 +98,13 @@ class PostsController extends AccountBaseController
 					if ($post->archived == 1) {
 						$archivedPostsExpiration = config('settings.listing.manually_archived_posts_expiration', 180);
 						
-						$message = t('offline_putting_message', [
-							'postId'  => $postId,
-							'dateDel' => $post->archived_at
-								->addDays($archivedPostsExpiration)
-								->formatLocalized(config('settings.app.default_date_format'))
-						]);
+						$message = t("Archiving completed successfully.");
+						// $message = t('offline_putting_message', [
+						// 	'postId'  => $postId,
+						// 	'dateDel' => $post->archived_at
+						// 		->addDays($archivedPostsExpiration)
+						// 		->formatLocalized(config('settings.app.default_date_format'))
+						// ]);
 						
 						flash($message)->success();
 						
@@ -146,7 +147,7 @@ class PostsController extends AccountBaseController
 	 */
 	public function getArchivedPosts($postId = null)
 	{
-		$pagePath = 'archived';
+		$pagePath = trans('routes.archived-ads');
 		
 
 		// If "repost" button is clicked
@@ -197,7 +198,7 @@ class PostsController extends AccountBaseController
 				flash(t("The repost has failed. Please try again."))->error();
 			}
 			
-			return redirect(config('app.locale') . '/account/' . $pagePath);
+			return redirect(config('app.locale') . '/' . trans('routes.personal-data') . '/' . $pagePath);
 		}
 		
 		$data = [];
@@ -316,52 +317,52 @@ class PostsController extends AccountBaseController
 				$ids[] = $id;
 			}
 		}
-		
+
 		// Delete
 		$nb = 0;
-		if ($pagePath == 'favourite') {
+		if ($pagePath == trans('routes.favourite-ads')) {
 			$savedPosts = SavedPost::where('user_id', auth()->user()->id)->whereIn('post_id', $ids);
 			if ($savedPosts->count() > 0) {
 				$nb = $savedPosts->delete();
 			}
 		} elseif ($pagePath == 'saved-search') {
                     $nb = SavedSearch::destroy($ids);
-                } elseif ($pagePath == 'archived') {
-                    foreach ($ids as $item) {
-                        $post = Post::withoutGlobalScopes([VerifiedScope::class, ReviewedScope::class])
-                            ->where('user_id', auth()->user()->id)
-                            ->where('id', $item)
-                            ->first();
-                        if (!empty($post)) {
-                            $tmpPost = ArrayHelper::toObject($post->toArray());
+		} elseif ($pagePath == trans('routes.archived-ads')) {				
+			foreach ($ids as $item) {
+				$post = Post::withoutGlobalScopes([VerifiedScope::class, ReviewedScope::class])
+					->where('user_id', auth()->user()->id)
+					->where('id', $item)
+					->first();
+				if (!empty($post)) {
+					$tmpPost = ArrayHelper::toObject($post->toArray());
 
-                            // E.K.
-                            // set date and time and make post unvisible if it was deleted from archive
+					// E.K.
+					// set date and time and make post unvisible if it was deleted from archive
 
-                            $post->reviewed = 0;
-                            $post->deleted_at = date('Y-m-d H:i:s');
+					$post->reviewed = 0;
+					$post->deleted_at = date('Y-m-d H:i:s');
 
-                            try{
-                                $post->save();
-                                $nb = 2;
-                            }
-                            catch(\Exception $e){
-                                flash($e->getMessage())->error();
-                                $nb = 0;
-                            }
+					try{
+						$post->save();
+						$nb = 2;
+					}
+					catch(\Exception $e){
+						flash($e->getMessage())->error();
+						$nb = 0;
+					}
 
-                            // Send an Email confirmation
-                            if (!empty($tmpPost->email)) {
-                                if (config('settings.mail.confirmation') == 1) {
-                                    try {
-                                        Notification::route('mail', $tmpPost->email)->notify(new PostDeleted($tmpPost));
-                                    } catch (\Exception $e) {
-                                        flash($e->getMessage())->error();
-                                    }
-                                }
-                            }
-                        }
-                    }
+					// Send an Email confirmation
+					if (!empty($tmpPost->email)) {
+						if (config('settings.mail.confirmation') == 1) {
+							try {
+								Notification::route('mail', $tmpPost->email)->notify(new PostDeleted($tmpPost));
+							} catch (\Exception $e) {
+								flash($e->getMessage())->error();
+							}
+						}
+					}
+				}
+			}
 		} else {
 			foreach ($ids as $item) {
 				$post = Post::withoutGlobalScopes([VerifiedScope::class, ReviewedScope::class])
@@ -405,26 +406,43 @@ class PostsController extends AccountBaseController
 		
 		// Confirmation
 		if ($nb == 0) {
-			flash(t("No deletion is done. Please try again."))->error();
+			if ($pagePath == trans("routes.my-ads")) {
+				flash(t("No ads selected for archiving."))->error();
+			}
+			elseif($pagePath == trans("routes.favourite-ads")){
+				flash(t("No ads selected for removing from favorites."))->error();
+			}
+			elseif($pagePath == trans("routes.archived-ads")){
+				flash(t("No ads selected for deleting from archive."))->error();
+			}
+			elseif($pagePath == trans("routes.rejected-ads")){
+				flash(t("No ads selected for deleting from archive."))->error();
+			}
 		} else {
 			$count = count($ids);
-			if ($pagePath == "archived") {
-                            if ($count > 1) {
-                                $message = t("x :entities has been deleted successfully.", ['entities' => t('ads'), 'count' => $count]);
-                            } else {
-                                $message = t("1 :entity has been deleted successfully.", ['entity' => t('ad')]);
-                            }
-                        } else {
-                            if ($count > 1) {
-                                $message = t("x :entities has been archived successfully.", ['entities' => t('ads'), 'count' => $count]);
-                            } else {
-                                $message = t("1 :entity has been archived successfully.", ['entity' => t('ad')]);
-                            }
-                        }
+			if ($pagePath == trans("routes.archived-ads")) {
+				// if ($count > 1) {
+				// 	$message = t("x :entities has been deleted successfully.", ['entities' => t('ads'), 'count' => $count]);
+				// } else {
+				// 	$message = t("1 :entity has been deleted successfully.", ['entity' => t('ad')]);
+				// }
+					$message = t("Selected ads have been deleted.");
+			}
+			else if($pagePath == trans("routes.favourite-ads")){
+				$message = t("Removed from favorites successfully.");
+			} 
+			else {
+				// if ($count > 1) {
+				//     $message = t("x :entities has been archived successfully.", ['entities' => t('ads'), 'count' => $count]);
+				// } else {
+				//     $message = t("1 :entity has been archived successfully.", ['entity' => t('ad')]);
+				// }
+				$message = t("Archiving completed successfully.");
+			}
 
 			flash($message)->success();
 		}
 		
-		return redirect(config('app.locale') . '/account/' . $pagePath);
+		return redirect(config('app.locale') . '/' .trans('routes.personal-data') . '/' . $pagePath);
 	}
 }

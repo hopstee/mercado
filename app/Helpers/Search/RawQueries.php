@@ -169,7 +169,7 @@ class RawQueries
 
 		// Check reviewed posts
 		if (config('settings.single.posts_review_activation')) {
-			$this->arrSql->where['tPost.reviewed'] = " = 1";
+			$this->arrSql->where['tPost.reviewed'] = " IN(1,2)";
 		}
 
 		// Priority settings
@@ -437,6 +437,14 @@ class RawQueries
 		}
 		// R.S
 		$notInBlackList = " AND  tPost.phone NOT IN (select entry from blacklist) ";
+
+		// E.K
+		if(request()->get('showNegotiable') == '0') {
+			$hideNegotiable = " AND tPost.price > 0 AND (tPost.negotiable IS NULL OR tPost.negotiable != 1) ";
+			// Get Query
+			$sql = $select . "\n" . "FROM " . DBTool::table($this->table) . " AS tPost" . $join . $where . $notInBlackList . $hideNegotiable . $groupBy . $having . $orderBy;
+			return $sql;
+		}
 
 		// Get Query
 		$sql = $select . "\n" . "FROM " . DBTool::table($this->table) . " AS tPost" . $join . $where . $notInBlackList . $groupBy . $having . $orderBy;

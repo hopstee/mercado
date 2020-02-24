@@ -54,7 +54,7 @@ if (!function_exists("createFieldNodeTree")) {
 
         @if ($field->type == 'checkbox')
             <!-- checkbox -->
-            <div class="form-group row {{ $requiredClass }}"
+            <div class="cf-l cf-m cf-s form-group row {{ $requiredClass }}"
                  style="margin-top: -10px;">
                 <label class="col-md-2 col-form-label"
                        for="{{ $fieldId }}"></label>
@@ -84,7 +84,7 @@ if (!function_exists("createFieldNodeTree")) {
                 <?php
                 $select2Type = 'sselecter';
                 ?>
-                <div class="ns-form-group {{ $requiredClass }} {{ $errorClass }}">
+                <div class="cf-l cf-m cf-s ns-form-group {{ $requiredClass }} {{ $errorClass }}">
                     <label class="ns-form-label {{ $errorClass }}"
                            for="{{ $fieldId }}">
                         {{ $field->name }}
@@ -184,35 +184,46 @@ if (!function_exists("createFieldNodeTree")) {
         @elseif ($field->type == 'file')
 
             <!-- file -->
-            <div class="ns-form-group {{ $requiredClass }}">
+            <div class="cf-l cf-m cf-s ns-form-group {{ $requiredClass }}">
                 <div>
                     <!-- <div class="mb10">
                         <input id="{{ $fieldId }}" name="{{ $fieldName }}"
                                type="file" class="file{{ $errorClass }}">
                     </div> -->
                     <div class="button-wrap">
-                        <label class ="custom-button-upfile" for="{{ $fieldId }}"> Upload CV </label>
+                        <label class ="custom-button-upfile" for="{{ $fieldId }}"> {{ t('Upload CV') }} </label>
                         <input class="custom-upfile" id="{{ $fieldId }}" name="{{ $fieldName }}" type="file" class="file{{ $errorClass }}">
                         <div id="fileName"></div>
                     </div>
+                    @if (!empty($field->default) and $disk->exists($field->default))
+                        <div class="button-download">
+{{--                            <label class ="custom-button-upfile" for="{{ $fieldId }}"> {{ t('Download CV') }} </label>--}}
+
+                            <a class="btn btn-default"
+                               href="{{ fileUrl($field->default) }}"
+                               target="_blank">{{ t('Download CV') }}
+                            </a>
+                        </div>
+                    @endif
                     <script>
                         $(".custom-upfile").on('change', function () {
                             let e = $(".custom-upfile")[0].value.split('\\');
                             $('#fileName').html(e[e.length - 1]);
+                            $('#fileName').prepend("<button onclick=\"deleteFile()\" type=\"button\" class=\"close delete-file-button\"><span aria-hidden=\"true\"><i class=\"unir-close_l delete-file-icon\"></i></span><span class=\"sr-only\">{{ t('Delete') }}</span></button>");
                         });
+
+                        function deleteFile() {
+                            $(this).value = '';
+                            const myNode = document.getElementById("fileName");
+                            while (myNode.firstChild) {
+                                myNode.removeChild(myNode.firstChild);
+                            }
+                        }
                     </script>
                     <small style="display:block;"  class="text-muted">
                         {!! $field->help !!} {{ t('File types: :file_types', ['file_types' => showValidFileTypes('file')], 'global', $languageCode) }}
                     </small>
-                    @if (!empty($field->default) and $disk->exists($field->default))
-                        <div>
-                            <a class="btn btn-default"
-                               href="{{ fileUrl($field->default) }}"
-                               target="_blank">
-                                <i class="icon-attach-2"></i> {{ t('Download') }}
-                            </a>
-                        </div>
-                    @endif
+
                 </div>
             </div>
 
@@ -232,7 +243,7 @@ if (!function_exists("createFieldNodeTree")) {
                 <?php
                 $select2Type = 'sselecter';
                 ?>
-                <div class="ns-form-group {{ $requiredClass }} {{ $errorClass }}">
+                <div class="cf-l cf-m cf-s ns-form-group {{ $requiredClass }} {{ $errorClass }}">
                     <label class="ns-form-label {{ $errorClass }} {{ $errorClass }}"
                            for="{{
                     $fieldId }}">
@@ -277,7 +288,7 @@ if (!function_exists("createFieldNodeTree")) {
         @elseif ($field->type == 'select')
 
             <!-- select -->
-            <div class="ns-form-group {{ $requiredClass }} {{ $errorClass }}">
+            <div class="cf-l cf-m cf-s ns-form-group {{ $requiredClass }} {{ $errorClass }}">
                 <label class="ns-form-label {{ $errorClass }} {{ $errorClass }}"
                        for="{{
                     $fieldId }}">
@@ -314,7 +325,7 @@ if (!function_exists("createFieldNodeTree")) {
         @elseif ($field->type == 'textarea')
 
             <!-- textarea -->
-            <div class="ns-form-group {{ $requiredClass }} {{ $errorClass }}">
+            <div class="cf-l cf-m cf-s ns-form-group {{ $requiredClass }} {{ $errorClass }}">
                 <label class="ns-form-label {{ $errorClass }} {{ $errorClass }}"
                        for="{{
                     $fieldId }}">
@@ -337,7 +348,7 @@ if (!function_exists("createFieldNodeTree")) {
         @elseif ($field->type == 'tree')
 
             <!-- tree -->
-            <div class="ns-form-group {{ $requiredClass }} {{ $errorClass }}">
+            <div class="cf-l cf-m cf-s ns-form-group {{ $requiredClass }} {{ $errorClass }}">
                 <label class="ns-form-label {{ $errorClass }} {{ $errorClass }}"
                        for="{{
                     $fieldId }}">
@@ -514,7 +525,7 @@ if (!function_exists("createFieldNodeTree")) {
         @elseif ($field->type == 'number')
 
             <!-- number -->
-            <div class="ns-form-group {{ $requiredClass }} {{ $errorClass }}">
+            <div class="cf-l cf-m cf-s ns-form-group {{ $requiredClass }} {{ $errorClass }}">
                 <label class="ns-form-label {{ $errorClass }} {{ $errorClass }}"
                        for="{{
                     $fieldId }}">
@@ -527,9 +538,14 @@ if (!function_exists("createFieldNodeTree")) {
                     <input id="{{ $fieldId }}"
                            name="{{ $fieldName }}"
                            type="number"
+                           min="0"
+                           step="any"
                            placeholder="{{ $field->name }}"
-                           class="form-control input-md{{ $errorClass }}"
-                           value="{{ $defaultValue }}">
+                           class="form-control input-md{{ $errorClass }} disabled_scroll"
+                           value="{{ $defaultValue }}"
+                           onkeypress = "return checkOnlyDigits(this,event)"
+                           pattern="^\d*[.,]?\d*$"
+                    >
                     <small id=""
                            class="form-text text-muted">{!! $field->help !!}</small>
                 </div>
@@ -538,10 +554,9 @@ if (!function_exists("createFieldNodeTree")) {
         @else
 
             <!-- text -->
-            <div class="ns-form-group {{ $requiredClass }} {{ $errorClass }}">
+            <div class="cf-l cf-m cf-s ns-form-group {{ $requiredClass }} {{ $errorClass }}">
                 <label class="ns-form-label {{ $errorClass }} {{ $errorClass }}"
-                       for="{{
-                    $fieldId }}">
+                       for="{{ $fieldId }}">
                     {{ $field->name }}
                     @if ($field->required == 1)
                         <sup>*</sup>
@@ -553,10 +568,40 @@ if (!function_exists("createFieldNodeTree")) {
                            type="text"
                            placeholder="{{ $field->name }}"
                            class="form-control input-md{{ $errorClass }}"
-                           value="{{ $defaultValue }}">
-                    <small id=""
-                           class="form-text text-muted">{!! $field->help !!}</small>
+                           value="{{ $defaultValue }}"
+                           maxlength="{{ $field->max }}"
+                           onkeyup="leftCharacters(this);">  
+                           <!-- {{ $field->max }} -->
+                    <!-- <small id="" class="form-text text-muted">{!! $field->help !!}</small> -->
+                    <small id="custom-input-feedback" class="form-text text-muted">{{ $field->max }} {{ t('characters left') }}</small>
                 </div>
+                <script>
+                    function leftCharacters(e){
+                        var smallTag = $(e).parent().children('small').prevObject[0].lastElementChild,
+                            text_max = e.getAttribute("maxlength"),
+                            text_length = $(smallTag)[0].previousElementSibling.selectionEnd,
+                            text_remaining = text_max - text_length;
+
+                        if (text_length === 0) {
+                            $(smallTag).html(text_max + "{{ t('characters left') }}");
+                        } else {
+                            $(smallTag).html(text_remaining + "{{ t('characters left') }}");
+                        }
+                    }
+                    function checkOnlyDigits(element,event) {
+                        if(event.keyCode < 48 || event.keyCode >57){
+                            if(event.keyCode!==46){
+                                return false;
+                            }
+                        }
+                        if (element.id === 'cf.161') {
+                            element.step = 1;
+                            if(element.value.length === 4) {
+                                return false;
+                            }
+                        }
+                    }
+                </script>
             </div>
 
         @endif

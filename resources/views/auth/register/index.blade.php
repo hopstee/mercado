@@ -24,9 +24,11 @@
 				@if (isset($errors) and $errors->any())
 					<div class="col-xl-12">
 						<div class="alert alert-danger">
-							<!-- <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+
+						<!-- <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 							<h5><strong>{{ t('Oops ! An error has occurred. Please correct the red fields in the form') }}</strong></h5> -->
-							<ul class="list list-check">
+							<ul class="list list-error">
 								@foreach ($errors->all() as $error)
 									<li>{{ $error }}</li>
 								@endforeach
@@ -105,16 +107,16 @@
 						@endif
 						
 {{--						<div class="row mt-5">--}}
-								<form id="signupForm" class="form-horizontal" method="POST" action="{{ url()->current() }}">
+								<form id="signupForm" class="form-horizontal" method="POST" action="{{ url()->current() }}" autocomplete="off">
 
 									{!! csrf_field() !!}
 
 										<div class="col-xl-12 col-xl-12-dif">
-											<div class="ads-header">
+											<!-- <div class="ads-header">
 												<h3>
 													<strong>{{ t('User information') }}</strong>
 												</h3>
-											</div>
+											</div> -->
 
 											<div class="inner-ads-box">
 												<!-- name -->
@@ -172,6 +174,7 @@
 																	   class="form-control input-md{{ $phoneError }}"
 																	   type="tel"
 																	   value="{{ phoneFormat(old('phone'), old('country', config('country.code'))) }}"
+																	   autocomplete="new-password"
 																>
 
 																<!-- <div class="input-group-append tooltipHere" data-placement="top"
@@ -241,13 +244,10 @@
 													<label class="col-md-2 col-form-label" for="password">{{ t('Password') }} <sup>*</sup></label>
 													<div class="col-md-9">
 														<input id="password" name="password" type="password" class="form-control{{ $passwordError }}"
-															   placeholder="{{ t('Password') }}">
+															   placeholder="{{ t('Four characters') }}" autocomplete="new-password">
 														<br>
 														<input id="password_confirmation" name="password_confirmation" type="password" class="form-control{{ $passwordError }}"
-															   placeholder="{{ t('Password Confirmation') }}">
-														<small id="" class="form-text text-muted">
-															{{ t('At least :num characters', ['num' => 4]) }}
-														</small>
+															   placeholder="{{ t('Password Confirmation') }}" autocomplete="new-password">
 													</div>
 
 												</div>
@@ -271,7 +271,6 @@
 																</label>
 															</div>
 															<!-- <input class="form-check-input" type="checkbox" onclick="showPass()">
-
 															<label class="form-check-label" for="term">
 																{!! t('Show Password') !!}
 															</label> -->
@@ -280,42 +279,12 @@
 													</div>
 												</div>
 
-
 												@include('layouts.inc.tools.recaptcha', ['colLeft' => 'col-md-2', 'colRight' => 'col-md-9'])
 
-												<!-- term -->
-												<?php $termError = (isset($errors) and $errors->has('term')) ? ' is-invalid' : ''; ?>
-												<div class="form-group row required">
-{{--													<label class="col-md-2 col-form-label"></label>--}}
-													<div class="col-md-2"></div>
-													<div class="col-md-9">
-														<div class="form-check flex-align">
-															<div class="cntr">
-																<label for="term" class="label-cbx">
-																<input name="term" id="term" type="checkbox" class="invisible {{ $termError }}" value="1" {{ (old('term')=='1') ? 'checked="checked"' : '' }}>
-																<div class="checkbox">
-																	<svg width="14px" height="14px" viewBox="0 0 14 14">
-																	<path d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
-																	<polyline points="4 8 6 10 11 5"></polyline>
-																	</svg>
-																</div>
-																{!! t('I have read and agree to the <a :attributes>Terms of Use</a>', ['attributes' => getUrlPageByType('terms')]) !!}
-																</label>
-															</div>
-
-															<!-- <input name="term" id="term"
-																   class="form-check-input{{ $termError }}"
-																   value="1"
-																   type="checkbox" {{ (old('term')=='1') ? 'checked="checked"' : '' }}
-															>
-
-															<label class="form-check-label" for="term">
-																{!! t('I have read and agree to the <a :attributes>Terms & Conditions</a>', ['attributes' => getUrlPageByType('terms')]) !!}
-															</label> -->
-														</div>
-														<!-- <div style="clear:both"></div> -->
-													</div>
-												</div>
+												<!-- term 2-->
+												<label style="font-weight: normal">
+													{!! t('I have read and agree to the') !!} <a href="{{ lurl('page/terms-of-use')}}">{{ t('Terms of Use') }}</a>, <a href="{{ lurl('page/privacy-policy')}}">{{ t('Privacy Policy') }}</a> {{ t('And')}} <a href="{{ lurl('page/posting-rules')}}">{{ t('Posting Rules') }}</a>
+												</label>
 
 												<!-- Button  -->
 												<div class="form-group row">
@@ -339,12 +308,13 @@
 					<div class="help-block sticky-top">
 						<h3 class="title-3 py-3">{{ t('Help links') }}</h3>
 						<div class="text-content text-left from-wysiwyg">
-							<h4><a href="{{ lurl('page/terms-of-use')}}">{{ t('Terms of Use') }}</a></h4>
-							<h4><a href="{{ lurl('page/privacy-policy')}}">{{ t('Privacy Policy') }}</a></h4>
-							<h4><a href="{{ lurl('page/posting-rules')}}">{{ t('Posting Rules') }}</a></h4>
-							<h4><a href="{{ lurl('page/tips')}}">{{ t('Tips for Users') }}</a></h4>
-							<h4><a href="{{ lurl('page/faq')}}">{{ t('FAQ') }}</a></h4>
-							<h4><a href="{{ lurl('contact')}}">{{ t('Contact Us') }}</a></h4>
+							<h4><a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.terms-of-use')])) }}">{{ t('Terms of Use') }}</a></h4>
+							<h4><a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.privacy-policy')])) }}">{{ t('Privacy Policy') }}</a></h4>
+							<h4><a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.posting-rules')])) }}">{{ t('Posting Rules') }}</a></h4>
+							<h4><a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.tips')])) }}">{{ t('Tips for Users') }}</a></h4>
+							<h4><a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.faq')])) }}">{{ t('FAQ') }}</a></h4>
+							<h4><a href="{{ lurl(trans('routes.sitemap')) }}">{{ t('Sitemap') }}</a></h4> 
+							<h4><a href="{{ lurl(trans('routes.contact-us'))}}">{{ t('Contact Us') }}</a></h4> 
 						</div>
 					</div>
            		 </div>

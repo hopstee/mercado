@@ -74,7 +74,7 @@ class PhotoController extends FrontController
 
         // Keep the Post's creation message
         // session()->keep(['message']);
-        if (getSegment(2) == 'create') {
+        if (getSegment(2) == trans('routes.create')) {
             if (session()->has('tmpPostId')) {
                 session()->flash('message', t('Your ad has been created.'));
             }
@@ -98,9 +98,9 @@ class PhotoController extends FrontController
         $data = [];
 
         // Get Post
-        if (getSegment(2) == 'create') {
+        if (getSegment(2) == trans('routes.create',[],config('app.local'))) {
             if (!session()->has('tmpPostId')) {
-                return redirect('posts/create');
+                return redirect(lurl('posts/create'));
             }
             $post = Post::currentCountry()->withoutGlobalScopes([VerifiedScope::class, ReviewedScope::class])
                 ->where('id', session('tmpPostId'))
@@ -134,7 +134,7 @@ class PhotoController extends FrontController
 
 
         // Get next step URI
-        $creationPath = (getSegment(2) == 'create') ? 'create/' : '';
+        $creationPath = (getSegment(2) == trans('routes.create',[],config('app.local'))) ? 'create/' : '';
         if (
             isset($this->data['countPackages']) &&
             isset($this->data['countPaymentMethods']) &&
@@ -144,14 +144,17 @@ class PhotoController extends FrontController
             $nextStepUrl = config('app.locale') . '/posts/' . $creationPath . $postIdOrToken . '/payment';
             $nextStepLabel = t('Next');
         } else {
-            if (getSegment(2) == 'create') {
+            if (getSegment(2) == trans('routes.create')) {
+                session()->flash('message', t('Your ad has been created.'));
                 $nextStepUrl = config('app.locale') . '/posts/create/' . $postIdOrToken . '/finish';
             } else {
-                $nextStepUrl = UrlGen::postUri($post);
+                session()->flash('message', t('Your ad has been created.'));
+                $nextStepUrl = UrlGen::postUri($post, config('app.locale'));
             }
             $nextStepLabel = t('Finish');
         }
 
+        // var_dump(session()->has('message'));
         view()->share('nextStepUrl', $nextStepUrl);
         view()->share('nextStepLabel', $nextStepLabel);
 
@@ -226,10 +229,11 @@ class PhotoController extends FrontController
             }
         }
 
-        if($post->reviewed == 1){
-            $post->reviewed = 0;
+        // if($post->reviewed == 1){
+            $post->archived = 0;
+            $post->reviewed = 1;
             $post->save();
-        }
+        // }
 
         // Get pictures limit
         $countExistingPictures = Picture::where('post_id', $post->id)->count();

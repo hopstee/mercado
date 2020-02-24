@@ -12,7 +12,7 @@
 							@foreach($bigBanners2 as $banner)
 								<div class="owl-item">
 									<div class="item">
-										<a  href="{{  url('posts/create') }}">
+										<a  href="{{  lurl(trans('routes.posts-create')) }}">
 											<?php $url = url('storage') . "/" . $banner ;?>
 											<img src="{{  $url }}">
 										</a>
@@ -36,7 +36,7 @@
 							@foreach($smallBanners2 as $banner)
 								<div class="owl-item">
 									<div class="item">
-										<a  href="{{  url('posts/create') }}">
+										<a  href="{{  lurl(trans('routes.posts-create')) }}">
 										<?php $urlSmall = url('storage') . "/" . $banner ;?>
 											<img src="{{  $urlSmall }}">
 										</a>
@@ -64,13 +64,18 @@
 				autoplayHoverPause:true,
 			});
 
-			if($(document).width() >= 575){
-				$("#mobileBanner2").attr("style", "display: none;");
-			}
-			else{
-				$("#desktopBanner2").attr("style", "display: none;");
-				// $("#mobileBanner2").attr("style", "display: none;");
-				$( "#mobileBanner2" ).insertBefore( $( "#categories-home" ) );
-			}
+			
+			window.addEventListener('resize', function(event){
+				if($(document).width() > 575){
+					$("#mobileBanner2").attr("style", "display: none;");
+					$("#desktopBanner2").attr("style", "display: block;");
+				}
+				else{
+					$("#desktopBanner2").attr("style", "display: none;");
+					// $("#mobileBanner2").attr("style", "display: none;");
+					$( "#mobileBanner2" ).insertBefore( $( "#categories-home" ) );
+					$("#mobileBanner2").attr("style", "display: block;");
+				}
+			});
 		</script>
 @endsection

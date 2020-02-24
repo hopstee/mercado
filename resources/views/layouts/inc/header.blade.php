@@ -35,12 +35,12 @@ if (getSegment(1) != trans('routes.countries')) {
 			<div class="navbar-identity">
 				{{-- Logo --}}
 				<a href="{{ lurl('/') }}" class="navbar-brand logo logo-title">
-					<img src="/storage/app/logo/mercado_logo.png"
+					<img src="/storage/app/logo/mercado_logo.svg"
 						 alt="{{ strtolower(config('settings.app.app_name')) }}" class="tooltipHere main-logo" title="" data-placement="bottom"
 						 data-toggle="tooltip"
 {{--						 style="margin-top: calc(80px / 2 - 26.94px / 2)"--}}
 						 />
-					<img src="/storage/app/logo/mercado_logo_mobile.png"
+					<img src="/storage/app/logo/mercado_logo_mobile.svg"
 						 alt="{{ strtolower(config('settings.app.app_name')) }}" class="tooltipHere main-logo-mob" title="" data-placement="bottom"
 						 data-toggle="tooltip"
 {{--						 style="margin-top: calc(80px / 2 - 26.94px / 2)"--}}
@@ -108,7 +108,7 @@ if (getSegment(1) != trans('routes.countries')) {
 							@endif
 						</li>
 						<li class="nav-item">
-							<a style="color: #888888 !important; padding: 14px 0px;" class="nav-link">or</a>
+							<a style="color: #888888 !important; padding: 14px 0px;" class="nav-link">{{ t('Or') }}</a>
 						</li>
 						<li class="nav-item">
 							<a href="{{ lurl(trans('routes.register')) }}" class="nav-link"> {{ t('Register') }}</a>
@@ -129,7 +129,7 @@ if (getSegment(1) != trans('routes.countries')) {
 {{--						</li>--}}
 						<li class="nav-item dropdown no-arrow">
 {{--                            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">--}}
-							<a href="{{ url('/') }}/account" class="nav-link receive-info" style="display: flex; align-items: center">
+							<a href="{{ lurl('/' . trans('routes.personal-data'))}}" class="nav-link receive-info" style="display: flex; align-items: center">
 								<!-- <i class="unib-user fa"></i> -->
 								<span>{{ auth()->user()->name }}</span>
 {{--								@if(isset($noReadConversations) && $noReadConversations > 0)--}}

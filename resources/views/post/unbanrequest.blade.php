@@ -24,15 +24,27 @@
 				@if (isset($errors) and $errors->any())
 					<div class="col-md-12">
 						<div class="alert alert-danger">
-							<!-- <button type="button" class="close" data-dismiss="alert" aria-hidden="true"><i class="unir-close"></i></button>
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+
+                        <!-- <button type="button" class="close" data-dismiss="alert" aria-hidden="true"><i class="unir-close"></i></button>
 							<h5><strong>{{ t('Oops ! An error has occurred. Please correct the red fields in the form') }}</strong></h5> -->
-							<ul class="list list-check">
+							<ul class="list list-error">
 								@foreach ($errors->all() as $error)
 									<li>{{ $error }}</li>
 								@endforeach
 							</ul>
 						</div>
 					</div>
+
+                    @if (Session::has('flash_notification'))
+					<div class="col-xl-12">
+						<div class="row">
+							<div class="col-xl-12">
+								@include('flash::message')
+							</div>
+						</div>
+					</div>
+				@endif
 				@endif
 
 				<div class="col-md-8">
@@ -45,16 +57,19 @@
                                 </h3>
                             </div>
 
-                            <form role="form" method="POST" action="{{ lurl('unban/' . $post . '/request') }}">
+                            <form role="form" method="POST" action="{{ lurl( trans('routes.v-unban-request', ['phone'=>$phone]),$phone) }}">
                                 {!! csrf_field() !!}
                                 <fieldset>
                                     <div class="card-body">
                                         <!-- phone -->
-                                        <?php $phoneError = (isset($errors) and $errors->has('phone')) ? ' is-invalid' : ''; ?>
                                         <div class="form-group required">
-                                            <label for="phone" class="control-label">{{ t('Phone') }} <sup>*</sup></label>
+                                            <span> 
+                                                {!! t('By tap "Send request" you want to unban account with phone number ') !!}
+                                                <label for="phone" class="control-label" style="margin-bottom: 0px;">{{ $phone }}</label>.
+                                                {!! t('We will process your request in next 48 hours. For any questions send message in Contact Us page.') !!}
+                                            </span>
                                             <div class="input-group">
-                                                <input id="phone" name="phone" type="text" maxlength="60" class="form-control{{ $phoneError }}" value="{{ $post }}">
+                                                <input id="phone" name="phone" type="hidden" value="{{ $phone }}">
                                             </div>
                                         </div>
 
@@ -70,7 +85,7 @@
                                         <input type="hidden" name="abuseForm" value="1">
 
                                         <div class="form-group form-group-dif">
-                                            <button type="submit" class="btn btn-green btn-lg btn-dif btn-rep">{{ t('Send request') }}</button>
+                                            <button type="submit" class="btn btn-green btn-lg btn-dif btn-rep"  style="padding: 0px;">{{ t('Send request') }}</button>
                                             <a href="{{ rawurldecode(URL::previous()) }}" class="btn btn-default btn-default-dif btn-lg btn-rep btn-grey">{{ t('Back') }}</a>
                                         </div>
                                     </div>

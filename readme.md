@@ -1,13 +1,11 @@
-## LaraClassified - Classified Ads Web Application
+## Mercado
 
-LaraClassified is a Classified CMS, a powerfull modulable app and has a fully responsive design. Built with Laravel and Bootstrap. It is packed with lots of features.
+Classified CMS. Built with Laravel and Bootstrap. 
 
+## Installation
 
-## Installation & Update Documentation
+Please run composer install upon fork.
 
-The documentation is located in the folder: documentation/
+## Configuration
 
-
-## License
-
-This software is furnished under a license and may be used and copied only in accordance with the terms of such license and with the inclusion of the above copyright notice. If you Purchased from Codecanyon, Please read the full License from here : http://codecanyon.net/licenses/standard
+Ask colleagues for .env file.

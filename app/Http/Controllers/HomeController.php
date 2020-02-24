@@ -434,7 +434,6 @@ class HomeController extends FrontController
 				$categories = collect([]);
 				$subCategories = collect([]);
 			}
-			
 			view()->share('categories', $categories);
 			view()->share('subCategories', $subCategories);
 			
@@ -444,7 +443,7 @@ class HomeController extends FrontController
 				$categories = Category::trans()->where('parent_id', 0)->take($maxItems)->orderBy('lft')->get();
 
 				return $categories;
-			});
+			}); 
 			// var_dump($categories);
 
 			// R.S
@@ -456,12 +455,12 @@ class HomeController extends FrontController
 						$category = Category::where('id', $val->translation_of)->take($maxItems)->orderBy('lft')->get();
 						//Leave The Original Name of Category
 						$category[0]->name = $categories[$key]->name;
+						$category[0]->slug = $categories[$key]->slug;
 						unset($categories[$key]);
 						$categories[$key] =  $category[0];
 					}
 				}
 			}
-			// var_dump($categories);
 
 
 			if (isset($value['type_of_display']) && $value['type_of_display'] == 'c_picture_icon') {
@@ -472,6 +471,7 @@ class HomeController extends FrontController
 				$maxRowsPerCol = ($maxRowsPerCol > 0) ? $maxRowsPerCol : 1; // Fix array_chunk with 0
 				$categories = $categories->chunk($maxRowsPerCol);
 			}
+				// var_dump($categories);
 				view()->share('categories', $categories);
 
 		}
@@ -536,6 +536,7 @@ class HomeController extends FrontController
 			'tPost.title',
 			'tPost.price',
 			'tPost.city_id',
+			'tPost.negotiable',
 			'tPost.featured',
 			'tPost.created_at',
 			'tPost.reviewed',
@@ -574,7 +575,7 @@ class HomeController extends FrontController
 		$reviewedCondition = '';
 		if (config('settings.single.posts_review_activation')) {
 //			$reviewedCondition = ' AND tPost.reviewed = 1';
-                        $reviewedCondition = ' AND tPost.reviewed > 0';
+                        $reviewedCondition = ' AND tPost.reviewed IN(1,2) ';
 		}
 		
 		// R.S
@@ -587,7 +588,7 @@ class HomeController extends FrontController
                 ' . $paymentJoin . '
                 WHERE tPost.country_code = :countryCode
 					AND (tPost.verified_email=1 AND tPost.verified_phone=1)
-					AND tPost.category_id=799
+					AND tPost.category_id IN(799,801)
 					AND tPost.archived!=1 ' . $reviewedCondition . $sponsoredCondition . $notInBlackList .'
                 GROUP BY ' . implode(',', $groupBy) . '
                 ORDER BY ' . $sponsoredOrder . 'tPost.created_at DESC
@@ -599,7 +600,7 @@ class HomeController extends FrontController
                 ' . $paymentJoin . '
                 WHERE tPost.country_code = :countryCode
 					AND (tPost.verified_email=1 AND tPost.verified_phone=1)
-					AND tPost.category_id !=799
+					AND tPost.category_id NOT IN(799,801)
 					AND tPost.archived!=1 ' . $reviewedCondition . $sponsoredCondition . $notInBlackList .'
                 GROUP BY ' . implode(',', $groupBy) . '
                 ORDER BY ' . $sponsoredOrder . 'tPost.created_at DESC

@@ -20,6 +20,7 @@ use App\Http\Requests\Admin\Request;
 use App\Http\Requests\Admin\UserRequest as StoreRequest;
 use App\Http\Requests\Admin\UserRequest as UpdateRequest;
 use App\Models\Gender;
+use App\Models\BanType as BanTypes;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Models\Scopes\VerifiedScope;
@@ -28,6 +29,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
 use Larapen\Admin\app\Http\Controllers\PanelController;
+use App\Models\Blacklist;
 
 class UserController extends PanelController
 {
@@ -291,14 +293,14 @@ class UserController extends PanelController
 					'class' => 'form-group col-md-6',
 				],
 			]);
-			$this->xPanel->addField([
-				'name'              => 'blocked',
-				'label'             => trans("admin::messages.Blocked"),
-				'type'              => 'checkbox',
-				'wrapperAttributes' => [
-					'class' => 'form-group col-md-6',
-				],
-			]);
+			// $this->xPanel->addField([
+			// 	'name'              => 'blocked',
+			// 	'label'             => trans("admin::messages.Blocked"),
+			// 	'type'              => 'checkbox',
+			// 	'wrapperAttributes' => [
+			// 		'class' => 'form-group col-md-6',
+			// 	],
+			// ]);
 			$entity = $this->xPanel->getModel()->find(request()->segment(3));
 			if (!empty($entity)) {
 				$ipLink = config('larapen.core.ipLinkBase') . $entity->ip_addr;
@@ -307,26 +309,65 @@ class UserController extends PanelController
 					'type'  => 'custom_html',
 					'value' => '<h5><strong>IP:</strong> <a href="' . $ipLink . '" target="_blank">' . $entity->ip_addr . '</a></h5>',
 				], 'update');
-				if (!empty($entity->phone)) {
-					$btnUrl = admin_url('blacklists/add') . '?phone=' . $entity->phone;
+			if (!empty($entity->phone)) {
+				
+				$banned = Blacklist::where('type', 'email')->where('entry', $entity->phone)->first();
+
+				if (!empty($banned)) {
+					$btnUrl = admin_url('blacklists/') . "/" . $banned->id . "/unban";
+					$btnText = trans("admin::messages.unban_the_user");
+					$tooltip = 'data-button-type="delete"';
 					
-					$cMsg = trans('admin::messages.confirm_this_action');
-					$cLink = "window.location.replace('" . $btnUrl . "'); window.location.href = '" . $btnUrl . "';";
-					$cHref = "javascript: if (confirm('" . addcslashes($cMsg, "'") . "')) { " . $cLink . " } else { void('') }; void('')";
-					
-					$btnText = trans("admin::messages.ban_the_user");
-					$btnHint = trans("admin::messages.ban_the_user_phone", ['phone' => $entity->phone]);
-					$tooltip = ' data-toggle="tooltip" title="' . $btnHint . '"';
-					
-					$btnLink = '<a href="' . $cHref . '" class="btn btn-danger"' . $tooltip . '>' . $btnText . '</a>';
+					$btnLink = '<a id="deleteBtn" href="' . $btnUrl . '" class="btn btn-success"' . $tooltip . '>' . $btnText . '</a>';
 					$this->xPanel->addField([
-						'name'              => 'ban_button',
+						'name'              => 'unban_button',
 						'type'              => 'custom_html',
 						'value'             => $btnLink,
 						'wrapperAttributes' => [
 							'style' => 'text-align:center;',
 						],
 					], 'update');
+				}
+				else{
+					$banTypes = BanTypes::trans()->get();			
+					$btnUrl = admin_url('blacklists/add') . '?phone=' . $entity->phone;
+
+					$values = "";
+
+					foreach($banTypes as $banType){
+						$values .=  "<option value='". $btnUrl . '&ban_type_id='. $banType->translation_of ."'> ". $banType->name ."</option>";
+					}
+					$btnLink = "<select id='ban_type_id' class='btn btn-danger' name='ban_type_id'
+							onchange='window.location = $(this).val();'
+						type='submit' value='" . trans('admin::messages.ban_the_user') .
+					"'><option disabled selected>" .trans('admin::messages.ban_the_user') . "</option>" . $values . "</select>";
+
+					$this->xPanel->addField([
+						'name'              => 'ban_type',
+						'type'              => 'custom_html',
+						'value'             => $btnLink,
+						'wrapperAttributes' => [
+							'style' => 'text-align:center;',
+						],
+					], 'update');
+
+					// $tooltip = 'data-button-type="delete"';
+					// $btnText = trans("admin::messages.ban_the_user");
+					// $btnLink = '<a onclick="$(this).href=$(this).href+"&ban_type_id="+document.getElementById("ban_type_id").value;
+					// 			alert($(this).href);"
+					//  			id="deleteBtn" href="' . $btnUrl . '" class="btn btn-danger"' . $tooltip . '>' . $btnText . '</a>';
+				}
+					
+					// $cMsg = trans('admin::messages.confirm_this_action');
+					// $cLink = "window.location.replace('" . $btnUrl . "'); window.location.href = '" . $btnUrl . "';";
+					// $cHref = "javascript: if (confirm('" . addcslashes($cMsg, "'") . "')) { " . $cLink . " } else { void('') }; void('')";
+					
+					// $btnText = trans("admin::messages.ban_the_user");
+					// $btnHint = trans("admin::messages.ban_the_user_phone", ['phone' => $entity->phone]);
+					// $tooltip = ' data-toggle="tooltip" title="' . $btnHint . '"';
+					
+					// $btnLink = '<a href="' . $cHref . '" class="btn btn-danger"' . $tooltip . '>' . $btnText . '</a>';
+
 				}
 			}
 			// Only 'super-admin' can assign 'roles' or 'permissions' to users

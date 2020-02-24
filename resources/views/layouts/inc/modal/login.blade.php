@@ -20,7 +20,7 @@
 					@if (isset($errors) and $errors->any() and old('quickLoginForm')=='1')
 						<div class="alert alert-danger">
 							<button type="button" class="close" data-dismiss="alert" aria-hidden="true"><i class="unir-close"></i></button>
-							<ul class="list list-check">
+							<ul class="list list-error">
 								@foreach($errors->all() as $error)
 									<li>{{ $error }}</li>
 								@endforeach

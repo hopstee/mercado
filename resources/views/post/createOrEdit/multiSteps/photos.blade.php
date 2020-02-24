@@ -57,17 +57,17 @@
                                                 <?php $picturesError = (isset($errors) and $errors->has('pictures')) ? ' is-invalid' : ''; ?>
     {{--                                                <div id="picturesBloc" class="form-group row">--}}
 
-                                                    <div class="ads-header">
+                                                    <!-- <div class="ads-header">
                                                         <h3>
                                                             <strong> {{ t('Add photo') }} </strong>
                                                         </h3>
-                                                    </div>
+                                                    </div> -->
 
                                                     <div class="inner-ads-box inner-ads-box-dif">
         {{--                                                    <div class="col-md-8"></div>--}}
                                                         <div class="col-md-12 text-center pt-2 col-md-12-dif" style="position: relative; float: {!! (config('lang.direction')=='rtl') ? 'left' : 'right' !!};">
                                                             <div {!! (config('lang.direction')=='rtl') ? 'dir="rtl"' : '' !!} class="file-loading">
-                                                                <input id="pictureField" name="pictures[]" type="file" multiple class="file picimg{{ $picturesError }}">
+                                                                <input title=" " id="pictureField" name="pictures[]" type="file" multiple class="file picimg{{ $picturesError }}">
                                                             </div>
                                                             <small id="add-photo-text" class="form-text text-muted">
                                                                 {{ t('Add up to :pictures_number pictures. Use real pictures of your product, not catalogs.', [
@@ -98,14 +98,13 @@
                                 <div class="help-block">
                                     <h3 class="title-3 py-3">{{ t('Help links') }}</h3>
                                     <div class="text-content text-left from-wysiwyg">                                        
-                                        <h4><a href="{{ lurl('page/terms-conditions')}}">{{ t('Terms and Conditions') }}</a></h4>
-                                        <h4><a href="{{ lurl('page/about')}}">{{ t('About Mercado.gratis') }}</a></h4>
-                                        <h4><a href="{{ lurl('page/account')}}">{{ t('Managing Account & Ads') }}</a></h4>
-                                        <h4><a href="{{ lurl('page/safety')}}">{{ t('Safety Tips') }}</a></h4>
-                                        <h4><a href="{{ lurl('page/fastsell')}}">{{ t('How to sell fast') }}</a></h4>
-                                        <h4><a href="{{ lurl('page/report')}}">{{ t('Report a suspicious user or add') }}</a></h4>
-                                        <h4><a href="{{ lurl('page/fraudvictim')}}">{{ t('If you become a victim of fraud') }}</a></h4>
-                                        <h4><a href="{{ lurl('contact')}}">{{ t('Contact Us') }}</a></h4>
+                                        <h4><a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.terms-of-use')])) }}">{{ t('Terms of Use') }}</a></h4>
+                                        <h4><a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.privacy-policy')])) }}">{{ t('Privacy Policy') }}</a></h4>
+                                        <h4><a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.posting-rules')])) }}">{{ t('Posting Rules') }}</a></h4>
+                                        <h4><a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.tips')])) }}">{{ t('Tips for Users') }}</a></h4>
+                                        <h4><a href="{{ lurl(trans('routes.v-page',['slug'=>trans('routes.faq')])) }}">{{ t('FAQ') }}</a></h4>
+                                        <h4><a href="{{ lurl(trans('routes.sitemap')) }}">{{ t('Sitemap') }}</a></h4> 
+                                        <h4><a href="{{ lurl(trans('routes.contact-us'))}}">{{ t('Contact Us') }}</a></h4> 
                                     </div>
                                 </div>
                             </div>
@@ -170,7 +169,9 @@
             if (getSegment(2) == 'create') {
                 $uploadUrl = lurl('posts/create/' . $post->tmp_token . '/photos/');
             } else {
-                $uploadUrl = lurl('posts/' . $post->id . '/photos/');
+                // $uploadUrl = lurl('posts/' . $post->id . '/photos/');
+                $uploadUrl = lurl(trans('routes.v-posts-photos', ['id'=>$post->id]),$post->id);
+
             }
 
         ?>
@@ -190,6 +191,7 @@
 				showBrowse: true,
 				showCancel: true,
 				showUpload: false,
+                showZoom: false,
 				showRemove: false,
 				minFileSize: {{ (int)config('settings.upload.min_image_size', 0) }}, {{-- in KB --}}
                 maxFileSize: {{ (int)config('settings.upload.max_image_size', 1000) }}, {{-- in KB --}}
@@ -197,6 +199,12 @@
                 minFileCount: 0,
                 maxFileCount: {{ (int)$picturesLimit }},
                 validateInitialCount: true,
+                fileActionSettings: {
+                    showDrag: true,
+                    showZoom: false,
+                    removeIcon: '<i class="far fa-trash-alt" style="color: black;"></i>',
+                    indicatorNew: '<i class="fas fa-check-circle" style="color: #09c509;font-size: 20px;margin-top: -15px;display: block;"></i>'
+                },
                 @if (isset($post->pictures))
                 /* Retrieve current images */
                 /* Setup initial preview with data keys */
@@ -276,27 +284,27 @@
             $.each(data.files, function(key, file) {
                 if (typeof file !== 'undefined') {
                     var fname = file.name;
-                    out = out + "{!! t('Uploaded file #key successfully') !!}";
+                    out = out + "{!! t('File uploaded successfully') !!}";
                 }
             });
             $('#uploadSuccess ul').append(out);
             $('#uploadSuccess').fadeIn('slow');
 
             /* Change button label */
-            $('#nextStepAction').html('{{ $nextStepLabel }}').removeClass('btn-default').addClass('btn-primary');
+            {{--$('#nextStepAction').html('{{ $nextStepLabel }}').removeClass('btn-default').addClass('btn-primary');--}}
 
-            location.reload();
+            // location.reload();
 
             /* Check redirect */
-            // var maxFiles = {{ (isset($picturesLimit)) ? (int)$picturesLimit : 1 }};
-            // var oldFiles = {{ (isset($post) and isset($post->pictures)) ? $post->pictures->count() : 0 }};
-            // var newFiles = Object.keys(data.files).length;
-            // var countFiles = oldFiles + newFiles;
-            // if (countFiles >= maxFiles) {
-            //     var nextStepUrl = '{{ url($nextStepUrl) }}';
-			// 	redirect(nextStepUrl);
-            // }
-            
+
+            {{--var maxFiles = {{ (isset($picturesLimit)) ? (int)$picturesLimit : 1 }};--}}
+            {{--var oldFiles = {{ (isset($post) and isset($post->pictures)) ? $post->pictures->count() : 0 }};--}}
+            {{--var newFiles = Object.keys(data.files).length;--}}
+            {{--var countFiles = oldFiles + newFiles;--}}
+            {{--if (countFiles >= maxFiles) {--}}
+            {{--    var nextStepUrl = '{{ url($nextStepUrl) }}';--}}
+            {{--    redirect(nextStepUrl);--}}
+            {{--}--}}
         });
 
         var paramsR ;
@@ -309,10 +317,10 @@
 
 		/* Delete picture */
         $('#pictureField').on('filepredelete', function(jqXHR) {
-            var abort = true;
-            // if (confirm("{{ t('Are you sure you want to delete this picture?') }}")) {
-            //     abort = false;
-            // }
+            var abort = false;
+            {{--if (confirm("{{ t('Are you sure you want to delete this picture?') }}")) {--}}
+            {{--    abort = false;--}}
+            {{--}--}}
             return abort;
         });
 
@@ -331,7 +339,9 @@
         //  open modal window
 
         $(".kv-file-remove").on("click", function(){
+            // location.reload();
             url = $(this).attr("data-url");
+            // console.log("click del");
             deletePostPhoto()
             // $(".user-info-modal").attr("style","display:block;");
             // $('.menu-overly-mask').addClass('is-visible');
@@ -380,6 +390,7 @@
 
         // on delete
         function deletePostPhoto( ){
+            console.log("In delete post photo");
             $.ajax({
                 method: 'POST',
                 url: url,
@@ -388,7 +399,6 @@
                     '_token': $('input[name=_token]').val()
                 }
             }).done(function(data) {
-                console.log(data);
                 
                 $( "#deletedPhoto" ).prepend( "<div class='col-xl-12'><div class='row'><div class='col-xl-12'><div class='alert alert-success' role='alert'>" +
                                                     successText +

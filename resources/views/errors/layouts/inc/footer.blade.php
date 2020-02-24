@@ -239,17 +239,20 @@ if (
 			<div class="row">
 				
 				@if (!config('settings.footer.hide_links'))
-					<div class="col-lg-8 col-md-8 col-sm-8 col-6">
+					<div class="col-lg-6 col-md-6 col-sm-7 col-5">
 						<span class="footer-title d-none d-sm-inline"><a href="{{ lurl('page/terms-of-use')}}" >{{ t('Use all links') }}</a></span>
 						<span class="footer-title d-inline d-sm-none"><a href="{{ lurl('page/terms-conditions')}}" >{{ t('Use all links') }}</a></span>
 						<span class="footer-title d-none d-sm-inline"><a href="{{ \App\Helpers\UrlGen::sitemap() }}"> {{ t('Sitemap') }} </a></span>
-						<span class="footer-title d-none d-sm-inline"><a href="{{ lurl(trans('routes.contact')) }}"> {{ t('Contact us') }} </a></span>
+						<span class="footer-title d-none d-sm-inline"><a href="{{ lurl(trans('routes.contact-us')) }}"> {{ t('Contact us') }} </a></span>
 					</div>
 						
-					<div class="{{ $colClass4 }}">
+					<!-- <div class="{{ $colClass4 }}">
 						<div class="footer-col">
 							<span class="copy-info"> {{ t('Free classifieds in Guinea-Bissau') }} © {{ date('Y') }} {{ config('settings.app.app_name') }}</span>
 						</div>
+					</div> -->
+					<div class="col-lg-6 col-md-6 col-sm-5 col-7" style="text-align: right;">
+							<span class="copy-info"> <span class="d-none d-sm-inline">{{ t('Free classifieds in Guinea-Bissau') }}</span> © {{ date('Y') }} {{ config('settings.app.app_name') }}</span>
 					</div>
 					
 					@if (
@@ -380,16 +383,16 @@ if (
 						@endif
 					@endif
 					
-					<div class="copy-info text-center">
+					<!-- <div class="copy-info text-center"> -->
 					<!-- {{ t('Free classifieds in Guinea-Bissau') }} © {{ date('Y') }} {{ config('settings.app.app_name') }} -->
-						@if (!config('settings.footer.hide_powered_by'))
+						<!-- @if (!config('settings.footer.hide_powered_by'))
 							@if (config('settings.footer.powered_by_info'))
 								{{ t('Powered by') }} {!! config('settings.footer.powered_by_info') !!}
 							@else
 								{{ t('Powered by') }} <a href="http://www.bedigit.com" title="BedigitCom">Bedigit</a>.
 							@endif
-						@endif
-					</div>
+						@endif -->
+					<!-- </div> -->
 				</div>
 			
 			</div>

@@ -9,10 +9,11 @@ if (!isset($cacheExpiration)) {
         $cats = collect([]);
     }
 
+    $paddings = false;
     foreach($paginator->getCollection() as $key => $post):
     if (empty($countries) or !$countries->has($post->country_code)) continue;
     // if ($post->category_id != '801' and $post->category_id != '799') continue;
-
+    $paddings = !$paddings;
     // Get Package Info
     $package = null;
     if ($post->featured == 1) {
@@ -73,7 +74,7 @@ if (!isset($cacheExpiration)) {
         $liveCatName = $liveCat->name;
     }
     ?>
-    <div class="item-list item-inline">
+    <div class="item-list item-inline {{ $paddings == true ? 'pad-right' : 'pad-left' }}">
         @if (isset($package) and !empty($package))
             @if ($package->ribbon != '')
                 <div class="cornerRibbons {{ $package->ribbon }}">
@@ -187,10 +188,10 @@ if (!isset($cacheExpiration)) {
             var display = window.localStorage.getItem('display');
             if (display === "list") {
                 listView('.list-view');
-                item_list.addClass('normal-view');
+                item_list.addClass('normal-padding');
             } else {
                 gridView('.grid-view');
-                item_list.removeClass('normal-view');
+                item_list.removeClass('normal-padding');
             }
 
         });

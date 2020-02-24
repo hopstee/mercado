@@ -188,7 +188,7 @@ $(document).ready(function ()
 	$('.list-view,#ajaxTabs li a').click(function (e) { /* use a class, since your ID gets mangled */
 		e.preventDefault();
 		listView('.list-view');
-		item_list.addClass('normal-view');
+		item_list.addClass('normal-padding');
 		createCookie('listing_display_mode', '.list-view', 7);
 		console.log('list');
 	});
@@ -196,7 +196,7 @@ $(document).ready(function ()
 	$('.grid-view').click(function (e) { /* use a class, since your ID gets mangled */
 		e.preventDefault();
 		gridView(this);
-		item_list.removeClass('normal-view');
+		item_list.removeClass('normal-padding');
 		createCookie('listing_display_mode', '.grid-view', 7);
 		console.log('grid');
 	});

@@ -1104,17 +1104,6 @@ ul.nav-wizard>li:before {
     border-bottom: none;
 }
 
-
-@media (max-width: 767px) {
-    .pad-right {
-        padding: 0 8px 15px 15px !important;
-    }
-    .pad-right {
-        padding: 0 15px 15px 8px !important;
-    }
-    .normal-view {
-        padding: 0 15px 15px 15px !important;
-
 .user-panel-sidebar ul li a {
     display: flex;
 }
@@ -1164,8 +1153,6 @@ ul.nav-wizard>li:before {
     }
 }
 @media (max-width: 768px) {
-
-
     .pad-right {
         padding: 0 8px 15px 15px !important;
     }

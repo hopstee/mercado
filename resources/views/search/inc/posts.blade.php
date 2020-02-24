@@ -141,7 +141,7 @@ if (!isset($cacheExpiration)) {
 						<br>
 						<span class="item-location">
 							<i class="unir-location">&ensp;</i>
-							<a href="{!! qsurl(config('app.locale').'/'.trans('routes.v-search', ['countryCode' => config('country.icode')]), array_merge(request()->except(['l', 'location']), ['l'=>$post->city_id]), null, false) !!}"
+							<a href="{!! qsurl(config('app.locale').'/'.trans('routes.v-search', ['countryCode' => config('country.icode')]), array_merge(request()->except(['l', 'location']), ['location'=>$city->name]), null, false) !!}"
                                class="info-link">{{$city->name}}</a><span> {{ (isset($post->distance)) ? '- ' . round($post->distance, 2) . getDistanceUnit() : '' }}</span>
 						</span>&nbsp;
 						<span class="date"><i class="unir-clock">&ensp;</i>{{$post->created_at}}</span>

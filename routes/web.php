@@ -443,4 +443,6 @@ Route::group([
 		Route::get(LaravelLocalization::transRoute('routes.search-subCat'), 'Search\CategoryController@index')->where('subCatSlug', '.*');
 		Route::get(LaravelLocalization::transRoute('routes.search-cat'), 'Search\CategoryController@index');
 	});
+            Route::get(trans('routes.pers-conversations-delete-id'),'ConversationsController@destroy');
+            Route::post(trans('routes.pers-conversations-delete-id'), 'ConversationsController@destroy');
 });

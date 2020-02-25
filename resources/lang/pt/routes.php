@@ -35,4 +35,6 @@ return [
     'search-tag' => 'tag/{tag}',
     't-search-tag' => 'tag',
     'v-search-tag' => 'tag/:tag',
+    'pers-conversations-delete-id' => 'conversas/{id}/mensagem/remover',
+    'v-pers-conversations-delete-id' => 'conversas/:id/mensagem/remover',
 ];

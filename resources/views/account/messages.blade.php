@@ -44,8 +44,8 @@
 						if (isset($conversation) && !empty($conversation) > 0):
 						
 							// Conversation URLs
-							$consUrl = lurl('account/conversations');
-							$conDelAllUrl = lurl('account/conversations/' . $conversation->id . '/messages/delete');
+							$consUrl = lurl(trans('routes.conversations'));
+							$conDelAllUrl = lurl(trans('routes.v-pers-conversations-delete-id',['id'=>$conversation->id]));
 						?>
 						<div class="table-responsive">
 							<form name="listForm" method="POST" action="{{ $conDelAllUrl }}">
@@ -103,11 +103,9 @@
 											{{ $mes }}
 											@if (!empty($conversation->filename) and $disk->exists($conversation->filename))
 												<br><br><a class="btn btn-info" href="{{ fileUrl($conversation->filename) }}">{{ t('Download') }}</a>
+													{{ t('Reply') }}
+												</a>
 											@endif
-											<hr>
-											<a class="btn btn-primary btn-default btn-default-cab mes-reply btn-green" href="#" data-toggle="modal" data-target="#replyTo{{ $conversation->id }}">
-												{{ t('Reply') }}
-											</a>
 										</td>
 									</tr>
 									<!-- All Conversation's Messages -->
@@ -123,9 +121,10 @@
 {{--												</div>--}}
 {{--											</td>--}}
 											<td class="cel-borderless reply-message" style="width:94%;">
-												<div style="word-break:break-all;">
+												<div style="word-break:break-word;">
 													<strong>
-														<i class="unir-arrow_top"></i> {{ $message->from_name . ' (' . $message->created_at->formatLocalized(config('settings.app.default_datetime_format_mod')) . ')' }}:
+														<!-- <i class="unir-arrow_top"></i> {{ $message->from_name . ' (' . $message->created_at->formatLocalized(config('settings.app.default_datetime_format')) . ')' }}: -->
+														<i class="unir-arrow_top"></i> {{ $message->from_name . ' (' . date('d M Y H:i', strtotime($message->created_at)) . ')' }}:
 													</strong><br>
 {{--													{!! nl2br($mes) !!}--}}
 													{{ substr($message->message, 0, stripos($message->message, " |")) }}
@@ -146,9 +145,10 @@
 {{--											</td>--}}
 										@else
 											<td colspan="3">
-												<div style="word-break:break-all;">
+												<div style="word-break:break-word;">
 													<strong>
-														<i class="unir-arrow_top"></i> {{ $message->from_name . ' (' . $message->created_at->formatLocalized(config('settings.app.default_datetime_format_mod')) . ')' }}:
+														<!-- <i class="unir-arrow_top"></i> {{ $message->from_name . ' (' . $message->created_at->formatLocalized(config('settings.app.default_datetime_format')) . ')' }}: -->
+														<i class="unir-arrow_top"></i> {{ $message->from_name . ' (' . date('d M Y H:i', strtotime($message->created_at)) . ')' }}:
 													</strong><br>
 {{--													{!! nl2br($message->message) !!}--}}
 													{{ substr($message->message, 0, stripos($message->message, " |")) }}
@@ -163,6 +163,11 @@
 									<?php endif; ?>
 									</tbody>
 								</table>
+								<div class="conversation-delete-btn">
+									<button type="submit" class="btn btn-default btn-default-cab btn-grey btn-delete">
+										{{ t('Delete') }}
+									</button>
+								</div>
 								
 								@if (isset($messages) && $messages->count() > 0)
 {{--								<div class="table-action">--}}
